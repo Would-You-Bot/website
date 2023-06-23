@@ -30,6 +30,14 @@ export default function QuestionPack() {
       likes: 200,
       isFeatured: false,
     },
+    {
+      title: "School Questions",
+      description: "Over 1000 would you rather questions about school situations.",
+      totalQuestions: 1081,
+      type: "Would You Whatever",
+      likes: 200,
+      isFeatured: false,
+    },
   ];
 
   return (
@@ -47,7 +55,7 @@ export default function QuestionPack() {
         </h1>
       </main>
 
-      <div className="max-w-[850px] mx-auto py-10">
+      <div className="w-11/12 py-10 mx-auto xl:w-4/6">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {data.map((item, index) => (
             <QuestionPackCard key={index} title={item.title} description={item.description} totalQuestions={item.totalQuestions} type={item.type} likes={item.likes} isFeatured={item.isFeatured} />
