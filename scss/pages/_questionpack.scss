@@ -1,0 +1,148 @@
+.questionpack-main {
+  @media screen and (max-width: 1300px) {
+    margin: 160px 50px 30px 50px;
+  }
+
+  @media screen and (max-width: 450px) {
+    margin: 160px 30px 30px 30px;
+  }
+}
+
+.questionpack {
+  @extend .mt-10;
+  @extend .rounded-xl;
+  @extend .w-full;
+  @extend .bg-gradient-to-r;
+  @extend .p-[5px];
+  background-image: linear-gradient(to right, #0598F6, #F00505);
+
+  @media screen and (min-width: 768px) {
+    @extend .p-5;
+    @extend .h-full;
+    @extend .bg-black;
+
+    h5 {
+      @extend .mb-2;
+      @extend .text-2xl;
+      @extend .font-semibold;
+      color: white;
+    }
+
+    p {
+      @extend .text-[#B4B4B4];
+      @extend .mb-5;
+    }
+
+    .flex {
+      @extend .items-center;
+
+      .flex-col {
+        @extend .md:w-1/2;
+
+        span {
+          @extend .text-sm;
+          @extend .text-[#898989];
+          @extend .mb-1;
+        }
+
+        h6 {
+          @extend .font-medium;
+          color: white;
+        }
+      }
+    }
+
+    .items-center {
+      @extend .flex;
+
+      > div {
+        @extend .md:w-1/2;
+
+        button {
+          @extend .w-full;
+
+          &.primary {
+            @extend .wy-button;
+            @extend .primary;
+          }
+
+          &.secondary {
+            @extend .wy-button;
+            @extend .secondary;
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .h-full {
+      @extend .p-5;
+      @extend .bg-black;
+
+      h5 {
+        font-size: 1.5rem;
+        line-height: 2rem;
+        margin-bottom: 0.75rem;
+        font-weight: 600;
+        color: white;
+      }
+
+      p {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+        color: #B4B4B4;
+        margin-bottom: 1.25rem;
+      }
+
+      .flex {
+        @extend .items-center;
+
+        .flex-col {
+          @extend .w-full;
+          margin-bottom: 0.625rem;
+
+          span {
+            font-size: 0.75rem;
+            line-height: 1rem;
+            color: #898989;
+            margin-bottom: 0.25rem;
+          }
+
+          h6 {
+            font-size: 1rem;
+            line-height: 1.5rem;
+            font-weight: 500;
+            color: white;
+          }
+        }
+      }
+
+      .items-center {
+        @extend .flex;
+
+        > div {
+          @extend .w-half;
+
+          button {
+            font-size: 0.75rem;
+            line-height: 1rem;
+            padding-top: 0.625rem;
+            padding-bottom: 0.625rem;
+            border-radius: 0.375rem;
+
+            &.primary {
+              @extend .wy-button;
+              @extend .primary;
+            }
+
+            &.secondary {
+              @extend .wy-button;
+              @extend .secondary;
+            }
+          }
+        }
+      }
+    }
+  }
+}
