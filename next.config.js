@@ -21,6 +21,11 @@ const nextConfig = {
         destination: process.env.NEXT_PUBLIC_VOTE,
         permanent: true,
       },
+      {
+        source: "/reddit",
+        destination: process.env.NEXT_PUBLIC_REDDIT,
+        permanent: true,
+      }
     ];
   },
 };

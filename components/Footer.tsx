@@ -37,6 +37,9 @@ const Footer = () => {
             <Link href="/vote" target={"_blank"}>
               Vote
             </Link>
+            <Link href="/reddit" target={"_blank"}>
+              Reddit
+            </Link>
           </div>
         </div>
       </div>
