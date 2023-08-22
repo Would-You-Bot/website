@@ -269,7 +269,9 @@ export default function Unreviewed() {
                       </button>
 
                       <button 
-                       onClick={() => set_opened_pack(pack.customId)}
+                       onClick={() => {
+                        set_opened_pack(pack.customId)
+                       }}
                       className="py-2 px-4 rounded-md bg-[#0598f6] text-white flex items-center space-x-1">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"

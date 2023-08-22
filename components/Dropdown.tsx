@@ -65,7 +65,7 @@ const Dropdown: React.FC<DropdownProps> = ({ children }) => {
               </svg>{" "}
               <span>Likes</span>
             </Link>
-            {(process.env?.NEXT_PUBLIC_STAFF || "").split(" ").includes(User!.id) && (
+            {User!.staff && (
               <>
                 <Link
                   href="/unreviewed"

@@ -14,7 +14,8 @@ export default interface DiscordUser {
     locale: string
     premium_type: number
     iat: number
-    exp: number
+    exp: number,
+    staff: boolean
   }
   
   export interface JAPIUser {

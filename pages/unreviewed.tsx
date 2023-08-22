@@ -10,7 +10,7 @@ import { useAtom } from "jotai";
 import * as state from "@/utils/state";
 import Image from "next/image";
 import { JAPIUser } from "@/types/user";
-import { Toaster, toast } from 'sonner';
+import { Toaster, toast } from "sonner";
 export interface Pack {
   _id: string;
   customId: string;
@@ -46,11 +46,11 @@ export default function Unreviewed() {
       method: "POST",
       body: JSON.stringify({
         accepted,
-        customId: opened_pack
+        customId: opened_pack,
       }),
       headers: {
-        "Content-Type": "application/json"
-      }
+        "Content-Type": "application/json",
+      },
     })
       .then((response) => response.json())
       .then((data): any => {
@@ -61,15 +61,11 @@ export default function Unreviewed() {
       .catch((error) => {
         console.error("Error reviewing pack:", error);
       });
-  }
+  };
 
   useEffect(() => {
     if (!User) router.push("/api/login");
-    else if (
-      !(process.env?.NEXT_PUBLIC_STAFF || "")
-        .split(" ")
-        .includes(User!.id)
-    ) {
+    else if (!User!.staff) {
       router.push("/packs");
     }
   }, []);
@@ -93,7 +89,7 @@ export default function Unreviewed() {
       fetch(`https://japi.rest/discord/v1/user/${selectedPack?.author}`)
         .then((r) => r.json())
         .then((d) => {
-            set_pack_author(d);
+          set_pack_author(d);
         });
     }
   }, [opened_pack]);
@@ -165,10 +161,16 @@ export default function Unreviewed() {
                         </div>
                       </div>
                       <div className="w-full mt-2 flex flex-row justify-end gap-2">
-                        <button onClick={() => handle(false)} className="py-2 px-4 rounded-md bg-[#F00505] text-white hover:cursor-pointer">
+                        <button
+                          onClick={() => handle(false)}
+                          className="py-2 px-4 rounded-md bg-[#F00505] text-white hover:cursor-pointer"
+                        >
                           Decline
                         </button>
-                        <button onClick={() => handle(true)} className="py-2 px-4 rounded-md  bg-[#0598f6] text-white hover:cursor-pointer">
+                        <button
+                          onClick={() => handle(true)}
+                          className="py-2 px-4 rounded-md  bg-[#0598f6] text-white hover:cursor-pointer"
+                        >
                           Accept
                         </button>
                       </div>
@@ -256,7 +258,10 @@ export default function Unreviewed() {
                     </div>
                     <div className="flex flex-row px-3 py-2 justify-center">
                       <button
-                        onClick={() => {console.log(pack); set_opened_pack(pack.customId)}}
+                        onClick={() => {
+                          console.log(pack);
+                          set_opened_pack(pack.customId);
+                        }}
                         className="py-2 px-4 rounded-md bg-[#0598f6] text-white flex items-center justify-center space-x-1 w-full text-center"
                       >
                         <svg

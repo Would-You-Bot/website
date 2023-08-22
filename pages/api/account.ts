@@ -21,6 +21,11 @@ export default async function Account(
 
   return res.json({
     message: "auth :)",
-    user: data,
+    user: {
+      ...data,
+      staff: (process.env?.NEXT_PUBLIC_STAFF || "")
+        .split(" ")
+        .includes(data.id as string),
+    },
   });
 }

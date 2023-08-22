@@ -161,6 +161,7 @@ export default function packs() {
           </h1>
           <div className="flex flex-row gap-3 w-full">
             <input
+            readOnly
               className="bg-[#1d1d1d] border-none outline-none rounded-md text-white w-3/4 p-3"
               placeholder="Search..."
             />
