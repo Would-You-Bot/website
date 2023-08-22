@@ -134,12 +134,12 @@ const Home = () => {
       <Head>
         <title>Would You</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/Logo.png" />
+        <link rel="icon" href="/Logo.svg" />
       </Head>
 
       <Navbar />
 
-      <main className="homepage-main">
+      <main className="homepage-main mt-[240px]">
         <section className="landing">
           <motion.div
             className="left"
@@ -152,7 +152,7 @@ const Home = () => {
               Entertain Your <span className="red">Discord</span>{" "}
               <span className="blue">Server</span>
             </h1>
-            <p>
+            <p className="homep">
               Elevate your server&apos;s engagement with Would You, featuring
               user voting, daily messages, and customizability.
             </p>
@@ -217,7 +217,7 @@ const Home = () => {
                     <DiscordEmbedFooter
                       timestamp={currentDate}
                       slot="footer"
-                      footerImage="https://cdn.discordapp.com/attachments/1004008495483457546/1056748109700538429/Logo.png"
+                      footerImage="/Logo.svg"
                     >
                       Would You
                     </DiscordEmbedFooter>
@@ -496,7 +496,7 @@ const Home = () => {
                     <DiscordEmbedFooter
                       timestamp={currentDate}
                       slot="footer"
-                      footerImage="https://cdn.discordapp.com/attachments/1004008495483457546/1056748109700538429/Logo.png"
+                      footerImage="/Logo.svg"
                     >
                       {" "}
                       Would You{" "}
@@ -570,7 +570,7 @@ const Home = () => {
                     <DiscordEmbedFooter
                       timestamp={currentDate}
                       slot="footer"
-                      footerImage="https://cdn.discordapp.com/attachments/1004008495483457546/1056748109700538429/Logo.png"
+                      footerImage="/Logo.svg"
                     >
                       Would You
                     </DiscordEmbedFooter>
@@ -709,7 +709,7 @@ const Home = () => {
                     <DiscordEmbedFooter
                       timestamp={currentDate}
                       slot="footer"
-                      footer-image="https://cdn.discordapp.com/attachments/1004008495483457546/1056748109700538429/Logo.png"
+                      footer-image="/Logo.svg"
                     >
                       Would You
                     </DiscordEmbedFooter>

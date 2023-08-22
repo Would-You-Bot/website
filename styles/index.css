@@ -103,16 +103,19 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
 }
-body::-webkit-scrollbar {
+
+::-webkit-scrollbar {
   width: 0.5rem;
   border-radius: 20px;
 }
-body::-webkit-scrollbar-thumb {
+
+::-webkit-scrollbar-thumb {
   width: 0.5rem;
   background-color: #616161;
   border-radius: 20px;
 }
-body::-webkit-scrollbar-track {
+
+::-webkit-scrollbar-track {
   width: 0.5rem;
   background-color: transparent;
 }
@@ -564,16 +567,6 @@ footer .footer-copyright p a:active {
     text-align: center;
     width: calc(100vw - 100px);
   }
-}
-.homepage-main section.landing .left h1 span.red {
-  color: #F00505;
-  text-shadow: 2px 2px 20px #F00505;
-  animation: flickerAnimation 6s linear 2.5s infinite;
-}
-.homepage-main section.landing .left h1 span.blue {
-  color: #0598F6;
-  text-shadow: 2px 2px 20px #0598F6;
-  animation: flickerAnimation 7s linear 7s infinite;
 }
 .homepage-main section.landing .left p {
   font-weight: 400;
@@ -1403,4 +1396,20 @@ footer .footer-copyright p a:active {
 }
 .status-main .status .status.active .status-expand .status-expand-group:last-child {
   margin-bottom: 10px;
+}
+
+span.red {
+  font-size: 64px;
+  color: #F00505;
+  font-weight: 700;
+  text-shadow: 2px 2px 20px #F00505;
+  animation: flickerAnimation 6s linear 2.5s infinite;
+}
+
+span.blue {
+  font-size: 64px;
+  font-weight: 700;
+  color: #0598F6;
+  text-shadow: 2px 2px 20px #0598F6;
+  animation: flickerAnimation 7s linear 7s infinite;
 }

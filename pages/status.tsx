@@ -21,7 +21,7 @@ export default function Status() {
       <Head>
         <title>Would You</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/Logo.png" />
+        <link rel="icon" href="/Logo.svg" />
       </Head>
       <Navbar />
       <main className="status-main">

@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="footer-head">
         <div className="footer-head-column extend">
           <div className="logo">
-            <Image src="/Logo.png" alt="Logo" draggable={false} width="50" height="50"/>
+            <Image src="/Logo.svg" alt="Logo" draggable={false} width="50" height="50"/>
             <p>WouldYou</p>
           </div>
           <p className="logo-subtext">

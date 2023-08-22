@@ -17,22 +17,21 @@ body {
   font-family: "Inter", sans-serif;
   overflow-x: hidden;
   overflow-y: auto;
+}
+::-webkit-scrollbar {
+  width: 0.5rem;
+  border-radius: 20px;
+}
 
-  &::-webkit-scrollbar {
-    width: 0.5rem;
-    border-radius: 20px;
-  }
+::-webkit-scrollbar-thumb {
+  width: 0.5rem;
+  background-color: #616161;
+  border-radius: 20px;
+}
 
-  &::-webkit-scrollbar-thumb {
-    width: 0.5rem;
-    background-color: #616161;
-    border-radius: 20px;
-  }
-
-  &::-webkit-scrollbar-track {
-    width: 0.5rem;
-    background-color: transparent;
-  }
+::-webkit-scrollbar-track {
+  width: 0.5rem;
+  background-color: transparent;
 }
 
 button {
@@ -128,3 +127,19 @@ a {
 @import "./pages/legal";
 @import "./pages/commands";
 @import "./pages/status";
+
+span.red {
+  font-size: 64px;
+  color: $secondary;
+  font-weight: 700;
+  text-shadow: 2px 2px 20px $secondary;
+  animation: flickerAnimation 6s linear 2.5s infinite;
+}
+
+span.blue {
+  font-size: 64px;
+  font-weight: 700;
+  color: $primary;
+  text-shadow: 2px 2px 20px $primary;
+  animation: flickerAnimation 7s linear 7s infinite;
+}

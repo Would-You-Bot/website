@@ -46,17 +46,7 @@
           width: calc(100vw - 100px);
         }
 
-        span.red {
-          color: $secondary;
-          text-shadow: 2px 2px 20px $secondary;
-          animation: flickerAnimation 6s linear 2.5s infinite;
-        }
-
-        span.blue {
-          color: $primary;
-          text-shadow: 2px 2px 20px $primary;
-          animation: flickerAnimation 7s linear 7s infinite;
-        }
+        
       }
 
       p {

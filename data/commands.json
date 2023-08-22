@@ -72,7 +72,7 @@
     },
     {
       "name": "wycustom",
-      "description": "Ajust custom questions",
+      "description": "Adjust custom questions",
       "usage": "/wycustom <subcommand>",
       "subcommands": ["add", "export", "import", "remove", "removeall", "view"]
     }
