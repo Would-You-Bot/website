@@ -65,7 +65,7 @@ const Dropdown: React.FC<DropdownProps> = ({ children }) => {
               </svg>{" "}
               <span>Likes</span>
             </Link>
-            {"347077478726238228 606279329844035594 268843733317976066 805898988402376725".split(" ").includes(User!.id) && (
+            {(process.env?.NEXT_PUBLIC_STAFF || "").split(" ").includes(User!.id) && (
               <>
                 <Link
                   href="/unreviewed"

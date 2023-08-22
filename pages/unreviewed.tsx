@@ -66,7 +66,7 @@ export default function Unreviewed() {
   useEffect(() => {
     if (!User) router.push("/api/login");
     else if (
-      !"347077478726238228 606279329844035594 268843733317976066 805898988402376725"
+      !(process.env?.NEXT_PUBLIC_STAFF || "")
         .split(" ")
         .includes(User!.id)
     ) {
