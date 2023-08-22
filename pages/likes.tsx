@@ -219,7 +219,7 @@ export default function Unreviewed() {
             {packs.map((pack: Pack, index: number) => {
               return (
                 <div
-                  className={`bg-[#141414] rounded-3xl p-1 ${
+                  className={`bg-[#141414] rounded-3xl p-1 w-[300px] ${
                     pack.popular ? "popular" : ""
                   }`}
                   key={index}
