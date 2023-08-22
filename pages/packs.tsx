@@ -6,10 +6,10 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import Modal from "@/components/Modal";
-import { Toaster, toast } from 'sonner';
+import { Toaster, toast } from "sonner";
 import Toggle from "@/components/ToggleSwitch";
 import { JAPIUser } from "@/types/user";
-import * as state from "@/utils/state"
+import * as state from "@/utils/state";
 import { useAtom } from "jotai";
 export interface Pack {
   _id: string;
@@ -33,17 +33,36 @@ export default function packs() {
   let [page, set_page] = useState(0);
   const [opened_pack, set_opened_pack] = useState<string | null>(null);
   const [pack_author, set_pack_author] = useState<JAPIUser | null>();
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState<string>("");
+
+  const debouncingDelay = 300;
+
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setDebouncedSearchQuery(searchQuery);
+    }, debouncingDelay);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [searchQuery]);
   const [packs, set_packs] = useState<Pack[]>([]);
   const closeModal = () => {
     set_opened_pack(null);
     set_pack_author(null);
   };
-  function copy(){
-    navigator.clipboard.writeText(`/import ${packs.find((p: Pack) => p.customId === opened_pack)?.type.toLowerCase().replaceAll(" ", "")} ${opened_pack}`)
-    toast.success("Copied!")
+  function copy() {
+    navigator.clipboard.writeText(
+      `/import ${packs
+        .find((p: Pack) => p.customId === opened_pack)
+        ?.type.toLowerCase()
+        .replaceAll(" ", "")} ${opened_pack}`
+    );
+    toast.success("Copied!");
   }
   useEffect(() => {
-    fetch(`/api/packs?page=${page}`)
+    fetch(`/api/packs?page=${page}&search=${debouncedSearchQuery}`)
       .then((response) => response.json())
       .then((data) => {
         set_packs(data.packs);
@@ -53,7 +72,7 @@ export default function packs() {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [page]);
+  }, [page, debouncedSearchQuery]);
   useEffect(() => {
     if (opened_pack !== null) {
       const selectedPack = packs.find(
@@ -62,7 +81,7 @@ export default function packs() {
       fetch(`https://japi.rest/discord/v1/user/${selectedPack?.author}`)
         .then((r) => r.json())
         .then((d) => {
-            set_pack_author(d);
+          set_pack_author(d);
         });
     }
   }, [opened_pack]);
@@ -89,7 +108,7 @@ export default function packs() {
                       <p className="text-gray-400 text-md overflow-hidden line-clamp-3">
                         {selectedPack?.description}
                       </p>
-                      <div className="flex flex-row px-3 py-2 gap-10">
+                      <div className="flex flex-row px-3 py-2 gap-12">
                         <div className="flex flex-col">
                           <h2 className="text-gray-500">Author</h2>
                           <div className="flex justify-center items-center hover:cursor-pointer">
@@ -118,16 +137,30 @@ export default function packs() {
                             {selectedPack?.type}
                           </p>
                         </div>
-                      </div> 
+                      </div>
                       <div className="mt-4 flex flex-col w-full">
                         <h2 className="text-gray-500">Use this pack</h2>
-                        <div onClick={() => copy()} className="w-full p-2 border-2 border-[#0598f6] bg-opacity-10 bg-[#0598f6] rounded-md flex justify-between text-[#0598f6] items-center">
-                          <p className="text-xs">/import {selectedPack?.type.toLowerCase().replaceAll(" ", "")} {selectedPack?.customId}</p>
-                          <svg  onClick={() => copy()} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5">
-  <path d="M2 4.25A2.25 2.25 0 014.25 2h6.5A2.25 2.25 0 0113 4.25V5.5H9.25A3.75 3.75 0 005.5 9.25V13H4.25A2.25 2.25 0 012 10.75v-6.5z" />
-  <path d="M9.25 7A2.25 2.25 0 007 9.25v6.5A2.25 2.25 0 009.25 18h6.5A2.25 2.25 0 0018 15.75v-6.5A2.25 2.25 0 0015.75 7h-6.5z" />
-</svg>
-
+                        <div
+                          onClick={() => copy()}
+                          className="w-full p-2 border-2 border-[#0598f6] bg-opacity-10 bg-[#0598f6] rounded-md flex justify-between text-[#0598f6] items-center"
+                        >
+                          <p className="text-xs">
+                            /import{" "}
+                            {selectedPack?.type
+                              .toLowerCase()
+                              .replaceAll(" ", "")}{" "}
+                            {selectedPack?.customId}
+                          </p>
+                          <svg
+                            onClick={() => copy()}
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 20 20"
+                            fill="currentColor"
+                            className="w-5 h-5"
+                          >
+                            <path d="M2 4.25A2.25 2.25 0 014.25 2h6.5A2.25 2.25 0 0113 4.25V5.5H9.25A3.75 3.75 0 005.5 9.25V13H4.25A2.25 2.25 0 012 10.75v-6.5z" />
+                            <path d="M9.25 7A2.25 2.25 0 007 9.25v6.5A2.25 2.25 0 009.25 18h6.5A2.25 2.25 0 0018 15.75v-6.5A2.25 2.25 0 0015.75 7h-6.5z" />
+                          </svg>
                         </div>
                       </div>
                       <div className="mt-2">
@@ -161,9 +194,10 @@ export default function packs() {
           </h1>
           <div className="flex flex-row gap-3 w-full">
             <input
-            readOnly
               className="bg-[#1d1d1d] border-none outline-none rounded-md text-white w-3/4 p-3"
               placeholder="Search..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
             <div className="w-1/4 flex items-center justify-start">
               <button
@@ -175,6 +209,22 @@ export default function packs() {
                 Create Pack
               </button>
             </div>
+          </div>
+          <div className="flex flex-row gap-2 mt-2">
+            {["Would You Rather", "Never Have I Ever", "What Would You Do"].map(
+              (type: string, index: number) => {
+                return (
+                  <>
+                    <div
+                      key={index}
+                      className="rounded-md p-2 bg-[#1d1d1d] text-gray-500 hover:cursor-pointer transition-all hover:bg-[#0598f6] hover:text-white"
+                    >
+                      <p># {type}</p>
+                    </div>
+                  </>
+                );
+              }
+            )}
           </div>
           {loading && (
             <>
@@ -215,7 +265,7 @@ export default function packs() {
             {packs.map((pack: Pack, index: number) => {
               return (
                 <div
-                  className={`bg-[#141414] rounded-3xl p-1 ${
+                  className={`bg-[#141414] rounded-3xl p-1 w-[300px] ${
                     pack.popular ? "popular" : ""
                   }`}
                   key={index}
@@ -241,18 +291,27 @@ export default function packs() {
                         </div>
                       </div>
                     </div>
-                    <div className="flex flex-row px-3 py-2 justify-between">
-                      <button onClick={() => {
-                        fetch("/api/likePack", {
-                          method: "POST",
-                          headers: {
-                            "Content-Type": "application/json",
-                          },
-                          body: JSON.stringify({ customId: pack?.customId }),
-                        }).then(r => r.json()).then(d => {
-                          toast(d.message)
-                        })
-                      }} className={`py-2 px-4 rounded-md bg-[#101010] text-gray-500 transition-all flex items-center space-x-1 hover:text-[#F00505] ${pack.likes.includes(User?.id || "") ? "text-[#F00505]" : ""}`}>
+                    <div className="flex flex-row px-3 py-2 gap-3 justify-evenly">
+                      <button
+                        onClick={() => {
+                          fetch("/api/likePack", {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({ customId: pack?.customId }),
+                          })
+                            .then((r) => r.json())
+                            .then((d) => {
+                              toast(d.message);
+                            });
+                        }}
+                        className={`py-2 px-4 rounded-md bg-[#101010] text-gray-500 transition-all flex items-center space-x-1 hover:text-[#F00505] ${
+                          pack.likes.includes(User?.id || "")
+                            ? "text-[#F00505]"
+                            : ""
+                        }`}
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"
@@ -264,9 +323,10 @@ export default function packs() {
                         <span>{pack.likes.length} Likes</span>
                       </button>
 
-                      <button 
-                       onClick={() => set_opened_pack(pack.customId)}
-                      className="py-2 px-4 rounded-md bg-[#0598f6] text-white flex items-center space-x-1">
+                      <button
+                        onClick={() => set_opened_pack(pack.customId)}
+                        className="py-2 px-4 rounded-md bg-[#0598f6] text-white flex items-center space-x-1"
+                      >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"

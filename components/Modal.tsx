@@ -72,7 +72,7 @@ interface ModalTitleProps {
 }
 
 const ModalTitle: React.FC<ModalTitleProps> = ({ children }) => {
-  return <h2 className="text-xl font-semibold mb-2">{children}</h2>;
+  return <h2 className="text-xl font-semibold mb-2 pl-5">{children}</h2>;
 };
 
 interface ModalDescriptionProps {
