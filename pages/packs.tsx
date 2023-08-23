@@ -25,7 +25,7 @@ export interface Pack {
   __v: number;
 }
 
-export default function packs() {
+export default function Packs() {
   let router = useRouter();
   const [User] = useAtom(state.User);
   const [show_next, set_show_next] = useState(false);
@@ -35,6 +35,7 @@ export default function packs() {
   const [pack_author, set_pack_author] = useState<JAPIUser | null>();
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState<string>("");
+  const [selected_type, set_selected_type] = useState<number>(0);
 
   const debouncingDelay = 300;
 
@@ -62,7 +63,12 @@ export default function packs() {
     toast.success("Copied!");
   }
   useEffect(() => {
-    fetch(`/api/packs?page=${page}&search=${debouncedSearchQuery}`)
+    fetch(
+      `/api/packs?page=${page}&type=${selected_type}&search=${debouncedSearchQuery.replace(
+        /[^a-zA-Z0-9-]/g,
+        ""
+      )}`
+    )
       .then((response) => response.json())
       .then((data) => {
         set_packs(data.packs);
@@ -72,7 +78,7 @@ export default function packs() {
       .catch((error) => {
         console.error("Error fetching data:", error);
       });
-  }, [page, debouncedSearchQuery]);
+  }, [page, debouncedSearchQuery, selected_type]);
   useEffect(() => {
     if (opened_pack !== null) {
       const selectedPack = packs.find(
@@ -104,7 +110,7 @@ export default function packs() {
                 <>
                   <Modal.Title>{selectedPack?.name}</Modal.Title>
                   <Modal.Description>
-                    <div className="w-full h-full flex items-center justify-center flex-col gap-4">
+                    <div className="w-full h-full flex items-center justify-center flex-col gap-7">
                       <p className="text-gray-400 text-md overflow-hidden line-clamp-3">
                         {selectedPack?.description}
                       </p>
@@ -192,40 +198,51 @@ export default function packs() {
             <span className="red">Question</span>{" "}
             <span className="blue">Packs</span>
           </h1>
-          <div className="flex flex-row gap-3 w-full">
+          <div className="flex flex-col md:flex-row md:gap-3 w-full md:items-center">
             <input
-              className="bg-[#1d1d1d] border-none outline-none rounded-md text-white w-3/4 p-3"
+              className="bg-[#1d1d1d] border-none outline-none rounded-md text-white w-full md:w-3/4 p-3 mb-3 md:mb-0"
               placeholder="Search..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyPress={(e) => {
+                if (!/^[a-zA-Z0-9-?,]+$/.test(e.key)) {
+                  e.preventDefault();
+                }
+              }}
             />
-            <div className="w-1/4 flex items-center justify-start">
-              <button
-                className="bg-[#1d1d1d] rounded-md text-white w-1/2 py-3"
-                onClick={() => {
-                  router.push("/create-pack");
-                }}
-              >
-                Create Pack
-              </button>
-            </div>
+
+            <button
+              className="bg-[#1d1d1d] rounded-md text-white w-full md:w-1/4 py-3"
+              onClick={() => {
+                if (!User) return router.push("/api/login");
+                else return router.push("/create-pack");
+              }}
+            >
+              Create Pack
+            </button>
           </div>
-          <div className="flex flex-row gap-2 mt-2">
+
+          <p className="text-gray-300 text-sm italic mt-3 md:mt-0">
+            You can only search with: a-z, 0-9, -, , and ?
+          </p>
+          <div className="flex flex-row gap-2 mt-2 flex-wrap">
             {["Would You Rather", "Never Have I Ever", "What Would You Do"].map(
-              (type: string, index: number) => {
-                return (
-                  <>
-                    <div
-                      key={index}
-                      className="rounded-md p-2 bg-[#1d1d1d] text-gray-500 hover:cursor-pointer transition-all hover:bg-[#0598f6] hover:text-white"
-                    >
-                      <p># {type}</p>
-                    </div>
-                  </>
-                );
-              }
+              (type: string, index: number) => (
+                <div
+                  key={index}
+                  onClick={() => set_selected_type(index)}
+                  className={`rounded-md p-2 hover:cursor-pointer transition-all hover:bg-[#0598f6] hover:text-white ${
+                    index === selected_type
+                      ? "bg-[#0598f6] text-white"
+                      : "bg-[#1d1d1d] text-gray-500"
+                  }`}
+                >
+                  <p># {type}</p>
+                </div>
+              )
             )}
           </div>
+
           {loading && (
             <>
               <div className="grid grid-cols-3 mt-10 gap-5 mb-10">
@@ -261,7 +278,7 @@ export default function packs() {
               <h2 className="text-lg text-white font-bold">No Packs Found</h2>
             </div>
           )}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 mt-10 gap-5 mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 mt-10 gap-3 mb-10">
             {packs.map((pack: Pack, index: number) => {
               return (
                 <div
@@ -303,13 +320,15 @@ export default function packs() {
                           })
                             .then((r) => r.json())
                             .then((d) => {
-                              toast(d.message);
+                              if (d.message.includes("logged"))
+                                return router.push("/api/login");
+                              else toast(d.message);
                             });
                         }}
-                        className={`py-2 px-4 rounded-md bg-[#101010] text-gray-500 transition-all flex items-center space-x-1 hover:text-[#F00505] ${
+                        className={`py-2 px-4 rounded-md bg-[#101010] transition-all flex items-center space-x-1 hover:text-[#F00505] ${
                           pack.likes.includes(User?.id || "")
                             ? "text-[#F00505]"
-                            : ""
+                            : "text-gray-500"
                         }`}
                       >
                         <svg
@@ -325,7 +344,7 @@ export default function packs() {
 
                       <button
                         onClick={() => set_opened_pack(pack.customId)}
-                        className="py-2 px-4 rounded-md bg-[#0598f6] text-white flex items-center space-x-1"
+                        className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-[#0598f6] text-white hover:bg-[#0598f6]/90 h-10 py-2 px-4"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -358,7 +377,7 @@ export default function packs() {
                 set_page(page - 1);
               }}
               disabled={page === 0}
-              className="py-2 px-4 rounded-md disabled:bg-[#0559f6] disabled:cursor-not-allowed bg-[#0598f6] text-white hover:cursor-pointer"
+              className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-[#0598f6] text-white hover:bg-[#0598f6]/90 h-10 py-2 px-4"
             >
               Previous
             </button>
@@ -368,7 +387,7 @@ export default function packs() {
                 set_page(page + 1);
               }}
               disabled={!show_next}
-              className="py-2 px-4 rounded-md disabled:bg-[#0559f6] disabled:cursor-not-allowed bg-[#0598f6] text-white hover:cursor-pointer"
+              className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-[#0598f6] text-white hover:bg-[#0598f6]/90 h-10 py-2 px-4"
             >
               Next
             </button>

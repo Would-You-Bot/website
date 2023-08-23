@@ -226,7 +226,7 @@ export default function Unreviewed() {
               <h2 className="text-lg text-white font-bold">No Packs Found</h2>
             </div>
           )}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 mt-10 gap-5 mb-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 mt-10 gap-3 mb-10">
             {packs.map((pack: Pack, index: number) => {
               return (
                 <div
@@ -290,7 +290,7 @@ export default function Unreviewed() {
                 set_page(page - 1);
               }}
               disabled={page === 0}
-              className="py-2 px-4 rounded-md disabled:bg-[#0559f6] disabled:cursor-not-allowed bg-[#0598f6] text-white hover:cursor-pointer"
+              className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-[#0598f6] text-white hover:bg-[#0598f6]/90 h-10 py-2 px-4"
             >
               Previous
             </button>
@@ -300,7 +300,7 @@ export default function Unreviewed() {
                 set_page(page + 1);
               }}
               disabled={!show_next}
-              className="py-2 px-4 rounded-md disabled:bg-[#0559f6] disabled:cursor-not-allowed bg-[#0598f6] text-white hover:cursor-pointer"
+              className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-[#0598f6] text-white hover:bg-[#0598f6]/90 h-10 py-2 px-4"
             >
               Next
             </button>

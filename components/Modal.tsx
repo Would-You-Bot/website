@@ -13,15 +13,17 @@ interface ModalComponent extends React.FC<ModalProps> {
 }
 
 const Modal: ModalComponent = ({ isOpen, onClose, children }) => {
-  const [isVisible, setIsVisible] = useState(isOpen);
   const modalRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    setIsVisible(isOpen);
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "auto";
+    }
   }, [isOpen]);
 
   const closeModal = () => {
-    setIsVisible(false);
     onClose();
   };
 
@@ -33,18 +35,24 @@ const Modal: ModalComponent = ({ isOpen, onClose, children }) => {
 
   return (
     <AnimatePresence>
-      {isVisible && (
+      {isOpen && (
         <motion.div
-          initial={{ opacity: 0, y: "100%" }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: "100%" }}
-          transition={{ type: "spring", damping: 20, stiffness: 300 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           className="fixed inset-0 flex items-center justify-center z-50"
         >
-          <div className="fixed inset-0 bg-black opacity-50 blur-sm"></div>
           <div
+            className="fixed inset-0 bg-black opacity-50 blur-sm"
+            onClick={handleOverlayClick}
+          ></div>
+          <motion.div
             ref={modalRef}
-            className="bg-[#16171a] rounded-lg p-4 w-full text-white max-w-md relative"
+            initial={{ opacity: 0, y: "10%" }}
+            animate={{ opacity: 1, y: "0%" }}
+            exit={{ opacity: 0, y: "10%" }}
+            transition={{ type: "spring", damping: 20, stiffness: 300 }}
+            className="bg-[#16171a] rounded-lg p-4 w-full sm:max-w-sm md:max-w-md lg:max-w-lg text-white relative z-10"
           >
             <button
               className="absolute top-2 right-2 text-white"
@@ -60,7 +68,7 @@ const Modal: ModalComponent = ({ isOpen, onClose, children }) => {
               </svg>
             </button>
             {children}
-          </div>
+          </motion.div>
         </motion.div>
       )}
     </AnimatePresence>

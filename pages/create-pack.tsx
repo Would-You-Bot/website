@@ -29,8 +29,8 @@ export default function CreatePack() {
   useEffect(() => {
     if(!User) router.push("/api/login")
   }, []);
-  const types = ["Would You Rather", "Never have I ever", "What Would you do"];
-  const pages = [
+  const types = ["Would You Rather", "Never Have I Ever", "What Would You Do"];
+  const pages: any[] = [
     {
       text: "Select Pack Type",
       disabled: false,
@@ -156,7 +156,7 @@ export default function CreatePack() {
       disabled: pack.tags.length < 1,
       component: (
         <>
-          <div className="w-full flex items-center justify-center">
+          <div className="w-full flex items-center justify-center flex-col">
             <motion.div
               key={"tags"}
               className="w-full"
@@ -201,7 +201,9 @@ export default function CreatePack() {
                   placeholder="Cool tags for your pack..."
                 />
               </div>
+
             </motion.div>
+            <p className="text-gray-300 text-sm italic mt-3">Press <span className="p-1 rounded-md bg-slate-600">Enter</span> to add a tag.</p>
           </div>
         </>
       ),
@@ -209,6 +211,7 @@ export default function CreatePack() {
     {
       text: "Pack Questions",
       disabled: pack.questions.length < 5,
+      description: "Once submitting your pack will need to be reviewed.",
       component: (
         <>
           <div className="w-full flex items-center justify-center">
@@ -227,15 +230,24 @@ export default function CreatePack() {
                   onKeyDown={(e) => {
                     e.stopPropagation();
                     const inputValue = e.currentTarget.value;
+                    if (inputValue.length >= 100 && e.key !== "Backspace") {
+                      e.preventDefault();
+                    }
                     if (e.key === "Enter" && inputValue) {
-                        set_pack({...pack, questions: [...pack.questions, inputValue]});
+                        set_pack({...pack, questions: [...pack.questions, inputValue.replace(/[^a-zA-Z0-9-\?\,]/g, "")]});
                       e.currentTarget.value = "";
                     }
                   }}
                 />
-                <button className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-[#0598f6] text-white hover:bg-[#0598f6]/90 h-12 py-2 px-4">
+                <button 
+                disabled={true}
+                className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-[#0598f6] text-white hover:bg-[#0598f6]/90 h-10 py-2 px-4">
                   Import
                 </button>
+              </div>
+              <div className="mt-2">
+                {pack.questions.length < 5 && (<p className="text-gray-300 text-sm italic mt-3">You can not create a pack until it has atleast 5 questions.</p>)}
+              <p className="text-gray-300 text-sm italic mt-3">Questions may only contain: a-z, 0-9, -, , and ?, and must be under 100 characters.</p>
               </div>
               <div className="mt-2">
                 <div className="overflow-y-auto max-h-[300px] flex flex-col gap-2">
@@ -251,7 +263,7 @@ export default function CreatePack() {
                           onChange={(e) => {
                             const inputValue = e.target.value;
                             set_pack({...pack, questions: pack.questions.map((ques: string, i: number) =>
-                                i === editing ? inputValue : ques
+                                i === editing ? inputValue.replace(/[^a-zA-Z0-9-\?\,]/g, "") : ques
                               )})
                           }}
                           onKeyDown={(e) => {
@@ -327,10 +339,10 @@ export default function CreatePack() {
             <h3 className="text-sm font-bold uppercase text-gray-500">
               Create New Pack
             </h3>
-
             <h2 className="text-2xl font-bold text-gray-400">
               {pages[page].text}
             </h2>
+            {("description" in (pages[page])) && <p className="text-sm text-gray-400 font-semibold">{pages[page].description}</p>}
           </div>
           <div className="my-6 h-[1px] bg-[#282e34]"></div>
           <AnimatePresence mode="wait">

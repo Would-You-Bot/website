@@ -23,7 +23,7 @@ export default async function Account(
     message: "auth :)",
     user: {
       ...data,
-      staff: (process.env?.NEXT_PUBLIC_STAFF || "")
+      staff: (process.env?.STAFF || "")
         .split(" ")
         .includes(data.id as string),
     },
