@@ -10,6 +10,7 @@ import { useAtom } from "jotai";
 import * as state from "@/utils/state";
 import Image from "next/image";
 import { JAPIUser } from "@/types/user";
+import { AnimatePresence, motion } from "framer-motion";
 import { Toaster, toast } from "sonner";
 export interface Pack {
   _id: string;
@@ -34,6 +35,7 @@ export default function Likes() {
   const [pack_author, set_pack_author] = useState<JAPIUser | null>();
   let [page, set_page] = useState(0);
   const [packs, set_packs] = useState<Pack[]>([]);
+  const [question_query, set_question_query] = useState<string>();
 
   const closeModal = () => {
     set_opened_pack(null);
@@ -88,15 +90,53 @@ export default function Likes() {
               );
               return (
                 <>
-                  <Modal.Title>{selectedPack?.name}</Modal.Title>
+                  <Modal.Title>
+                    <div className="flex flex-row gap-3">
+                      {selectedPack?.name}
+                      <button
+                        onClick={() => {
+                          fetch("/api/likePack", {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({
+                              customId: selectedPack?.customId,
+                            }),
+                          })
+                            .then((r) => r.json())
+                            .then((d) => {
+                              if (d.message.includes("logged"))
+                                return router.push("/api/login");
+                              else toast(d.message);
+                            });
+                        }}
+                        className={`py-1 px-2 rounded-md bg-[#101010] transition-all flex items-center space-x-1 hover:text-[#F00505] text-base ${
+                          selectedPack?.likes.includes(User?.id || "")
+                            ? "text-[#F00505]"
+                            : "text-gray-500"
+                        }`}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          className="w-5 h-5"
+                        >
+                          <path d="M9.653 16.915l-.005-.003-.019-.01a20.759 20.759 0 01-1.162-.682 22.045 22.045 0 01-2.582-1.9C4.045 12.733 2 10.352 2 7.5a4.5 4.5 0 018-2.828A4.5 4.5 0 0118 7.5c0 2.852-2.044 5.233-3.885 6.82a22.049 22.049 0 01-3.744 2.582l-.019.01-.005.003h-.002a.739.739 0 01-.69.001l-.002-.001z" />
+                        </svg>
+                        <span>{selectedPack?.likes.length} Likes</span>
+                      </button>
+                    </div>
+                  </Modal.Title>
                   <Modal.Description>
-                    <div className="w-full h-full flex items-center justify-center flex-col gap-4">
-                      <p className="text-gray-400 text-md overflow-hidden line-clamp-3">
+                    <div className="w-full h-full flex flex-col">
+                      <p className="text-gray-400 text-md overflow-hidden line-clamp-3 text-start">
                         {selectedPack?.description}
                       </p>
-                      <div className="flex flex-row px-3 py-2 gap-10">
+                      <div className="flex flex-row py-2 justify-between w-3/4">
                         <div className="flex flex-col">
-                          <h2 className="text-gray-500">Author</h2>
+                          <h2 className="text-gray-500 mb-2">Author</h2>
                           <div className="flex justify-center items-center hover:cursor-pointer">
                             <Image
                               src={`https://japi.rest/discord/v1/user/${selectedPack?.author}/avatar`}
@@ -112,20 +152,20 @@ export default function Likes() {
                           </div>
                         </div>
                         <div className="flex flex-col">
-                          <h2 className="text-gray-500">Questions</h2>
+                          <h2 className="text-gray-500 mb-2">Questions</h2>
                           <p className="text-white font-bold">
                             {selectedPack?.questions?.length}
                           </p>
                         </div>
                         <div className="flex flex-col">
-                          <h2 className="text-gray-500">Type</h2>
+                          <h2 className="text-gray-500 mb-2">Type</h2>
                           <p className="text-white font-bold text-sm">
                             {selectedPack?.type}
                           </p>
                         </div>
                       </div>
                       <div className="mt-4 flex flex-col w-full">
-                        <h2 className="text-gray-500">Use this pack</h2>
+                        <h2 className="text-gray-500 mb-4 ">Use this pack</h2>
                         <div
                           onClick={() => copy()}
                           className="w-full p-2 border-2 border-[#0598f6] bg-opacity-10 bg-[#0598f6] rounded-md flex justify-between text-[#0598f6] items-center"
@@ -142,7 +182,7 @@ export default function Likes() {
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 20 20"
                             fill="currentColor"
-                            className="w-5 h-5"
+                            className="w-5 h-5 hover:cursor-pointer"
                           >
                             <path d="M2 4.25A2.25 2.25 0 014.25 2h6.5A2.25 2.25 0 0113 4.25V5.5H9.25A3.75 3.75 0 005.5 9.25V13H4.25A2.25 2.25 0 012 10.75v-6.5z" />
                             <path d="M9.25 7A2.25 2.25 0 007 9.25v6.5A2.25 2.25 0 009.25 18h6.5A2.25 2.25 0 0018 15.75v-6.5A2.25 2.25 0 0015.75 7h-6.5z" />
@@ -150,17 +190,49 @@ export default function Likes() {
                         </div>
                       </div>
                       <div className="mt-2">
-                        <div className="overflow-y-auto max-h-[300px] flex flex-col gap-2">
-                          {(selectedPack?.questions || []).map(
-                            (question: string, index: number) => (
-                              <div
-                                key={index}
-                                className="flex bg-[#1d1d1d] border-none outline-none rounded-md text-white w-full p-3 items-center justify-between"
-                              >
-                                <p className="flex-grow">{question}</p>
-                              </div>
-                            )
-                          )}
+                        <div className="bg-[#181818] p-1 rounded-xl flex flex-col">
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="my-1 flex flex-row items-center gap-3"
+                          >
+                            <h2 className="text-[#898989] font-bold text-xl pl-2">
+                              Question
+                            </h2>
+                            <input
+                              className="bg-[#1d1d1d] border-none outline-none rounded-md text-white w-1/2 md:w-1/2 p-2 mb-3 md:mb-0"
+                              placeholder="Search questions..."
+                              value={question_query}
+                              onChange={(e) =>
+                                set_question_query(e.target.value)
+                              }
+                            />
+                          </motion.div>
+                          <div className="overflow-y-auto max-h-[250px] flex flex-col gap-1">
+                            <AnimatePresence>
+                              {(selectedPack?.questions || [])
+                                .filter((question) =>
+                                  question
+                                    .toLowerCase()
+                                    .includes(
+                                      (question_query || "").toLowerCase()
+                                    )
+                                )
+                                .map((question: string, index: number) => (
+                                  <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.3 + index * 0.1 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    className="flex bg-[#121212] border-none outline-none rounded-md text-white w-full p-3 items-center justify-between"
+                                  >
+                                    <p className="flex-grow">{question}</p>
+                                  </motion.div>
+                                ))}
+                            </AnimatePresence>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -215,7 +287,7 @@ export default function Likes() {
               <h2 className="text-lg text-white font-bold">No Packs Found</h2>
             </div>
           )}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 mt-10 gap-3 mb-10">
+          <div className="grid grid-cols-1 gap-10 sm:gap-10 md:gap-10 lg:gap-10 xl:gap-5 2xl:gap-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 2xl:grid-cols-3 mt-10 mb-10 items-center sm:items-center md:items-center">
             {packs.map((pack: Pack, index: number) => {
               return (
                 <div
@@ -256,7 +328,7 @@ export default function Likes() {
                         }).then(r => r.json()).then(d => {
                           toast(d.message)
                         })
-                      }} className={`py-2 px-4 rounded-md bg-[#101010] text-gray-500 transition-all flex items-center space-x-1 hover:text-[#F00505] ${pack.likes.includes(User?.id || "") ? "text-[#F00505]" : ""}`}>
+                      }} className={`py-2 px-4 rounded-md bg-[#101010] transition-all flex items-center space-x-1 hover:text-[#F00505] ${pack.likes.includes(User?.id || "") ? "text-[#F00505]" : "text-gray-500"}`}>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           viewBox="0 0 20 20"

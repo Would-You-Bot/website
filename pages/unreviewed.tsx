@@ -11,6 +11,7 @@ import * as state from "@/utils/state";
 import Image from "next/image";
 import { JAPIUser } from "@/types/user";
 import { Toaster, toast } from "sonner";
+import { AnimatePresence, motion } from "framer-motion";
 export interface Pack {
   _id: string;
   customId: string;
@@ -32,6 +33,7 @@ export default function Unreviewed() {
   const [loading, set_loading] = useState(true);
   const [opened_pack, set_opened_pack] = useState<string | null>(null);
   const [pack_author, set_pack_author] = useState<JAPIUser | null>();
+  const [question_query, set_question_query] = useState<string>();
   let [page, set_page] = useState(0);
   const [packs, set_packs] = useState<Pack[]>([]);
 
@@ -112,13 +114,13 @@ export default function Unreviewed() {
                 <>
                   <Modal.Title>{selectedPack?.name}</Modal.Title>
                   <Modal.Description>
-                    <div className="w-full h-full flex items-center justify-center flex-col gap-4">
-                      <p className="text-gray-400 text-md overflow-hidden line-clamp-3">
+                    <div className="w-full h-full flex flex-col gap-4">
+                      <p className="text-gray-400 text-md overflow-hidden line-clamp-3 text-start">
                         {selectedPack?.description}
                       </p>
-                      <div className="flex flex-row px-3 py-2 gap-10">
+                      <div className="flex flex-row py-2 justify-between w-3/4">
                         <div className="flex flex-col">
-                          <h2 className="text-gray-500">Author</h2>
+                          <h2 className="text-gray-500 mb-2">Author</h2>
                           <div className="flex justify-center items-center hover:cursor-pointer">
                             <Image
                               src={`https://japi.rest/discord/v1/user/${selectedPack?.author}/avatar`}
@@ -134,30 +136,62 @@ export default function Unreviewed() {
                           </div>
                         </div>
                         <div className="flex flex-col">
-                          <h2 className="text-gray-500">Questions</h2>
+                          <h2 className="text-gray-500 mb-2">Questions</h2>
                           <p className="text-white font-bold">
                             {selectedPack?.questions?.length}
                           </p>
                         </div>
                         <div className="flex flex-col">
-                          <h2 className="text-gray-500">Type</h2>
+                          <h2 className="text-gray-500 mb-2">Type</h2>
                           <p className="text-white font-bold text-sm">
                             {selectedPack?.type}
                           </p>
                         </div>
                       </div>
                       <div className="mt-2">
-                        <div className="overflow-y-auto max-h-[300px] flex flex-col gap-2">
-                          {(selectedPack?.questions || []).map(
-                            (question: string, index: number) => (
-                              <div
-                                key={index}
-                                className="flex bg-[#1d1d1d] border-none outline-none rounded-md text-white w-full p-3 items-center justify-between"
-                              >
-                                <p className="flex-grow">{question}</p>
-                              </div>
-                            )
-                          )}
+                        <div className="bg-[#181818] p-1 rounded-xl flex flex-col">
+                          <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.2 }}
+                            className="my-1 flex flex-row items-center gap-3"
+                          >
+                            <h2 className="text-[#898989] font-bold text-xl pl-2">
+                              Question
+                            </h2>
+                            <input
+                              className="bg-[#1d1d1d] border-none outline-none rounded-md text-white w-1/2 md:w-1/2 p-2 mb-3 md:mb-0"
+                              placeholder="Search questions..."
+                              value={question_query}
+                              onChange={(e) =>
+                                set_question_query(e.target.value)
+                              }
+                            />
+                          </motion.div>
+                          <div className="overflow-y-auto max-h-[250px] flex flex-col gap-1">
+                            <AnimatePresence>
+                              {(selectedPack?.questions || [])
+                                .filter((question) =>
+                                  question
+                                    .toLowerCase()
+                                    .includes(
+                                      (question_query || "").toLowerCase()
+                                    )
+                                )
+                                .map((question: string, index: number) => (
+                                  <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: 0.3 + index * 0.1 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    className="flex bg-[#121212] border-none outline-none rounded-md text-white w-full p-3 items-center justify-between"
+                                  >
+                                    <p className="flex-grow">{question}</p>
+                                  </motion.div>
+                                ))}
+                            </AnimatePresence>
+                          </div>
                         </div>
                       </div>
                       <div className="w-full mt-2 flex flex-row justify-end gap-2">
@@ -226,7 +260,7 @@ export default function Unreviewed() {
               <h2 className="text-lg text-white font-bold">No Packs Found</h2>
             </div>
           )}
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 mt-10 gap-3 mb-10">
+          <div className="grid grid-cols-1 gap-10 sm:gap-10 md:gap-10 lg:gap-10 xl:gap-5 2xl:gap-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 2xl:grid-cols-3 mt-10 mb-10 items-center sm:items-center md:items-center">
             {packs.map((pack: Pack, index: number) => {
               return (
                 <div

@@ -40,7 +40,7 @@ const Modal: ModalComponent = ({ isOpen, onClose, children }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 flex items-center justify-center z-50"
+          className="fixed inset-0 flex items-center justify-center z-50 w-full h-full mb-10"
         >
           <div
             className="fixed inset-0 bg-black opacity-50 blur-sm"
@@ -52,7 +52,7 @@ const Modal: ModalComponent = ({ isOpen, onClose, children }) => {
             animate={{ opacity: 1, y: "0%" }}
             exit={{ opacity: 0, y: "10%" }}
             transition={{ type: "spring", damping: 20, stiffness: 300 }}
-            className="bg-[#16171a] rounded-lg p-4 w-full sm:max-w-sm md:max-w-md lg:max-w-lg text-white relative z-10"
+            className="bg-[#121212] rounded-3xl p-4 w-[805px] text-white relative z-50"
           >
             <button
               className="absolute top-2 right-2 text-white"
@@ -80,7 +80,7 @@ interface ModalTitleProps {
 }
 
 const ModalTitle: React.FC<ModalTitleProps> = ({ children }) => {
-  return <h2 className="text-xl font-semibold mb-2 pl-5">{children}</h2>;
+  return <h2 className="text-xl font-semibold mb-2">{children}</h2>;
 };
 
 interface ModalDescriptionProps {
