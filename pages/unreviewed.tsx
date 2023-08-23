@@ -260,7 +260,7 @@ export default function Unreviewed() {
               <h2 className="text-lg text-white font-bold">No Packs Found</h2>
             </div>
           )}
-          <div className="grid grid-cols-1 gap-10 sm:gap-10 md:gap-10 lg:gap-10 xl:gap-5 2xl:gap-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 2xl:grid-cols-3 mt-10 mb-10 items-center sm:items-center md:items-center">
+          <div className="grid grid-cols-1 gap-10 sm:gap-10 md:gap-10 lg:gap-10 xl:gap-10 2xl:gap-5 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 2xl:grid-cols-3 mt-10 mb-10 items-center sm:items-center md:items-center">
             {packs.map((pack: Pack, index: number) => {
               return (
                 <div
