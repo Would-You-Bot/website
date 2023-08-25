@@ -77,18 +77,25 @@ const Navbar = () => {
           <div className="w-full h-full flex items-center justify-center flex-col gap-4">
             <button
               onClick={() => {
-                router.push(`/api/login?state=${encodeURIComponent(JSON.stringify({
-                  server: is_on
-                }))}`);
+                router.push(
+                  `/api/login?state=${encodeURIComponent(
+                    JSON.stringify({
+                      server: is_on,
+                    })
+                  )}`
+                );
               }}
               className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-[#0598f6] text-white hover:bg-[#0598f6]/90 h-10 py-2 px-4"
             >
               Login with Discord
             </button>
             <div className="flex flex-row items-center justify-center gap-3">
-              <Toggle isOn={true} onChange={() => {
-                set_is_on(!is_on)
-              }} />
+              <Toggle
+                isOn={true}
+                onChange={() => {
+                  set_is_on(!is_on);
+                }}
+              />
               <p className="text-xs">Join Discord Server</p>
             </div>
           </div>
@@ -137,7 +144,10 @@ const Navbar = () => {
             </Dropdown>
           ) : (
             <button
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => {
+                toggleMobileMenu();
+                setIsModalOpen(true);
+              }}
               className="wy-button primary"
             >
               Login
@@ -161,7 +171,7 @@ const Navbar = () => {
             ></motion.span>
           </div>
         </div>
-        <hr className="z-0"/>
+        <hr className="z-0" />
 
         <motion.div
           className="nav-mobile-menu"
@@ -169,7 +179,7 @@ const Navbar = () => {
           initial={{ opacity: 0.5, left: "100vw", pointerEvents: "none" }}
           animate={menuControls}
         >
-          <div className="links">
+          <div className="links mb-2">
             <Link href="/">Home</Link>
             <Link href="/commands">Commands</Link>
             <Link href="/packs">Packs</Link>
@@ -178,16 +188,20 @@ const Navbar = () => {
               Support
             </Link>
             {User ? (
-              <p className="text-white text-lg hover:cursor-pointer">
-                {User.global_name}
-              </p>
+              <>
+                <Link href="/likes">Likes</Link>
+                {User!.staff && <Link href="/unreviewed">Unreviewed</Link>}
+              </>
             ) : (
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="wy-button primary"
-            >
-              Login
-            </button>
+              <button
+                onClick={() => {
+                  toggleMobileMenu();
+                  setIsModalOpen(true);
+                }}
+                className="wy-button primary mt-2"
+              >
+                Login
+              </button>
             )}
           </div>
         </motion.div>

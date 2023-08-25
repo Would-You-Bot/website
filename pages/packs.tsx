@@ -154,7 +154,7 @@ export default function Packs() {
                       <p className="text-gray-400 text-md overflow-hidden line-clamp-3 text-start">
                         {selectedPack?.description}
                       </p>
-                      <div className="flex flex-row py-2 justify-between w-3/4">
+                      <div className="grid grid-rows-3 sm:grid-cols-2 sm:grid-rows-2 md:grid-cols-3 md:grid-rows-1 py-2 justify-between w-3/4">
                         <div className="flex flex-col">
                           <h2 className="text-gray-500 mb-2">Author</h2>
                           <div className="flex justify-center items-center hover:cursor-pointer">
@@ -264,12 +264,15 @@ export default function Packs() {
         )}
       </Modal>
       <Navbar />
-      <main className="homepage-main mt-44">
+      <main className="homepage-main mt-40">
         <section className="flex items-between justify-center mx-[17vw] flex-col">
           <h1 className="my-4">
             <span className="red">Question</span>{" "}
             <span className="blue">Packs</span>
           </h1>
+          <p className="text-gray-300 text-sm italic mt-3 md:mt-0">
+            You can only search with: a-z, 0-9, -, , and ?
+          </p>
           <div className="flex flex-col md:flex-row md:gap-3 w-full md:items-center">
             <input
               className="bg-[#1d1d1d] border-none outline-none rounded-md text-white w-full md:w-3/4 p-3 mb-3 md:mb-0"
@@ -294,9 +297,6 @@ export default function Packs() {
             </button>
           </div>
 
-          <p className="text-gray-300 text-sm italic mt-3 md:mt-0">
-            You can only search with: a-z, 0-9, -, , and ?
-          </p>
           <div className="flex flex-row gap-2 mt-2 flex-wrap">
             {["Would You Rather", "Never Have I Ever", "What Would You Do"].map(
               (type: string, index: number) => (

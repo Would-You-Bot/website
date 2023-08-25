@@ -2,7 +2,8 @@ import { serialize } from "cookie";
 import { sign } from "jsonwebtoken";
 import type DiscordUser from "@/types/user";
 import { NextApiRequest, NextApiResponse } from "next";
-const REDIRECT_URI = `https://beta.wouldyoubot.gg/api/login`;
+//beta.wouldyoubot.gg
+const REDIRECT_URI = `http://localhost:3000/api/login`;
 const scopes = ["identify"];
 export default async function OAuth(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "GET") return res.redirect("/");

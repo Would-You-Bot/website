@@ -233,13 +233,13 @@ nav {
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 1000;
+  z-index: 10;
 }
 nav .nav-left {
   display: flex;
   align-items: center;
   margin-left: 17vw;
-  z-index: 1000;
+  z-index: 10;
 }
 @media screen and (max-width: 1300px) {
   nav .nav-left {
@@ -521,9 +521,6 @@ footer .footer-copyright p a:active {
   color: #016CB0;
 }
 
-.homepage-main {
-  margin-top: 240px;
-}
 .homepage-main section.landing {
   margin-left: 17vw;
   margin-right: 17vw;

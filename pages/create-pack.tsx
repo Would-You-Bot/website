@@ -6,16 +6,16 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import * as state from "@/utils/state";
 import { useRouter } from "next/router";
-import { Toaster, toast } from 'sonner'
+import { Toaster, toast } from "sonner";
 interface Pack {
   name: string | null;
   description: string | null;
-  tags: string[],
-  questions: string[],
-  type: string
+  tags: string[];
+  questions: string[];
+  type: string;
 }
 export default function CreatePack() {
-    let router = useRouter();
+  let router = useRouter();
   const [User] = useAtom(state.User);
   const [page, set_page] = useState<number>(0);
   const [pack, set_pack] = useState<Pack>({
@@ -23,12 +23,12 @@ export default function CreatePack() {
     description: null,
     tags: [],
     questions: [],
-    type: "Would You Rather"
+    type: "Would You Rather",
   });
   const [editing, set_editing] = useState<number>(-1);
   useEffect(() => {
-    if(!User) router.push("/api/login")
-  }, []);
+    if (!User) router.push("/api/login");
+  }, [User]);
   const types = ["Would You Rather", "Never Have I Ever", "What Would You Do"];
   const pages: any[] = [
     {
@@ -42,7 +42,7 @@ export default function CreatePack() {
                 <>
                   <motion.div
                     onClick={() => {
-                      set_pack({...pack, type});
+                      set_pack({ ...pack, type });
                     }}
                     key={index}
                     className="w-full bg-[#191d22] border-none outline-none rounded-md text-white p-3 flex items-center justify-between hover:cursor-pointer"
@@ -165,7 +165,7 @@ export default function CreatePack() {
               exit={{ opacity: 0, x: 10 }}
               transition={{ duration: 0.2 }}
             >
-              <div className="p-3 w-full bg-[#1d1d1d] border-none outline-none rounded-md text-white flex flex-row gap-2">
+              <div className="p-3 w-full bg-[#1d1d1d] border-none outline-none rounded-md text-white flex flex-row gap-2 flex-wrap">
                 {pack.tags.map((tag: string, index: number) => {
                   return (
                     <>
@@ -186,24 +186,36 @@ export default function CreatePack() {
                       ""
                     );
 
-                    if (e.key === "Enter" && inputValue) {
-                      set_pack({...pack, tags: [...pack.tags, inputValue]});
-                      e.currentTarget.value = "";
-                    } else if (
-                      e.key === "Backspace" &&
-                      !e.currentTarget.value
-                    ) {
+                    if (e.key === "Enter" || e.key === "Unidentified") {
+                      if (inputValue) {
+                        set_pack({ ...pack, tags: [...pack.tags, inputValue] });
+                        e.currentTarget.value = "";
+                      }
+                    } else if (e.key === "Backspace" && !inputValue) {
                       const new_tags = pack.tags.slice(0, -1);
-                      set_pack({...pack, tags: [...pack.tags, inputValue]});
+                      set_pack({ ...pack, tags: [...new_tags] });
                     }
                   }}
-                  className="bg-transparent border-none outline-none text-white w-full"
+                  onKeyUp={(e) => {
+                    e.stopPropagation();
+                    const inputValue = e.currentTarget.value.replaceAll(
+                      "#",
+                      ""
+                    );
+
+                    if (e.key === "Enter" || e.key === "Unidentified") {
+                      e.currentTarget.value = "";
+                    }
+                  }}
+                  className="bg-transparent border-none outline-none text-white w-[45%]"
                   placeholder="Cool tags for your pack..."
                 />
               </div>
-
             </motion.div>
-            <p className="text-gray-300 text-sm italic mt-3">Press <span className="p-1 rounded-md bg-slate-600">Enter</span> to add a tag.</p>
+            <p className="text-gray-300 text-sm italic mt-3">
+              Press <span className="p-1 rounded-md bg-slate-600">Enter</span>{" "}
+              to add a tag.
+            </p>
           </div>
         </>
       ),
@@ -233,21 +245,35 @@ export default function CreatePack() {
                     if (inputValue.length >= 100 && e.key !== "Backspace") {
                       e.preventDefault();
                     }
-                    if (e.key === "Enter" && inputValue) {
-                        set_pack({...pack, questions: [...pack.questions, inputValue.replace(/[^a-zA-Z0-9-\?\,]/g, "")]});
+                    if ((e.key === "Enter" || e.key === "Unidentified") && inputValue) {
+                      set_pack({
+                        ...pack,
+                        questions: [
+                          ...pack.questions,
+                          inputValue.replace(/[^a-zA-Z0-9-\?\,]/g, ""),
+                        ],
+                      });
                       e.currentTarget.value = "";
                     }
                   }}
                 />
-                <button 
-                disabled={true}
-                className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-[#0598f6] text-white hover:bg-[#0598f6]/90 h-10 py-2 px-4">
+                <button
+                  disabled={true}
+                  className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-[#0598f6] text-white hover:bg-[#0598f6]/90 h-10 py-2 px-4"
+                >
                   Import
                 </button>
               </div>
               <div className="mt-2">
-                {pack.questions.length < 5 && (<p className="text-gray-300 text-sm italic mt-3">You can not create a pack until it has atleast 5 questions.</p>)}
-              <p className="text-gray-300 text-sm italic mt-3">Questions may only contain: a-z, 0-9, -, , and ?, and must be under 100 characters.</p>
+                {pack.questions.length < 5 && (
+                  <p className="text-gray-300 text-sm italic mt-3">
+                    You can not create a pack until it has atleast 5 questions.
+                  </p>
+                )}
+                <p className="text-gray-300 text-sm italic mt-3">
+                  Questions may only contain: a-z, 0-9, -, , and ?, and must be
+                  under 100 characters.
+                </p>
               </div>
               <div className="mt-2">
                 <div className="overflow-y-auto max-h-[300px] flex flex-col gap-2">
@@ -262,12 +288,21 @@ export default function CreatePack() {
                           value={pack.questions[editing]}
                           onChange={(e) => {
                             const inputValue = e.target.value;
-                            set_pack({...pack, questions: pack.questions.map((ques: string, i: number) =>
-                                i === editing ? inputValue.replace(/[^a-zA-Z0-9-\?\,]/g, "") : ques
-                              )})
+                            set_pack({
+                              ...pack,
+                              questions: pack.questions.map(
+                                (ques: string, i: number) =>
+                                  i === editing
+                                    ? inputValue.replace(
+                                        /[^a-zA-Z0-9-\?\,]/g,
+                                        ""
+                                      )
+                                    : ques
+                              ),
+                            });
                           }}
                           onKeyDown={(e) => {
-                            if (e.key === "Enter") {
+                            if (e.key === "Enter" || e.key === "Unidentified")  {
                               e.preventDefault();
                               set_editing(-1);
                             }
@@ -298,11 +333,12 @@ export default function CreatePack() {
                           viewBox="0 0 20 20"
                           fill="currentColor"
                           onClick={() => {
-                            set_pack({...pack,
+                            set_pack({
+                              ...pack,
                               questions: pack.questions.filter(
                                 (_: string, i: number) => i !== index
-                              )
-                              });
+                              ),
+                            });
                           }}
                           className="w-5 h-5 hover:text-red-600 transition-all"
                         >
@@ -334,7 +370,7 @@ export default function CreatePack() {
       <Navbar />
       <Toaster />
       <main className="homepage-main mt-44 flex justify-center items-center flex-col">
-        <div className="bg-[#16171a] w-[500px] rounded-md p-6 shadow-md">
+        <div className="bg-[#16171a] w-[300px] md:w-[500px] rounded-md p-6 shadow-md">
           <div>
             <h3 className="text-sm font-bold uppercase text-gray-500">
               Create New Pack
@@ -342,14 +378,18 @@ export default function CreatePack() {
             <h2 className="text-2xl font-bold text-gray-400">
               {pages[page].text}
             </h2>
-            {("description" in (pages[page])) && <p className="text-sm text-gray-400 font-semibold">{pages[page].description}</p>}
+            {"description" in pages[page] && (
+              <p className="text-sm text-gray-400 font-semibold">
+                {pages[page].description}
+              </p>
+            )}
           </div>
           <div className="my-6 h-[1px] bg-[#282e34]"></div>
           <AnimatePresence mode="wait">
             <div>{pages[page].component}</div>
           </AnimatePresence>
         </div>
-        <div className="grid grid-cols-2 items-center mt-6">
+        <div className="grid grid-cols-2 items-center mt-6 ">
           <ProgressBar currentPage={page} totalPages={pages.length} />
           <div className="flex justify-end gap-2">
             <button
@@ -360,53 +400,52 @@ export default function CreatePack() {
               className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background text-white h-10 py-2 px-4 bg-[#1f2428]"
             >
               <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 24 24"
-                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="text-lg"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="w-5 h-5"
               >
                 <path
-                  d="M12.7071 5.70711C13.0976 5.31658 13.0976 4.68342 12.7071 4.29289C12.3166 3.90237 11.6834 3.90237 11.2929 4.29289L4.29289 11.2929C3.90237 11.6834 3.90237 12.3166 4.29289 12.7071L11.2929 19.7071C11.6834 20.0976 12.3166 20.0976 12.7071 19.7071C13.0976 19.3166 13.0976 18.6834 12.7071 18.2929L7.41421 13L19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11L7.41421 11L12.7071 5.70711Z"
-                  fill="currentColor"
-                ></path>
+                  fillRule="evenodd"
+                  d="M17 10a.75.75 0 01-.75.75H5.612l4.158 3.96a.75.75 0 11-1.04 1.08l-5.5-5.25a.75.75 0 010-1.08l5.5-5.25a.75.75 0 111.04 1.08L5.612 9.25H16.25A.75.75 0 0117 10z"
+                  clipRule="evenodd"
+                />
               </svg>
             </button>
             <button
               disabled={pages[page].disabled}
               onClick={() => {
-                if(page === (pages.length - 1)){
-                    fetch("/api/createPack", ({
-                        method: "POST",
-                        body: JSON.stringify({
-                            ...pack,
-                            author: User?.id,
-                        })
-                        
-                    })).then(r => r.json()).then((r: any): any => {
-                        if(r.created) return router.push("/packs");
-                        else return toast.error(r.message)
-                    })
-                }else{ 
-                    set_page(Math.min(pages.length, page + 1)); 
+                if (page === pages.length - 1) {
+                  fetch("/api/createPack", {
+                    method: "POST",
+                    body: JSON.stringify({
+                      ...pack,
+                      author: User?.id,
+                    }),
+                  })
+                    .then((r) => r.json())
+                    .then((r: any): any => {
+                      if (r.created) return router.push("/packs");
+                      else return toast.error(r.message);
+                    });
+                } else {
+                  set_page(Math.min(pages.length, page + 1));
                 }
               }}
               className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-[#0598f6] text-white hover:bg-[#0598f6]/90 h-10 py-2 px-4"
             >
-              {page === (pages.length - 1) ? "Create" : "Continue"}
+              {page === pages.length - 1 ? "Create" : "Continue"}
               <svg
-                width="1em"
-                height="1em"
-                viewBox="0 0 24 24"
-                fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                className="text-lg ml-2"
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                className="w-5 h-5"
               >
                 <path
-                  d="M12.7071 4.29289C12.3166 3.90237 11.6834 3.90237 11.2929 4.29289C10.9024 4.68342 10.9024 5.31658 11.2929 5.70711L16.5858 11H5C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13H16.5858L11.2929 18.2929C10.9024 18.6834 10.9024 19.3166 11.2929 19.7071C11.6834 20.0976 12.3166 20.0976 12.7071 19.7071L19.7071 12.7071C20.0976 12.3166 20.0976 11.6834 19.7071 11.2929L12.7071 4.29289Z"
-                  fill="currentColor"
-                ></path>
+                  fillRule="evenodd"
+                  d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z"
+                  clipRule="evenodd"
+                />
               </svg>
             </button>
           </div>

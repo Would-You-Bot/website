@@ -218,7 +218,7 @@ export default function Unreviewed() {
       </Modal>
 
       <Navbar />
-      <main className="homepage-main mt-44">
+      <main className="homepage-main mt-40">
         <section className="flex items-between justify-center mx-[17vw] flex-col">
           <h1 className="my-4">
             <span className="red">Unreviewed</span>{" "}
