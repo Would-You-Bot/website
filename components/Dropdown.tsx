@@ -31,7 +31,7 @@ const Dropdown: React.FC<DropdownProps> = ({ children }) => {
   };
 
   return (
-    <div ref={dropdownRef} className="relative hidden md:inline-block text-left">
+    <div ref={dropdownRef} className="relative hidden lg:inline-block text-left">
       <div>
         <button
           type="button"

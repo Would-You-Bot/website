@@ -186,25 +186,16 @@ export default function CreatePack() {
                       ""
                     );
 
-                    if (e.key === "Enter" || e.key === "Unidentified") {
+                    if (e.key === "Enter") {
+                      e.preventDefault();
                       if (inputValue) {
                         set_pack({ ...pack, tags: [...pack.tags, inputValue] });
                         e.currentTarget.value = "";
                       }
-                    } else if (e.key === "Backspace" && !inputValue) {
+                    } else if (e.key === "Backspace" && inputValue === "") {
+                      e.preventDefault();
                       const new_tags = pack.tags.slice(0, -1);
                       set_pack({ ...pack, tags: [...new_tags] });
-                    }
-                  }}
-                  onKeyUp={(e) => {
-                    e.stopPropagation();
-                    const inputValue = e.currentTarget.value.replaceAll(
-                      "#",
-                      ""
-                    );
-
-                    if (e.key === "Enter" || e.key === "Unidentified") {
-                      e.currentTarget.value = "";
                     }
                   }}
                   className="bg-transparent border-none outline-none text-white w-[45%]"
@@ -245,7 +236,10 @@ export default function CreatePack() {
                     if (inputValue.length >= 100 && e.key !== "Backspace") {
                       e.preventDefault();
                     }
-                    if ((e.key === "Enter" || e.key === "Unidentified") && inputValue) {
+                    if (
+                      (e.key === "Enter") &&
+                      inputValue
+                    ) {
                       set_pack({
                         ...pack,
                         questions: [
@@ -302,7 +296,7 @@ export default function CreatePack() {
                             });
                           }}
                           onKeyDown={(e) => {
-                            if (e.key === "Enter" || e.key === "Unidentified")  {
+                            if (e.key === "Enter" || e.key === "Unidentified") {
                               e.preventDefault();
                               set_editing(-1);
                             }
