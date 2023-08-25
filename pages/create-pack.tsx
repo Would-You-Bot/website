@@ -233,24 +233,25 @@ export default function CreatePack() {
                   onKeyDown={(e) => {
                     e.stopPropagation();
                     const inputValue = e.currentTarget.value;
+
                     if (inputValue.length >= 100 && e.key !== "Backspace") {
                       e.preventDefault();
                     }
-                    if (
-                      (e.key === "Enter") &&
-                      inputValue
-                    ) {
+                    const sanitizedValue = inputValue.replace(
+                      /[^\w\s-?,]/g,
+                      ""
+                    );
+                    if (e.key === "Enter" && sanitizedValue.trim() !== "") {
+                      
                       set_pack({
                         ...pack,
-                        questions: [
-                          ...pack.questions,
-                          inputValue.replace(/[^a-zA-Z0-9-\?\,]/g, ""),
-                        ],
+                        questions: [...pack.questions, sanitizedValue.trim()],
                       });
                       e.currentTarget.value = "";
                     }
                   }}
                 />
+
                 <button
                   disabled={true}
                   className="inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background bg-[#0598f6] text-white hover:bg-[#0598f6]/90 h-10 py-2 px-4"
@@ -282,21 +283,27 @@ export default function CreatePack() {
                           value={pack.questions[editing]}
                           onChange={(e) => {
                             const inputValue = e.target.value;
+                            const sanitizedValue = inputValue.replace(
+                              /[^\w\s-?,]/g,
+                              ""
+                            );
                             set_pack({
                               ...pack,
                               questions: pack.questions.map(
                                 (ques: string, i: number) =>
                                   i === editing
-                                    ? inputValue.replace(
-                                        /[^a-zA-Z0-9-\?\,]/g,
-                                        ""
-                                      )
+                                    ? sanitizedValue
                                     : ques
                               ),
                             });
                           }}
                           onKeyDown={(e) => {
-                            if (e.key === "Enter" || e.key === "Unidentified") {
+                            const inputValue = e.currentTarget.value;
+                            const sanitizedValue = inputValue.replace(
+                              /[^\w\s-?,]/g,
+                              ""
+                            );
+                            if (e.key === "Enter" && sanitizedValue.trim() !== "") {
                               e.preventDefault();
                               set_editing(-1);
                             }

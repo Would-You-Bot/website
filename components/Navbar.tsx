@@ -187,12 +187,11 @@ const Navbar = () => {
             <Link href="/discord" target={"_blank"}>
               Support
             </Link>
-            {User ? (
-              <>
-                <Link href="/likes">Likes</Link>
-                {User!.staff && <Link href="/unreviewed">Unreviewed</Link>}
-              </>
-            ) : (
+
+            {User && <Link href="/likes">Likes</Link>}
+            {User && User!.staff && <Link href="/unreviewed">Unreviewed</Link>}
+
+            {!User && (
               <button
                 onClick={() => {
                   toggleMobileMenu();
