@@ -354,7 +354,7 @@ export default function Packs() {
             {packs.map((pack: Pack, index: number) => {
               return (
                 <div
-                className="flex items-center justify-center"
+                className="flex items-center"
                 key={index}
               >
                 <div

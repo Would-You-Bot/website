@@ -190,6 +190,7 @@ const Navbar = () => {
 
             {User && <Link href="/likes">Likes</Link>}
             {User && User!.staff && <Link href="/unreviewed">Unreviewed</Link>}
+            {User && <Link href="/api/logout">Logout</Link>}
 
             {!User && (
               <button
