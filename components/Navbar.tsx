@@ -71,7 +71,7 @@ const Navbar = () => {
 
   return (
     <>
-      <Modal isOpen={isModalOpen} onClose={closeModal}>
+      <Modal isOpen={isModalOpen} onClose={closeModal} width={"w-[300px]"}>
         <Modal.Title>Login</Modal.Title>
         <Modal.Description>
           <div className="w-full h-full flex items-center justify-center flex-col gap-4">
@@ -143,9 +143,9 @@ const Navbar = () => {
               </div>
             </Dropdown>
           ) : (
-            <button
+            <button 
               onClick={() => {
-                toggleMobileMenu();
+               
                 setIsModalOpen(true);
               }}
               className="wy-button primary"

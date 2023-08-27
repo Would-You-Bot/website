@@ -101,7 +101,7 @@ export default function Packs() {
         <link rel="icon" href="/Logo.svg" />
       </Head>
       <Toaster />
-      <Modal isOpen={opened_pack !== null} onClose={closeModal}>
+      <Modal isOpen={opened_pack !== null} onClose={closeModal} width={"w-[805px]"}>
         {opened_pack !== null && (
           <>
             {(() => {
