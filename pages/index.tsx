@@ -95,7 +95,7 @@ const Home = () => {
     dominik: {
       author: "Dominik",
       avatar:
-        "https://cdn.discordapp.com/avatars/347077478726238228/25242cace4c27ac9dc8fe1cb37d23d89.webp?size=80",
+        "https://cdn.discordapp.com/avatars/347077478726238228/1b6365388c60a8a4ee94b04afc0ab97f.webp?size=80",
       roleColor: "#F47FFF",
       bot: false,
       verified: false,
