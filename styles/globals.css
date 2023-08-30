@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.popular::before{ /* made by Ashmw(ashmw.com) for one bj*/
+    @apply rounded-3xl;
+    content: '';
+    position: absolute;
+    top: -2px;
+    bottom: -2px;
+    left: -2px;
+    right: -2px;
+    z-index: -1;
+    background: linear-gradient(to right, #0598F6, #F00505);
+  }

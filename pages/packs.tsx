@@ -350,7 +350,7 @@ export default function Packs() {
               <h2 className="text-lg text-white font-bold">No Packs Found</h2>
             </div>
           )}
-          <div className="grid grid-cols-1 gap-10 sm:gap-10 md:gap-10 lg:gap-10 xl:gap-10 2xl:gap-5 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-3 2xl:grid-cols-3 mt-10 mb-10">
+          <div className="grid grid-cols-1 gap-10 sm:gap-10 md:gap-10 lg:gap-10 xl:gap-10 2xl:gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-1 xl:grid-cols-3 2xl:grid-cols-3 mt-10 mb-10">
             {packs.map((pack: Pack, index: number) => {
               return (
                 <div
@@ -358,16 +358,23 @@ export default function Packs() {
                 key={index}
               >
                 <div
-                  className={`bg-[#141414] rounded-3xl p-1 w-[300px] ${
+                  className={`bg-[#141414] rounded-3xl p-1 w-full h-full popular relative ${
                     pack.popular ? "popular" : ""
                   }`}
                
                 >
                   <div className="flex flex-col h-full">
                     <div className="flex flex-col flex-grow">
+                      <div className="flex justify-between p-2">
                       <h2 className="text-white font-bold text-2xl px-3 py-2">
                         {pack.name}
                       </h2>
+                      {pack.popular && <>
+                      <div className="px-1 rounded-md my-auto bg-gradient-to-l from-[#4A6DB0] to-[#725487] flex items-center text-white">
+                        <p>Popular</p>
+                      </div>
+                      </>}
+                      </div>
                       <p className="text-gray-400 text-md px-3 overflow-hidden line-clamp-3">
                         {pack.description}
                       </p>
