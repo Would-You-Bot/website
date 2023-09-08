@@ -5,6 +5,10 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
 
+  images: {
+    domains: ["cdn.discordapp.com"],
+  },
+
   async redirects() {
     return [
       {
