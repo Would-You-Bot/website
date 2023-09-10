@@ -97,7 +97,7 @@ const FeatureItem: React.FC<{
       viewport={{ once: true }}
       transition={{ duration: 0.65, ease: "easeInOut" }}
       className={`flex flex-col justify-center gap-2 ${
-        reverse ? "order-last md:order-first" : ""
+        reverse && "order-last md:order-first"
       }`}
     >
       {right}
