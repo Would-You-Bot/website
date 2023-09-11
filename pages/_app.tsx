@@ -2,11 +2,16 @@ import Footer from "@/components/Footer";
 import Navbar from "@/components/Navbar";
 import "@/styles/globals.css";
 import "@/styles/index.css";
+import { api } from "@/utils/api";
+import { type Session } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import type { AppProps } from "next/app";
+import type { AppType } from "next/app";
 import Head from "next/head";
 
-export default function App({ Component, pageProps }: AppProps) {
+const App: AppType<{ session: Session | null }> = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}) => {
   return (
     <>
       <Head>
@@ -22,4 +27,6 @@ export default function App({ Component, pageProps }: AppProps) {
       </SessionProvider>
     </>
   );
-}
+};
+
+export default api.withTRPC(App);
