@@ -4,11 +4,12 @@ import "@/styles/globals.css";
 import "@/styles/index.css";
 import { api } from "@/utils/api";
 import { type Session } from "next-auth";
+import { SessionProvider } from "next-auth/react";
 import type { AppType } from "next/app";
 import Head from "next/head";
 import type { FrontMatter } from "./blog/[slug]";
 
-const App: AppType<{ session: Session | null; frontMatter: FrontMatter }> = ({
+const App: AppType<{ session: Session | null; frontMatter?: FrontMatter }> = ({
   Component,
   pageProps: { session, frontMatter, ...pageProps },
 }) => {
@@ -19,7 +20,7 @@ const App: AppType<{ session: Session | null; frontMatter: FrontMatter }> = ({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Logo.png" />
         <link rel="canonical" href="https://wouldyoubot.gg" />
-        {frontMatter.thumbnail?.large ? (
+        {frontMatter?.thumbnail?.large ? (
           <>
             <meta
               key="og:image"
@@ -37,13 +38,16 @@ const App: AppType<{ session: Session | null; frontMatter: FrontMatter }> = ({
           </>
         )}
       </Head>
-      <div className="flex min-h-screen flex-col">
-        <Navbar />
-        <div className="grow">
-          <Component {...pageProps} />
+
+      <SessionProvider>
+        <div className="flex min-h-screen flex-col">
+          <Navbar />
+          <div className="grow">
+            <Component {...pageProps} />
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+      </SessionProvider>
     </>
   );
 };
