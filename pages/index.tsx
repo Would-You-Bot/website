@@ -130,7 +130,7 @@ const Home = () => {
   };
 
   return (
-    <main className="mt-52 text-neutral-300 ">
+    <main className="mt-48 text-neutral-300">
       <section className="flex flex-col items-center justify-between gap-8 px-8 text-center lg:flex-row lg:text-left xl:px-[17vw]">
         <motion.div
           initial={{ opacity: 0, transform: "translateY(20px)" }}
@@ -311,7 +311,7 @@ const Home = () => {
           <h2 className="bg-gradient-brand bg-clip-text text-6xl font-bold text-transparent">
             Features
           </h2>
-          <h3 className="mt-4 text-2xl text-white">
+          <h3 className="mt-4 text-center text-2xl text-white">
             What Does Would You Offer To Your Server?
           </h3>
         </motion.div>
@@ -567,7 +567,7 @@ const Home = () => {
         />
       </section>
 
-      <section className="mt-36 bg-neutral-950 py-12">
+      <section className="mt-36 bg-neutral-950 px-9 py-12 xl:px-[17vw]">
         <motion.h2
           initial={{ opacity: 0, transform: "translateY(10px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}

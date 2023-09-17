@@ -17,7 +17,7 @@ const Footer = () => {
             />
             <p className="ml-3">Would You</p>
           </div>
-          <p className="mt-4 text-sm">
+          <p className="mt-4 text-center text-sm md:text-left">
             &copy; {new Date().getFullYear()} Dominik Development. All rights
             reserved.
           </p>

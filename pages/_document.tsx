@@ -5,7 +5,6 @@ export default function Document() {
     <Html lang="en">
       <Head>
         <script
-          rel="preconnect"
           defer
           data-domain="wouldyoubot.gg"
           src="https://stats.wouldyoubot.gg/js/script.js"
@@ -16,22 +15,46 @@ export default function Document() {
             __html: `
             {
               "@context":"http://schema.org",
-              "@type":"Organization",
+              "@type":"Product",
               "name":"Would You Bot",
               "url":"https://wouldyoubot.gg",
               "logo":"https://i.imgur.com/YjwOfOX.png",
-              "description":"Elevate your server's engagement with Would You, featuring user voting, daily messages, and customizability. Would You Rather",
+              "image":"https://i.imgur.com/OPQaiVa.png",
+              "description":"Increase server engagement and entertain your members with Would You, featuring user polls, daily questions, and customization. Would You Rather",
               "sameAs":[
                  "https://twitter.com/wouldyoubot",
                  "https://www.youtube.com/@wouldyoubot",
                  "https://top.gg/bot/981649513427111957"
               ],
-              "aggregateRating":{
-                 "@type":"AggregateRating",
-                 "ratingValue":"5",
-                 "reviewCount":"31"
-              }
+              "offers":{
+                "@type":"Offer",
+                "availability":"https://schema.org/OnlineOnly",
+                "price":"0.00",
+                "priceCurrency":"USD",
+                "url":"https://wouldyoubot.gg"
+             },
+             "review":{
+              "@type":"Review",
+              "reviewRating":{
+                 "@type":"Rating",
+                 "bestRating":5,
+                 "worstRating":1,
+                 "ratingValue":5
+              },
+              "author":{
+                 "@type":"Person",
+                 "name":"_kiru_"
+              },
+              "reviewBody":"Geiler Bot, fördert die Aktivität des Server&apos;s enorm. Der Developer ist auch sehr symphytisch. Kann ich nur weiter empfehlen!"
+           },
+           "aggregateRating":{
+              "@type":"AggregateRating",
+              "ratingValue":5,
+              "ratingCount":32,
+              "bestRating":5,
+              "worstRating":1
            }
+        }
   `,
           }}
         ></script>
@@ -47,7 +70,6 @@ export default function Document() {
         <meta property="og:title" content="Would You | Discord Bot" />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:image" content="0" />
-        <meta property="og:image" content="https://i.imgur.com/OPQaiVa.png" />
         <meta name="theme-color" content="#0598F6" />
         <meta name="msapplication-TileColor" content="#0598F6" />
       </Head>

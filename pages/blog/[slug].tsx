@@ -6,6 +6,7 @@ import matter from "gray-matter";
 import { GetStaticProps, NextPage } from "next";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import path from "path";
@@ -14,15 +15,20 @@ const components = {
   Button: Button,
 };
 
-interface FrontMatter {
+export interface FrontMatter {
   title: string;
   description: string;
   date: string;
+  thumbnail?: {
+    large?: string;
+    banner?: string;
+  };
   author: {
     name: string;
     avatar: string;
   };
   tags: string[];
+  pinned?: boolean;
 }
 
 const BlogPost: NextPage<{
@@ -31,6 +37,20 @@ const BlogPost: NextPage<{
 }> = ({ source, frontMatter }) => {
   return (
     <>
+      <Head>
+        <title>Would You Blog | {frontMatter.title}</title>
+        <meta name="description" content={frontMatter.description} />
+        <meta property="og:title" content={frontMatter.title} />
+        <meta property="og:description" content={frontMatter.description} />
+        {frontMatter.thumbnail?.large && (
+          <meta
+            key="og:image"
+            property="og:image"
+            content={frontMatter.thumbnail?.large}
+          />
+        )}
+      </Head>
+
       <div className="mt-36 px-8 text-neutral-300 xl:px-[17vw]">
         <Link
           href="/blog"
@@ -38,6 +58,15 @@ const BlogPost: NextPage<{
         >
           <p className="mb-4">&larr; Back</p>
         </Link>
+        {frontMatter.thumbnail?.banner && (
+          <Image
+            src={frontMatter.thumbnail.banner}
+            alt={frontMatter.title}
+            width={1000}
+            height={200}
+            className="mb-4 h-auto w-full rounded-lg"
+          />
+        )}
         <h1 className="text-4xl font-bold text-white">{frontMatter.title}</h1>
         <p className="mt-4">{frontMatter.description}</p>
         <div className="mt-4 flex items-center">
