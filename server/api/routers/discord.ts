@@ -14,7 +14,10 @@ export const discordRouter = createTRPCRouter({
       },
     });
 
-    if (guilds.status !== 200) throw new Error("Failed to fetch guilds");
+    if (guilds.status !== 200) {
+      console.error(guilds.statusText);
+      throw new Error("Failed to fetch guilds: " + guilds.statusText);
+    }
 
     let guildsData = (await guilds.json()) as UserGuilds[];
 
@@ -32,10 +35,12 @@ export const discordRouter = createTRPCRouter({
 
       const guildDataJson = await guildData.json();
       if (guildDataJson) guild.banner = guildDataJson.banner;
+
+      console.log(guild.name, guildDataJson.banner);
     }
 
     guildsData = guildsData
-      .filter((g) => parseInt(g.permissions) & 0x20)
+      // .filter((g) => parseInt(g.permissions) & 0x20)
       .sort((g) => (g.botInServer && g.owner ? -1 : g.botInServer ? 0 : 1));
 
     return guildsData;
