@@ -1,4 +1,6 @@
-import { initTRPC, TRPCError } from "@trpc/server";
+import { Guild, QuestionPack } from "@/utils/models";
+import connectDb from "@/utils/mongo";
+import { TRPCError, initTRPC } from "@trpc/server";
 import { type CreateNextContextOptions } from "@trpc/server/adapters/next";
 import { type NextApiRequest } from "next";
 import { type Session } from "next-auth";
@@ -15,7 +17,10 @@ const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
     req: opts.req,
     session: opts.session,
-    // TODO: Mongo here
+    schemas: {
+      Guild,
+      QuestionPack,
+    },
   };
 };
 
@@ -23,6 +28,8 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
   const { req, res } = opts;
 
   const session = await getServerAuthSession({ req, res });
+
+  connectDb();
 
   return createInnerTRPCContext({
     req,
