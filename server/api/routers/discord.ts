@@ -14,7 +14,10 @@ export const discordRouter = createTRPCRouter({
       },
     });
 
-    if (guilds.status !== 200) throw new Error("Failed to fetch guilds");
+    if (guilds.status !== 200) {
+      console.error(guilds.statusText);
+      throw new Error("Failed to fetch guilds");
+    }
 
     let guildsData = (await guilds.json()) as UserGuilds[];
 
