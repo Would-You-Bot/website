@@ -9,10 +9,12 @@ export const packsRouter = createTRPCRouter({
   createPack: protectedProcedure
     .input(
       z.object({
-        name: z.string(),
+        name: z.string().min(3),
         description: z.string(),
-        tags: z.array(z.string()),
-        questions: z.array(z.string()),
+        tags: z.array(z.string()).min(1, "You must have at least 1 tag"),
+        questions: z
+          .array(z.string())
+          .min(5, "You must have at least 5 questions"),
         type: z.string(),
       }),
     )
