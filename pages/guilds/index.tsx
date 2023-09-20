@@ -53,7 +53,7 @@ const GuildSelection: NextPage = () => {
             <div className={`relative w-min ${!g.botInServer && "grayscale"}`}>
               <div className="relative h-28 w-52 overflow-hidden rounded-lg">
                 <Image
-                  src={g.banner || g.icon || "/Logo.svg"}
+                  src={g.icon || "/Logo.svg"}
                   fill
                   alt={g.name}
                   className={`object-cover blur-sm brightness-75 transition-all group-hover:brightness-90`}

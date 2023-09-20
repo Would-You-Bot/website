@@ -24,17 +24,8 @@ export const discordRouter = createTRPCRouter({
     for (const guild of guildsData) {
       guild.icon = getGuildIconUrl(guild);
 
-      const guildData = await fetch(`${DISCORD_ENDPOINT}/guilds/${guild.id}`, {
-        headers: {
-          Authorization: `Bot ${process.env.DISCORD_BOT_TOKEN}`,
-        },
-      });
-
-      guild.botInServer = guildData.status === 200;
-      if (guildData.status !== 200) continue;
-
-      const guildDataJson = await guildData.json();
-      if (guildDataJson) guild.banner = guildDataJson.banner;
+      // TODO: Mongo query
+      guild.botInServer = false;
     }
 
     guildsData = guildsData

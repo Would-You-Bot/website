@@ -6,7 +6,6 @@ export interface Guild {
   icon: string | null;
   owner: boolean;
   permissions: string;
-  banner: string | null;
 }
 
 // https://discord.com/developers/docs/reference#image-formatting
