@@ -1,9 +1,29 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "../trpc";
 
+const packsPerPage = 10;
+
+// TODO: Pagination
+
 export const packsRouter = createTRPCRouter({
-  getPacks: protectedProcedure.query(async ({ ctx }) =>
-    ctx.schemas.QuestionPack.find().exec(),
+  getPacksByType: protectedProcedure
+    .input(z.string())
+    .query(async ({ ctx, input }) =>
+      ctx.schemas.QuestionPack.find({ type: input, reviewed: true })
+        .limit(packsPerPage)
+        .exec(),
+    ),
+
+  getLikedPacks: protectedProcedure.query(async ({ ctx }) =>
+    ctx.schemas.QuestionPack.find({ likes: ctx.session.user.id })
+      .limit(packsPerPage)
+      .exec(),
+  ),
+
+  getUnreviewedPacks: protectedProcedure.query(async ({ ctx }) =>
+    ctx.schemas.QuestionPack.find({ reviewed: false })
+      .limit(packsPerPage)
+      .exec(),
   ),
 
   createPack: protectedProcedure
@@ -24,4 +44,20 @@ export const packsRouter = createTRPCRouter({
         ...input,
       }),
     ),
+
+  likePack: protectedProcedure
+    .input(z.string())
+    .mutation(async ({ ctx, input }) => {
+      const id = ctx.session.user.id;
+
+      const pack = await ctx.schemas.QuestionPack.findById(input).exec();
+      if (!pack) throw new Error("Pack not found");
+
+      const alreadyLiked = pack.likes.includes(id);
+
+      if (alreadyLiked) pack.likes = pack.likes.filter((i) => i !== id);
+      else pack.likes.push(id);
+
+      await pack.save();
+    }),
 });
