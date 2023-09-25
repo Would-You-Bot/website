@@ -148,7 +148,7 @@ const QuestionPackSchema = new Schema({
     required: true,
   },
   type: {
-    type: String,
+    type: Number, // 0 = WYR, 1 = NHIE, 2 = WWYD
     required: true,
   },
   author: {

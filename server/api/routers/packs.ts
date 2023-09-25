@@ -7,7 +7,7 @@ const packsPerPage = 10;
 
 export const packsRouter = createTRPCRouter({
   getPacksByType: protectedProcedure
-    .input(z.string())
+    .input(z.number())
     .query(async ({ ctx, input }) =>
       ctx.schemas.QuestionPack.find({ type: input, reviewed: true })
         .limit(packsPerPage)
@@ -35,7 +35,7 @@ export const packsRouter = createTRPCRouter({
         questions: z
           .array(z.string())
           .min(5, "You must have at least 5 questions"),
-        type: z.string(),
+        type: z.number(),
       }),
     )
     .mutation(async ({ ctx, input }) =>
