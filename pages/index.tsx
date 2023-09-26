@@ -197,10 +197,7 @@ const Home = () => {
               />
               <DiscordEmbed slot="embeds" color="#1e88e5">
                 <DiscordEmbedFields slot="fields">
-                  <DiscordEmbedField
-                    fieldTitle="Would you want this power?"
-                    className=""
-                  >
+                  <DiscordEmbedField fieldTitle="Would you want this power?">
                     {currentQuestion}
                   </DiscordEmbedField>
                 </DiscordEmbedFields>
