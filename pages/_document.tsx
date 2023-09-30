@@ -43,14 +43,14 @@ export default function Document() {
               },
               "author":{
                  "@type":"Person",
-                 "name":"_kiru_"
+                 "name":"policechase"
               },
-              "reviewBody":"Geiler Bot, fördert die Aktivität des Server&apos;s enorm. Der Developer ist auch sehr symphytisch. Kann ich nur weiter empfehlen!"
+              "reviewBody":"Man, this developer gives one on one support with the team. Absolute legend."
            },
            "aggregateRating":{
               "@type":"AggregateRating",
               "ratingValue":5,
-              "ratingCount":32,
+              "ratingCount":33,
               "bestRating":5,
               "worstRating":1
            }
@@ -61,11 +61,13 @@ export default function Document() {
         <meta name="robots" content="index, follow" />
         <meta
           name="description"
-          content="Would you is a fun little bot for every server! Provide your server with fun little would you questions!"
+          content="Play fun and entertaining games with Would You, featuring user polls and customization. 
+          Play Would You Rather, Never Have I Ever, Higher or Lower, and What Would You Do!"
         />
         <meta
           property="og:description"
-          content="Would you is a fun little bot for every server! Provide your server with fun little would you questions!"
+          content="Play fun and entertaining games with Would You, featuring user polls and customization. 
+          Play Would You Rather, Never Have I Ever, Higher or Lower, and What Would You Do!"
         />
         <meta property="og:title" content="Would You | Discord Bot" />
         <meta property="twitter:card" content="summary_large_image" />

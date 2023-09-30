@@ -18,7 +18,6 @@ import {
   DiscordReply,
 } from "@skyra/discord-components-react";
 import { motion } from "framer-motion";
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
@@ -149,8 +148,8 @@ const Home = () => {
             </span>
           </h1>
           <p className="text-lg text-neutral-300">
-            Elevate your server&apos;s engagement with Would You, featuring user
-            voting, daily messages, and customizability.
+            Play fun and entertaining games with Would You, featuring user polls and customization. 
+            Play Would You Rather, Never Have I Ever, Higher or Lower, and What Would You Do!
           </p>
           <Link href="/invite" target="_blank">
             <Button className="mx-auto mt-8 gap-2 lg:mx-0">
@@ -567,7 +566,7 @@ const Home = () => {
         />
       </section>
 
-      <section className="mt-36 bg-neutral-950 py-12 px-9 xl:px-[17vw]">
+      <section className="mt-36 bg-neutral-950 px-9 py-12 xl:px-[17vw]">
         <motion.h2
           initial={{ opacity: 0, transform: "translateY(10px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}
@@ -605,4 +604,4 @@ const Home = () => {
   );
 };
 
-export default dynamic(() => Promise.resolve(Home), { ssr: false });
+export default Home;

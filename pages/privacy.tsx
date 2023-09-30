@@ -21,42 +21,46 @@ export default function Privacy() {
           <br />
           This privacy notice describes how we might use your information if
           you:
-          <ul>
-            <li>
-              - Visit our website at{" "}
-              <Link
-                href="https://wouldyoubot.gg"
-                target={"_blank"}
-                className="text-white underline"
-              >
-                https://wouldyoubot.gg
-              </Link>{" "}
-              or{" "}
-              <Link
-                href="https://wouldyoubot.com"
-                target={"_blank"}
-                className="text-white underline"
-              >
-                https://wouldyoubot.com
-              </Link>
-            </li>
-            <li>
-              - Engage with us in other related ways — including any sales,
-              marketing, or events.
-            </li>
-          </ul>
+        </p>
+        <ul>
+          <li>
+            - Visit our website at{" "}
+            <Link
+              href="https://wouldyoubot.gg"
+              target={"_blank"}
+              className="text-white underline"
+            >
+              https://wouldyoubot.gg
+            </Link>{" "}
+            or{" "}
+            <Link
+              href="https://wouldyoubot.com"
+              target={"_blank"}
+              className="text-white underline"
+            >
+              https://wouldyoubot.com
+            </Link>
+          </li>
+          <li>
+            - Engage with us in other related ways — including any sales,
+            marketing, or events.
+          </li>
+        </ul>
+        <p>
           <br />
           In this privacy notice, if we refer to:
-          <ul>
-            <li>
-              - &quot;Website,&quot; we are referring to any website of ours
-              that references or links to this policy.
-            </li>
-            <li>
-              - &quot;Services,&quot; we are referring to our Website, and other
-              related services, including any sales, marketing, or events.
-            </li>
-          </ul>
+        </p>
+        <ul>
+          <li>
+            - &quot;Website,&quot; we are referring to any website of ours that
+            references or links to this policy.
+          </li>
+          <li>
+            - &quot;Services,&quot; we are referring to our Website, and other
+            related services, including any sales, marketing, or events.
+          </li>
+        </ul>
+        <p>
           <br />
           The purpose of this privacy notice is to explain to you in the
           clearest way possible what information we collect, how we use it, and
@@ -79,42 +83,46 @@ export default function Privacy() {
           <br />
           <br />
           On this website and/or via our Bot:
-          <ul>
-            <li>
-              - Your discord user id, avatar and custom questions uploaded to
-              our marketplace by the user.
-            </li>
-            <li>- Questions you liked or shared on our marketplace.</li>
-            <li>
-              - Data about your discord server including your server id, avatar,
-              settings, webhook urls, custom uploaded messages and
-            </li>
-            <li>
-              - If and when available, through mobile or desktop applications
-              you download from this website, which provide dedicated
-              non-browser- based interaction between you and this website.
-            </li>
-            <li>
-              - When you interact with our applications on social media or
-              third-party applications, websites and services, if those
-              applications or advertising including links to this policy or of
-              information from social media or third parties.
-            </li>
-          </ul>
+        </p>
+        <ul>
+          <li>
+            - Your discord user id, avatar and custom questions uploaded to our
+            marketplace by the user.
+          </li>
+          <li>- Questions you liked or shared on our marketplace.</li>
+          <li>
+            - Data about your discord server including your server id, avatar,
+            settings, webhook urls, custom uploaded messages and
+          </li>
+          <li>
+            - If and when available, through mobile or desktop applications you
+            download from this website, which provide dedicated non-browser-
+            based interaction between you and this website.
+          </li>
+          <li>
+            - When you interact with our applications on social media or
+            third-party applications, websites and services, if those
+            applications or advertising including links to this policy or of
+            information from social media or third parties.
+          </li>
+        </ul>
+        <p>
           <br />
           It does not apply to information collected by:
-          <ul>
-            <li>
-              - us offline or through any other means, including on any other
-              website operated by Would You or any third party;
-            </li>
-            <p>or</p>
-            <li>
-              - any third party, including through any application or content
-              (including advertising) that may link to or be accessible from or
-              on the website.
-            </li>
-          </ul>
+        </p>
+        <ul>
+          <li>
+            - us offline or through any other means, including on any other
+            website operated by Would You or any third party;
+          </li>
+          <p>or</p>
+          <li>
+            - any third party, including through any application or content
+            (including advertising) that may link to or be accessible from or on
+            the website.
+          </li>
+        </ul>
+        <p>
           <br />
           Please read this policy carefully to understand our policies and
           practices regarding your information and how we treat it. If you do
@@ -202,24 +210,24 @@ export default function Privacy() {
           collected from external sources.
           <br />
           <br />
-          <ul>
-            <li>
-              <Link
-                href="https://en.wikipedia.org/wiki/HTTP_cookie"
-                target={"_blank"}
-                className="text-white underline"
-              >
-                Cookies (or browser cookies)
-              </Link>
-              . You may refuse to accept browser cookies by activating the
-              appropriate setting on your browser. However, if you select this
-              setting you may be unable to access certain parts of our website.
-              Unless you have adjusted your browser setting so that it will
-              refuse cookies, our system will issue cookies when you direct your
-              browser to our website.
-            </li>
-          </ul>
         </p>
+        <ul>
+          <li>
+            <Link
+              href="https://en.wikipedia.org/wiki/HTTP_cookie"
+              target={"_blank"}
+              className="text-white underline"
+            >
+              Cookies (or browser cookies)
+            </Link>
+            . You may refuse to accept browser cookies by activating the
+            appropriate setting on your browser. However, if you select this
+            setting you may be unable to access certain parts of our website.
+            Unless you have adjusted your browser setting so that it will refuse
+            cookies, our system will issue cookies when you direct your browser
+            to our website.
+          </li>
+        </ul>
         <h3 className="font-lg my-4 font-bold text-white">
           Third-Party Websites
         </h3>
@@ -252,45 +260,45 @@ export default function Privacy() {
           operation of this website or other purposes use information that we
           collect about you or that you provide to us, including any personal
           information:
-          <ul>
-            <li>- To present our website and its contents to you.</li>
-            <li>
-              - To provide you with information on programs, services or
-              products.
-            </li>
-            <li>
-              - For you to register for events, promotions, contests,
-              sweepstakes or services.
-            </li>
-            <li>
-              - To process online transactions, purchases, registrations,
-              donations or participation in programs.
-            </li>
-            <li>
-              - To provide you with information that may be targeted to your
-              interests.
-            </li>
-            <li>- To fulfill any other purpose for which you provide it.</li>
-            <li>
-              - To carry out our obligations and enforce our rights arising from
-              any contracts entered into between you and us.
-            </li>
-            <li>
-              - To request additional information from you for various purposes.
-            </li>
-            <li>
-              - In any other way we may describe when you provide the
-              information.
-            </li>
-            <li>
-              - For any other purpose with your consent. We may also use your
-              information if provided to us to contact you about our own and
-              third-party services and products that may be of interest to you.
-              If you do not want us to use your information in this way, you can
-              opt out of receiving this information by so indicating in your
-              registration/preferences file or by notifying us.
-            </li>
-          </ul>
+        </p>
+        <ul>
+          <li>- To present our website and its contents to you.</li>
+          <li>
+            - To provide you with information on programs, services or products.
+          </li>
+          <li>
+            - For you to register for events, promotions, contests, sweepstakes
+            or services.
+          </li>
+          <li>
+            - To process online transactions, purchases, registrations,
+            donations or participation in programs.
+          </li>
+          <li>
+            - To provide you with information that may be targeted to your
+            interests.
+          </li>
+          <li>- To fulfill any other purpose for which you provide it.</li>
+          <li>
+            - To carry out our obligations and enforce our rights arising from
+            any contracts entered into between you and us.
+          </li>
+          <li>
+            - To request additional information from you for various purposes.
+          </li>
+          <li>
+            - In any other way we may describe when you provide the information.
+          </li>
+          <li>
+            - For any other purpose with your consent. We may also use your
+            information if provided to us to contact you about our own and
+            third-party services and products that may be of interest to you. If
+            you do not want us to use your information in this way, you can opt
+            out of receiving this information by so indicating in your
+            registration/preferences file or by notifying us.
+          </li>
+        </ul>
+        <p>
           <br />
           We may also use or disclose information to resolve disputes,
           investigate problems or enforce our{" "}

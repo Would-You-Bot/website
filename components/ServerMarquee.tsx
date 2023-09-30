@@ -41,6 +41,7 @@ const ServerMarquee: React.FC<MarqueeProps> = ({
             className="mr-4 flex w-72 cursor-pointer items-center gap-4 rounded-lg bg-neutral-900 p-4 transition-all hover:bg-neutral-800"
             key={s.name}
             href={s.invite}
+            target="_blank"
           >
             <Image
               src={`/logos/${s.avatar}`}

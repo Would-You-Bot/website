@@ -9,6 +9,10 @@
     "lint": "next lint",
     "postbuild": "next-sitemap"
   },
+  "repository": {
+  "type": "git",
+  "url": "https://github.com/Would-You-Bot/website.git"
+},
   "dependencies": {
     "@skyra/discord-components-react": "^3.6.1",
     "@types/node": "^18.16.0",
@@ -25,7 +29,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-fast-marquee": "^1.6.0",
-    "sharp": "^0.32.5",
+    "sharp": "^0.32.6",
     "typescript": "^5.0.4"
   },
   "devDependencies": {
