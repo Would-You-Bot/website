@@ -2,6 +2,60 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Footer = () => {
+  const recommendedLinks = [
+    {
+      name: "Home",
+      link: "/",
+      EventTarget: "_self",
+    },
+    {
+      name: "Commands",
+      link: "/commands",
+      EventTarget: "_self",
+    },
+    {
+      name: "Reddit",
+      link: "/reddit",
+      EventTarget: "_blank",
+    },
+  ];
+
+  const Links = [
+    {
+      name: "Support Server",
+      link: "/discord",
+      EventTarget: "_blank",
+    },
+    {
+      name: "Invite",
+      link: "/invite",
+      EventTarget: "_blank",
+    },
+    {
+      name: "Vote",
+      link: "/vote",
+      EventTarget: "_blank",
+    },
+  ];
+
+  const LegalLinks = [
+    {
+      name: "Legal Notice",
+      link: "/legal",
+      EventTarget: "_self",
+    },
+    {
+      name: "Privacy Policy",
+      link: "/privacy",
+      EventTarget: "_self",
+    },
+    {
+      name: "Terms of Service",
+      link: "/terms",
+      EventTarget: "_self",
+    },
+  ];
+
   return (
     <footer className="mt-8 px-8 py-8 xl:px-[17vw]">
       <div className="mb-8 flex flex-col items-center justify-between gap-4 text-neutral-300 md:flex-row">
@@ -25,59 +79,46 @@ const Footer = () => {
         <div className="flex w-full flex-col items-center md:items-start">
           <h4 className="mb-2 text-lg font-bold text-white">Recommended</h4>
           <div className="flex flex-col items-center gap-1 md:items-start">
-            <Link href="/" className="transition-all hover:text-white">
-              Home
-            </Link>
-            <Link href="/commands" className="transition-all hover:text-white">
-              Commands
-            </Link>
-            <Link
-              href="/reddit"
-              target="_blank"
-              className="transition-all hover:text-white"
-            >
-              Reddit
-            </Link>
+            {recommendedLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.link}
+                target={link.EventTarget}
+                className="transition-all hover:text-white"
+              >
+                {link.name}
+              </Link>
+            ))}
           </div>
         </div>
         <div className="flex w-full flex-col items-center md:items-start">
           <h4 className="mb-2 text-lg font-bold text-white">Links</h4>
           <div className="flex flex-col items-center gap-1 md:items-start">
-            <Link
-              href="/discord"
-              target="_blank"
-              className="transition-all hover:text-white"
-            >
-              Support Server
-            </Link>
-            <Link
-              href="/invite"
-              target="_blank"
-              className="transition-all hover:text-white"
-            >
-              Invite
-            </Link>
-            <Link
-              href="/vote"
-              target="_blank"
-              className="transition-all hover:text-white"
-            >
-              Vote
-            </Link>
+            {Links.map((link) => (
+              <Link
+                key={link.name}
+                href={link.link}
+                target={link.EventTarget}
+                className="transition-all hover:text-white"
+              >
+                {link.name}
+              </Link>
+            ))}
           </div>
         </div>
         <div className="flex w-full flex-col items-center md:items-start">
           <h4 className="mb-2 text-lg font-bold text-white">Legal</h4>
           <div className="flex flex-col items-center gap-1 md:items-start">
-            <Link href="/legal" className="transition-all hover:text-white">
-              Legal Notice
-            </Link>
-            <Link href="/privacy" className="transition-all hover:text-white">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="transition-all hover:text-white">
-              Terms of Service
-            </Link>
+            {LegalLinks.map((link) => (
+              <Link
+                key={link.name}
+                href={link.link}
+                target={link.EventTarget}
+                className="transition-all hover:text-white"
+              >
+                {link.name}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <title>Would You</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Logo.png" />
-        <link rel="canonical" href="https://wouldyoubot.gg"/>
+        <link rel="canonical" href="https://wouldyoubot.gg" />
         {pageProps.frontMatter?.thumbnail?.large ? (
           <>
             <meta
@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
           </>
         )}
       </Head>
-      <div className="min-h-screen flex flex-col">
+      <div className="flex min-h-screen flex-col">
         <Navbar />
         <div className="grow">
           <Component {...pageProps} />

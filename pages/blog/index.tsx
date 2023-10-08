@@ -45,7 +45,9 @@ const BlogPosts: NextPage<PageProps> = ({ posts }) => {
           </p>
         )}
         {posts
-           .sort((a, b) => (a.data.pinned === b.data.pinned ? 0 : a.data.pinned ? -1 : 1))
+          .sort((a, b) =>
+            a.data.pinned === b.data.pinned ? 0 : a.data.pinned ? -1 : 1,
+          )
           .map((post) => (
             <Link
               href={`/blog/${post.filePath.replace(/\.mdx?$/, "")}`}

@@ -148,8 +148,9 @@ const Home = () => {
             </span>
           </h1>
           <p className="text-lg text-neutral-300">
-            Play fun and entertaining games with Would You, featuring user polls and customization. 
-            Play Would You Rather, Never Have I Ever, Higher or Lower, and What Would You Do!
+            Play fun and entertaining games with Would You, featuring user polls
+            and customization. Play Would You Rather, Never Have I Ever, Higher
+            or Lower, and What Would You Do!
           </p>
           <Link href="/invite" target="_blank">
             <Button className="mx-auto mt-8 gap-2 lg:mx-0">

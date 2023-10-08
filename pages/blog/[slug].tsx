@@ -10,6 +10,7 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import path from "path";
+import { motion, useScroll, useSpring } from "framer-motion";
 
 const components = {
   Button: Button,
@@ -36,6 +37,13 @@ const BlogPost: NextPage<{
   source: MDXRemoteSerializeResult;
   frontMatter: FrontMatter;
 }> = ({ source, frontMatter }) => {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   return (
     <>
       <Head>
@@ -52,6 +60,7 @@ const BlogPost: NextPage<{
         )}
       </Head>
 
+      <motion.div className={blogStyles["progress-bar"]} style={{ scaleX }} />
       <div className="mt-36 px-8 text-neutral-300 xl:px-[17vw]">
         <Link
           href="/blog"

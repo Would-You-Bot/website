@@ -3,6 +3,19 @@ import commands from "../data/commands.json";
 
 export default function Commands() {
   const [openedCommand, setOpenedCommand] = useState("");
+  const [isHovered, setIsHovered] = useState(false);
+  const [copyText, setCopyText] = useState("");
+
+  const handleCopyUsage = (textToCopy: any) => {
+    const commandPart = textToCopy.split(" ")[0];
+    const textArea = document.createElement("textarea");
+    textArea.value = commandPart;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textArea);
+    setCopyText("Copied!");
+  };
 
   return (
     <main className="px-8 xl:px-[17vw]">
@@ -18,7 +31,7 @@ export default function Commands() {
             <div
               className={`relative cursor-pointer overflow-hidden rounded-lg p-4 text-neutral-300 transition-all duration-300 ${
                 openedCommand === c.name
-                  ? "max-h-[210px] bg-neutral-700"
+                  ? "max-h-[250px] bg-neutral-700"
                   : "max-h-[90px] bg-neutral-800"
               }`}
               onClick={() =>
@@ -57,8 +70,26 @@ export default function Commands() {
                 }`}
               >
                 <h5 className="mb-1">Usage</h5>
-                <h6 className="mb-2 w-fit rounded-md bg-neutral-900 px-2 py-1 font-mono text-xs">
-                  {c.usage}
+                <h6
+                  className="mb-2 w-fit rounded-md bg-neutral-900 px-2 py-1 font-mono text-xs"
+                  onMouseEnter={() => {
+                    setCopyText("--Click To Copy--");
+                    setIsHovered(true);
+                  }}
+                  onMouseLeave={() => {
+                    setCopyText(c.usage);
+                    setIsHovered(false);
+                  }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCopyUsage(c.usage);
+                  }}
+                >
+                  {isHovered ? (
+                    <div className="text-gray-400">{copyText}</div>
+                  ) : (
+                    <div>{c.usage}</div>
+                  )}
                 </h6>
                 {c.subcommands && (
                   <>
