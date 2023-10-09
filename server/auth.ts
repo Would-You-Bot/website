@@ -45,6 +45,9 @@ export const authOptions: NextAuthOptions = {
       }
       return token;
     },
+    signIn: () => {
+      return "/guilds";
+    },
   },
   providers: [
     DiscordProvider({
