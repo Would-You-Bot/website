@@ -69,23 +69,23 @@ const Navbar = () => {
             <p className="ml-4 text-2xl font-bold text-white">Would You</p>
           </div>
         </Link>
-        <div className="ml-24 font-semibold hidden items-center md:flex">
+        <div className="ml-24 hidden items-center font-semibold md:flex">
           <Link
             href="/commands"
-            className="underline underline-offset-8 ease-in-out hover:underline-offset-4 hover:text-white mr-6 text-lg text-neutral-300 transition-all"
+            className="mr-6 text-lg text-neutral-300 underline underline-offset-8 transition-all ease-in-out hover:text-white hover:underline-offset-4"
           >
             Commands
           </Link>
           <Link
             href="/blog"
-            className="underline underline-offset-8 ease-in-out hover:underline-offset-4 hover:text-white mr-6 text-lg text-neutral-300 transition-all"
+            className="mr-6 text-lg text-neutral-300 underline underline-offset-8 transition-all ease-in-out hover:text-white hover:underline-offset-4"
           >
             Blog
           </Link>
           <Link
             href="/vote"
             target="_blank"
-            className="underline underline-offset-8 ease-in-out hover:underline-offset-4 hover:text-white mr-6 text-lg text-neutral-300 transition-all"
+            className="mr-6 text-lg text-neutral-300 underline underline-offset-8 transition-all ease-in-out hover:text-white hover:underline-offset-4"
           >
             Vote
           </Link>
@@ -123,24 +123,24 @@ const Navbar = () => {
         initial={{ opacity: 0.5, left: "100vw", pointerEvents: "none" }}
         animate={menuControls}
       >
-        <div className="absolute top-36 font-semibold flex w-full flex-col items-center">
+        <div className="absolute top-36 flex w-full flex-col items-center font-semibold">
           <Link
             href="/"
-            className="mt-8 text-center text-3xl text-neutral-200 hover:text-white hover:underline underline-offset-8 hover:underline-offset-4 transition-all"
+            className="mt-8 text-center text-3xl text-neutral-200 underline-offset-8 transition-all hover:text-white hover:underline hover:underline-offset-4"
             onClick={() => toggleMobileMenu()}
           >
             Home
           </Link>
           <Link
             href="/commands"
-            className="mt-8 text-center text-3xl text-neutral-200 hover:text-white hover:underline underline-offset-8 hover:underline-offset-4 transition-all"
+            className="mt-8 text-center text-3xl text-neutral-200 underline-offset-8 transition-all hover:text-white hover:underline hover:underline-offset-4"
             onClick={() => toggleMobileMenu()}
           >
             Commands
           </Link>
           <Link
             href="/blog"
-            className="mt-8 text-center text-3xl text-neutral-200 hover:text-white hover:underline underline-offset-8 hover:underline-offset-4 transition-all"
+            className="mt-8 text-center text-3xl text-neutral-200 underline-offset-8 transition-all hover:text-white hover:underline hover:underline-offset-4"
             onClick={() => toggleMobileMenu()}
           >
             Blog
@@ -148,7 +148,7 @@ const Navbar = () => {
           <Link
             href="/vote"
             target="_blank"
-            className="mt-8 text-center text-3xl text-neutral-200 hover:text-white hover:underline underline-offset-8 hover:underline-offset-4 transition-all"
+            className="mt-8 text-center text-3xl text-neutral-200 underline-offset-8 transition-all hover:text-white hover:underline hover:underline-offset-4"
             onClick={() => toggleMobileMenu()}
           >
             Vote

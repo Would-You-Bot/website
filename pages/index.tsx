@@ -124,8 +124,9 @@ const FeatureItem: React.FC<{
       whileInView={{ opacity: 1, transform: "translateX(0)" }}
       viewport={{ once: true }}
       transition={{ duration: 0.65, ease: "easeInOut" }}
-      className={`flex flex-col justify-center gap-2 ${reverse ? "order-last md:order-first" : ""
-        }`}
+      className={`flex flex-col justify-center gap-2 ${
+        reverse ? "order-last md:order-first" : ""
+      }`}
     >
       {right}
     </motion.div>
@@ -184,11 +185,16 @@ const Home = () => {
             </span>
           </h1>
           <p className="text-lg text-neutral-300">
-            Discover Exciting Games and Interactive Polls with Would You. Play Would You Rather, Never Have I Ever, Higher or Lower, and What  <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">Would You</span> Do!
+            Discover Exciting Games and Interactive Polls with Would You. Play
+            Would You Rather, Never Have I Ever, Higher or Lower, and What{" "}
+            <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
+              Would You
+            </span>{" "}
+            Do!
           </p>
           <Link href="/invite" target="_blank">
-            <button className="shakeme scale-105 transition-all rounded-lg p-1 mx-auto bg-gradient-brand bg-transparent font-extrabold mt-8 gap-2 lg:mx-0">
-              <div className="flex bg-[#171717] rounded-lg px-6 py-3 w-full h-full">
+            <button className="shakeme mx-auto mt-8 scale-105 gap-2 rounded-lg bg-transparent bg-gradient-brand p-1 font-extrabold transition-all lg:mx-0">
+              <div className="flex h-full w-full rounded-lg bg-[#171717] px-6 py-3">
                 Unleash the Real Fun!
               </div>
             </button>
@@ -409,10 +415,14 @@ const Home = () => {
           left={
             <>
               <h4 className="text-center text-3xl font-bold text-white md:text-left">
-                Increase user <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">Engagement</span>
+                Increase user{" "}
+                <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
+                  Engagement
+                </span>
               </h4>
               <p className="text-center text-lg text-neutral-300 md:text-left">
-                Elevate your server engagement with &quot;Would You&quot; Bot making Discord interactions engaging and enjoyable.
+                Elevate your server engagement with &quot;Would You&quot; Bot
+                making Discord interactions engaging and enjoyable.
               </p>
             </>
           }
@@ -422,10 +432,14 @@ const Home = () => {
           left={
             <>
               <h4 className="text-center text-3xl font-bold text-white md:text-left">
-                <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">Entertain</span> your server
+                <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
+                  Entertain
+                </span>{" "}
+                your server
               </h4>
               <p className="text-center text-lg text-neutral-300 md:text-left">
-                Unleash fun with interactive games: Would You Rather, Never Have I Ever, Higher or Lower, What Would You Do!
+                Unleash fun with interactive games: Would You Rather, Never Have
+                I Ever, Higher or Lower, What Would You Do!
               </p>
             </>
           }
@@ -644,7 +658,10 @@ const Home = () => {
           left={
             <>
               <h4 className="text-center text-3xl font-bold text-white md:text-left">
-                <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">Upgrade</span> your server
+                <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
+                  Upgrade
+                </span>{" "}
+                your server
               </h4>
               <p className="text-center text-lg text-neutral-300 md:text-left">
                 Upgrade your server with Would You, featuring a wide variety of
@@ -675,7 +692,8 @@ const Home = () => {
           transition={{ duration: 0.65, ease: "easeInOut" }}
           className="mt-4 text-center text-xl text-neutral-300"
         >
-          "Engage, Entertain, and Elevate Your Discord Server - Invite 'Would You' for Non-Stop Fun"
+          "Engage, Entertain, and Elevate Your Discord Server - Invite 'Would
+          You' for Non-Stop Fun"
         </motion.h3>
         <motion.div
           initial={{ opacity: 0, transform: "translateY(-20px)" }}
@@ -685,7 +703,9 @@ const Home = () => {
           className="mt-8 flex justify-center"
         >
           <Link href="/invite" target="_blank">
-            <Button className="font-bold animate-bounce tracking-wide">Invite Would You Bot!</Button>
+            <Button className="animate-bounce font-bold tracking-wide">
+              Invite Would You Bot!
+            </Button>
           </Link>
         </motion.div>
       </section>

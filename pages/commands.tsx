@@ -19,8 +19,8 @@ export default function Commands() {
 
   return (
     <main className="px-8 xl:px-[17vw]">
-      <h1 className="mt-36 text-white text-4xl font-extrabold tracking-wider">
-      <span className="text-brand-red-100 drop-shadow-red-glow">Would</span>{" "}
+      <h1 className="mt-36 text-4xl font-extrabold tracking-wider text-white">
+        <span className="text-brand-red-100 drop-shadow-red-glow">Would</span>{" "}
         <span className="text-brand-blue-100 drop-shadow-blue-glow">You</span>{" "}
         Commands!
       </h1>
