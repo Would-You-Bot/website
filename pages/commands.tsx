@@ -19,8 +19,10 @@ export default function Commands() {
 
   return (
     <main className="px-8 xl:px-[17vw]">
-      <h1 className="mt-36 text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
-        Commands
+      <h1 className="mt-36 text-white text-4xl font-extrabold tracking-wider">
+      <span className="text-brand-red-100 drop-shadow-red-glow">Would</span>{" "}
+        <span className="text-brand-blue-100 drop-shadow-blue-glow">You</span>{" "}
+        Commands!
       </h1>
 
       <div className="mt-8 flex flex-col gap-4">

@@ -124,9 +124,8 @@ const FeatureItem: React.FC<{
       whileInView={{ opacity: 1, transform: "translateX(0)" }}
       viewport={{ once: true }}
       transition={{ duration: 0.65, ease: "easeInOut" }}
-      className={`flex flex-col justify-center gap-2 ${
-        reverse ? "order-last md:order-first" : ""
-      }`}
+      className={`flex flex-col justify-center gap-2 ${reverse ? "order-last md:order-first" : ""
+        }`}
     >
       {right}
     </motion.div>
@@ -181,31 +180,18 @@ const Home = () => {
               Discord
             </span>{" "}
             <span className="text-brand-blue-100 drop-shadow-blue-glow">
-              Server
+              Community
             </span>
           </h1>
           <p className="text-lg text-neutral-300">
-            Play fun and entertaining games with Would You, featuring user polls
-            and customization. Play Would You Rather, Never Have I Ever, Higher
-            or Lower, and What Would You Do!
+            Discover Exciting Games and Interactive Polls with Would You. Play Would You Rather, Never Have I Ever, Higher or Lower, and What  <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">Would You</span> Do!
           </p>
           <Link href="/invite" target="_blank">
-            <Button className="mx-auto mt-8 gap-2 lg:mx-0">
-              Unleash the Fun
-              <svg
-                width="13"
-                height="13"
-                fillRule="evenodd"
-                clipRule="evenodd"
-                viewBox="0 0 509 511.54"
-              >
-                <path
-                  fillRule="nonzero"
-                  fill="#fff"
-                  d="M447.19 347.03c0-17.06 13.85-30.91 30.91-30.91 17.05 0 30.9 13.85 30.9 30.91v87.82c0 21.08-8.63 40.29-22.51 54.18-13.88 13.88-33.09 22.51-54.18 22.51H76.69c-21.09 0-40.3-8.63-54.18-22.51C8.63 475.14 0 455.93 0 434.85V76.69c0-21.09 8.63-40.3 22.51-54.18C36.39 8.63 55.6 0 76.69 0h86.98c17.06 0 30.9 13.85 30.9 30.9 0 17.06-13.84 30.91-30.9 30.91H76.69c-4.07 0-7.82 1.69-10.51 4.37-2.68 2.69-4.37 6.44-4.37 10.51v358.16c0 4.06 1.69 7.82 4.37 10.5 2.69 2.68 6.44 4.38 10.51 4.38h355.62c4.07 0 7.82-1.7 10.51-4.38 2.68-2.68 4.37-6.44 4.37-10.5v-87.82zm0-243.56L308.15 244.28c-11.91 12.12-31.45 12.28-43.56.37-12.11-11.91-12.28-31.45-.37-43.56L401.77 61.81H309.7c-17.06 0-30.9-13.85-30.9-30.91 0-17.05 13.84-30.9 30.9-30.9h168.4C495.15 0 509 13.85 509 30.9v165.04c0 17.06-13.85 30.9-30.9 30.9-17.06 0-30.91-13.84-30.91-30.9v-92.47z"
-                />
-              </svg>
-            </Button>
+            <button className="shakeme scale-105 transition-all rounded-lg p-1 mx-auto bg-gradient-brand bg-transparent font-extrabold mt-8 gap-2 lg:mx-0">
+              <div className="flex bg-[#171717] rounded-lg px-6 py-3 w-full h-full">
+                Unleash the Real Fun!
+              </div>
+            </button>
           </Link>
         </motion.div>
         <motion.div
@@ -423,11 +409,10 @@ const Home = () => {
           left={
             <>
               <h4 className="text-center text-3xl font-bold text-white md:text-left">
-                Increase user engagement
+                Increase user <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">Engagement</span>
               </h4>
               <p className="text-center text-lg text-neutral-300 md:text-left">
-                Keep your community engaged and active with daily &quot;Would
-                You Rather&quot; messages!
+                Elevate your server engagement with &quot;Would You&quot; Bot making Discord interactions engaging and enjoyable.
               </p>
             </>
           }
@@ -437,12 +422,10 @@ const Home = () => {
           left={
             <>
               <h4 className="text-center text-3xl font-bold text-white md:text-left">
-                Entertain your server
+                <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">Entertain</span> your server
               </h4>
               <p className="text-center text-lg text-neutral-300 md:text-left">
-                Entertain your discord server with fun and interactive games
-                like Would You Rather, Never Have I Ever, Higher or Lower, and
-                What Would You Do!
+                Unleash fun with interactive games: Would You Rather, Never Have I Ever, Higher or Lower, What Would You Do!
               </p>
             </>
           }
@@ -661,7 +644,7 @@ const Home = () => {
           left={
             <>
               <h4 className="text-center text-3xl font-bold text-white md:text-left">
-                Upgrade your server
+                <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">Upgrade</span> your server
               </h4>
               <p className="text-center text-lg text-neutral-300 md:text-left">
                 Upgrade your server with Would You, featuring a wide variety of
@@ -682,7 +665,7 @@ const Home = () => {
         >
           Keep Your Server Active with{" "}
           <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
-            Would You
+            Would You!
           </span>
         </motion.h2>
         <motion.h3
@@ -692,7 +675,7 @@ const Home = () => {
           transition={{ duration: 0.65, ease: "easeInOut" }}
           className="mt-4 text-center text-xl text-neutral-300"
         >
-          Invite To Your Server Now!
+          "Engage, Entertain, and Elevate Your Discord Server - Invite 'Would You' for Non-Stop Fun"
         </motion.h3>
         <motion.div
           initial={{ opacity: 0, transform: "translateY(-20px)" }}
@@ -702,7 +685,7 @@ const Home = () => {
           className="mt-8 flex justify-center"
         >
           <Link href="/invite" target="_blank">
-            <Button>Invite</Button>
+            <Button className="font-bold animate-bounce tracking-wide">Invite Would You Bot!</Button>
           </Link>
         </motion.div>
       </section>

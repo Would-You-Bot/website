@@ -1,147 +1,160 @@
 @font-face {
-  font-family: "Inter";
-  src:
-    url("/font/inter/woff2/Inter-Thin.woff2") format("woff2"),
-    url("/font/inter/woff/Inter-Thin.woff") format("woff"),
-    url("/font/inter/ttf/Inter-Thin.ttf") format("truetype");
-  font-weight: 100;
-  font-style: normal;
+	font-family: "Inter";
+	src:
+		url("/font/inter/woff2/Inter-Thin.woff2") format("woff2"),
+		url("/font/inter/woff/Inter-Thin.woff") format("woff"),
+		url("/font/inter/ttf/Inter-Thin.ttf") format("truetype");
+	font-weight: 100;
+	font-style: normal;
 }
+
 @font-face {
-  font-family: "Inter";
-  src:
-    url("/font/inter/woff2/Inter-ExtraLight.woff2") format("woff2"),
-    url("/font/inter/woff/Inter-ExtraLight.woff") format("woff"),
-    url("/font/inter/ttf/Inter-ExtraLight.ttf") format("truetype");
-  font-weight: 200;
-  font-style: normal;
+	font-family: "Inter";
+	src:
+		url("/font/inter/woff2/Inter-ExtraLight.woff2") format("woff2"),
+		url("/font/inter/woff/Inter-ExtraLight.woff") format("woff"),
+		url("/font/inter/ttf/Inter-ExtraLight.ttf") format("truetype");
+	font-weight: 200;
+	font-style: normal;
 }
+
 @font-face {
-  font-family: "Inter";
-  src:
-    url("/font/inter/woff2/Inter-Light.woff2") format("woff2"),
-    url("/font/inter/woff/Inter-Light.woff") format("woff"),
-    url("/font/inter/ttf/Inter-Light.ttf") format("truetype");
-  font-weight: 300;
-  font-style: normal;
+	font-family: "Inter";
+	src:
+		url("/font/inter/woff2/Inter-Light.woff2") format("woff2"),
+		url("/font/inter/woff/Inter-Light.woff") format("woff"),
+		url("/font/inter/ttf/Inter-Light.ttf") format("truetype");
+	font-weight: 300;
+	font-style: normal;
 }
+
 @font-face {
-  font-family: "Inter";
-  src:
-    url("/font/inter/woff2/Inter-Regular.woff2") format("woff2"),
-    url("/font/inter/woff/Inter-Regular.woff") format("woff"),
-    url("/font/inter/ttf/Inter-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
+	font-family: "Inter";
+	src:
+		url("/font/inter/woff2/Inter-Regular.woff2") format("woff2"),
+		url("/font/inter/woff/Inter-Regular.woff") format("woff"),
+		url("/font/inter/ttf/Inter-Regular.ttf") format("truetype");
+	font-weight: 400;
+	font-style: normal;
 }
+
 @font-face {
-  font-family: "Inter";
-  src:
-    url("/font/inter/woff2/Inter-Medium.woff2") format("woff2"),
-    url("/font/inter/woff/Inter-Medium.woff") format("woff"),
-    url("/font/inter/ttf/Inter-Medium.ttf") format("truetype");
-  font-weight: 500;
-  font-style: normal;
+	font-family: "Inter";
+	src:
+		url("/font/inter/woff2/Inter-Medium.woff2") format("woff2"),
+		url("/font/inter/woff/Inter-Medium.woff") format("woff"),
+		url("/font/inter/ttf/Inter-Medium.ttf") format("truetype");
+	font-weight: 500;
+	font-style: normal;
 }
+
 @font-face {
-  font-family: "Inter";
-  src:
-    url("/font/inter/woff2/Inter-SemiBold.woff2") format("woff2"),
-    url("/font/inter/woff/Inter-SemiBold.woff") format("woff"),
-    url("/font/inter/ttf/Inter-SemiBold.ttf") format("truetype");
-  font-weight: 600;
-  font-style: normal;
+	font-family: "Inter";
+	src:
+		url("/font/inter/woff2/Inter-SemiBold.woff2") format("woff2"),
+		url("/font/inter/woff/Inter-SemiBold.woff") format("woff"),
+		url("/font/inter/ttf/Inter-SemiBold.ttf") format("truetype");
+	font-weight: 600;
+	font-style: normal;
 }
+
 @font-face {
-  font-family: "Inter";
-  src:
-    url("/font/inter/woff2/Inter-Bold.woff2") format("woff2"),
-    url("/font/inter/woff/Inter-Bold.woff") format("woff"),
-    url("/font/inter/ttf/Inter-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
+	font-family: "Inter";
+	src:
+		url("/font/inter/woff2/Inter-Bold.woff2") format("woff2"),
+		url("/font/inter/woff/Inter-Bold.woff") format("woff"),
+		url("/font/inter/ttf/Inter-Bold.ttf") format("truetype");
+	font-weight: 700;
+	font-style: normal;
 }
+
 @font-face {
-  font-family: "Inter";
-  src:
-    url("/font/inter/woff2/Inter-ExtraBold.woff2") format("woff2"),
-    url("/font/inter/woff/Inter-ExtraBold.woff") format("woff"),
-    url("/font/inter/ttf/Inter-ExtraBold.ttf") format("truetype");
-  font-weight: 800;
-  font-style: normal;
+	font-family: "Inter";
+	src:
+		url("/font/inter/woff2/Inter-ExtraBold.woff2") format("woff2"),
+		url("/font/inter/woff/Inter-ExtraBold.woff") format("woff"),
+		url("/font/inter/ttf/Inter-ExtraBold.ttf") format("truetype");
+	font-weight: 800;
+	font-style: normal;
 }
+
 @font-face {
-  font-family: "Inter";
-  src:
-    url("/font/inter/woff2/Inter-Black.woff2") format("woff2"),
-    url("/font/inter/woff/Inter-Black.woff") format("woff"),
-    url("/font/inter/ttf/Inter-Black.ttf") format("truetype");
-  font-weight: 900;
-  font-style: normal;
+	font-family: "Inter";
+	src:
+		url("/font/inter/woff2/Inter-Black.woff2") format("woff2"),
+		url("/font/inter/woff/Inter-Black.woff") format("woff"),
+		url("/font/inter/ttf/Inter-Black.ttf") format("truetype");
+	font-weight: 900;
+	font-style: normal;
 }
 
 body {
-  background-color: #171717;
-  font-family: "Inter", sans-serif;
-  overflow-x: hidden;
-  overflow-y: auto;
+	background-color: #171717;
+	font-family: "Inter", sans-serif;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 body::-webkit-scrollbar {
-  width: 0.5rem;
-  border-radius: 20px;
+	width: 0.5rem;
+	border-radius: 20px;
 }
 
 body::-webkit-scrollbar-thumb {
-  width: 0.5rem;
-  background-color: #616161;
-  border-radius: 20px;
+	width: 0.5rem;
+	background-color: #616161;
+	border-radius: 20px;
 }
+
 body::-webkit-scrollbar-track {
-  width: 0.5rem;
-  background-color: transparent;
+	width: 0.5rem;
+	background-color: transparent;
 }
 
 @media screen and (min-width: 1280px) {
-  .discord-messages {
-    width: calc(50vw - 80px - 17vw);
-  }
+	.discord-messages {
+		width: calc(50vw - 80px - 17vw);
+	}
 }
 
 .discord-button {
-  background-color: #4e5058;
-  display: flex;
-  align-items: center;
-  font-size: 15px;
-  color: #fff;
-  border-radius: 3px;
-  padding: 5px 16px;
-  transition: all 0.2s ease;
-  cursor: pointer;
-  user-select: none;
-  margin-bottom: 6px;
-  margin-left: 6px
+	background-color: #4e5058;
+	display: flex;
+	align-items: center;
+	font-size: 15px;
+	color: #fff;
+	border-radius: 3px;
+	padding: 5px 16px;
+	transition: all 0.2s ease;
+	cursor: pointer;
+	user-select: none;
+	margin-bottom: 6px;
+	margin-left: 6px
 }
 
 .discord-button:hover {
-  background-color: #6d6f78;
+	background-color: #6d6f78;
 }
+
 .discord-button:active {
-  background-color: #82858f;
+	background-color: #82858f;
 }
+
 .discord-button.discord-button-primary {
-  background-color: #5865f2;
+	background-color: #5865f2;
 }
+
 .discord-button.discord-button-primary:hover {
-  background-color: #4752c4;
+	background-color: #4752c4;
 }
+
 .discord-button.discord-button-primary:active {
-  background-color: #3c45a5;
+	background-color: #3c45a5;
 }
 
 .discord-button span {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 
@@ -156,6 +169,7 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 	display: flex;
 	flex-wrap: nowrap;
 }
+
 .discord-attachment {
 	color: #dcddde;
 	display: flex;
@@ -175,6 +189,7 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 	overflow: hidden;
 	border-radius: 3px;
 }
+
 .discord-message .discord-attachments {
 	display: grid;
 	grid-auto-flow: row;
@@ -187,11 +202,12 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 	position: relative;
 }
 
-.discord-message .discord-attachments > * {
+.discord-message .discord-attachments>* {
 	justify-self: start;
 	-ms-flex-item-align: start;
 	align-self: start;
 }
+
 .discord-button {
 	display: flex;
 	justify-content: center;
@@ -264,6 +280,7 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 	height: 1.375em;
 	vertical-align: bottom;
 }
+
 .discord-replied-message.discord-executed-command .discord-command-name {
 	color: #00aff4;
 	font-weight: 500;
@@ -473,6 +490,7 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 	display: inline-block;
 	cursor: pointer;
 }
+
 .discord-custom-emoji .discord-custom-emoji-image {
 	object-fit: contain;
 	width: 1.375rem;
@@ -489,6 +507,7 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 	height: 18px;
 	vertical-align: bottom;
 }
+
 .discord-embed {
 	color: #dcddde;
 	display: flex;
@@ -674,6 +693,7 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 	height: 18px;
 	vertical-align: bottom;
 }
+
 .discord-embed .discord-embed-description {
 	font-size: 0.875rem;
 	font-weight: 400;
@@ -758,6 +778,7 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 .discord-light-theme .discord-embed .discord-embed-description .spoiler:active {
 	background-color: rgba(0, 0, 0, 0.1);
 }
+
 .discord-embed .discord-embed-field {
 	font-size: 0.875rem;
 	line-height: 1.125rem;
@@ -796,12 +817,14 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 .discord-embed-inline-field-1 {
 	grid-column: 1/5 !important;
 }
+
 .discord-embed .discord-embed-fields {
 	display: grid;
 	grid-column: 1/1;
 	margin-top: 8px;
 	grid-gap: 8px;
 }
+
 .discord-embed-footer {
 	-webkit-box-align: center;
 	align-items: center;
@@ -833,6 +856,7 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 .discord-light-theme .discord-embed-footer .discord-footer-separator {
 	color: #e4e4e4;
 }
+
 .discord-invite {
 	background-color: #2f3136;
 	border-radius: 4px;
@@ -1012,6 +1036,7 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 .discord-light-theme .discord-invite .discord-invite-count {
 	color: #4f5660;
 }
+
 .discord-message .discord-mention {
 	color: #e3e7f8;
 	background-color: hsla(235, 85.6%, 64.7%, 0.3);
@@ -1060,6 +1085,7 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 	left: 0.125rem;
 	top: 0.125rem;
 }
+
 .discord-message {
 	color: #dcddde;
 	display: flex;
@@ -1410,16 +1436,19 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 	src: url('https://cdn.skyra.pw/whitney-font/v2/Book.woff') format('woff');
 	font-weight: 400;
 }
+
 @font-face {
 	font-family: 'Whitney';
 	src: url('https://cdn.skyra.pw/whitney-font/v2/Medium.woff') format('woff');
 	font-weight: 500;
 }
+
 @font-face {
 	font-family: 'Whitney';
 	src: url('https://cdn.skyra.pw/whitney-font/v2/Semibold.woff') format('woff');
 	font-weight: 600;
 }
+
 @font-face {
 	font-family: 'Whitney';
 	src: url('https://cdn.skyra.pw/whitney-font/v2/Bold.woff') format('woff');
@@ -1445,11 +1474,12 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 .discord-messages.discord-no-background {
 	background-color: unset;
 }
+
 .discord-message .discord-message-body .discord-quote-container {
 	display: flex;
 }
 
-.discord-message .discord-message-body .discord-quote-container > .discord-quote-divider {
+.discord-message .discord-message-body .discord-quote-container>.discord-quote-divider {
 	background-color: #4f545c;
 	border-radius: 4px;
 	font-size: 0.9em;
@@ -1467,6 +1497,7 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 	margin-inline-start: unset;
 	padding: 0 8px 0 12px;
 }
+
 .discord-reaction {
 	border-radius: 0.5rem;
 	cursor: pointer;
@@ -1538,6 +1569,7 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 .discord-light-theme .discord-reaction.discord-reaction-reacted .discord-reaction-count {
 	color: #5865f2;
 }
+
 .discord-message .discord-reactions,
 .discord-system-message .discord-reactions {
 	display: flex;
@@ -1547,6 +1579,7 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 	align-items: center;
 	flex-wrap: wrap;
 }
+
 .discord-replied-message {
 	color: #b9bbbe;
 	display: flex;
@@ -1764,6 +1797,7 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 .discord-light-theme .discord-message .discord-message-body .discord-spoiler:active {
 	background-color: rgba(0, 0, 0, 0.1);
 }
+
 .discord-system-message {
 	color: #8e9297;
 	display: flex;
@@ -1990,6 +2024,7 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 	left: 0px;
 	top: 0px;
 }
+
 .discord-thread {
 	background-color: #2f3136;
 	border-radius: 4px;
@@ -2051,6 +2086,7 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 .discord-thread:hover .discord-thread-cta {
 	text-decoration: underline;
 }
+
 .discord-thread-message {
 	height: 18px;
 	min-width: 0;
@@ -2132,8 +2168,33 @@ COPIED INTO THIS SOURCE CODE BECAUSE NEXTJS DOES SOME FUNKY STUFF WITH REMOVING 
 .discord-light-theme .discord-thread-message .discord-message-edited {
 	color: #747f8d;
 }
+
 .discord-time {
 	background-color: #ffffff0f;
 	border-radius: 3px;
 	padding: 0 2px;
+}
+
+@keyframes shake {
+	0% {
+		transform: rotate(0.6deg);
+	}
+
+	50% {
+		transform: rotate(-0.6deg);
+	}
+
+	100% {
+		transform: rotate(0.6deg);
+	}
+}
+
+.shakeme {
+	animation: shake 1.5s infinite;
+	animation-timing-function: linear;
+}
+
+.shakeme:hover {
+	animation: none;
+	scale: 1.01;
 }

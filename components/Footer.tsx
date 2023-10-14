@@ -45,7 +45,7 @@ const Footer = () => {
       EventTarget: "_self",
     },
     {
-      name: "Privacy Policy",
+      name: "Our Privacy Policy",
       link: "/privacy",
       EventTarget: "_self",
     },
@@ -81,6 +81,7 @@ const Footer = () => {
           <div className="flex flex-col items-center gap-1 md:items-start">
             {recommendedLinks.map((link) => (
               <Link
+                aria-label={link.name}
                 key={link.name}
                 href={link.link}
                 target={link.EventTarget}
@@ -96,6 +97,7 @@ const Footer = () => {
           <div className="flex flex-col items-center gap-1 md:items-start">
             {Links.map((link) => (
               <Link
+                aria-label={link.name}
                 key={link.name}
                 href={link.link}
                 target={link.EventTarget}
@@ -111,6 +113,7 @@ const Footer = () => {
           <div className="flex flex-col items-center gap-1 md:items-start">
             {LegalLinks.map((link) => (
               <Link
+                aria-label={link.name}
                 key={link.name}
                 href={link.link}
                 target={link.EventTarget}
