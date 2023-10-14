@@ -692,8 +692,8 @@ const Home = () => {
           transition={{ duration: 0.65, ease: "easeInOut" }}
           className="mt-4 text-center text-xl text-neutral-300"
         >
-          "Engage, Entertain, and Elevate Your Discord Server - Invite 'Would
-          You' for Non-Stop Fun"
+          Engage, Entertain, and Elevate Your Discord Server - Invite &quot;Would
+          You&quot; for Non-Stop Fun!
         </motion.h3>
         <motion.div
           initial={{ opacity: 0, transform: "translateY(-20px)" }}
