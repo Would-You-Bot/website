@@ -406,7 +406,7 @@ const Home = () => {
                     avatar={profiles.nightkiller.avatar}
                     roleColor={profiles.nightkiller.roleColor}
                   >
-                    Wow thats...
+                    Wow that...
                   </DiscordThreadMessage>
                 </DiscordThread>
               </DiscordMessage>
@@ -672,7 +672,7 @@ const Home = () => {
         />
       </section>
 
-      <section className="mt-36 bg-neutral-950 px-9 py-12 xl:px-[17vw]">
+      <section className="mt-36 bg-[#101010] px-9 py-12 xl:px-[17vw]">
         <motion.h2
           initial={{ opacity: 0, transform: "translateY(10px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}

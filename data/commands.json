@@ -42,6 +42,11 @@
     "usage": "/ping"
   },
   {
+    "name": "privacy",
+    "description": "Change the users privacy settings.",
+    "usage": "/privacy"
+  },
+  {
     "name": "settings",
     "description": "Change settings for Daily Messages and Welcomes",
     "usage": "/settings <category>",
