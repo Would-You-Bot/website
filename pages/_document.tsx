@@ -19,8 +19,8 @@ export default function Document() {
               "name":"Would You Bot",
               "url":"https://wouldyoubot.gg",
               "logo":"https://i.imgur.com/YjwOfOX.png",
-              "image":"https://i.imgur.com/OPQaiVa.png",
-              "description":"Increase server engagement and entertain your members with Would You, featuring user polls, daily questions, and customization. Would You Rather",
+              "image":"https://i.imgur.com/jv5nCgK.png",
+              "description":"Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, and What Would You Do!",
               "sameAs":[
                  "https://twitter.com/wouldyoubot",
                  "https://www.youtube.com/@wouldyoubot",
@@ -50,7 +50,7 @@ export default function Document() {
            "aggregateRating":{
               "@type":"AggregateRating",
               "ratingValue":5,
-              "ratingCount":33,
+              "ratingCount":34,
               "bestRating":5,
               "worstRating":1
            }
@@ -58,22 +58,75 @@ export default function Document() {
   `,
           }}
         ></script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: `
+            {
+              "@context": "https://schema.org",
+              "@type": "FAQPage",
+              "mainEntity": [
+                {
+                  "@type": "Question",
+                  "name": "How can I increase the activity on my Discord server?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Using a popular engagement bot such as Would You can help revive activity on your server. This bot allows your community to play games like Would You Rather, Never Have I Ever, or Higher or Lower on Discord."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "How do I invite the would you rather discord bot?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "To invite the Would You Discord bot, visit their website at https://wouldyoubot.gg/ and click on the 'unleash the fun' button. This will take you to Discord, where you will be prompted to invite the bot."
+                  }
+                },
+                {
+                  "@type": "Question",
+                  "name": "Can I play would you rather on Discord?",
+                  "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, you can. To play would you rather on Discord, go to https://wouldyoubot.gg and click the 'unleash the fun' button to invite the would you rather bot!"
+                  }
+                }
+              ]
+            }
+  `,
+          }}
+        ></script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: `
+            {
+              "@context": "http://schema.org",
+              "@type": "VideoObject",
+              "name": "How to use Would You Bot",
+              "description": "https://wouldyoubot.com/  Boost Your Discord Server's Engagement with 'Would You' Bot! Discover how this powerful Discord bot revolutionizes your community interactions, sparking lively discussions, and keeping your server active. Engage your members with captivating 'Would You Rather' questions, polls, and games, fostering a dynamic and thriving community. Watch our video for a comprehensive overview and step-by-step setup guide to unleash the full potential of 'Would You' bot and take your Discord server to the next level!",
+              "thumbnailUrl": "https://i.ytimg.com/vi/x6BMCtgIy-8/default.jpg",
+              "uploadDate": "2023-06-21T13:03:23Z",
+              "duration": "PT30S",
+              "embedUrl": "https://www.youtube.com/embed/x6BMCtgIy-8",
+              "interactionCount": "166"
+            }
+  `,
+          }}
+        ></script>
         <meta name="robots" content="index, follow" />
         <meta
           name="description"
-          content="Play fun and entertaining games with Would You, featuring user polls and customization. 
-          Play Would You Rather, Never Have I Ever, Higher or Lower, and What Would You Do!"
+          content="Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, and What Would You Do on Discord!"
         />
         <meta
           property="og:description"
-          content="Play fun and entertaining games with Would You, featuring user polls and customization. 
-          Play Would You Rather, Never Have I Ever, Higher or Lower, and What Would You Do!"
+          content="Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, and What Would You Do on Discord!"
         />
         <meta property="og:title" content="Would You | Discord Bot" />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:image" content="0" />
-        <meta name="theme-color" content="#0598F6" />
-        <meta name="msapplication-TileColor" content="#0598F6" />
+        <meta name="theme-color" content="#FF8C00" />
+        <meta name="msapplication-TileColor" content="#FF8C00" />
       </Head>
       <body>
         <Main />

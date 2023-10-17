@@ -72,8 +72,15 @@ const Footer = () => {
             <p className="ml-3">Would You</p>
           </div>
           <p className="mt-4 text-center text-sm md:text-left">
-            &copy; {new Date().getFullYear()} Dominik Development. All rights
-            reserved.
+            &copy; {new Date().getFullYear()}{" "}
+            <Link
+              href="https://rivo.gg/"
+              target="_blank"
+              className="transition-all hover:text-white"
+            >
+              <b>Rivo</b>
+            </Link>
+            . All rights reserved.
           </p>
         </div>
         <div className="flex w-full flex-col items-center md:items-start">

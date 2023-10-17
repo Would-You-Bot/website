@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <meta
               key="og:image"
               property="og:image"
-              content="https://i.imgur.com/OPQaiVa.png"
+              content="https://i.imgur.com/jv5nCgK.png"
             />
           </>
         )}

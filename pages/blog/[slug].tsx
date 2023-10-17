@@ -51,6 +51,11 @@ const BlogPost: NextPage<{
         <meta name="description" content={frontMatter.description} />
         <meta property="og:title" content={frontMatter.title} />
         <meta property="og:description" content={frontMatter.description} />
+        <meta property="og:type" content="article" />
+        <meta property="article:published_time" content={frontMatter.date} />
+        <meta property="article:author" content={frontMatter.author.name} />
+        <meta property="article:tag" content={frontMatter.tags[0]} />
+        <meta property="article:tag" content={frontMatter.tags[1]} />
         {frontMatter.thumbnail?.large && (
           <meta
             key="og:image"

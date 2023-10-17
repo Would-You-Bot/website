@@ -66,6 +66,11 @@ export default function legalnoticede() {
           https://wouldyoubot.gg/
         </Link>
         <br />
+
+        <Link href="https://rivo.gg/" className="underline">
+          https://rivo.gg/
+        </Link>
+        <br />
         <Link href="https://twitter.com/WouldYouBot/" className="underline">
           https://twitter.com/WouldYouBot/
         </Link>

@@ -25,7 +25,7 @@ const nextConfig = {
         source: "/impressum",
         destination: "/legal-de",
         permanent: true,
-      },
+      }
     ];
   },
 };

@@ -1,21 +1,20 @@
 import Button from "@/components/Button";
-import InteractiveReaction from "@/components/DiscordReaction";
 import ServerMarquee from "@/components/ServerMarquee";
 import {
   DiscordActionRow,
   DiscordAttachments,
   DiscordButton,
   DiscordCommand,
-  DiscordCustomEmoji,
   DiscordEmbed,
-  DiscordEmbedField,
+  DiscordEmbedDescription,
   DiscordEmbedFields,
   DiscordEmbedFooter,
   DiscordMention,
   DiscordMessage,
   DiscordMessages,
-  DiscordReactions,
   DiscordReply,
+  DiscordThread,
+  DiscordThreadMessage,
 } from "@skyra/discord-components-react";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -24,14 +23,16 @@ import React, { useEffect, useState } from "react";
 import servers from "../data/servers.json";
 
 const questions = [
-  "You have an irl minecraft inventory, no weight limit, 64 per stack.",
-  "You can make anything have the opposite effect of what was supposed to be",
-  `Every time you see something and say "Dang, that's too expensive." a random person buys it and gives it to you`,
-  "Each time someone compliments you a turtle will appear and give you a sandwich",
-  "You are invisible to all doors, faucets, soaps, paper towels, and hand dryer sensors.",
-  "You can spawn any soda at will, but it will always be flat",
-  "Any time you don’t understand something, time freezes, and David Attenborough explains how the thing works",
-  "You can eat infinite food without getting fat",
+  "🎃Would you rather be a famous Halloween movie monster or the hero in your own horror movie?",
+  "🦇Would you rather spend Halloween night in a creepy, old mansion or a haunted, abandoned house?",
+  "👻Would you rather wear a complex but uncomfortable costume or a simple, comfy one that's not very impressive?",
+  "👹Would you rather go trick-or-treating with friends in a spooky forest or alone in a dimly lit cemetery?",
+  "🍬Would you rather eat only Halloween candy for a week after Halloween or never eat Halloween candy again?",
+  "🎃Would you rather attend a Halloween party with great music and dancing or a cozy bonfire with marshmallow roasting?",
+  "🦇Would you rather be chased by a swarm of bats or a pack of hungry wolves on Halloween night?",
+  "👻Would you rather see ghosts but not talk to them or talk to ghosts but not see them?",
+  "🍬Would you rather wear your Halloween costume every day for a year or eat only Halloween-themed foods for a month?",
+  "👹Would you rather carve a pumpkin into an intricate design or have a pumpkin pie-eating contest with your friends?",
 ];
 
 const getRandomQuestion = () =>
@@ -59,6 +60,13 @@ const profiles = {
     bot: false,
     verified: false,
   },
+  nightkiller: {
+    author: "NightKiller_2",
+    avatar: "./staff/Nightkiller.webp",
+    roleColor: "#00fff5",
+    bot: false,
+    verified: false,
+  },
   pod: {
     author: "Pod",
     avatar: "./staff/Pod.webp",
@@ -70,6 +78,27 @@ const profiles = {
     author: "Finn",
     avatar: "./staff/Finn.webp",
     roleColor: "#23CE6B",
+    bot: false,
+    verified: false,
+  },
+  invis: {
+    author: "invis",
+    avatar: "./staff/Invis.webp",
+    roleColor: "#53b3cb",
+    bot: false,
+    verified: false,
+  },
+  emilia: {
+    author: "Emilia",
+    avatar: "./staff/Emilia.webp",
+    roleColor: "#5ADBFF",
+    bot: false,
+    verified: false,
+  },
+  invalid: {
+    author: "InvalidKiller",
+    avatar: "./staff/Invalid.webp",
+    roleColor: "#f8dd3f",
     bot: false,
     verified: false,
   },
@@ -110,7 +139,15 @@ const Home = () => {
   const [currentQuestion, setCurrentQuestion] = useState<string>(
     getRandomQuestion(),
   );
-  const [serverCount, setServerCount] = useState<number>(5660);
+  const [serverCount, setServerCount] = useState<number>(6240);
+
+  const date = new Date();
+
+  const threadName = `${[
+    date.getFullYear(),
+    date.getMonth() + 1,
+    date.getDate(),
+  ].join("/")} - Daily Message`;
 
   useEffect(() => {
     fetch("https://japi.rest/discord/v1/application/981649513427111957/")
@@ -129,7 +166,7 @@ const Home = () => {
   };
 
   return (
-    <main className="mt-48 text-neutral-300 ">
+    <main className="mt-48 overflow-x-hidden text-neutral-300">
       <section className="flex flex-col items-center justify-between gap-8 px-8 text-center lg:flex-row lg:text-left xl:px-[17vw]">
         <motion.div
           initial={{ opacity: 0, transform: "translateY(20px)" }}
@@ -177,7 +214,7 @@ const Home = () => {
           transition={{ duration: 0.7, ease: "easeInOut" }}
           viewport={{ once: true }}
         >
-          <DiscordMessages class="rounded-lg text-left shadow">
+          <DiscordMessages class="overflow-x-hidden rounded-lg text-left shadow">
             <DiscordMessage
               profile="wouldyou"
               author={profiles.wouldyou.author}
@@ -193,34 +230,65 @@ const Home = () => {
                 author={profiles.dominik.author}
                 avatar={profiles.dominik.avatar}
                 roleColor={profiles.dominik.roleColor}
-                command="/wouldyou useful"
+                command="/wouldyourather"
               />
               <DiscordEmbed slot="embeds" color="#1e88e5">
-                <DiscordEmbedFields slot="fields">
-                  <DiscordEmbedField
-                    fieldTitle="Would you want this power?"
-                    className=""
-                  >
-                    {currentQuestion}
-                  </DiscordEmbedField>
-                </DiscordEmbedFields>
+                <DiscordEmbedDescription slot="description">
+                  {currentQuestion}
+                </DiscordEmbedDescription>
                 <DiscordEmbedFooter
-                  timestamp={currentDate}
                   slot="footer"
-                  footerImage="/Logo.svg"
+                  footerImage="./staff/Dominik.webp"
                 >
-                  Would You
+                  Requested by dominikdev | Type: General | ID: 64
                 </DiscordEmbedFooter>
               </DiscordEmbed>
-              <DiscordReactions slot="reactions">
-                <InteractiveReaction
-                  name="✅"
-                  emoji="/check.svg"
-                  initialCount={4}
-                />
-                <InteractiveReaction name="❌" emoji="/x.svg" />
-              </DiscordReactions>
               <DiscordAttachments slot="components">
+                <DiscordActionRow>
+                  <DiscordButton type="secondary">Results</DiscordButton>
+                  <DiscordButton type="primary">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 36 36"
+                      width="36"
+                      height="36"
+                      className="h-5 w-5"
+                    >
+                      <path
+                        fill="#3B88C3"
+                        d="M36 32a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v28z"
+                      />
+                      <path
+                        fill="#FFF"
+                        d="M16.462 11.175h-1.829c-1.488 0-2.108-1.085-2.108-2.139 0-1.085.775-2.14 2.108-2.14h4.402c1.334 0 2.078.961 2.078 2.201V26.74c0 1.551-.992 2.418-2.326 2.418-1.333 0-2.325-.867-2.325-2.418V11.175z"
+                      />
+                    </svg>
+                  </DiscordButton>
+                  <DiscordButton type="primary">
+                    <svg
+                      viewBox="0 0 36 36"
+                      width="36"
+                      height="36"
+                      className="h-5 w-5"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 36 36"
+                        width="36"
+                        height="36"
+                      >
+                        <path
+                          fill="#3B88C3"
+                          d="M36 32a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v28z"
+                        />
+                        <path
+                          fill="#FFF"
+                          d="M23.086 24.907c1.365 0 2.42.62 2.42 2.046 0 1.427-1.055 2.047-2.233 2.047H12.917c-1.364 0-2.418-.62-2.418-2.047 0-.65.403-1.209.713-1.581 2.573-3.069 5.364-5.86 7.721-9.271.558-.806 1.085-1.768 1.085-2.884 0-1.271-.961-2.387-2.233-2.387-3.566 0-1.86 5.023-4.837 5.023-1.488 0-2.264-1.054-2.264-2.264 0-3.906 3.473-7.038 7.287-7.038 3.815 0 6.883 2.512 6.883 6.449 0 4.309-4.805 8.589-7.441 11.906h5.673z"
+                        />
+                      </svg>
+                    </svg>
+                  </DiscordButton>
+                </DiscordActionRow>
                 <DiscordActionRow>
                   {replayedRounds < 3 ? (
                     <DiscordButton type="primary" onClick={() => replay()}>
@@ -235,7 +303,7 @@ const Home = () => {
                           d="M22.242 22.242l2.829 2.829c-3.905 3.905-10.237 3.904-14.143-.001-2.247-2.246-3.194-5.296-2.854-8.225l-4.037.367c-.215 3.84 1.128 7.752 4.062 10.687 5.467 5.467 14.333 5.468 19.799 0l2.828 2.828.849-9.334-9.333.849zM27.899 8.1C22.431 2.633 13.568 2.633 8.1 8.1L5.272 5.272l-.849 9.334 9.334-.849-2.829-2.829c3.906-3.905 10.236-3.905 14.142 0 2.248 2.247 3.194 5.297 2.856 8.226l4.036-.366c.216-3.841-1.128-7.753-4.063-10.688z"
                         />
                       </svg>
-                      Replay
+                      New Question
                     </DiscordButton>
                   ) : (
                     <DiscordButton
@@ -279,18 +347,18 @@ const Home = () => {
           className="-z-50 w-screen"
           priority
         />
-        <div className="bg-[#101010] px-8 pb-12 text-center text-5xl font-bold text-white md:-mt-20 md:pb-28 xl:px-[17vw]">
+        <div className="bg-[#101010] px-8 pb-12 text-center text-5xl text-white md:-mt-20 md:pb-28 xl:px-[17vw]">
           <h2>
             Used by{" "}
-            <span className="bg-gradient-brand bg-clip-text text-transparent">
+            <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
               {serverCount.toLocaleString()}+
             </span>{" "}
             communities
           </h2>
           <h3 className="mt-4 text-2xl">
             keeping{" "}
-            <span className="bg-gradient-brand bg-clip-text text-transparent">
-              2,000,000+
+            <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
+              2,500,000+
             </span>{" "}
             users entertained
           </h3>
@@ -319,7 +387,7 @@ const Home = () => {
         <FeatureItem
           reverse
           right={
-            <DiscordMessages class="min-w-fit rounded-lg shadow">
+            <DiscordMessages class="min-w-fit overflow-x-hidden rounded-lg shadow">
               <DiscordMessage
                 profile="wouldyou"
                 author={profiles.wouldyou.author}
@@ -328,24 +396,27 @@ const Home = () => {
                 bot={profiles.wouldyou.bot}
                 verified={profiles.wouldyou.verified}
               >
-                <DiscordMention type="role" color="#3489c3">
-                  QOTD
+                <DiscordMention type="role" color="#FF8C00">
+                  Spooky QOTD
                 </DiscordMention>
                 <DiscordEmbed slot="embeds" color="#1e88e5">
-                  <DiscordEmbedFields slot="fields">
-                    <DiscordEmbedField fieldTitle="Would you want this power?">
-                      You get 3% smarter every time someone calls you stupid.
-                    </DiscordEmbedField>
-                  </DiscordEmbedFields>
-                  <DiscordEmbedFooter
-                    timestamp={currentDate}
-                    slot="footer"
-                    footerImage="/Logo.svg"
-                  >
-                    {" "}
-                    Would You{" "}
+                  <DiscordEmbedDescription slot="description">
+                    {currentQuestion}
+                  </DiscordEmbedDescription>
+                  <DiscordEmbedFooter slot="footer">
+                    Daily Message | Type: Mixed | ID: 34
                   </DiscordEmbedFooter>
                 </DiscordEmbed>
+                <DiscordThread slot="thread" name={threadName}>
+                  <DiscordThreadMessage
+                    profile="Nightkiller"
+                    author={profiles.nightkiller.author}
+                    avatar={profiles.nightkiller.avatar}
+                    roleColor={profiles.nightkiller.roleColor}
+                  >
+                    Wow that...
+                  </DiscordThreadMessage>
+                </DiscordThread>
               </DiscordMessage>
             </DiscordMessages>
           }
@@ -366,16 +437,17 @@ const Home = () => {
           left={
             <>
               <h4 className="text-center text-3xl font-bold text-white md:text-left">
-                Keep the server active
+                Entertain your server
               </h4>
               <p className="text-center text-lg text-neutral-300 md:text-left">
-                We provide your server with hundreds of funny possible
-                superpowers ready to start a conversation with.
+                Entertain your discord server with fun and interactive games
+                like Would You Rather, Never Have I Ever, Higher or Lower, and
+                What Would You Do!
               </p>
             </>
           }
           right={
-            <DiscordMessages class="rounded-lg shadow">
+            <DiscordMessages class="overflow-x-hidden rounded-lg shadow">
               <DiscordMessage
                 profile="wouldyou"
                 author={profiles.wouldyou.author}
@@ -390,46 +462,55 @@ const Home = () => {
                   author={profiles.finn.author}
                   avatar={profiles.finn.avatar}
                   roleColor={profiles.finn.roleColor}
-                  command="/wouldyourather"
+                  command="/higherlower"
                 />
-                <DiscordEmbed slot="embeds" color="#1e88e5">
+                <DiscordEmbed
+                  slot="embeds"
+                  color="#57f389"
+                  image="/higherlower.webp"
+                >
                   <DiscordEmbedFields slot="fields">
-                    <DiscordEmbedField fieldTitle="Would you want this power?">
-                      Your pocket can hold 10 items no matter the size.
-                    </DiscordEmbedField>
-                    <DiscordEmbedField fieldTitle="Stats">
-                      Everyone who voted would want this power.
-                    </DiscordEmbedField>
+                    <DiscordEmbedDescription>
+                      Do you think that{" "}
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="https://media.gettyimages.com/id/172983250/de/foto/el-bolte.jpg?s=612x612&w=0&k=20&c=k_mRK-vNunI3_-Vj4PuZ1Ego3gritQdXNobiZIlzszU="
+                      >
+                        <b>Mcdonalds </b>
+                      </a>
+                      has higher or lower searches than{" "}
+                      <a
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        href="https://www.flickr.com/photos/jeepersmedia/14148153870/in/photolist-nydZeq-nQDDp3-pdpSvU-g7LgY-o3o2jd-pcNHiK-o3cCTF-5WPCjg-nQ2NWU-f2zTHH-pcNMyi-nQ2NHY-pcNHte-pfrPLZ-8spnG2-5pW4Z-pfaUUH-2uoaCe-nRMfuF-oXXAPw-nPUyfN-pfpNHs-pfaWDV-pfrMUx-pfrMD2-oXWWcy-5WPCZP-so4g2-5WPBYk-5WTTfu-p5tWUQ-5WTSBW-d39Ks-KHuxQ-oN23na-ayyYGJ-8spkbH-7B9Qwt-z6GPjP-p5vZi6-fJofT-LwbCj-bwPBWn-e9VGDK-8ssDmf-ea2nUm-8spDep-PanEt-8spyZR-z6GNxD"
+                      >
+                        <b>Wrestling</b>
+                      </a>
+                      ?
+                    </DiscordEmbedDescription>
                   </DiscordEmbedFields>
                   <DiscordEmbedFooter
                     timestamp={currentDate}
                     slot="footer"
-                    footerImage="/Logo.svg"
+                    footerImage="/staff/Finn.webp"
                   >
-                    Would You
+                    finndev | Game ID: 32c7b7c4-6e6a
                   </DiscordEmbedFooter>
                 </DiscordEmbed>
-                <DiscordReactions slot="reactions">
-                  <InteractiveReaction
-                    name="✅"
-                    emoji="/check.svg"
-                    initialCount={3}
-                  />
-                  <InteractiveReaction
-                    name="❌"
-                    emoji="/x.svg"
-                    initialCount={2}
-                  />
-                </DiscordReactions>
+                <DiscordAttachments slot="components">
+                  <DiscordActionRow>
+                    <DiscordButton type="success">Higher</DiscordButton>
+                    <DiscordButton type="destructive">Lower</DiscordButton>
+                  </DiscordActionRow>
+                </DiscordAttachments>
               </DiscordMessage>
 
               <DiscordMessage
-                profile="sky"
-                author={profiles.sky.author}
-                avatar={profiles.sky.avatar}
-                roleColor={profiles.sky.roleColor}
-                bot={profiles.sky.bot}
-                verified={profiles.sky.verified}
+                profile="invis"
+                author={profiles.invis.author}
+                avatar={profiles.invis.avatar}
+                roleColor={profiles.invis.roleColor}
               >
                 <DiscordReply
                   slot="reply"
@@ -442,52 +523,47 @@ const Home = () => {
                 >
                   <p style={{ whiteSpace: "initial" }}>Click to see commands</p>
                 </DiscordReply>
-                I would sell the pants <br /> Profit
+                McDonalds probably has a lot more
               </DiscordMessage>
 
               <DiscordMessage
-                profile="finn"
-                author={profiles.finn.author}
-                avatar={profiles.finn.avatar}
-                roleColor={profiles.finn.roleColor}
-                bot={profiles.finn.bot}
-                verified={profiles.finn.verified}
+                profile="emilia"
+                author={profiles.emilia.author}
+                avatar={profiles.emilia.avatar}
+                roleColor={profiles.emilia.roleColor}
               >
-                It&apos;s not your pants <br /> Whatever pants you wear they do
-                that
+                Yep should be McDonalds
               </DiscordMessage>
 
               <DiscordMessage
-                profile="sky"
-                author={profiles.sky.author}
-                avatar={profiles.sky.avatar}
-                roleColor={profiles.sky.roleColor}
-                bot={profiles.sky.bot}
-                verified={profiles.sky.verified}
+                profile="invis"
+                author={profiles.invis.author}
+                avatar={profiles.invis.avatar}
+                roleColor={profiles.invis.roleColor}
               >
                 <DiscordReply
                   slot="reply"
-                  profile="finn"
-                  author={profiles.finn.author}
-                  avatar={profiles.finn.avatar}
-                  roleColor={profiles.finn.roleColor}
+                  profile="emilia"
+                  author={profiles.emilia.author}
+                  avatar={profiles.emilia.avatar}
+                  roleColor={profiles.emilia.roleColor}
                 >
                   <p style={{ whiteSpace: "initial" }}>
-                    Whatever pants you wear they do that
+                    Yep should be McDonalds
                   </p>
                 </DiscordReply>
-                Ohhhh
+                Soooo, we gonna press higher?
               </DiscordMessage>
 
               <DiscordMessage
-                profile="finn"
-                author={profiles.finn.author}
-                avatar={profiles.finn.avatar}
-                roleColor={profiles.finn.roleColor}
-                bot={profiles.finn.bot}
-                verified={profiles.finn.verified}
+                profile="invalid"
+                author={profiles.invalid.author}
+                avatar={profiles.invalid.avatar}
+                roleColor={profiles.invalid.roleColor}
+                bot={profiles.invalid.bot}
+                verified={profiles.invalid.verified}
               >
-                So if you don&apos;t wear them you don&apos;t get the benefit
+                Yep!
               </DiscordMessage>
             </DiscordMessages>
           }
@@ -496,7 +572,7 @@ const Home = () => {
         <FeatureItem
           reverse
           right={
-            <DiscordMessages class="rounded-lg shadow">
+            <DiscordMessages class="overflow-x-hidden rounded-lg text-left shadow">
               <DiscordMessage
                 profile="wouldyou"
                 author={profiles.wouldyou.author}
@@ -504,52 +580,81 @@ const Home = () => {
                 roleColor={profiles.wouldyou.roleColor}
                 bot={profiles.wouldyou.bot}
                 verified={profiles.wouldyou.verified}
+                edited={replayedRounds > 0}
               >
                 <DiscordCommand
                   slot="reply"
                   profile="pod"
-                  command="/custom rather"
                   author={profiles.pod.author}
                   avatar={profiles.pod.avatar}
                   roleColor={profiles.pod.roleColor}
-                />{" "}
+                  command="/neverhaveiever"
+                />
                 <DiscordEmbed slot="embeds" color="#1e88e5">
-                  <DiscordEmbedFields slot="fields">
-                    <DiscordEmbedField fieldTitle="Would You rather have">
-                      <DiscordCustomEmoji
-                        name="one"
-                        url="/1.svg"
-                        embed-emoji
-                        className="mr-1"
-                      />
-                      Unlimited food but live in a small house
-                    </DiscordEmbedField>
-                    <DiscordEmbedField fieldTitle="or">
-                      <DiscordCustomEmoji
-                        name="two"
-                        url="/2.svg"
-                        embed-emoji
-                        className="mr-1"
-                      />
-                      Live in a big mansion but have limited food
-                    </DiscordEmbedField>
-                  </DiscordEmbedFields>
+                  <DiscordEmbedDescription slot="description">
+                    🎃Never have I ever dressed up as a classic monster (e.g.,
+                    vampire, werewolf, mummy) for Halloween.
+                  </DiscordEmbedDescription>
                   <DiscordEmbedFooter
-                    timestamp={currentDate}
                     slot="footer"
-                    footerImage="/Logo.svg"
+                    footerImage="./staff/Pod.webp"
                   >
-                    Would You
+                    Requested by podskio | Type: Random | ID: 124
                   </DiscordEmbedFooter>
                 </DiscordEmbed>
-                <DiscordReactions slot="reactions">
-                  <InteractiveReaction
-                    name="1️⃣"
-                    emoji="1.svg"
-                    initialCount={5}
-                  />
-                  <InteractiveReaction name="2️⃣" emoji="2.svg" />
-                </DiscordReactions>
+                <DiscordAttachments slot="components">
+                  <DiscordActionRow>
+                    <DiscordButton type="secondary">Results</DiscordButton>
+                    <DiscordButton type="primary">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 36 36"
+                        width="36"
+                        height="36"
+                        className="h-5 w-5"
+                      >
+                        <path
+                          fill="#77B255"
+                          d="M36 32a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4V4a4 4 0 0 1 4-4h28a4 4 0 0 1 4 4v28z"
+                        />
+                        <path
+                          fill="#FFF"
+                          d="M29.28 6.362a2.502 2.502 0 0 0-3.458.736L14.936 23.877l-5.029-4.65a2.5 2.5 0 1 0-3.394 3.671l7.209 6.666c.48.445 1.09.665 1.696.665.673 0 1.534-.282 2.099-1.139.332-.506 12.5-19.27 12.5-19.27a2.5 2.5 0 0 0-.737-3.458z"
+                        />
+                      </svg>
+                    </DiscordButton>
+                    <DiscordButton type="primary">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 36 36"
+                        width="36"
+                        height="36"
+                        className="h-5 w-5"
+                      >
+                        <path
+                          fill="#DD2E44"
+                          d="M21.533 18.002 33.768 5.768a2.5 2.5 0 0 0-3.535-3.535L17.998 14.467 5.764 2.233a2.498 2.498 0 0 0-3.535 0 2.498 2.498 0 0 0 0 3.535l12.234 12.234L2.201 30.265a2.498 2.498 0 0 0 1.768 4.267c.64 0 1.28-.244 1.768-.732l12.262-12.263 12.234 12.234a2.493 2.493 0 0 0 1.768.732 2.5 2.5 0 0 0 1.768-4.267L21.533 18.002z"
+                        />
+                      </svg>
+                    </DiscordButton>
+                  </DiscordActionRow>
+                  <DiscordActionRow>
+                    <DiscordButton type="primary">
+                      <svg
+                        viewBox="0 0 36 36"
+                        width="36"
+                        height="36"
+                        className="mr-2 h-5 w-5"
+                      >
+                        <path
+                          fill="#FFF"
+                          d="M22.242 22.242l2.829 2.829c-3.905 3.905-10.237 3.904-14.143-.001-2.247-2.246-3.194-5.296-2.854-8.225l-4.037.367c-.215 3.84 1.128 7.752 4.062 10.687 5.467 5.467 14.333 5.468 19.799 0l2.828 2.828.849-9.334-9.333.849zM27.899 8.1C22.431 2.633 13.568 2.633 8.1 8.1L5.272 5.272l-.849 9.334 9.334-.849-2.829-2.829c3.906-3.905 10.236-3.905 14.142 0 2.248 2.247 3.194 5.297 2.856 8.226l4.036-.366c.216-3.841-1.128-7.753-4.063-10.688z"
+                        />
+                      </svg>
+                      New Question
+                    </DiscordButton>
+                  </DiscordActionRow>
+                </DiscordAttachments>
               </DiscordMessage>
             </DiscordMessages>
           }
@@ -559,15 +664,15 @@ const Home = () => {
                 Upgrade your server
               </h4>
               <p className="text-center text-lg text-neutral-300 md:text-left">
-                Customized responses make your server unique and stand out from
-                the crowd.
+                Upgrade your server with Would You, featuring a wide variety of
+                games and customized questions.
               </p>
             </>
           }
         />
       </section>
 
-      <section className="mt-36 bg-neutral-950 px-9 py-12 xl:px-[17vw]">
+      <section className="mt-36 bg-[#101010] px-9 py-12 xl:px-[17vw]">
         <motion.h2
           initial={{ opacity: 0, transform: "translateY(10px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}
