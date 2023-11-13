@@ -77,6 +77,12 @@ const Navbar = () => {
             Commands
           </Link>
           <Link
+            href="/premium"
+            className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+          >
+            Premium
+          </Link>
+          <Link
             href="/blog"
             className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
           >
