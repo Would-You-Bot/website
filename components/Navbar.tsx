@@ -145,6 +145,13 @@ const Navbar = () => {
             Commands
           </Link>
           <Link
+            href="/premium"
+            className="mt-8 text-center text-3xl text-white"
+            onClick={() => toggleMobileMenu()}
+          >
+            Premium
+          </Link>
+          <Link
             href="/blog"
             className="mt-8 text-center text-3xl text-white"
             onClick={() => toggleMobileMenu()}
