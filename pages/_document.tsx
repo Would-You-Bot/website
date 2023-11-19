@@ -19,8 +19,8 @@ export default function Document() {
               "name":"Would You Bot",
               "url":"https://wouldyoubot.gg",
               "logo":"https://i.imgur.com/YjwOfOX.png",
-              "image":"https://i.imgur.com/jv5nCgK.png",
-              "description":"Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, and What Would You Do!",
+              "image":"https://i.imgur.com/OPQaiVa.png",
+              "description":"Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, Truth or Dare and What Would You Do on Discord!",
               "sameAs":[
                  "https://twitter.com/wouldyoubot",
                  "https://www.youtube.com/@wouldyoubot",
@@ -71,7 +71,7 @@ export default function Document() {
                   "name": "How can I increase the activity on my Discord server?",
                   "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Using a popular engagement bot such as Would You can help revive activity on your server. This bot allows your community to play games like Would You Rather, Never Have I Ever, or Higher or Lower on Discord."
+                    "text": "Using a popular engagement bot such as Would You can help revive activity on your server. This bot allows your community to play games like Would You Rather, Truth or Dare, Never Have I Ever, or Higher or Lower on Discord."
                   }
                 },
                 {
@@ -116,17 +116,17 @@ export default function Document() {
         <meta name="robots" content="index, follow" />
         <meta
           name="description"
-          content="Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, and What Would You Do on Discord!"
+          content="Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, Truth or Dare and What Would You Do on Discord!"
         />
         <meta
           property="og:description"
-          content="Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, and What Would You Do on Discord!"
+          content="Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, Truth or Dare and What Would You Do on Discord!"
         />
-        <meta property="og:title" content="Would You | Discord Bot" />
+        <meta property="og:title" content="Would You | The Discord Bot" />
         <meta property="twitter:card" content="summary_large_image" />
         <meta property="twitter:image" content="0" />
-        <meta name="theme-color" content="#FF8C00" />
-        <meta name="msapplication-TileColor" content="#FF8C00" />
+        <meta name="theme-color" content="#0598F6" />
+        <meta name="msapplication-TileColor" content="#0598F6" />
       </Head>
       <body>
         <Main />

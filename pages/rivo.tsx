@@ -1,11 +1,5 @@
-import { useEffect } from "react";
+import { Redirect } from "@/components/Redirect";
 
-const Rivo = () => {
-  useEffect(() => {
-    window.location.href = "https://rivo.gg/";
-  }, []);
-
-  return null;
-};
-
-export default Rivo;
+export default function Rivo() {
+  return Redirect("https://rivo.gg/");
+}

@@ -1,11 +1,5 @@
-import { useEffect } from "react";
+import { Redirect } from "@/components/Redirect";
 
-const Reddit = () => {
-  useEffect(() => {
-    window.location.href = "https://www.reddit.com/r/WouldYou/";
-  }, []);
-
-  return null;
-};
-
-export default Reddit;
+export default function Reddit() {
+  return Redirect("https://www.reddit.com/r/WouldYou/");
+}

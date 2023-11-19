@@ -9,7 +9,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Would You</title>
+        <title>Would You - The Discord Bot</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/Logo.png" />
         <link rel="canonical" href="https://wouldyoubot.gg" />
@@ -26,7 +26,7 @@ export default function App({ Component, pageProps }: AppProps) {
             <meta
               key="og:image"
               property="og:image"
-              content="https://i.imgur.com/jv5nCgK.png"
+              content="https://i.imgur.com/OPQaiVa.png"
             />
           </>
         )}

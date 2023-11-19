@@ -6,6 +6,11 @@
     "subcommands": ["channel", "mode", "webhook"]
   },
   {
+    "name": "dare",
+    "description": "Posts a random dare question that you need to answer",
+    "usage": "/dare"
+  },
+  {
     "name": "guide",
     "description": "A Guide on how to use the bot and increase activity",
     "usage": "/guide"
@@ -56,6 +61,11 @@
     "name": "support",
     "description": "Links our support server",
     "usage": "/support"
+  },
+  {
+    "name": "truth",
+    "description": "Posts a random truth question that you need to answer",
+    "usage": "/truth"
   },
   {
     "name": "vote",

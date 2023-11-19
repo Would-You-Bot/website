@@ -1,3 +1,33 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@media screen and (max-width : 500px) {
+    .discord-message:first-child {
+        @apply w-[95%] !important;
+    }
+    .smalldevice {
+        @apply w-[100%] my-[0.5rem] mx-auto !important;
+    }
+    .order-last {
+        @apply w-[100%] mx-auto !important;
+    }
+    .maindiv {
+        @apply w-[90vw] !important;
+    }
+    .discord-messages {
+        @apply min-w-0 !important;
+    }
+}
+@media screen and (max-width: 350px) {
+    
+    .discord-thread-message .discord-thread-message-content {
+        @apply text-xs;
+    }
+    .discord-thread-message .discord-thread-message-timestamp {
+        @apply text-xs !important;
+    }
+    .discord-thread {
+        @apply max-w-full !important;
+    }
+}

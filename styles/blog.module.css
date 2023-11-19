@@ -2,6 +2,12 @@
   @apply leading-relaxed;
 }
 
+.markdown img {
+  width: 100%;
+  max-width: 800px;
+  border-radius: 5px;
+}
+
 .markdown p,
 .markdown ul,
 .markdown ol,
@@ -39,6 +45,6 @@
   left: 0;
   right: 0;
   height: 5px;
-  background: #0598F4;
+  background: #0598f4;
   transform-origin: 0%;
 }

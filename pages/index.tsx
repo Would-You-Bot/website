@@ -23,16 +23,15 @@ import React, { useEffect, useState } from "react";
 import servers from "../data/servers.json";
 
 const questions = [
-  "🎃Would you rather be a famous Halloween movie monster or the hero in your own horror movie?",
-  "🦇Would you rather spend Halloween night in a creepy, old mansion or a haunted, abandoned house?",
-  "👻Would you rather wear a complex but uncomfortable costume or a simple, comfy one that's not very impressive?",
-  "👹Would you rather go trick-or-treating with friends in a spooky forest or alone in a dimly lit cemetery?",
-  "🍬Would you rather eat only Halloween candy for a week after Halloween or never eat Halloween candy again?",
-  "🎃Would you rather attend a Halloween party with great music and dancing or a cozy bonfire with marshmallow roasting?",
-  "🦇Would you rather be chased by a swarm of bats or a pack of hungry wolves on Halloween night?",
-  "👻Would you rather see ghosts but not talk to them or talk to ghosts but not see them?",
-  "🍬Would you rather wear your Halloween costume every day for a year or eat only Halloween-themed foods for a month?",
-  "👹Would you rather carve a pumpkin into an intricate design or have a pumpkin pie-eating contest with your friends?",
+  "Would you rather always be 10 minutes late or 20 minutes early?",
+  "Would you rather be able to speak all languages or be able to play every musical instrument?",
+  "Would you rather have a rewind button or a pause button in your life?",
+  "Would you rather have super strength or super speed?",
+  "Would you rather live in a haunted house or a house with no electricity?",
+  "Would you rather have no one show up to your wedding or to your funeral?",
+  "Would you rather not be able to taste or not be able to smell?",
+  "Would you rather always have to say everything on your mind or never speak again?",
+  "Would you rather be famous when you are alive and forgotten when you die, or unknown when you are alive but famous after you die?",
 ];
 
 const getRandomQuestion = () =>
@@ -102,6 +101,13 @@ const profiles = {
     bot: false,
     verified: false,
   },
+  gersti: {
+    author: "Gersti",
+    avatar: "./staff/Gersti.webp",
+    roleColor: "#ff69eb",
+    bot: false,
+    verified: false,
+  },
 };
 
 const FeatureItem: React.FC<{
@@ -109,7 +115,7 @@ const FeatureItem: React.FC<{
   right: React.ReactNode;
   reverse?: true;
 }> = ({ left, right, reverse }) => (
-  <div className="flex flex-col justify-between gap-20 md:flex-row">
+  <div className="maindiv flex flex-col justify-between gap-20 md:flex-row">
     <motion.div
       initial={{ opacity: 0, transform: "translateX(-50px)" }}
       whileInView={{ opacity: 1, transform: "translateX(0)" }}
@@ -167,12 +173,13 @@ const Home = () => {
 
   return (
     <main className="mt-48 overflow-x-hidden text-neutral-300">
-      <section className="flex flex-col items-center justify-between gap-8 px-8 text-center lg:flex-row lg:text-left xl:px-[17vw]">
+      <section className="flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left xl:px-[17vw]">
         <motion.div
           initial={{ opacity: 0, transform: "translateY(20px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
           viewport={{ once: true }}
+          className="px-8"
         >
           <h1 className="text-6xl font-bold leading-normal text-white">
             Entertain Your
@@ -186,8 +193,8 @@ const Home = () => {
           </h1>
           <p className="text-lg text-neutral-300">
             Play fun and entertaining games with Would You, featuring user polls
-            and customization. Play Would You Rather, Never Have I Ever, Higher
-            or Lower, and What Would You Do!
+            and customization. Play Would You Rather, Truth or Dare, Never Have
+            I Ever, Higher or Lower, and What Would You Do!
           </p>
           <Link href="/invite" target="_blank">
             <Button className="mx-auto mt-8 gap-2 lg:mx-0">
@@ -213,6 +220,7 @@ const Home = () => {
           whileInView={{ opacity: 1, transform: "translateY(0)" }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
           viewport={{ once: true }}
+          style={{ width: "90%", marginLeft: "auto", marginRight: "auto" }}
         >
           <DiscordMessages class="overflow-x-hidden rounded-lg text-left shadow">
             <DiscordMessage
@@ -349,7 +357,7 @@ const Home = () => {
         />
         <div className="bg-[#101010] px-8 pb-12 text-center text-5xl text-white md:-mt-20 md:pb-28 xl:px-[17vw]">
           <h2>
-            Used by{" "}
+            Trusted by{" "}
             <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
               {serverCount.toLocaleString()}+
             </span>{" "}
@@ -358,7 +366,7 @@ const Home = () => {
           <h3 className="mt-4 text-2xl">
             keeping{" "}
             <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
-              2,500,000+
+              3,000,000+
             </span>{" "}
             users entertained
           </h3>
@@ -396,12 +404,12 @@ const Home = () => {
                 bot={profiles.wouldyou.bot}
                 verified={profiles.wouldyou.verified}
               >
-                <DiscordMention type="role" color="#FF8C00">
-                  Spooky QOTD
+                <DiscordMention type="role" color="#1e99">
+                  QOTD
                 </DiscordMention>
                 <DiscordEmbed slot="embeds" color="#1e88e5">
                   <DiscordEmbedDescription slot="description">
-                    {currentQuestion}
+                    Would you rather be able to control fire 🔥 or water 💧?
                   </DiscordEmbedDescription>
                   <DiscordEmbedFooter slot="footer">
                     Daily Message | Type: Mixed | ID: 34
@@ -425,7 +433,7 @@ const Home = () => {
               <h4 className="text-center text-3xl font-bold text-white md:text-left">
                 Increase user engagement
               </h4>
-              <p className="text-center text-lg text-neutral-300 md:text-left">
+              <p className="mx-auto text-center text-lg text-neutral-300 md:text-left">
                 Keep your community engaged and active with daily &quot;Would
                 You Rather&quot; messages!
               </p>
@@ -441,8 +449,8 @@ const Home = () => {
               </h4>
               <p className="text-center text-lg text-neutral-300 md:text-left">
                 Entertain your discord server with fun and interactive games
-                like Would You Rather, Never Have I Ever, Higher or Lower, and
-                What Would You Do!
+                like Would You Rather, Truth or Dare, Never Have I Ever, Higher
+                or Lower, and What Would You Do!
               </p>
             </>
           }
@@ -536,10 +544,10 @@ const Home = () => {
               </DiscordMessage>
 
               <DiscordMessage
-                profile="invis"
-                author={profiles.invis.author}
-                avatar={profiles.invis.avatar}
-                roleColor={profiles.invis.roleColor}
+                profile="gersti"
+                author={profiles.gersti.author}
+                avatar={profiles.gersti.avatar}
+                roleColor={profiles.gersti.roleColor}
               >
                 <DiscordReply
                   slot="reply"
@@ -599,7 +607,7 @@ const Home = () => {
                     slot="footer"
                     footerImage="./staff/Pod.webp"
                   >
-                    Requested by podskio | Type: Random | ID: 124
+                    Requested by podskio | Type: NHIE | ID: 124
                   </DiscordEmbedFooter>
                 </DiscordEmbed>
                 <DiscordAttachments slot="components">

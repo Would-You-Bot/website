@@ -13,6 +13,7 @@ interface PageProps {
       title: string;
       description: string;
       date: string;
+      seoDate: string;
       thumbnail?: {
         large?: string;
         banner?: string;
@@ -52,30 +53,34 @@ const BlogPosts: NextPage<PageProps> = ({ posts }) => {
             <Link
               href={`/blog/${post.filePath.replace(/\.mdx?$/, "")}`}
               key={post.filePath}
-              className="relative flex items-center justify-between rounded-lg bg-neutral-800 p-4 text-neutral-300 transition-all duration-300 hover:bg-neutral-700"
+              className="relative flex flex-col items-start justify-between rounded-lg bg-neutral-800 p-4 text-neutral-300 transition-all duration-300 hover:bg-neutral-700 sm:flex-row"
             >
-              <div className="z-10 flex items-start gap-4">
-                <Image
-                  src={post.data.author.avatar}
-                  alt={post.data.author.name}
-                  width={50}
-                  height={50}
-                  className="h-10 w-10 rounded-full"
-                />
-                <div>
-                  <div className="flex items-center gap-2">
+              <div className="z-10 flex flex-col items-start gap-2">
+                <div className="flex w-full flex-wrap items-center gap-2">
+                  <div className="flex-no-wrap flex items-center gap-2">
+                    <Image
+                      src={post.data.author.avatar}
+                      alt={post.data.author.name}
+                      width={50}
+                      height={50}
+                      className="h-10 w-10 rounded-full"
+                    />
                     <h4 className="mb-1 text-xl font-bold text-white">
                       {post.data.title}
                     </h4>
+                  </div>
+                  <div className="flex h-fit flex-wrap gap-2">
                     {post.data.tags.slice(0, 4).map((tag) => (
                       <p
                         key={tag}
-                        className="-mt-1 rounded-full border border-neutral-500 px-2 py-1 text-xs text-neutral-300"
+                        className="rounded-full border border-neutral-500 px-2 py-1 text-xs text-neutral-300"
                       >
                         {tag}
                       </p>
                     ))}
                   </div>
+                </div>
+                <div className="text-left">
                   <p className="mb-2 text-sm text-neutral-400">
                     {post.data.date}
                   </p>
@@ -83,13 +88,14 @@ const BlogPosts: NextPage<PageProps> = ({ posts }) => {
                 </div>
               </div>
               {post.data.thumbnail?.large && (
-                <Image
-                  src={post.data.thumbnail.large}
-                  width={500}
-                  height={500}
-                  alt={post.data.thumbnail.alt || post.data.title}
-                  className="h-24 w-auto rounded-lg"
-                />
+                <div className="relative mt-4 aspect-video min-w-full sm:min-w-[200px]">
+                  <Image
+                    src={post.data.thumbnail.large}
+                    alt={post.data.thumbnail.alt || post.data.title}
+                    className="rounded-lg sm:mt-0"
+                    fill
+                  />
+                </div>
               )}
               {post.data.pinned && (
                 <svg

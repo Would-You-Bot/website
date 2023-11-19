@@ -14,12 +14,18 @@ import { motion, useScroll, useSpring } from "framer-motion";
 
 const components = {
   Button: Button,
+  a: CustomLink,
 };
+
+function CustomLink(props: any) {
+  return <a {...props} target="_blank" />;
+}
 
 interface FrontMatter {
   title: string;
   description: string;
   date: string;
+  seoDate: string;
   thumbnail?: {
     large?: string;
     banner?: string;
@@ -47,15 +53,16 @@ const BlogPost: NextPage<{
   return (
     <>
       <Head>
-        <title>Would You Blog | {frontMatter.title}</title>
+        <title>{frontMatter.title}</title>
         <meta name="description" content={frontMatter.description} />
         <meta property="og:title" content={frontMatter.title} />
         <meta property="og:description" content={frontMatter.description} />
         <meta property="og:type" content="article" />
-        <meta property="article:published_time" content={frontMatter.date} />
+        <meta property="article:published_time" content={frontMatter.seoDate} />
         <meta property="article:author" content={frontMatter.author.name} />
         <meta property="article:tag" content={frontMatter.tags[0]} />
         <meta property="article:tag" content={frontMatter.tags[1]} />
+        <meta property="article:tag" content={frontMatter.tags[2]} />
         {frontMatter.thumbnail?.large && (
           <meta
             key="og:image"
@@ -97,11 +104,11 @@ const BlogPost: NextPage<{
             <p className="text-sm text-neutral-400">{frontMatter.date}</p>
           </div>
         </div>
-        <div className="mb-4 flex gap-1 border-b border-b-neutral-500 pb-4">
+        <div className="my-4 flex flex-wrap gap-1 border-b border-b-neutral-500 pb-4">
           {frontMatter.tags.map((tag) => (
             <p
               key={tag}
-              className="mt-4 rounded-full border border-neutral-500 px-2 py-1 text-xs text-neutral-300"
+              className="min-w-fit rounded-full border border-neutral-500 px-2 py-1 text-xs text-neutral-300"
             >
               {tag}
             </p>

@@ -1,11 +1,5 @@
-import { useEffect } from "react";
+import { Redirect } from "@/components/Redirect";
 
-const Vote = () => {
-  useEffect(() => {
-    window.location.href = "https://top.gg/bot/981649513427111957/vote";
-  }, []);
-
-  return null;
-};
-
-export default Vote;
+export default function Vote() {
+  return Redirect("https://top.gg/bot/981649513427111957/vote");
+}

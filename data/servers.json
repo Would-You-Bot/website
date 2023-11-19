@@ -33,6 +33,14 @@
       "invite": "https://discord.gg/crunchy"
     },
     {
+      "name": "Actus France",
+      "members": "3k+",
+      "avatar": "actus.webp",
+      "partnered": true,
+      "verified": false,
+      "invite": "https://discord.gg/actusfr"
+    },
+    {
       "name": "Medium Cafe",
       "members": "117k+",
       "avatar": "mediumcafe.webp",
@@ -91,6 +99,14 @@
   ],
   [
     {
+      "name": "Sons of The Forest International",
+      "members": "39k+",
+      "avatar": "sotf.webp",
+      "partnered": true,
+      "verified": false,
+      "invite": "https://discord.gg/sotf"
+    },
+    {
       "name": "Altrax's Joint",
       "members": "76k+",
       "avatar": "altrax.webp",
@@ -108,7 +124,7 @@
     },
     {
       "name": "KIWIKARIU",
-      "members": "2.2k+",
+      "members": "3k+",
       "avatar": "KIWIKARIU.gif",
       "partnered": true,
       "verified": false,
