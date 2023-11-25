@@ -89,7 +89,7 @@ const BlogPost: NextPage<{
         <meta property="article:tag" content={frontMatter.tags[0]} />
         <meta property="article:tag" content={frontMatter.tags[1]} />
         <meta property="article:tag" content={frontMatter.tags[2]} />
-        <meta property="canonical"/>
+        <meta property="canonical" />
         {frontMatter.thumbnail?.large && (
           <meta
             key="og:image"

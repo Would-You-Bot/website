@@ -1,16 +1,23 @@
-import { DiscordEmbed, DiscordEmbedDescription, DiscordEmbedFooter, DiscordMention, DiscordMessage, DiscordMessages, DiscordThread, DiscordThreadMessage } from "@skyra/discord-components-react";
+import {
+  DiscordEmbed,
+  DiscordEmbedDescription,
+  DiscordEmbedFooter,
+  DiscordMention,
+  DiscordMessage,
+  DiscordMessages,
+  DiscordThread,
+  DiscordThreadMessage,
+} from "@skyra/discord-components-react";
 import profiles from "../../data/profiles.json";
 
 interface MainProps {
-    threadName: string;
-  }
+  threadName: string;
+}
 
-  const DailyMessageEmbed: React.FC<MainProps> = ({
-    threadName,
-  }) => {
-    return (
-        <DiscordMessages className="min-w-fit overflow-x-hidden rounded-lg shadow">
-        <DiscordMessage
+const DailyMessageEmbed: React.FC<MainProps> = ({ threadName }) => {
+  return (
+    <DiscordMessages className="min-w-fit overflow-x-hidden rounded-lg shadow">
+      <DiscordMessage
         profile="wouldyou"
         author={profiles.wouldyou.author}
         avatar={profiles.wouldyou.avatar}
@@ -41,7 +48,6 @@ interface MainProps {
         </DiscordThread>
       </DiscordMessage>
     </DiscordMessages>
-    );
-}
+  );
+};
 export default DailyMessageEmbed;
-

@@ -9,11 +9,22 @@ import React, { useEffect, useState } from "react";
 import servers from "../data/servers.json";
 import dynamic from "next/dynamic";
 
-const MainDiscordEmbed = dynamic(() => import('@/components/Embeds/MainDiscordEmbed'), { ssr: false })
-const DailyMessageEmbed = dynamic(() => import('@/components/Embeds/DailyMessageEmbed'), { ssr: false })
-const HigherLowerEmbed = dynamic(() => import('@/components/Embeds/HigherLowerEmbed'), { ssr: false })
-const NeverHaveIEverEmbed = dynamic(() => import('@/components/Embeds/NeverHaveIEverEmbed'), { ssr: false })
-
+const MainDiscordEmbed = dynamic(
+  () => import("@/components/Embeds/MainDiscordEmbed"),
+  { ssr: false },
+);
+const DailyMessageEmbed = dynamic(
+  () => import("@/components/Embeds/DailyMessageEmbed"),
+  { ssr: false },
+);
+const HigherLowerEmbed = dynamic(
+  () => import("@/components/Embeds/HigherLowerEmbed"),
+  { ssr: false },
+);
+const NeverHaveIEverEmbed = dynamic(
+  () => import("@/components/Embeds/NeverHaveIEverEmbed"),
+  { ssr: false },
+);
 
 const questions = [
   "Would you rather always be 10 minutes late or 20 minutes early?",
@@ -29,7 +40,6 @@ const questions = [
 
 const getRandomQuestion = () =>
   questions[Math.floor(Math.random() * questions.length)];
-
 
 const FeatureItem: React.FC<{
   left: React.ReactNode;
@@ -93,11 +103,12 @@ const Home = () => {
   };
 
   return (
-    <><Head>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: `
+    <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: `
             {
               "@context":"http://schema.org",
               "@type":"Product",
@@ -141,12 +152,12 @@ const Home = () => {
            }
         }
   `,
-        }}
-      ></script>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: `
+          }}
+        ></script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: `
             {
               "@context": "https://schema.org",
               "@type": "FAQPage",
@@ -178,12 +189,12 @@ const Home = () => {
               ]
             }
   `,
-        }}
-      ></script>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: `
+          }}
+        ></script>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: `
             {
               "@context": "http://schema.org",
               "@type": "VideoObject",
@@ -196,9 +207,10 @@ const Home = () => {
               "interactionCount": "166"
             }
   `,
-        }}
-      ></script>
-    </Head><main className="mt-48 overflow-x-hidden text-neutral-300">
+          }}
+        ></script>
+      </Head>
+      <main className="mt-48 overflow-x-hidden text-neutral-300">
         <section className="flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left xl:px-[17vw]">
           <motion.div
             initial={{ opacity: 0, transform: "translateY(20px)" }}
@@ -218,9 +230,9 @@ const Home = () => {
               </span>
             </h1>
             <p className="text-lg text-neutral-300">
-              Play fun and entertaining games with Would You, featuring user polls
-              and customization. Play Would You Rather, Truth or Dare, Never Have
-              I Ever, Higher or Lower, and What Would You Do!
+              Play fun and entertaining games with Would You, featuring user
+              polls and customization. Play Would You Rather, Truth or Dare,
+              Never Have I Ever, Higher or Lower, and What Would You Do!
             </p>
             <Link href="/invite" target="_blank">
               <Button className="mx-auto mt-8 gap-2 lg:mx-0">
@@ -235,12 +247,17 @@ const Home = () => {
                   <path
                     fillRule="nonzero"
                     fill="#fff"
-                    d="M447.19 347.03c0-17.06 13.85-30.91 30.91-30.91 17.05 0 30.9 13.85 30.9 30.91v87.82c0 21.08-8.63 40.29-22.51 54.18-13.88 13.88-33.09 22.51-54.18 22.51H76.69c-21.09 0-40.3-8.63-54.18-22.51C8.63 475.14 0 455.93 0 434.85V76.69c0-21.09 8.63-40.3 22.51-54.18C36.39 8.63 55.6 0 76.69 0h86.98c17.06 0 30.9 13.85 30.9 30.9 0 17.06-13.84 30.91-30.9 30.91H76.69c-4.07 0-7.82 1.69-10.51 4.37-2.68 2.69-4.37 6.44-4.37 10.51v358.16c0 4.06 1.69 7.82 4.37 10.5 2.69 2.68 6.44 4.38 10.51 4.38h355.62c4.07 0 7.82-1.7 10.51-4.38 2.68-2.68 4.37-6.44 4.37-10.5v-87.82zm0-243.56L308.15 244.28c-11.91 12.12-31.45 12.28-43.56.37-12.11-11.91-12.28-31.45-.37-43.56L401.77 61.81H309.7c-17.06 0-30.9-13.85-30.9-30.91 0-17.05 13.84-30.9 30.9-30.9h168.4C495.15 0 509 13.85 509 30.9v165.04c0 17.06-13.85 30.9-30.9 30.9-17.06 0-30.91-13.84-30.91-30.9v-92.47z" />
+                    d="M447.19 347.03c0-17.06 13.85-30.91 30.91-30.91 17.05 0 30.9 13.85 30.9 30.91v87.82c0 21.08-8.63 40.29-22.51 54.18-13.88 13.88-33.09 22.51-54.18 22.51H76.69c-21.09 0-40.3-8.63-54.18-22.51C8.63 475.14 0 455.93 0 434.85V76.69c0-21.09 8.63-40.3 22.51-54.18C36.39 8.63 55.6 0 76.69 0h86.98c17.06 0 30.9 13.85 30.9 30.9 0 17.06-13.84 30.91-30.9 30.91H76.69c-4.07 0-7.82 1.69-10.51 4.37-2.68 2.69-4.37 6.44-4.37 10.51v358.16c0 4.06 1.69 7.82 4.37 10.5 2.69 2.68 6.44 4.38 10.51 4.38h355.62c4.07 0 7.82-1.7 10.51-4.38 2.68-2.68 4.37-6.44 4.37-10.5v-87.82zm0-243.56L308.15 244.28c-11.91 12.12-31.45 12.28-43.56.37-12.11-11.91-12.28-31.45-.37-43.56L401.77 61.81H309.7c-17.06 0-30.9-13.85-30.9-30.91 0-17.05 13.84-30.9 30.9-30.9h168.4C495.15 0 509 13.85 509 30.9v165.04c0 17.06-13.85 30.9-30.9 30.9-17.06 0-30.91-13.84-30.91-30.9v-92.47z"
+                  />
                 </svg>
               </Button>
             </Link>
           </motion.div>
-        <MainDiscordEmbed replayedRounds={replayedRounds} currentQuestion={currentQuestion} replay={replay} />
+          <MainDiscordEmbed
+            replayedRounds={replayedRounds}
+            currentQuestion={currentQuestion}
+            replay={replay}
+          />
         </section>
 
         <section className="mt-36">
@@ -251,7 +268,8 @@ const Home = () => {
             width="10000"
             height="10000"
             className="-z-50 w-screen"
-            priority />
+            priority
+          />
           <div className="bg-[#101010] px-8 pb-12 text-center text-5xl text-white md:-mt-20 md:pb-28 xl:px-[17vw]">
             <h2>
               Trusted by{" "}
@@ -292,41 +310,50 @@ const Home = () => {
           <FeatureItem
             reverse
             right={<DailyMessageEmbed threadName={threadName} />}
-            left={<>
-              <h4 className="text-center text-3xl font-bold text-white md:text-left">
-                Increase user engagement
-              </h4>
-              <p className="mx-auto text-center text-lg text-neutral-300 md:text-left">
-                Keep your community engaged and active with daily &quot;Would
-                You Rather&quot; messages!
-              </p>
-            </>} />
+            left={
+              <>
+                <h4 className="text-center text-3xl font-bold text-white md:text-left">
+                  Increase user engagement
+                </h4>
+                <p className="mx-auto text-center text-lg text-neutral-300 md:text-left">
+                  Keep your community engaged and active with daily &quot;Would
+                  You Rather&quot; messages!
+                </p>
+              </>
+            }
+          />
 
           <FeatureItem
-            left={<>
-              <h4 className="text-center text-3xl font-bold text-white md:text-left">
-                Entertain your server
-              </h4>
-              <p className="text-center text-lg text-neutral-300 md:text-left">
-                Entertain your discord server with fun and interactive games
-                like Would You Rather, Truth or Dare, Never Have I Ever, Higher
-                or Lower, and What Would You Do!
-              </p>
-            </>}
-            right={<HigherLowerEmbed currentDate={currentDate} />} />
+            left={
+              <>
+                <h4 className="text-center text-3xl font-bold text-white md:text-left">
+                  Entertain your server
+                </h4>
+                <p className="text-center text-lg text-neutral-300 md:text-left">
+                  Entertain your discord server with fun and interactive games
+                  like Would You Rather, Truth or Dare, Never Have I Ever,
+                  Higher or Lower, and What Would You Do!
+                </p>
+              </>
+            }
+            right={<HigherLowerEmbed currentDate={currentDate} />}
+          />
 
           <FeatureItem
             reverse
             right={<NeverHaveIEverEmbed replayedRounds={replayedRounds} />}
-            left={<>
-              <h4 className="text-center text-3xl font-bold text-white md:text-left">
-                Upgrade your server
-              </h4>
-              <p className="text-center text-lg text-neutral-300 md:text-left">
-                Upgrade your server with Would You, featuring a wide variety of
-                games and customized questions.
-              </p>
-            </>} />
+            left={
+              <>
+                <h4 className="text-center text-3xl font-bold text-white md:text-left">
+                  Upgrade your server
+                </h4>
+                <p className="text-center text-lg text-neutral-300 md:text-left">
+                  Upgrade your server with Would You, featuring a wide variety
+                  of games and customized questions.
+                </p>
+              </>
+            }
+          />
         </section>
 
         <section className="mt-36 bg-[#101010] px-9 py-12 xl:px-[17vw]">
@@ -363,7 +390,8 @@ const Home = () => {
             </Link>
           </motion.div>
         </section>
-      </main></>
+      </main>
+    </>
   );
 };
 
