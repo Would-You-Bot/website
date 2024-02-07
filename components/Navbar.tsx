@@ -88,11 +88,10 @@ const Navbar = () => {
               Blog
             </Link>
             <Link
-              href="/vote"
-              target="_blank"
-              className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+              href="/premium"
+              className="mr-6 text-lg text-yellow-500 transition-all hover:text-yellow-400"
             >
-              Vote
+              Premium
             </Link>
           </div>
         </div>
