@@ -9,6 +9,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        customPrimary: "rgb(5, 152, 244)",
         customSecondary: "rgb(5, 152, 244)",
         customDarkBg1: "rgb(3, 122, 199)",
         customDarkBg2: "rgb(23, 23, 23)",
@@ -28,6 +29,7 @@ module.exports = {
       dropShadow: {
         ["red-glow"]: ["2px 2px 10px #f00505"],
         ["blue-glow"]: ["2px 2px 10px #0598f6"],
+        ["gold-glow"]: ["2px 2px 10px #eab308"],
       },
     },
     backgroundImage: {

@@ -150,12 +150,11 @@ const Navbar = () => {
               Blog
             </Link>
             <Link
-              href="/vote"
-              target="_blank"
-              className="mt-8 text-center text-3xl text-white"
+              href="/premium"
+              className="mt-8 text-center text-3xl text-yellow-500"
               onClick={() => toggleMobileMenu()}
             >
-              Vote
+              Premium
             </Link>
             <Link
               href="/invite"
