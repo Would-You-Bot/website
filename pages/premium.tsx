@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Button from "@/components/Button";
+import {PremiumModal} from "@/components/PremiumModal";
 
 const CheckArrowIcon = () => (
   <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
@@ -67,6 +68,8 @@ const pricingData: PricingData = {
 
 export default function Premium() {
   const [isMonthly, setIsMonthly] = useState(true);
+  const [isPremiumOpen, setIsPremiumOpen] = useState(false);
+  const [isPremiumAiOpen, setIsPremiumAiOpen] = useState(false);
 
   const handleChange = () => {
     setIsMonthly(!isMonthly);
@@ -97,7 +100,7 @@ export default function Premium() {
                   checked={!isMonthly}
                   onChange={handleChange}
                 />
-                <span className="flex h-8 w-[5.5rem] cursor-pointer items-center pr-2 duration-300 ease-in-out  after:h-10 after:w-[30rem]  after:rounded-lg after:bg-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[5.5rem]"></span>
+                <span className="flex h-8 w-[5.5rem] cursor-pointer items-center pr-2 duration-300 ease-in-out after:h-10 after:w-[30rem]  after:rounded-lg after:bg-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[5.5rem]"></span>
                 <div className="absolute flex text-sm font-bold text-white">
                   <div
                     className={
@@ -113,7 +116,7 @@ export default function Premium() {
               </label>
             </div>
             <div className="-mx-4 mt-20 flex flex-col flex-wrap items-center lg:flex-row">
-              <div className="mb-8 w-[350px] px-4 sm:w-[380px] lg:mb-0 lg:w-1/3">
+              <div className="mb-4 w-[350px] px-4 sm:w-[380px] lg:mb-0 lg:w-1/3">
                 <div className="rounded-3xl bg-customDarkBg3 p-8">
                   <h4 className="font-heading mb-2 text-left text-xl font-bold text-white">
                     Freemium
@@ -128,7 +131,7 @@ export default function Premium() {
                   </div>
 
                   <p className="mb-6 mt-4 text-left leading-loose text-gray-500 2xl:mb-10">
-                    The perfect way to get started and get used to our tools.
+                    The perfect way to get started and get used to our bot.
                   </p>
                   <ul className="mb-2 text-white 2xl:mb-6">
                     {Object.keys(pricingData["freemium"]).map((text, index) => (
@@ -143,7 +146,7 @@ export default function Premium() {
                     ))}
                   </ul>
                   <Button
-                    className="mt-16 w-full justify-center rounded-xl bg-customDarkBg1 px-4 py-2 font-bold leading-loose"
+                    className="mt-16 w-full justify-center rounded-xl px-4 py-2 font-bold leading-loose"
                     onClick={() => {
                       window.open("/invite");
                     }}
@@ -166,7 +169,7 @@ export default function Premium() {
                     </div>
                   </div>
                   <p className="mb-8 mt-8 text-left leading-loose text-gray-500 2xl:mb-12">
-                    Unlock more features and elevate your data analysis.
+                    Experience the full power of our Would You bot.
                   </p>
                   <ul className="mb-14 text-white">
                     {Object.keys(pricingData["premium"]).map((text, index) => (
@@ -180,7 +183,7 @@ export default function Premium() {
                       </li>
                     ))}
                   </ul>
-                  <Button className="custom-button-colored mt-20 w-full justify-center rounded-xl rounded-t-xl px-4 py-2 font-bold leading-loose">
+                  <Button className=" mt-20 w-full justify-center rounded-xl rounded-t-xl px-4 py-2 font-bold leading-loose" onClick={() => setIsPremiumOpen(true)}>
                     Get Started
                   </Button>
                 </div>
@@ -199,7 +202,7 @@ export default function Premium() {
                     </div>
                   </div>
                   <p className="mb-6 mt-4 text-left leading-loose text-gray-500 2xl:mb-10">
-                    Experience the full power of our analytic platform
+                    Experience the full power of our Would You bot with our question generating AI.
                   </p>
                   <ul className="mb-2 text-white 2xl:mb-6">
                     {Object.keys(pricingData["premiumAI"]).map(
@@ -215,7 +218,7 @@ export default function Premium() {
                       ),
                     )}
                   </ul>
-                  <Button className="mt-16 w-full justify-center rounded-xl rounded-t-xl bg-customDarkBg1 px-4 py-2 font-bold leading-loose">
+                  <Button className="mt-16 w-full justify-center rounded-xl rounded-t-xl px-4 py-2 font-bold leading-loose" onClick={() => setIsPremiumAiOpen(true)}>
                     Get Started
                   </Button>
                 </div>
@@ -224,6 +227,12 @@ export default function Premium() {
           </div>
         </motion.div>
       </div>
+      {isPremiumOpen && (
+        <PremiumModal isOpen={isPremiumOpen} type="premium" setIsOpen={setIsPremiumOpen} />
+      )}
+      {isPremiumAiOpen && (
+        <PremiumModal isOpen={isPremiumAiOpen} type="premiumai" setIsOpen={setIsPremiumAiOpen} />
+      )}
     </main>
   );
 }
