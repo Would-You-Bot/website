@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Button from "@/components/Button";
-import {PremiumModal} from "@/components/PremiumModal";
+import { PremiumModal } from "@/components/PremiumModal";
 
 const CheckArrowIcon = () => (
   <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
@@ -156,7 +156,7 @@ export default function Premium() {
                 </div>
               </div>
               <div className="mb-8 w-[350px] px-4 sm:w-[380px] lg:mb-0 lg:w-1/3">
-                <div className="rounded-3xl bg-customDarkBg3 px-8 py-8">
+                <div className="rounded-3xl bg-customDarkBg3 px-8 py-8 outline outline-2 premium-outline">
                   <h4 className="font-heading mb-2 text-left text-2xl font-bold text-white 2xl:mb-4">
                     Premium
                   </h4>
@@ -183,7 +183,10 @@ export default function Premium() {
                       </li>
                     ))}
                   </ul>
-                  <Button className=" mt-20 w-full justify-center rounded-xl rounded-t-xl px-4 py-2 font-bold leading-loose" onClick={() => setIsPremiumOpen(true)}>
+                  <Button
+                    className=" mt-20 w-full justify-center rounded-xl rounded-t-xl px-4 py-2 font-bold leading-loose"
+                    onClick={() => setIsPremiumOpen(true)}
+                  >
                     Get Started
                   </Button>
                 </div>
@@ -202,7 +205,8 @@ export default function Premium() {
                     </div>
                   </div>
                   <p className="mb-6 mt-4 text-left leading-loose text-gray-500 2xl:mb-10">
-                    Experience the full power of our Would You bot with our question generating AI.
+                    Experience the full power of our Would You bot with our
+                    question generating AI.
                   </p>
                   <ul className="mb-2 text-white 2xl:mb-6">
                     {Object.keys(pricingData["premiumAI"]).map(
@@ -218,7 +222,10 @@ export default function Premium() {
                       ),
                     )}
                   </ul>
-                  <Button className="mt-16 w-full justify-center rounded-xl rounded-t-xl px-4 py-2 font-bold leading-loose" onClick={() => setIsPremiumAiOpen(true)}>
+                  <Button
+                    className="mt-16 w-full justify-center rounded-xl rounded-t-xl px-4 py-2 font-bold leading-loose"
+                    onClick={() => setIsPremiumAiOpen(true)}
+                  >
                     Get Started
                   </Button>
                 </div>
@@ -228,10 +235,18 @@ export default function Premium() {
         </motion.div>
       </div>
       {isPremiumOpen && (
-        <PremiumModal isOpen={isPremiumOpen} type="premium" setIsOpen={setIsPremiumOpen} />
+        <PremiumModal
+          isOpen={isPremiumOpen}
+          type="premium"
+          setIsOpen={setIsPremiumOpen}
+        />
       )}
       {isPremiumAiOpen && (
-        <PremiumModal isOpen={isPremiumAiOpen} type="premiumai" setIsOpen={setIsPremiumAiOpen} />
+        <PremiumModal
+          isOpen={isPremiumAiOpen}
+          type="premiumai"
+          setIsOpen={setIsPremiumAiOpen}
+        />
       )}
     </main>
   );
