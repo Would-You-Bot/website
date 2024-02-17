@@ -22,6 +22,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/login",
+        destination: "/api/login",
+        permanent: true,
+      },
+      {
         source: "/imprint",
         destination: "/legal",
         permanent: true,

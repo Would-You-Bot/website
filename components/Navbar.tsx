@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import Button from "./Button";
 import { useSearchParams } from "next/navigation";
+import DiscordIcon from "@/components/Icons/DiscordIcon";
 
 const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -96,8 +97,11 @@ const Navbar = () => {
           </div>
         </div>
         <div className="z-50 mr-8 flex items-center xl:mr-[17vw]">
-          <Link href="/invite" target="_blank" className="hidden md:block">
-            <Button className="">Invite</Button>
+          <Link href="/api/login" className="hidden md:block space-x-1">
+            <Button variant="discord">
+              <DiscordIcon />
+              Login with Discord
+            </Button>
           </Link>
           <div
             className="relative ml-6 flex h-6 w-8 flex-col items-center justify-between md:hidden"
@@ -156,12 +160,9 @@ const Navbar = () => {
             >
               Premium
             </Link>
-            <Link
-              href="/invite"
-              target="_blank"
-              className="mt-8 text-center text-2xl"
-            >
-              <Button>Invite</Button>
+            <Link href="/api/login" className="mt-8 text-center text-2xl">
+           
+              <Button variant="discord"> <DiscordIcon />Login with Discord</Button>
             </Link>
           </div>
         </motion.div>

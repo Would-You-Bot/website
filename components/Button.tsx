@@ -7,6 +7,7 @@ const button = cva(
       variant: {
         blue: "bg-brand-blue-100 hover:bg-brand-blue-200 text-white",
         red: "bg-brand-red-100 hover:bg-brand-red-200 text-white",
+        discord: "bg-[#5865F2] hover:bg-discord-200 text-white",
       },
     },
     defaultVariants: {
