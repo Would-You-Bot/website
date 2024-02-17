@@ -42,6 +42,7 @@ async function exchangeCode(code: string) {
 
 
   const { data: auth } = await axios.post<{
+    scope: string;
     access_token: string;
     token_type: string;
   }>("https://discord.com/api/oauth2/token", body.toString(), {
@@ -81,18 +82,18 @@ const handler: NextApiHandler = async (req, res) => {
   }
 
   // Exchange the code for a valid user object
-  const response = await exchangeCode(code);
+  const response = await exchangeCode(code)
 
   console.log(response.auth.scope.includes("identify"))
 
-  if (!responseauth.scope.includes("identify")) return { success: false, error: "Identify scope is missing" };
+  if (!response.auth.scope.includes("identify")) return { success: false, error: "Identify scope is missing" };
   if (!response.auth.scope.includes("guilds")) return { success: false, error: "Guilds scope is missing" };
 
   console.log("pogg")
 
   // Sign a JWT token with the user's details
   // encoded into it
-  const token = sign(user, JWT_SECRET || "", { expiresIn: "24h" });
+  const token = sign(response.user, JWT_SECRET || "", { expiresIn: "24h" });
 
   // Serialize a cookie and set it
   const cookie = getCookieHeader(token);
