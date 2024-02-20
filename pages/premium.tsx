@@ -56,7 +56,7 @@ const pricingData: PricingData = {
     "Customized Webhook Branding": true,
     "No More Invite Button Ads": true,
     "Auto Pin Daily Messages": true,
-    "AI-Generated Questions": false
+    "AI-Generated Questions": false,
   },
   premiumAI: {
     "All Freemium Features": true,
@@ -64,7 +64,7 @@ const pricingData: PricingData = {
     "Customized Webhook Branding": true,
     "No More Invite Button Ads": true,
     "Auto Pin Daily Messages": true,
-    "AI-Generated Questions": true
+    "AI-Generated Questions": true,
   },
 };
 
@@ -157,6 +157,8 @@ export default function Premium() {
                   </Button>
                 </div>
               </div>
+              <div className="bg-gradient-brand mb-8 w-[350px] p-1 rounded-[1.75rem] sm:w-[380px] lg:mb-0 lg:w-1/3">
+                <div className="rounded-3xl bg-customDarkBg3 px-8 py-8 ">
                   <h4 className="font-heading mb-2 text-left text-2xl font-bold text-white 2xl:mb-4">
                     Premium
                   </h4>
@@ -184,7 +186,7 @@ export default function Premium() {
                     ))}
                   </ul>
                   <Button
-                    className=" mt-20 w-full justify-center rounded-xl rounded-t-xl px-4 py-2 font-bold leading-loose"
+                    className=" mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose"
                     onClick={() => setIsPremiumOpen(true)}
                   >
                     Get Started

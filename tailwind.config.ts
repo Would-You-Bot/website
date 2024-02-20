@@ -34,7 +34,7 @@ module.exports = {
     },
     backgroundImage: {
       ["gradient-brand"]:
-        "linear-gradient(92.91deg, #0598F4 -50%,#F00605 150%)",
+        "linear-gradient(to bottom right, #0598F4 0%,#F00605 100%)",
     },
   },
   plugins: [],
