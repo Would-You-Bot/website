@@ -44,25 +44,27 @@ type PricingData = {
 
 const pricingData: PricingData = {
   freemium: {
-    "Seamless integration": true,
-    "Real-time data visualization": true,
-    "Advanced predictive analytics": false,
-    "Collaborative environment": false,
-    "Responsive customer support": false,
+    "Seamless Integration": true,
+    "100 Custom Questions (per category)": true,
+    "Customized Webhook Branding": false,
+    "No More Invite Button Ads": false,
+    "Auto Pin Daily Messages": false,
   },
   premium: {
-    "Seamless integration": true,
-    "Real-time fortnite data visualization": true,
-    "Advanced predictive analytics": true,
-    "Collaborative environment": true,
-    "Responsive customer support": true,
+    "All Freemium Features": true,
+    "Unlimited Custom Questions": true,
+    "Customized Webhook Branding": true,
+    "No More Invite Button Ads": true,
+    "Auto Pin Daily Messages": true,
+    "AI-Generated Questions": false
   },
   premiumAI: {
-    "Seamless integration": true,
-    "Real-time data visualization": true,
-    "Advanced predictive analytics": true,
-    "Collaborative environment": true,
-    "Responsive customer support": true,
+    "All Freemium Features": true,
+    "Unlimited Custom Questions": true,
+    "Customized Webhook Branding": true,
+    "No More Invite Button Ads": true,
+    "Auto Pin Daily Messages": true,
+    "AI-Generated Questions": true
   },
 };
 
@@ -155,8 +157,6 @@ export default function Premium() {
                   </Button>
                 </div>
               </div>
-              <div className="mb-8 w-[350px] px-4 sm:w-[380px] lg:mb-0 lg:w-1/3">
-                <div className="rounded-3xl bg-customDarkBg3 px-8 py-8 outline outline-2 premium-outline">
                   <h4 className="font-heading mb-2 text-left text-2xl font-bold text-white 2xl:mb-4">
                     Premium
                   </h4>
