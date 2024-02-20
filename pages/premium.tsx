@@ -46,6 +46,7 @@ const pricingData: PricingData = {
   freemium: {
     "Seamless Integration": true,
     "100 Custom Questions (per category)": true,
+    "Quick Assistance": true,
     "Customized Webhook Branding": false,
     "No More Invite Button Ads": false,
     "Auto Pin Daily Messages": false,
@@ -128,7 +129,7 @@ export default function Premium() {
                       $0
                     </div>
                     <div className="text-gray-500">
-                      {isMonthly ? "/ month" : "/ year"}
+                      / forever
                     </div>
                   </div>
 
@@ -157,7 +158,7 @@ export default function Premium() {
                   </Button>
                 </div>
               </div>
-              <div className="bg-gradient-brand mb-8 w-[350px] p-1 rounded-[1.75rem] sm:w-[380px] lg:mb-0 lg:w-1/3">
+              <div className="bg-gradient-premium mb-8 w-[350px] p-1 rounded-[1.75rem] sm:w-[380px] lg:mb-0 lg:w-1/3">
                 <div className="rounded-3xl bg-customDarkBg3 px-8 py-8 ">
                   <h4 className="font-heading mb-2 text-left text-2xl font-bold text-white 2xl:mb-4">
                     Premium
