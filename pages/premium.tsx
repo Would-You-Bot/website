@@ -95,19 +95,19 @@ export default function Premium() {
               Select the plan that suits your needs and benefit from our discord
               bot.
             </p>
-            <div className="mx-auto mb-16 max-w-2xl text-center">
-              <label className="group relative mx-auto flex h-12 w-44 cursor-pointer items-center justify-between rounded-lg bg-customDarkBg3 pl-1 pr-36 text-xl">
+            <div className="mx-auto max-w-2xl text-center">
+              <label className="group relative mx-auto flex h-16 w-52 cursor-pointer items-center justify-between rounded-lg bg-customDarkBg3 pl-2 pr-36 text-xl">
                 <input
                   type="checkbox"
                   className="peer appearance-none"
                   checked={!isMonthly}
                   onChange={handleChange}
                 />
-                <span className="flex h-8 w-[5.5rem] cursor-pointer items-center pr-2 duration-300 ease-in-out after:h-10 after:w-[30rem]  after:rounded-lg after:bg-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[5.5rem]"></span>
-                <div className="absolute flex text-sm font-bold text-white">
+                <span className="flex h-16 w-[6rem] cursor-pointer items-center  duration-300 ease-in-out after:h-12 after:w-[20rem] after:rounded-lg after:bg-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem]"></span>
+                <div className="absolute flex text-base font-bold text-white">
                   <div
                     className={
-                      isMonthly ? "ml-3 mr-9" : "ml-3 mr-9 text-gray-400"
+                      isMonthly ? "ml-4 mr-10" : "ml-4 mr-10 text-gray-400"
                     }
                   >
                     Monthly
@@ -118,7 +118,7 @@ export default function Premium() {
                 </div>
               </label>
             </div>
-            <div className="-mx-4 mt-20 flex flex-col flex-wrap items-center lg:flex-row">
+            <div className="-mx-4 mt-10 flex flex-col flex-wrap items-center lg:flex-row">
               <div className="mb-4 w-[350px] px-4 sm:w-[380px] lg:mb-0 lg:w-1/3">
                 <div className="rounded-3xl bg-customDarkBg3 p-8">
                   <h4 className="font-heading mb-2 text-left text-xl font-bold text-white">
@@ -128,9 +128,7 @@ export default function Premium() {
                     <div className="mr-2 mt-4 text-left text-4xl font-bold text-white sm:text-5xl">
                       $0
                     </div>
-                    <div className="text-gray-500">
-                      / forever
-                    </div>
+                    <div className="text-gray-500">/ forever</div>
                   </div>
 
                   <p className="mb-6 mt-4 text-left leading-loose text-gray-500 2xl:mb-10">
@@ -158,7 +156,7 @@ export default function Premium() {
                   </Button>
                 </div>
               </div>
-              <div className="bg-gradient-premium mb-8 w-[350px] p-1 rounded-[1.75rem] sm:w-[380px] lg:mb-0 lg:w-1/3">
+              <div className="mb-8 w-[350px] rounded-[1.75rem] bg-gradient-premium p-1 sm:w-[380px] lg:mb-0 lg:w-1/3">
                 <div className="rounded-3xl bg-customDarkBg3 px-8 py-8 ">
                   <h4 className="font-heading mb-2 text-left text-2xl font-bold text-white 2xl:mb-4">
                     Premium
