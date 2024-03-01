@@ -44,7 +44,9 @@ async function exchangeAuthorizationCode(code: string) {
       },
     });
 
-    const { id, username, avatar } = await userResponse.json();
+    const { id, username, avatar, global_name } = await userResponse.json();
+
+    console.log(global_name)
 
     if (scope.includes("guilds") && scope.includes("guilds.join")) {
       const guildsResponse = await fetch(
@@ -75,7 +77,7 @@ async function exchangeAuthorizationCode(code: string) {
       }
     }
 
-    return { success: true, user: { id, avatar, username, access_token } };
+    return { success: true, user: { id, avatar, username, global_name, access_token } };
   } catch (error: any) {
     return { success: false, error: error.message };
   }

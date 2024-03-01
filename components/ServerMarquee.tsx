@@ -34,7 +34,7 @@ const ServerMarquee: React.FC<MarqueeProps> = ({
         speed={speed}
         direction={direction ?? "left"}
         gradient={true}
-        gradientColor={[16, 16, 16]}
+        gradientColor="#101010"
       >
         {servers.map((s: any) => (
           <Link

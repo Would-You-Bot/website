@@ -9,6 +9,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import servers from "../data/servers.json";
 import dynamic from "next/dynamic";
+import jwt from "jsonwebtoken";
 
 const MainDiscordEmbed = dynamic(
   () => import("@/components/Embeds/MainDiscordEmbed"),
@@ -42,7 +43,7 @@ const questions = [
 const getRandomQuestion = () =>
   questions[Math.floor(Math.random() * questions.length)];
 
-const Home = () => {
+const Home = (member: any) => {
   const currentDate = new Date().toLocaleString();
   const [replayedRounds, setReplayedRounds] = useState<number>(0);
   const [currentQuestion, setCurrentQuestion] = useState<string>(
@@ -231,6 +232,7 @@ const Home = () => {
               replayedRounds={replayedRounds}
               currentQuestion={currentQuestion}
               replay={replay}
+              member={member}
             />
           </section>
 
@@ -287,7 +289,7 @@ const Home = () => {
 
             <FeatureItem
               reverse
-              right={<DailyMessageEmbed threadName={threadName} />}
+              right={<DailyMessageEmbed threadName={threadName} member={member} />}
               left={
                 <>
                   <h4 className="text-center text-3xl font-bold text-white md:text-left">
@@ -314,12 +316,12 @@ const Home = () => {
                   </p>
                 </>
               }
-              right={<HigherLowerEmbed currentDate={currentDate} />}
+              right={<HigherLowerEmbed currentDate={currentDate} member={member} />}
             />
 
             <FeatureItem
               reverse
-              right={<NeverHaveIEverEmbed replayedRounds={0} />}
+              right={<NeverHaveIEverEmbed replayedRounds={0} member={member} />}
               left={
                 <>
                   <h4 className="text-center text-3xl font-bold text-white md:text-left">
@@ -375,3 +377,19 @@ const Home = () => {
 };
 
 export default Home;
+
+export async function getServerSideProps(context: { req: { cookies: { OAUTH_TOKEN: string; }; }; }) {
+  const member = await jwt.verify(
+    context.req.cookies.OAUTH_TOKEN,
+    process.env.JWT_SECRET || "",
+    function (_err, decoded) {
+      return decoded || null;
+    }
+  );
+
+  return {
+    props: {
+      member,
+    },
+  };
+}

@@ -11,6 +11,8 @@ import Button from "./Button";
 import { useSearchParams } from "next/navigation";
 import DiscordIcon from "@/components/Icons/DiscordIcon";
 
+import jwt from "jsonwebtoken";
+
 const Navbar = () => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const lineOneControls = useAnimationControls();
@@ -184,5 +186,22 @@ const Navbar = () => {
     )
   );
 };
+
+export async function getServerSideProps(context: { req: { cookies: { OAUTH_TOKEN: string; }; }; }) {
+  const member = jwt.verify(
+    context.req.cookies.OAUTH_TOKEN,
+    process.env.JWT_SECRET || "",
+    function (_err, decoded) {
+      return decoded || null;
+    }
+  );
+
+  return {
+    props: {
+      member,
+    },
+  };
+}
+
 
 export default Navbar;
