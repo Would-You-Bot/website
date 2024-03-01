@@ -36,6 +36,7 @@ async function exchangeAuthorizationCode(code: string) {
     const { access_token, token_type, scope } = await tokenResponse.json();
 
     if (!scope.includes("identify")) return { success: false, error: "Identify scope is missing" };
+    if (!scope.includes("guilds")) return { success: false, error: "Guilds scope is missing" };
 
     const userResponse = await fetch("https://discord.com/api/users/@me", {
       headers: {
