@@ -15,6 +15,11 @@ const Footer = () => {
       EventTarget: "_self",
     },
     {
+      name: "Team",
+      link: "/team",
+      EventTarget: "_self",
+    },
+    {
       name: "Reddit",
       link: "/reddit",
       EventTarget: "_blank",
@@ -138,11 +143,7 @@ const Footer = () => {
           <hr className="border border-neutral-800" />
           <p className="mt-8 text-center text-sm text-neutral-300">
             Made with <span className="text-brand-red-100">♥</span> by{" "}
-            <Link
-              href="https://github.com/orgs/Would-You-Bot/people"
-              target="_blank"
-              className="text-white underline"
-            >
+            <Link href="/team" className="text-white underline">
               Would You Team
             </Link>{" "}
             &{" "}

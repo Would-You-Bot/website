@@ -33,14 +33,6 @@
       "invite": "https://discord.gg/crunchy"
     },
     {
-      "name": "Actus France",
-      "members": "3k+",
-      "avatar": "actus.webp",
-      "partnered": true,
-      "verified": false,
-      "invite": "https://discord.gg/actusfr"
-    },
-    {
       "name": "Medium Cafe",
       "members": "117k+",
       "avatar": "mediumcafe.webp",
@@ -63,14 +55,6 @@
       "partnered": false,
       "verified": true,
       "invite": "https://discord.gg/tvg"
-    },
-    {
-      "name": "BeluGANG",
-      "members": "731.2k+",
-      "avatar": "beluga.webp",
-      "partnered": false,
-      "verified": true,
-      "invite": "https://discord.gg/beluga"
     },
     {
       "name": "Creators Clash",
@@ -107,14 +91,6 @@
   ],
   [
     {
-      "name": "Sons of The Forest International",
-      "members": "39k+",
-      "avatar": "sotf.webp",
-      "partnered": true,
-      "verified": false,
-      "invite": "https://discord.gg/sotf"
-    },
-    {
       "name": "Altrax's Joint",
       "members": "76k+",
       "avatar": "altrax.webp",
@@ -137,14 +113,6 @@
       "partnered": false,
       "verified": true,
       "invite": "https://discord.gg/deadp47"
-    },
-    {
-      "name": "KIWIKARIU",
-      "members": "3k+",
-      "avatar": "KIWIKARIU.gif",
-      "partnered": true,
-      "verified": false,
-      "invite": "https://discord.gg/KIWIKARIU"
     },
     {
       "name": "Sebee",
@@ -179,16 +147,8 @@
       "invite": "https://discord.gg/hollynns-kingdom-879518411963637851"
     },
     {
-      "name": "Malevolent 💜 Social ♡ Fun",
-      "members": "1400+",
-      "avatar": "malevolent.webp",
-      "partnered": false,
-      "verified": false,
-      "invite": ""
-    },
-    {
       "name": "Discord Travelers",
-      "members": "7000+",
+      "members": "8000+",
       "avatar": "travel.webp",
       "partnered": false,
       "verified": false,
