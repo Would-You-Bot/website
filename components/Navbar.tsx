@@ -12,8 +12,9 @@ import { useSearchParams } from "next/navigation";
 import DiscordIcon from "@/components/Icons/DiscordIcon";
 
 import jwt from "jsonwebtoken";
+import Member from "./types/member";
 
-const Navbar = () => {
+const Navbar = (member: Member) => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const lineOneControls = useAnimationControls();
   const lineTwoControls = useAnimationControls();
@@ -104,7 +105,7 @@ const Navbar = () => {
           </div>
         </div>
         <div className="z-50 mr-8 flex items-center xl:mr-[17vw]">
-        <Link href="/login" className="hidden md:block space-x-1">
+          <Link href="/login" className="hidden space-x-1 md:block">
             <Button variant="discord">
               <DiscordIcon />
               Login with Discord
@@ -163,21 +164,24 @@ const Navbar = () => {
                 Blog
               </Link>
               <Link
-              href="/premium"
-              className="mt-8 text-center text-3xl text-yellow-500 transition-all hover:text-yellow-400"
-              onClick={() => toggleMobileMenu()}
-            >
-              Premium
-            </Link>
+                href="/premium"
+                className="mt-8 text-center text-3xl text-yellow-500 transition-all hover:text-yellow-400"
+                onClick={() => toggleMobileMenu()}
+              >
+                Premium
+              </Link>
               <Link
                 href="/invite"
                 target="_blank"
                 className="mt-8 text-center text-2xl"
               >
-                            <Link href="/api/login" className="mt-8 text-center text-2xl">
-
-<Button variant="discord"> <DiscordIcon />Login with Discord</Button>
-</Link>
+                <Link href="/api/login" className="mt-8 text-center text-2xl">
+                  <Button variant="discord">
+                    {" "}
+                    <DiscordIcon />
+                    Login with Discord
+                  </Button>
+                </Link>
               </Link>
             </div>
           </m.div>
@@ -187,21 +191,23 @@ const Navbar = () => {
   );
 };
 
-export async function getServerSideProps(context: { req: { cookies: { OAUTH_TOKEN: string; }; }; }) {
+export async function getServerSideProps(context: {
+  req: { cookies: { OAUTH_TOKEN: string } };
+}) {
+  console.log(context.req.cookies.OAUTH_TOKEN);
   const member = jwt.verify(
     context.req.cookies.OAUTH_TOKEN,
     process.env.JWT_SECRET || "",
     function (_err, decoded) {
       return decoded || null;
-    }
+    },
   );
-
+console.log("uwu")
   return {
     props: {
       member,
     },
   };
 }
-
 
 export default Navbar;

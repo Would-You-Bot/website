@@ -11,12 +11,13 @@ import {
 } from "@skyra/discord-components-react";
 import { motion } from "framer-motion";
 import profiles from "../../data/profiles.json";
+import Member from "../types/member";
 
 interface MainProps {
   replayedRounds: number;
   currentQuestion: string;
   replay: Function;
-  member: any;
+  member: Member;
 }
 
 const MainDiscordEmbed: React.FC<MainProps> = ({

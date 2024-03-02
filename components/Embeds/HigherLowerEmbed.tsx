@@ -12,10 +12,11 @@ import {
   DiscordReply,
 } from "@skyra/discord-components-react";
 import profiles from "../../data/profiles.json";
+import Member from "../types/member";
 
 interface MainProps {
   currentDate: string;
-  member: any,
+  member: Member,
 }
 
 const HigherLowerEmbed: React.FC<MainProps> = ({ currentDate, member }) => {

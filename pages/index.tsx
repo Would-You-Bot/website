@@ -10,6 +10,7 @@ import React, { useEffect, useState } from "react";
 import servers from "../data/servers.json";
 import dynamic from "next/dynamic";
 import jwt from "jsonwebtoken";
+import Member from "@/components/types/member";
 
 const MainDiscordEmbed = dynamic(
   () => import("@/components/Embeds/MainDiscordEmbed"),
@@ -43,7 +44,7 @@ const questions = [
 const getRandomQuestion = () =>
   questions[Math.floor(Math.random() * questions.length)];
 
-const Home = (member: any) => {
+const Home = (member: Member) => {
   const currentDate = new Date().toLocaleString();
   const [replayedRounds, setReplayedRounds] = useState<number>(0);
   const [currentQuestion, setCurrentQuestion] = useState<string>(

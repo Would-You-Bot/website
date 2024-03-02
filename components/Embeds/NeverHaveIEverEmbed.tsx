@@ -11,10 +11,11 @@ import {
 } from "@skyra/discord-components-react";
 import profiles from "../../data/profiles.json";
 import dynamic from "next/dynamic";
+import Member from "../types/member";
 
 interface MainProps {
   replayedRounds: number;
-  member: any;
+  member: Member;
 }
 
 const NeverHaveIEverEmbed: React.FC<MainProps> = ({ replayedRounds, member }) => {

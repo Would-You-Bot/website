@@ -9,10 +9,11 @@ import {
   DiscordThreadMessage,
 } from "@skyra/discord-components-react";
 import profiles from "../../data/profiles.json";
+import Member from "../types/member";
 
 interface MainProps {
   threadName: string;
-  member: any;
+  member: Member;
 }
 
 const DailyMessageEmbed: React.FC<MainProps> = ({ threadName, member }) => {
