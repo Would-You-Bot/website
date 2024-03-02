@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { m, LazyMotion, domAnimation, AnimatePresence } from "framer-motion";
 
 const CloseIcon = () => (
   <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
@@ -34,8 +34,9 @@ const CheckArrowIcon = () => (
 );
 
 export const PremiumModal = ({ setIsOpen, type }) => (
+  <LazyMotion features={domAnimation}>
   <AnimatePresence>
-    <motion.div
+    <m.div
       initial={{ opacity: 0, zIndex: 50 }}
       animate={{ opacity: 1, zIndex: 50 }}
       transition={{ duration: 0.1 }}
@@ -112,6 +113,7 @@ export const PremiumModal = ({ setIsOpen, type }) => (
           </div>
         </div>
       </div>
-    </motion.div>
+    </m.div>
   </AnimatePresence>
+  </LazyMotion>
 );

@@ -258,7 +258,7 @@ const Home = (member: Member) => {
               <h3 className="mt-4 text-2xl">
                 keeping{" "}
                 <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
-                  4,000,000+
+                  3,500,000+
                 </span>{" "}
                 users entertained
               </h3>

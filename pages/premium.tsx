@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { m, LazyMotion, domAnimation } from "framer-motion";
 import Button from "@/components/Button";
 import { PremiumModal } from "@/components/PremiumModal";
 
@@ -81,7 +81,8 @@ export default function Premium() {
   return (
     <main className="relative flex w-screen justify-center bg-customDarkBg2 px-8 xl:px-[17vw]">
       <div className="bg-customDarkBg2 ">
-        <motion.div
+        <LazyMotion features={domAnimation}>
+        <m.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
@@ -233,7 +234,8 @@ export default function Premium() {
               </div>
             </div>
           </div>
-        </motion.div>
+        </m.div>
+        </LazyMotion>
       </div>
       {isPremiumOpen && (
         <PremiumModal
