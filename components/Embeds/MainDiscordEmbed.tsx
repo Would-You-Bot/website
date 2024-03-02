@@ -9,22 +9,26 @@ import {
   DiscordMessage,
   DiscordMessages,
 } from "@skyra/discord-components-react";
-import { motion } from "framer-motion";
+import { m, LazyMotion, domAnimation } from "framer-motion";
 import profiles from "../../data/profiles.json";
+import Member from "../types/member";
 
 interface MainProps {
   replayedRounds: number;
   currentQuestion: string;
   replay: Function;
+  member: Member;
 }
 
 const MainDiscordEmbed: React.FC<MainProps> = ({
   replayedRounds,
   currentQuestion,
   replay,
+  member,
 }) => {
   return (
-    <motion.div
+    <LazyMotion features={domAnimation}>
+    <m.div
       initial={{ opacity: 0, transform: "translateY(20px)" }}
       whileInView={{ opacity: 1, transform: "translateY(0)" }}
       transition={{ duration: 0.7, ease: "easeInOut" }}
@@ -43,9 +47,16 @@ const MainDiscordEmbed: React.FC<MainProps> = ({
         >
           <DiscordCommand
             slot="reply"
-            profile="dominik"
-            author={profiles.dominik.author}
-            avatar={profiles.dominik.avatar}
+            author={
+              member.member
+                ? member.member.user.global_name
+                : "Dominik"
+            }
+            avatar={
+                member.member
+              ? `https://cdn.discordapp.com/avatars/${member.member.user.id}/${member.member.user.avatar}.png`
+              : "./staff/Dominik.webp"
+            }
             roleColor={profiles.dominik.roleColor}
             command="/wouldyourather"
           />
@@ -55,9 +66,17 @@ const MainDiscordEmbed: React.FC<MainProps> = ({
             </DiscordEmbedDescription>
             <DiscordEmbedFooter
               slot="footer"
-              footerImage="./staff/Dominik.webp"
+              footerImage={
+                member.member
+                  ? `https://cdn.discordapp.com/avatars/${member.member.user.id}/${member.member.user.avatar}.png`
+                  : "./staff/Dominik.webp"
+              }
             >
-              Requested by dominikdev | Type: General | ID: 64
+              Requested by {
+                member.member
+                  ? member.member.user.username
+                  : "dominikdev"
+              } | Type: General | ID: 64
             </DiscordEmbedFooter>
           </DiscordEmbed>
           <DiscordAttachments slot="components">
@@ -151,7 +170,9 @@ const MainDiscordEmbed: React.FC<MainProps> = ({
           </DiscordAttachments>
         </DiscordMessage>
       </DiscordMessages>
-    </motion.div>
+    </m.div>
+    </LazyMotion>
   );
 };
+
 export default MainDiscordEmbed;

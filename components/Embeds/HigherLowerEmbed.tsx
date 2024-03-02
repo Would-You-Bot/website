@@ -12,12 +12,14 @@ import {
   DiscordReply,
 } from "@skyra/discord-components-react";
 import profiles from "../../data/profiles.json";
+import Member from "../types/member";
 
 interface MainProps {
   currentDate: string;
+  member: Member,
 }
 
-const HigherLowerEmbed: React.FC<MainProps> = ({ currentDate }) => {
+const HigherLowerEmbed: React.FC<MainProps> = ({ currentDate, member }) => {
   return (
     <DiscordMessages class="overflow-x-hidden rounded-lg shadow">
       <DiscordMessage
@@ -76,8 +78,8 @@ const HigherLowerEmbed: React.FC<MainProps> = ({ currentDate }) => {
 
       <DiscordMessage
         profile="smokey"
-        author={profiles.smokey.author}
-        avatar={profiles.smokey.avatar}
+        author={member.member ? member.member.user.global_name : profiles.smokey.author }
+        avatar={member.member ? `https://cdn.discordapp.com/avatars/${member.member.user.id}/${member.member.user.avatar}.png` : profiles.smokey.avatar}
         roleColor={profiles.smokey.roleColor}
       >
         <DiscordReply

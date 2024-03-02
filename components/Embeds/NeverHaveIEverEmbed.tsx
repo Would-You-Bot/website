@@ -11,12 +11,14 @@ import {
 } from "@skyra/discord-components-react";
 import profiles from "../../data/profiles.json";
 import dynamic from "next/dynamic";
+import Member from "../types/member";
 
 interface MainProps {
   replayedRounds: number;
+  member: Member;
 }
 
-const NeverHaveIEverEmbed: React.FC<MainProps> = ({ replayedRounds }) => {
+const NeverHaveIEverEmbed: React.FC<MainProps> = ({ replayedRounds, member }) => {
   return (
     <DiscordMessages class="overflow-x-hidden rounded-lg text-left shadow">
       <DiscordMessage
@@ -31,8 +33,8 @@ const NeverHaveIEverEmbed: React.FC<MainProps> = ({ replayedRounds }) => {
         <DiscordCommand
           slot="reply"
           profile="pod"
-          author={profiles.pod.author}
-          avatar={profiles.pod.avatar}
+          author={member.member ? member.member.user.global_name : profiles.pod.author}
+          avatar={member.member ? `https://cdn.discordapp.com/avatars/${member.member.user.id}/${member.member.user.avatar}.png` : profiles.pod.avatar}
           roleColor={profiles.pod.roleColor}
           command="/neverhaveiever"
         />
@@ -40,8 +42,8 @@ const NeverHaveIEverEmbed: React.FC<MainProps> = ({ replayedRounds }) => {
           <DiscordEmbedDescription slot="description">
             Never have I ever dreamed about stopping time in class.
           </DiscordEmbedDescription>
-          <DiscordEmbedFooter slot="footer" footerImage="./staff/Pod.webp">
-            Requested by podskio | Type: NHIE | ID: 124
+          <DiscordEmbedFooter slot="footer" footerImage={member.member ? `https://cdn.discordapp.com/avatars/${member.member.user.id}/${member.member.user.avatar}.png` : profiles.pod.avatar}>
+            Requested by {member.member ? member.member.user.username : "podskio"} | Type: NHIE | ID: 124
           </DiscordEmbedFooter>
         </DiscordEmbed>
         <DiscordAttachments slot="components">

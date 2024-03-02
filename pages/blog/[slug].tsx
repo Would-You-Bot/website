@@ -10,7 +10,9 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import path from "path";
-import { motion, useScroll, useSpring } from "framer-motion";
+import { m, useScroll, useSpring, LazyMotion, domAnimation } from "framer-motion";
+
+import FrontMatter from "@/components/types/blog";
 
 const components = {
   Button: Button,
@@ -19,25 +21,6 @@ const components = {
 
 function CustomLink(props: any) {
   return <a {...props} target="_blank" />;
-}
-
-interface FrontMatter {
-  title: string;
-  description: string;
-  date: string;
-  seoDate: string;
-  thumbnail?: {
-    large?: string;
-    banner?: string;
-    alt?: string;
-  };
-  author: {
-    name: string;
-    avatar: string;
-  };
-  tags: string[];
-  pinned?: boolean;
-  toc?: string[];
 }
 
 interface TableOfContentsProps {
@@ -98,7 +81,9 @@ const BlogPost: NextPage<{
           />
         )}
       </Head>
-      <motion.div className={blogStyles["progress-bar"]} style={{ scaleX }} />
+      <LazyMotion features={domAnimation}>
+      <m.div className={blogStyles["progress-bar"]} style={{ scaleX }} />
+      </LazyMotion>
       <div className="mt-36 px-8 text-neutral-300 xl:px-[17vw]">
         <Link
           href="/blog"

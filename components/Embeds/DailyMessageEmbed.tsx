@@ -9,12 +9,14 @@ import {
   DiscordThreadMessage,
 } from "@skyra/discord-components-react";
 import profiles from "../../data/profiles.json";
+import Member from "../types/member";
 
 interface MainProps {
   threadName: string;
+  member: Member;
 }
 
-const DailyMessageEmbed: React.FC<MainProps> = ({ threadName }) => {
+const DailyMessageEmbed: React.FC<MainProps> = ({ threadName, member }) => {
   return (
     <DiscordMessages className="min-w-fit overflow-x-hidden rounded-lg shadow">
       <DiscordMessage
@@ -39,8 +41,8 @@ const DailyMessageEmbed: React.FC<MainProps> = ({ threadName }) => {
         <DiscordThread slot="thread" name={threadName}>
           <DiscordThreadMessage
             profile="Nightkiller"
-            author={profiles.nightkiller.author}
-            avatar={profiles.nightkiller.avatar}
+            author={member.member ? member.member.user.global_name : profiles.nightkiller.author}
+            avatar={member.member ? `https://cdn.discordapp.com/avatars/${member.member.user.id}/${member.member.user.avatar}.png` : profiles.nightkiller.avatar}
             roleColor={profiles.nightkiller.roleColor}
           >
             Wow that...

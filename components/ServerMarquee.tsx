@@ -1,18 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import Marquee from "react-fast-marquee";
-
-interface Server {
-  name: string;
-  members: string;
-  avatar: string;
-  verified: boolean;
-  partnered: boolean;
-  invite: string;
-}
+import DiscordServer from "./types/server";
 
 interface MarqueeProps {
-  servers: Server[];
+  servers: DiscordServer[];
   speed: number;
   direction?: "left" | "right";
   className?: string;
@@ -34,18 +26,18 @@ const ServerMarquee: React.FC<MarqueeProps> = ({
         speed={speed}
         direction={direction ?? "left"}
         gradient={true}
-        gradientColor={[16, 16, 16]}
+        gradientColor="#101010"
       >
-        {servers.map((s: any) => (
+        {servers.map((server: DiscordServer) => (
           <Link
             className="mr-4 flex w-72 cursor-pointer items-center gap-4 rounded-lg bg-neutral-900 p-4 transition-all hover:bg-neutral-800"
-            key={s.name}
-            href={s.invite}
+            key={server.name}
+            href={server.invite}
             target="_blank"
           >
             <Image
-              src={`/logos/${s.avatar}`}
-              alt={s.name}
+              src={`/logos/${server.avatar}`}
+              alt={server.name}
               draggable={false}
               width={60}
               height={60}
@@ -54,9 +46,9 @@ const ServerMarquee: React.FC<MarqueeProps> = ({
             <div>
               <div className="relative flex items-center">
                 <h4 className="mr-2 max-w-[160px] overflow-hidden text-ellipsis whitespace-nowrap text-lg text-white">
-                  {s.name}
+                  {server.name}
                 </h4>
-                {s.verified && (
+                {server.verified && (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="60"
@@ -77,7 +69,7 @@ const ServerMarquee: React.FC<MarqueeProps> = ({
                     />
                   </svg>
                 )}
-                {s.partnered && !s.verified && (
+                {server.partnered && !server.verified && (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="60"
@@ -100,7 +92,7 @@ const ServerMarquee: React.FC<MarqueeProps> = ({
                 )}
               </div>
               <p className="text-left text-sm text-neutral-300">
-                {s.members} Members
+                {server.members} Members
               </p>
             </div>
           </Link>

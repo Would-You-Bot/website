@@ -9,8 +9,12 @@ import Link from "next/link";
 import { useState } from "react";
 import Button from "./Button";
 import { useSearchParams } from "next/navigation";
+import DiscordIcon from "@/components/Icons/DiscordIcon";
 
-const Navbar = () => {
+import jwt from "jsonwebtoken";
+import Member from "./types/member";
+
+const Navbar = (member: Member) => {
   const [mobileMenu, setMobileMenu] = useState(false);
   const lineOneControls = useAnimationControls();
   const lineTwoControls = useAnimationControls();
@@ -93,17 +97,19 @@ const Navbar = () => {
               Blog
             </Link>
             <Link
-              href="/vote"
-              target="_blank"
-              className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+              href="/premium"
+              className="mr-6 text-lg text-yellow-500 transition-all hover:text-yellow-400"
             >
-              Vote
+              Premium
             </Link>
           </div>
         </div>
         <div className="z-50 mr-8 flex items-center xl:mr-[17vw]">
-          <Link href="/invite" target="_blank" className="hidden md:block">
-            <Button className="">Invite</Button>
+          <Link href="/login" className="hidden space-x-1 md:block">
+            <Button variant="discord">
+              <DiscordIcon />
+              Login with Discord
+            </Button>
           </Link>
           <div
             className="relative ml-6 flex h-6 w-8 flex-col items-center justify-between md:hidden"
@@ -158,19 +164,24 @@ const Navbar = () => {
                 Blog
               </Link>
               <Link
-                href="/vote"
-                target="_blank"
-                className="mt-8 text-center text-3xl text-white"
+                href="/premium"
+                className="mt-8 text-center text-3xl text-yellow-500 transition-all hover:text-yellow-400"
                 onClick={() => toggleMobileMenu()}
               >
-                Vote
+                Premium
               </Link>
               <Link
                 href="/invite"
                 target="_blank"
                 className="mt-8 text-center text-2xl"
               >
-                <Button>Invite</Button>
+                <Link href="/api/login" className="mt-8 text-center text-2xl">
+                  <Button variant="discord">
+                    {" "}
+                    <DiscordIcon />
+                    Login with Discord
+                  </Button>
+                </Link>
               </Link>
             </div>
           </m.div>
@@ -179,5 +190,24 @@ const Navbar = () => {
     )
   );
 };
+
+export async function getServerSideProps(context: {
+  req: { cookies: { OAUTH_TOKEN: string } };
+}) {
+  console.log(context.req.cookies.OAUTH_TOKEN);
+  const member = jwt.verify(
+    context.req.cookies.OAUTH_TOKEN,
+    process.env.JWT_SECRET || "",
+    function (_err, decoded) {
+      return decoded || null;
+    },
+  );
+console.log("uwu")
+  return {
+    props: {
+      member,
+    },
+  };
+}
 
 export default Navbar;

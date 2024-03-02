@@ -1,16 +1,20 @@
 import { VariantProps, cva } from "class-variance-authority";
 
-const button = cva("flex items-center rounded-lg px-6 py-3 transition-all", {
-  variants: {
-    variant: {
-      blue: "bg-brand-blue-100 hover:bg-brand-blue-200 text-white",
-      red: "bg-brand-red-100 hover:bg-brand-red-200 text-white",
+const button = cva(
+  "flex items-center text-center rounded-lg px-6 py-3 transition-all",
+  {
+    variants: {
+      variant: {
+        blue: "bg-brand-blue-100 hover:bg-brand-blue-200 text-white",
+        red: "bg-brand-red-100 hover:bg-brand-red-200 text-white",
+        discord: "bg-[#5865F2] hover:bg-discord-200 text-white font-semibold",
+      },
+    },
+    defaultVariants: {
+      variant: "blue",
     },
   },
-  defaultVariants: {
-    variant: "blue",
-  },
-});
+);
 
 interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
