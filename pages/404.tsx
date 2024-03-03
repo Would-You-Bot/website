@@ -1,13 +1,9 @@
 import Button from "@/components/Button";
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
-import { NextPage } from "next";
 import Link from "next/link";
 
-const NotFound: NextPage = () => {
+const NotFound = () => {
   return (
     <>
-      <Navbar />
       <div className="my-56 flex flex-col items-center justify-center px-8 text-white xl:px-[17vw]">
         <h1 className="text-5xl font-bold">
           Error{" "}
@@ -21,7 +17,6 @@ const NotFound: NextPage = () => {
           <Link href="/">Home</Link>
         </Button>
       </div>
-      <Footer />
     </>
   );
 };

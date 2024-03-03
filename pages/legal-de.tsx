@@ -1,8 +1,14 @@
+import Navbar from "@/components/Navbar";
 import Link from "next/link";
+import Member from "@/components/types/member";
 
-export default function legalnoticede() {
+import jwt from "jsonwebtoken";
+import Footer from "@/components/Footer";
+
+export default function legalnoticede({ member }: Member) {
   return (
     <main className="flex flex-col gap-8 px-8 text-neutral-300 xl:px-[17vw]">
+      <Navbar member={member} />
       <h1 className="mt-36 text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
         Impressum
       </h1>
@@ -81,7 +87,26 @@ export default function legalnoticede() {
         <br />
         Der Discord server with the id{" "}
         <span className="font-mono text-white">1009562516105461780</span>
-      </p>
+      </p>{" "}
+      <Footer />
     </main>
   );
+}
+
+export async function getServerSideProps(context: {
+  req: { cookies: { OAUTH_TOKEN: string } };
+}) {
+  const member = await jwt.verify(
+    context.req.cookies.OAUTH_TOKEN,
+    process.env.JWT_SECRET || "",
+    function (_err, decoded) {
+      return decoded || null;
+    },
+  );
+
+  return {
+    props: {
+      member,
+    },
+  };
 }

@@ -1,10 +1,14 @@
 import Head from "next/head";
-
 import Image from "next/image"; // Import the 'Image' component
-
 import staffs from "../data/staffs.json"; // Import the JSON data
 
-export default function Team() {
+import Navbar from "@/components/Navbar";
+import Member from "@/components/types/member";
+import Footer from "@/components/Footer";
+
+import jwt from "jsonwebtoken";
+
+export default function Team({ member }: Member) {
   const roles = [
     "Developers",
     "Admins",
@@ -18,6 +22,7 @@ export default function Team() {
       <Head>
         <title>Would You - Team</title>
       </Head>
+      <Navbar member={member} />
       <main className="px-8 xl:px-[17vw]">
         <h1 className="mt-36 text-4xl font-bold text-white">
           <span className="text-brand-red-100 drop-shadow-red-glow">Meet </span>{" "}
@@ -102,6 +107,25 @@ export default function Team() {
           ))}{" "}
         </div>
       </main>
+      <Footer />
     </>
   );
+}
+
+export async function getServerSideProps(context: {
+  req: { cookies: { OAUTH_TOKEN: string } };
+}) {
+  const member = await jwt.verify(
+    context.req.cookies.OAUTH_TOKEN,
+    process.env.JWT_SECRET || "",
+    function (_err, decoded) {
+      return decoded || null;
+    },
+  );
+
+  return {
+    props: {
+      member,
+    },
+  };
 }

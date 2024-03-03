@@ -62,8 +62,8 @@ const Navbar = (member: Member) => {
   };
 
   return (
-    <nav className="fixed left-0 top-0 z-50 flex h-[80px] w-full border-b border-b-neutral-800 bg-neutral-900 bg-opacity-90 backdrop-blur-sm xl:px-[17vw]">
-      <div className="flex w-full items-center justify-between px-8">
+    <nav className="fixed left-0 top-0 z-50 flex h-[80px] w-full border-b border-b-neutral-800 bg-neutral-900 bg-opacity-90 px-8 backdrop-blur-sm xl:px-[17vw]">
+      <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-8 md:gap-12 lg:gap-16 xl:gap-20">
           <Link href="/">
             <div className="flex items-center">

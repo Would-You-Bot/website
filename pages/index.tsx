@@ -3,6 +3,9 @@ import ServerMarquee from "@/components/ServerMarquee";
 import Head from "next/head";
 import FeatureItem from "@/components/FeatureItem";
 
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+
 import { m, LazyMotion, domAnimation } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -185,6 +188,7 @@ const Home = (member: Member) => {
           }}
         ></script>
       </Head>
+      <Navbar member={member.member} />
       <main className="mt-48 overflow-x-hidden text-neutral-300">
         <LazyMotion features={domAnimation}>
           <section className="flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left xl:px-[17vw]">
@@ -377,6 +381,7 @@ const Home = (member: Member) => {
           </section>
         </LazyMotion>
       </main>
+      <Footer />
     </>
   );
 };
