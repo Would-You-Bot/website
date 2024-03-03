@@ -16,7 +16,7 @@ import Member from "../types/member";
 
 interface MainProps {
   currentDate: string;
-  member: Member,
+  member: Member;
 }
 
 const HigherLowerEmbed: React.FC<MainProps> = ({ currentDate, member }) => {
@@ -78,8 +78,16 @@ const HigherLowerEmbed: React.FC<MainProps> = ({ currentDate, member }) => {
 
       <DiscordMessage
         profile="smokey"
-        author={member.member ? member.member.user.global_name : profiles.smokey.author }
-        avatar={member.member ? `https://cdn.discordapp.com/avatars/${member.member.user.id}/${member.member.user.avatar}.png` : profiles.smokey.avatar}
+        author={
+          member.member
+            ? member.member.user.global_name
+            : profiles.smokey.author
+        }
+        avatar={
+          member.member
+            ? `https://cdn.discordapp.com/avatars/${member.member.user.id}/${member.member.user.avatar}.png`
+            : profiles.smokey.avatar
+        }
         roleColor={profiles.smokey.roleColor}
       >
         <DiscordReply

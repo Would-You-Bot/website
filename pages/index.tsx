@@ -290,7 +290,9 @@ const Home = (member: Member) => {
 
             <FeatureItem
               reverse
-              right={<DailyMessageEmbed threadName={threadName} member={member} />}
+              right={
+                <DailyMessageEmbed threadName={threadName} member={member} />
+              }
               left={
                 <>
                   <h4 className="text-center text-3xl font-bold text-white md:text-left">
@@ -317,7 +319,9 @@ const Home = (member: Member) => {
                   </p>
                 </>
               }
-              right={<HigherLowerEmbed currentDate={currentDate} member={member} />}
+              right={
+                <HigherLowerEmbed currentDate={currentDate} member={member} />
+              }
             />
 
             <FeatureItem
@@ -379,13 +383,15 @@ const Home = (member: Member) => {
 
 export default Home;
 
-export async function getServerSideProps(context: { req: { cookies: { OAUTH_TOKEN: string; }; }; }) {
+export async function getServerSideProps(context: {
+  req: { cookies: { OAUTH_TOKEN: string } };
+}) {
   const member = await jwt.verify(
     context.req.cookies.OAUTH_TOKEN,
     process.env.JWT_SECRET || "",
     function (_err, decoded) {
       return decoded || null;
-    }
+    },
   );
 
   return {

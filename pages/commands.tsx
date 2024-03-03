@@ -7,7 +7,7 @@ import Member from "@/components/types/member";
 
 import jwt from "jsonwebtoken";
 
-export default function Commands({member}: Member) {
+export default function Commands({ member }: Member) {
   const [openedCommand, setOpenedCommand] = useState("");
   const [isHovered, setIsHovered] = useState(false);
   const [copyText, setCopyText] = useState("");
@@ -131,13 +131,15 @@ export default function Commands({member}: Member) {
   );
 }
 
-export async function getServerSideProps(context: { req: { cookies: { OAUTH_TOKEN: string; }; }; }) {
+export async function getServerSideProps(context: {
+  req: { cookies: { OAUTH_TOKEN: string } };
+}) {
   const member = await jwt.verify(
     context.req.cookies.OAUTH_TOKEN,
     process.env.JWT_SECRET || "",
     function (_err, decoded) {
       return decoded || null;
-    }
+    },
   );
 
   return {

@@ -18,7 +18,10 @@ interface MainProps {
   member: Member;
 }
 
-const NeverHaveIEverEmbed: React.FC<MainProps> = ({ replayedRounds, member }) => {
+const NeverHaveIEverEmbed: React.FC<MainProps> = ({
+  replayedRounds,
+  member,
+}) => {
   return (
     <DiscordMessages class="overflow-x-hidden rounded-lg text-left shadow">
       <DiscordMessage
@@ -33,8 +36,14 @@ const NeverHaveIEverEmbed: React.FC<MainProps> = ({ replayedRounds, member }) =>
         <DiscordCommand
           slot="reply"
           profile="pod"
-          author={member.member ? member.member.user.global_name : profiles.pod.author}
-          avatar={member.member ? `https://cdn.discordapp.com/avatars/${member.member.user.id}/${member.member.user.avatar}.png` : profiles.pod.avatar}
+          author={
+            member.member ? member.member.user.global_name : profiles.pod.author
+          }
+          avatar={
+            member.member
+              ? `https://cdn.discordapp.com/avatars/${member.member.user.id}/${member.member.user.avatar}.png`
+              : profiles.pod.avatar
+          }
           roleColor={profiles.pod.roleColor}
           command="/neverhaveiever"
         />
@@ -42,8 +51,17 @@ const NeverHaveIEverEmbed: React.FC<MainProps> = ({ replayedRounds, member }) =>
           <DiscordEmbedDescription slot="description">
             Never have I ever dreamed about stopping time in class.
           </DiscordEmbedDescription>
-          <DiscordEmbedFooter slot="footer" footerImage={member.member ? `https://cdn.discordapp.com/avatars/${member.member.user.id}/${member.member.user.avatar}.png` : profiles.pod.avatar}>
-            Requested by {member.member ? member.member.user.username : "podskio"} | Type: NHIE | ID: 124
+          <DiscordEmbedFooter
+            slot="footer"
+            footerImage={
+              member.member
+                ? `https://cdn.discordapp.com/avatars/${member.member.user.id}/${member.member.user.avatar}.png`
+                : profiles.pod.avatar
+            }
+          >
+            Requested by{" "}
+            {member.member ? member.member.user.username : "podskio"} | Type:
+            NHIE | ID: 124
           </DiscordEmbedFooter>
         </DiscordEmbed>
         <DiscordAttachments slot="components">

@@ -11,7 +11,7 @@ const OAuth2 = ({ member }: Member) => {
   console.log(member);
   if (!member) {
     components = (
-      <Link href="/login" className="hidden space-x-1 md:block">
+      <Link href="/login">
         <Button variant="discord">
           <DiscordIcon />
           Login with Discord
@@ -20,27 +20,23 @@ const OAuth2 = ({ member }: Member) => {
     );
   } else {
     components = (
-      <div className="hidden space-x-1 md:block">
-        <Button variant="user">
-          <Image
-            className="h-7 w-7 rounded-full mr-3"
-            height={24}
-            width={24}
-            src={
-              "https://cdn.discordapp.com/avatars/" +
-              member.user.id +
-              "/" +
-              member.user.avatar             }
-            alt={member.user.global_name}
-          />
-          {member.user.global_name
-            .split("", 11)
-            .reduce(
-              (o, c) => (o?.length === 10 ? `${o}${c}..` : `${o}${c}`),
-              "",
-            )}
-        </Button>
-      </div>
+      <Button variant="user">
+        <Image
+          className="mr-3 h-7 w-7 rounded-full"
+          height={24}
+          width={24}
+          src={
+            "https://cdn.discordapp.com/avatars/" +
+            member.user.id +
+            "/" +
+            member.user.avatar
+          }
+          alt={member.user.global_name}
+        />
+        {member.user.global_name
+          .split("", 11)
+          .reduce((o, c) => (o?.length === 10 ? `${o}${c}..` : `${o}${c}`), "")}
+      </Button>
     );
   }
 

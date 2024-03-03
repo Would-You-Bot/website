@@ -41,8 +41,16 @@ const DailyMessageEmbed: React.FC<MainProps> = ({ threadName, member }) => {
         <DiscordThread slot="thread" name={threadName}>
           <DiscordThreadMessage
             profile="Nightkiller"
-            author={member.member ? member.member.user.global_name : profiles.nightkiller.author}
-            avatar={member.member ? `https://cdn.discordapp.com/avatars/${member.member.user.id}/${member.member.user.avatar}.png` : profiles.nightkiller.avatar}
+            author={
+              member.member
+                ? member.member.user.global_name
+                : profiles.nightkiller.author
+            }
+            avatar={
+              member.member
+                ? `https://cdn.discordapp.com/avatars/${member.member.user.id}/${member.member.user.avatar}.png`
+                : profiles.nightkiller.avatar
+            }
             roleColor={profiles.nightkiller.roleColor}
           >
             Wow that...

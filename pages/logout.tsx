@@ -4,14 +4,15 @@ import { serialize } from "cookie";
 
 import Router from "next/router";
 
-export default function Logout( redirect : any) {
+export default function Logout(redirect: any) {
   useEffect(() => {
     Router.push(redirect.redirect);
   }, []);
-
 }
 
-export async function getServerSideProps(context: { res: { setHeader: (arg0: string, arg1: string) => void; }; }) {
+export async function getServerSideProps(context: {
+  res: { setHeader: (arg0: string, arg1: string) => void };
+}) {
   const cookie = serialize("OAUTH_TOKEN", "", {
     httpOnly: true,
     path: "/",

@@ -19,7 +19,6 @@ const Navbar = (member: Member) => {
   const lineThreeControls = useAnimationControls();
   const menuControls = useAnimationControls();
 
-
   const toggleMobileMenu = () => {
     if (mobileMenu) {
       lineOneControls.start(
@@ -63,8 +62,9 @@ const Navbar = (member: Member) => {
   };
 
   return (
-      <nav className="fixed left-0 top-0 z-50 mb-28 flex h-[80px] w-full items-center justify-between border-b border-b-neutral-800 bg-neutral-900 bg-opacity-90 backdrop-blur-sm">
-        <div className="ml-8 flex items-center xl:ml-[17vw]">
+    <nav className="fixed left-0 top-0 z-50 flex h-[80px] w-full border-b border-b-neutral-800 bg-neutral-900 bg-opacity-90 backdrop-blur-sm xl:px-[17vw]">
+      <div className="flex w-full items-center justify-between px-8">
+        <div className="flex items-center gap-8 md:gap-12 lg:gap-16 xl:gap-20">
           <Link href="/">
             <div className="flex items-center">
               <Image
@@ -78,7 +78,7 @@ const Navbar = (member: Member) => {
               <p className="ml-4 text-2xl font-bold text-white">Would You</p>
             </div>
           </Link>
-          <div className="ml-24 hidden items-center md:flex">
+          <div className="hidden items-center md:flex">
             <Link
               href="/commands"
               className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
@@ -99,8 +99,7 @@ const Navbar = (member: Member) => {
             </Link>
           </div>
         </div>
-        <div className="z-50 mr-8 flex items-center xl:mr-[17vw]">
-        <Oauth member={member.member} />
+        <div className="z-50 flex items-center">
           <div
             className="relative ml-6 flex h-6 w-8 flex-col items-center justify-between md:hidden"
             onClick={() => toggleMobileMenu()}
@@ -124,53 +123,53 @@ const Navbar = (member: Member) => {
             </LazyMotion>
           </div>
         </div>
-        <LazyMotion features={domAnimation}>
-          <m.div
-            className="fixed left-0 top-0 z-40 h-[100vh] w-[100vw] bg-neutral-900"
-            transition={{ duration: 0.21, type: "easeInOut" }}
-            initial={{ opacity: 0.5, left: "100vw", pointerEvents: "none" }}
-            animate={menuControls}
-          >
-            <div className="absolute top-36 flex w-full flex-col items-center">
-              <Link
-                href="/"
-                className="mt-8 text-center text-3xl text-white"
-                onClick={() => toggleMobileMenu()}
-              >
-                Home
-              </Link>
-              <Link
-                href="/commands"
-                className="mt-8 text-center text-3xl text-white"
-                onClick={() => toggleMobileMenu()}
-              >
-                Commands
-              </Link>
-              <Link
-                href="/blog"
-                className="mt-8 text-center text-3xl text-white"
-                onClick={() => toggleMobileMenu()}
-              >
-                Blog
-              </Link>
-              <Link
-                href="/premium"
-                className="mt-8 text-center text-3xl text-yellow-500 transition-all hover:text-yellow-400"
-                onClick={() => toggleMobileMenu()}
-              >
-                Premium
-              </Link>
-              <Link
-                href="/invite"
-                target="_blank"
-                className="mt-8 text-center text-2xl"
-              >
-               <Oauth member={member.member}/>
-              </Link>
+        <div className="hidden space-x-1 md:block">
+          <Oauth member={member.member} />
+        </div>
+      </div>
+      <LazyMotion features={domAnimation}>
+        <m.div
+          className="fixed left-0 top-0 z-40 h-[100vh] w-[100vw] bg-neutral-900"
+          transition={{ duration: 0.21, type: "easeInOut" }}
+          initial={{ opacity: 0.5, left: "100vw", pointerEvents: "none" }}
+          animate={menuControls}
+        >
+          <div className="absolute top-36 flex w-full flex-col items-center">
+            <Link
+              href="/"
+              className="mt-8 text-center text-3xl text-white"
+              onClick={() => toggleMobileMenu()}
+            >
+              Home
+            </Link>
+            <Link
+              href="/commands"
+              className="mt-8 text-center text-3xl text-white"
+              onClick={() => toggleMobileMenu()}
+            >
+              Commands
+            </Link>
+            <Link
+              href="/blog"
+              className="mt-8 text-center text-3xl text-white"
+              onClick={() => toggleMobileMenu()}
+            >
+              Blog
+            </Link>
+            <Link
+              href="/premium"
+              className="mt-8 text-center text-3xl text-yellow-500 transition-all hover:text-yellow-400"
+              onClick={() => toggleMobileMenu()}
+            >
+              Premium
+            </Link>
+            <div className="mt-8 space-x-1">
+              <Oauth member={member.member} />
             </div>
-          </m.div>
-        </LazyMotion>
-      </nav>
+          </div>
+        </m.div>
+      </LazyMotion>
+    </nav>
   );
 };
 
