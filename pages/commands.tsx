@@ -1,13 +1,18 @@
 import { useState } from "react";
 import commands from "../data/commands.json";
 import Head from "next/head";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import Member from "@/components/types/member";
 
-export default function Commands() {
+import jwt from "jsonwebtoken";
+
+export default function Commands({member}: Member) {
   const [openedCommand, setOpenedCommand] = useState("");
   const [isHovered, setIsHovered] = useState(false);
   const [copyText, setCopyText] = useState("");
 
-  const handleCopyUsage = (textToCopy: any) => {
+  const handleCopyUsage = (textToCopy: String) => {
     const commandPart = textToCopy.split(" ")[0];
     const textArea = document.createElement("textarea");
     textArea.value = commandPart;
@@ -23,6 +28,7 @@ export default function Commands() {
       <Head>
         <title>Would You - Commands</title>
       </Head>
+      <Navbar member={member} />
       <main className="px-8 xl:px-[17vw]">
         <h1 className="mt-36 text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
           Commands
@@ -120,6 +126,23 @@ export default function Commands() {
           })}
         </div>
       </main>
+      <Footer />
     </>
   );
+}
+
+export async function getServerSideProps(context: { req: { cookies: { OAUTH_TOKEN: string; }; }; }) {
+  const member = await jwt.verify(
+    context.req.cookies.OAUTH_TOKEN,
+    process.env.JWT_SECRET || "",
+    function (_err, decoded) {
+      return decoded || null;
+    }
+  );
+
+  return {
+    props: {
+      member,
+    },
+  };
 }

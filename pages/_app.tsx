@@ -31,11 +31,9 @@ export default function App({ Component, pageProps}: AppProps) {
         )}
       </Head>
       <div className="flex min-h-screen flex-col">
-        <Navbar />
         <div className="grow">
           <Component {...pageProps} />
         </div>
-        <Footer />
       </div>
     </>
   );

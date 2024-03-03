@@ -7,6 +7,7 @@ interface UserType {
   }
   
   interface MemberType {
+    global_name: string | undefined;
     user: UserType;
     iat: number; // Unix timestamp for issued at
     exp: number; // Unix timestamp for expiration 

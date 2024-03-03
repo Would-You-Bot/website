@@ -7,9 +7,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import Button from "./Button";
-import { useSearchParams } from "next/navigation";
-import DiscordIcon from "@/components/Icons/DiscordIcon";
+import Oauth from "./OAuth";
 
 import jwt from "jsonwebtoken";
 import Member from "./types/member";
@@ -21,8 +19,6 @@ const Navbar = (member: Member) => {
   const lineThreeControls = useAnimationControls();
   const menuControls = useAnimationControls();
 
-  const search = useSearchParams();
-  const iframe = search.get("iframe") !== null;
 
   const toggleMobileMenu = () => {
     if (mobileMenu) {
@@ -67,7 +63,6 @@ const Navbar = (member: Member) => {
   };
 
   return (
-    !iframe && (
       <nav className="fixed left-0 top-0 z-50 mb-28 flex h-[80px] w-full items-center justify-between border-b border-b-neutral-800 bg-neutral-900 bg-opacity-90 backdrop-blur-sm">
         <div className="ml-8 flex items-center xl:ml-[17vw]">
           <Link href="/">
@@ -105,12 +100,7 @@ const Navbar = (member: Member) => {
           </div>
         </div>
         <div className="z-50 mr-8 flex items-center xl:mr-[17vw]">
-          <Link href="/login" className="hidden space-x-1 md:block">
-            <Button variant="discord">
-              <DiscordIcon />
-              Login with Discord
-            </Button>
-          </Link>
+        <Oauth member={member.member} />
           <div
             className="relative ml-6 flex h-6 w-8 flex-col items-center justify-between md:hidden"
             onClick={() => toggleMobileMenu()}
@@ -175,19 +165,12 @@ const Navbar = (member: Member) => {
                 target="_blank"
                 className="mt-8 text-center text-2xl"
               >
-                <Link href="/api/login" className="mt-8 text-center text-2xl">
-                  <Button variant="discord">
-                    {" "}
-                    <DiscordIcon />
-                    Login with Discord
-                  </Button>
-                </Link>
+               <Oauth member={member.member}/>
               </Link>
             </div>
           </m.div>
         </LazyMotion>
       </nav>
-    )
   );
 };
 
@@ -202,7 +185,7 @@ export async function getServerSideProps(context: {
       return decoded || null;
     },
   );
-console.log("uwu")
+  console.log("uwu");
   return {
     props: {
       member,
