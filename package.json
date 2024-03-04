@@ -17,6 +17,7 @@
     "url": "https://github.com/Would-You-Bot/website.git"
   },
   "dependencies": {
+    "@nextui-org/react": "^2.2.10",
     "@radix-ui/react-icons": "^1.3.0",
     "@skyra/discord-components-react": "^3.6.1",
     "@types/node": "^18.16.0",

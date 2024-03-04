@@ -1,7 +1,6 @@
-import Footer from "@/components/Footer";
-import Navbar from "@/components/Navbar";
 import "@/styles/globals.css";
 import "@/styles/index.css";
+import { NextUIProvider } from "@nextui-org/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 
@@ -30,11 +29,13 @@ export default function App({ Component, pageProps }: AppProps) {
           </>
         )}
       </Head>
+      <NextUIProvider>
       <div className="flex min-h-screen flex-col">
         <div className="grow">
           <Component {...pageProps} />
         </div>
       </div>
+      </NextUIProvider>
     </>
   );
 }

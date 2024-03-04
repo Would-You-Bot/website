@@ -11,6 +11,13 @@ import Oauth from "./OAuth";
 
 import jwt from "jsonwebtoken";
 import Member from "./types/member";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  DropdownSection,
+} from "@nextui-org/react";
 
 const Navbar = (member: Member) => {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -123,9 +130,43 @@ const Navbar = (member: Member) => {
             </LazyMotion>
           </div>
         </div>
-        <div className="hidden space-x-1 md:block">
-          <Oauth member={member.member} />
-        </div>
+        <Dropdown triggerScaleOnOpen={false}>
+          <DropdownTrigger>
+            <div className="hidden space-x-1 md:block">
+              <Oauth member={member.member} />
+            </div>
+          </DropdownTrigger>
+
+          <DropdownMenu
+            aria-label="User Profile Dropdown"
+            color="primary"
+            itemClasses={{
+              base: [
+                "rounded-md",
+                "text-default-500",
+                "transition-opacity",
+                "data-[hover=true]:text-foreground",
+                "data-[hover=true]:bg-default-100",
+                "dark:data-[hover=true]:bg-default-50",
+                "data-[selectable=true]:focus:bg-default-50",
+                "data-[pressed=true]:opacity-70",
+                "data-[focus-visible=true]:ring-default-500",
+              ],
+            }}
+          >
+              <DropdownItem key="dashboard" href="/dashboard">
+                Dashboard
+              </DropdownItem>
+            <DropdownItem
+              key="logout"
+              className="text-danger"
+              href="/logout"
+              color="danger"
+            >
+              Logout
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
       </div>
       <LazyMotion features={domAnimation}>
         <m.div

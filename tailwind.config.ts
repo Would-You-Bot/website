@@ -1,10 +1,12 @@
 import { type Config } from "tailwindcss";
+import { nextui } from "@nextui-org/react";
 
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./pages/**/*.{js,ts,jsx,tsx}",
     "./components/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     extend: {
@@ -39,5 +41,6 @@ module.exports = {
         "linear-gradient(92.91deg, #0598F4 -50%,#F00605 150%)",
     },
   },
-  plugins: [],
+  darkMode: "class",
+  plugins: [nextui()],
 } satisfies Config;

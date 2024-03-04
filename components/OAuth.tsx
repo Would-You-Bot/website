@@ -1,8 +1,6 @@
 import Button from "./Button";
 import DiscordIcon from "@/components/Icons/DiscordIcon";
-
 import Image from "next/image";
-
 import Link from "next/link";
 import Member from "./types/member";
 
