@@ -3,6 +3,7 @@ import DiscordIcon from "@/components/Icons/DiscordIcon";
 import Image from "next/image";
 import Link from "next/link";
 import Member from "./types/member";
+import { Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react";
 
 const OAuth2 = ({ member }: Member) => {
   let components;
@@ -18,7 +19,10 @@ const OAuth2 = ({ member }: Member) => {
     );
   } else {
     components = (
-      <Button variant="user">
+      <Dropdown triggerScaleOnOpen={false}>
+      <DropdownTrigger>
+        <div className="hidden space-x-1 md:block">
+        <Button variant="user">
         <Image
           className="mr-3 h-7 w-7 rounded-full"
           height={24}
@@ -35,6 +39,39 @@ const OAuth2 = ({ member }: Member) => {
           .split("", 11)
           .reduce((o, c) => (o?.length === 10 ? `${o}${c}..` : `${o}${c}`), "")}
       </Button>
+        </div>
+      </DropdownTrigger>
+
+      <DropdownMenu
+        aria-label="User Profile Dropdown"
+        color="primary"
+        itemClasses={{
+          base: [
+            "rounded-md",
+            "text-default-500",
+            "transition-opacity",
+            "data-[hover=true]:text-foreground",
+            "data-[hover=true]:bg-default-100",
+            "dark:data-[hover=true]:bg-default-50",
+            "data-[selectable=true]:focus:bg-default-50",
+            "data-[pressed=true]:opacity-70",
+            "data-[focus-visible=true]:ring-default-500",
+          ],
+        }}
+      >
+          <DropdownItem showDivider key="dashboard" href="/dashboard">
+            Dashboard
+          </DropdownItem>
+        <DropdownItem
+          key="logout"
+          className="text-danger"
+          href="/logout"
+          color="danger"
+        >
+          Logout
+        </DropdownItem>
+      </DropdownMenu>
+    </Dropdown>
     );
   }
 
