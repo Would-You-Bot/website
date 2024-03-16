@@ -190,13 +190,13 @@ export default function Commands() {
             return null;
           })}
           {filteredCommands.length === 0 && (
-          <p className="select-none font-medium text-neutral-300">
-            No commands for your search were found!{" "}
-            <Link className="font-semibold" href="/discord" target="_blank">
-              Maybe suggest it?
-            </Link>
-          </p>
-        )}
+            <p className="select-none font-medium text-neutral-300">
+              No commands for your search were found!{" "}
+              <Link className="font-semibold" href="/discord" target="_blank">
+                Maybe suggest it?
+              </Link>
+            </p>
+          )}
         </div>
       </main>
     </>
