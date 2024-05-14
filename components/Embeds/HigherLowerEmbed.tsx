@@ -11,7 +11,7 @@ import {
   DiscordMessages,
   DiscordReply,
 } from "@skyra/discord-components-react";
-import profiles from "../../data/profiles.json";
+import profiles from "@/data/profiles.json";
 
 interface MainProps {
   currentDate: string;

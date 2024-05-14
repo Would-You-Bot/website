@@ -8,7 +8,7 @@ import {
   DiscordThread,
   DiscordThreadMessage,
 } from "@skyra/discord-components-react";
-import profiles from "../../data/profiles.json";
+import profiles from "@/data/profiles.json";
 
 interface MainProps {
   threadName: string;

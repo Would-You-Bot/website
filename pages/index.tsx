@@ -7,7 +7,6 @@ import { m, LazyMotion, domAnimation } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import servers from "../data/servers.json";
 import dynamic from "next/dynamic";
 
 const MainDiscordEmbed = dynamic(
@@ -207,7 +206,7 @@ const Home = (servers: any) => {
                 Play fun and entertaining games with Would You, featuring user
                 polls and customization. Play Would You Rather, Truth or Dare,
                 Never Have I Ever, Higher or Lower, and What Would You Do!{" "}
-                <span className="hidden">tempus voicus</span>
+                <span className="hidden">truth or dare discord bot</span>
               </p>
               <Link href="/invite" target="_blank">
                 <Button className="mx-auto mt-8 gap-2 lg:mx-0">
