@@ -4,7 +4,7 @@ WORKDIR /
 
 # Install dependencies using pnpm
 COPY package.json pnpm-lock.yaml* ./
-RUN npm i -g pnpm && pnpm i
+RUN npm i -g pnpm && pnpm i --frozen-lockfile
 
 # COPY src ./src
 COPY public ./public

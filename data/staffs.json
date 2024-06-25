@@ -225,7 +225,7 @@
     {
         "name": "dpaulos6",
         "id": 23,
-        "categories": ["Contributors"],
+        "categories": ["Contributors", "Developers"],
         "description": "Frontend Styling Specialist",
         "imageUrl": "https://cdn.wouldyoubot.gg/staff/special/Paulos.webp",
         "websiteUrl": "https://dpaulos6.xyz?utm_source=wouldyoubot.gg"
@@ -237,5 +237,13 @@
         "description": "Web Developer",
         "imageUrl": "https://cdn.wouldyoubot.gg/staff/developer/Paul.webp",
         "websiteUrl": "https://github.com/Jester0027"
+    },
+    {
+        "name": "Burak",
+        "id": 25,
+        "categories": ["Translators"],
+        "description": "Turkish Translator",
+        "imageUrl": "https://cdn.wouldyoubot.gg/staff/translator/Burak.jpg",
+        "websiteUrl": "https://buraky.live/"
     }
 ]
