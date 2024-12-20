@@ -29,6 +29,7 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { useLocalStorage } from '@/hooks/use-localstorage'
 import { PackData, packSchema } from '@/utils/zod/schemas'
 import { packLanguages, packTypes } from '@/lib/constants'
+import ImportQuestionModal from './ImportQuestionModal'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from '@/components/ui/use-toast'
@@ -365,15 +366,19 @@ function PackForm() {
                   </Button>
                   <div className="flex flex-col items-center justify-center gap-2">
                     <span className="text-sm">Pack Questions</span>
-                    <Button
-                      className="rounded-lg w-fit py-2 px-4"
-                      size="sm"
-                      variant="outline"
-                      type="button"
-                      disabled={isSubmitting}
-                    >
-                      Import JSON
-                    </Button>
+                    <ImportQuestionModal
+                      trigger={
+                        <Button
+                          className="rounded-lg w-fit py-2 px-4"
+                          size="sm"
+                          variant="outline"
+                          type="button"
+                          disabled={isSubmitting}
+                        >
+                          Import JSON
+                        </Button>
+                      }
+                    />
                   </div>
                   <div className="flex flex-col gap-2 justify-center">
                     <span className="text-sm">Submit Pack</span>
