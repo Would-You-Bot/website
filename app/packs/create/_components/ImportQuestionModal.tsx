@@ -7,15 +7,16 @@ import {
   DrawerTitle,
   DrawerTrigger
 } from '@/components/ui/drawer'
+
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from '@/components/ui/dialog'
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
+} from '@/components/ui/alert-dialog'
 import {
   importQuestionSchemaA,
   importQuestionSchemaB
@@ -183,21 +184,6 @@ function ImportDetails({
 
   return (
     <>
-      {isMobile ?
-        <DrawerHeader>
-          <DrawerTitle>Import Questions</DrawerTitle>
-          <DrawerDescription>
-            1 of 2 • Choose a file to import from
-          </DrawerDescription>
-        </DrawerHeader>
-      : <DialogHeader>
-          <DialogTitle>Import Questions</DialogTitle>
-          <DialogDescription>
-            1 of 2 • Choose a file to import from
-          </DialogDescription>
-        </DialogHeader>
-      }
-
       <div className="px-4">
         {step === 0 && (
           <>
@@ -252,7 +238,7 @@ function ImportDetails({
           </Button>
           <Button disabled={!fileUploaded}>Next Step</Button>
         </DrawerFooter>
-      : <DialogFooter>
+      : <AlertDialogFooter>
           <Button
             variant="secondary"
             onClick={resetImportModal}
@@ -260,7 +246,7 @@ function ImportDetails({
             Cancel Import
           </Button>
           <Button disabled={!fileUploaded}>Next Step</Button>
-        </DialogFooter>
+        </AlertDialogFooter>
       }
     </>
   )
@@ -274,31 +260,37 @@ export default function ImportQuestionModal({
   const [open, setOpen] = useState(false)
   const isMobile = useIsMobile()
 
-  if (isMobile) {
-    return (
+  return isMobile ?
       <Drawer
         open={open}
         onOpenChange={setOpen}
       >
         <DrawerTrigger asChild>{trigger}</DrawerTrigger>
         <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>Import Questions</DrawerTitle>
+            <DrawerDescription>
+              1 of 2 • Choose a file to import from
+            </DrawerDescription>
+          </DrawerHeader>
           <div className="p-4">
             <ImportDetails setOpen={setOpen} />
           </div>
         </DrawerContent>
       </Drawer>
-    )
-  }
-
-  return (
-    <Dialog
-      open={open}
-      onOpenChange={setOpen}
-    >
-      <DialogTrigger asChild>{trigger}</DialogTrigger>
-      <DialogContent>
-        <ImportDetails setOpen={setOpen} />
-      </DialogContent>
-    </Dialog>
-  )
+    : <AlertDialog
+        open={open}
+        onOpenChange={setOpen}
+      >
+        <AlertDialogTrigger asChild>{trigger}</AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Import Questions</AlertDialogTitle>
+            <AlertDialogDescription>
+              1 of 2 • Choose a file to import from
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <ImportDetails setOpen={setOpen} />
+        </AlertDialogContent>
+      </AlertDialog>
 }
