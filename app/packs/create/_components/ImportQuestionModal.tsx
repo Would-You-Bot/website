@@ -348,6 +348,9 @@ function ImportDetails({
                           className={
                             'px-4 py-2 flex text-left flex-row items-center border rounded-none border-transparent border-t-border w-full gap-2 disabled:cursor-not-allowed disabled:opacity-50'
                           }
+                          style={{
+                            overflowWrap: 'anywhere'
+                          }}
                           onClick={() => changeCheckState(key, index)}
                           disabled={!question.selected && selectedCount >= 100}
                         >
