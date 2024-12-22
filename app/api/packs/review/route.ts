@@ -7,9 +7,10 @@ export async function GET() {
     .findFirst({
       where: {
         pending: true,
-        denied: false
       },
       select: {
+        denied: true,
+        pending: true,
         type: true,
         id: true,
         name: true,

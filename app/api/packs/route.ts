@@ -1,10 +1,12 @@
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { NextResponse, type NextRequest } from 'next/server'
 import type { PackData } from '@/utils/zod/schemas'
-import type { PackType } from '@prisma/client'
+import type { PackType, QuestionPack } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { v4 as uuidv4 } from 'uuid'
 import validator from 'validator'
+import DiscordLogger from '@/lib/logger'
+
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
@@ -182,6 +184,8 @@ export async function POST(request: NextRequest) {
     )
   }
 
+   // @ts-ignore If the pack creation fails, return a 500 status code
+  DiscordLogger.createdQuestion(newPack as QuestionPack)
   return NextResponse.json(
     { message: 'New pack creation successfully!', data: newPack },
     { status: 200 }
