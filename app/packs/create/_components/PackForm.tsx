@@ -393,7 +393,7 @@ function PackForm() {
                           size="sm"
                           variant="outline"
                           type="button"
-                          disabled={isSubmitting}
+                          disabled={isSubmitting || addedQuestions.length === 0}
                         >
                           <FileOutput className="size-4" />
                           Export Questions
