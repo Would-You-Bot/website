@@ -21,19 +21,38 @@ import {
   importQuestionSchemaB
 } from '@/utils/zod/questionSchemas'
 import { Check, FileInput, FileUp, Loader2, X } from 'lucide-react'
+import { useLocalStorage } from '@/hooks/use-localstorage'
+import { Control, useController } from 'react-hook-form'
 import { useToast } from '@/components/ui/use-toast'
+import { Checkbox } from '@/components/ui/checkbox'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { Button } from '@/components/ui/button'
+import { PackData } from '@/utils/zod/schemas'
 import { Input } from '@/components/ui/input'
+import { packMap, PackTypes } from '@/types'
 import { useState } from 'react'
 import clsx from 'clsx'
 import { z } from 'zod'
 
 function ImportDetails({
-  setOpen
+  setOpen,
+  control
 }: {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
+  control: Control<PackData>
 }) {
+  const {
+    field: { onChange: onCurrentQuestionsChange, value: currentQuestions }
+  } = useController({
+    name: 'questions',
+    control,
+    defaultValue: []
+  })
+  const [formData, setFormData] = useLocalStorage<PackData>(
+    'PACKVALUES',
+    {} as PackData
+  )
+
   const [step, setStep] = useState(0)
   const [dragEntered, setDragEntered] = useState(false)
   const [fileDropped, setFileDropped] = useState(false)
@@ -45,7 +64,10 @@ function ImportDetails({
     useState<React.ForwardRefExoticComponent<React.SVGProps<SVGSVGElement>>>(
       FileInput
     )
-  const [questions, setQuestions] = useState<Record<string, string[]>>({})
+  const [questions, setQuestions] = useState<
+    Record<string, { question: string; selected: boolean }[]>
+  >({})
+  const [selectedCount, setSelectedCount] = useState(currentQuestions.length)
 
   const isMobile = useIsMobile()
   const toast = useToast()
@@ -102,15 +124,42 @@ function ImportDetails({
         const data = JSON.parse(e.target?.result as string)
 
         try {
+          let currentCount = selectedCount
           if (importQuestionSchemaA.safeParse(data).success) {
             const validData = importQuestionSchemaA.parse(data)
-            setQuestions(validData)
-          } else if (importQuestionSchemaB.safeParse(data)) {
-            const validData = importQuestionSchemaB.parse(data)
-            let newQuestions: Record<string, string[]> = {}
+            let newQuestions: Record<
+              string,
+              { question: string; selected: boolean }[]
+            > = {}
 
             for (const [key, value] of Object.entries(validData)) {
-              newQuestions[key] = value.map((question) => question.question)
+              newQuestions[key] = value.map((question) => {
+                if (currentCount < 100) {
+                  currentCount++
+                  return { question, selected: true }
+                } else {
+                  return { question, selected: false }
+                }
+              })
+            }
+
+            setQuestions(newQuestions)
+          } else if (importQuestionSchemaB.safeParse(data)) {
+            const validData = importQuestionSchemaB.parse(data)
+            let newQuestions: Record<
+              string,
+              { question: string; selected: boolean }[]
+            > = {}
+
+            for (const [key, value] of Object.entries(validData)) {
+              newQuestions[key] = value.map((question) => {
+                if (currentCount < 100) {
+                  currentCount++
+                  return { question: question.question, selected: true }
+                } else {
+                  return { question: question.question, selected: false }
+                }
+              })
             }
 
             setQuestions(newQuestions)
@@ -121,6 +170,7 @@ function ImportDetails({
             )
             return
           }
+          setSelectedCount(currentCount)
         } catch (error) {
           console.error(error)
           if (error instanceof z.ZodError) {
@@ -157,6 +207,16 @@ function ImportDetails({
     }
   }
 
+  const changeCheckState = (category: string, index: number) => {
+    const selected = questions[category][index].selected
+    if (selected) setSelectedCount(selectedCount - 1)
+    else setSelectedCount(selectedCount + 1)
+
+    const newQuestions = [...questions[category]]
+    newQuestions[index].selected = !newQuestions[index].selected
+    setQuestions({ ...questions, [category]: newQuestions })
+  }
+
   const resetImport = (title: string, description: string) => {
     setFileDropped(false)
     setDragEntered(false)
@@ -168,6 +228,32 @@ function ImportDetails({
     })
   }
 
+  const nextStep = () => {
+    setStep(step + 1)
+  }
+
+  const finishImport = () => {
+    const newQuestions: { type: PackTypes; question: string }[] = [
+      ...currentQuestions
+    ]
+
+    for (const [key, value] of Object.entries(questions)) {
+      for (const question of value) {
+        if (question.selected) {
+          newQuestions.push({
+            type: key as PackTypes,
+            question: question.question
+          })
+        }
+      }
+    }
+
+    onCurrentQuestionsChange(newQuestions)
+    if (formData) setFormData({ ...formData, questions: newQuestions })
+
+    resetImportModal()
+  }
+
   const resetImportModal = () => {
     setOpen(false)
     setStep(0)
@@ -176,9 +262,6 @@ function ImportDetails({
     setFileUploaded(false)
     setInnerUploadText('Drag and drop or click here to import questions.')
     setInnerIcon(FileInput)
-
-    const input = document.getElementById('fileInput') as HTMLInputElement
-    input.files = new DataTransfer().files
   }
 
   return (
@@ -187,18 +270,20 @@ function ImportDetails({
         <DrawerHeader>
           <DrawerTitle>Import Questions</DrawerTitle>
           <DrawerDescription>
-            1 of 2 • Choose a file to import from
+            {step === 0 && '1 of 2 • Choose a file to import from'}
+            {step === 1 && '2 of 2 • Select the questions to import'}
           </DrawerDescription>
         </DrawerHeader>
       : <DialogHeader>
           <DialogTitle>Import Questions</DialogTitle>
           <DialogDescription>
-            1 of 2 • Choose a file to import from
+            {step === 0 && '1 of 2 • Choose a file to import from'}
+            {step === 1 && '2 of 2 • Select the questions to import'}
           </DialogDescription>
         </DialogHeader>
       }
 
-      <div className="px-4">
+      <div className={clsx('', { 'px-4': isMobile })}>
         {step === 0 && (
           <>
             <label
@@ -240,6 +325,43 @@ function ImportDetails({
             </label>
           </>
         )}
+
+        {step === 1 && (
+          <div className="border rounded-xl overflow-hidden">
+            <div className="px-4 py-2 flex flex-row items-center gap-2 justify-between sticky">
+              <span>Questions</span>
+              <span>{selectedCount}/100</span>
+            </div>
+            <ul className={'divide-y overflow-y-auto max-h-96 thin-scrollbar'}>
+              {Object.keys(questions).map((key) => (
+                <>
+                  <li
+                    key={key}
+                    className="px-4 py-2 bg-white/5 rounded-none"
+                  >
+                    {packMap[key]}
+                  </li>
+                  <ul className="rounded-none border-none">
+                    {questions[key].map((question, index) => (
+                      <li key={`${question}-${index}`}>
+                        <button
+                          className={
+                            'px-4 py-2 flex text-left flex-row items-center border rounded-none border-transparent border-t-border w-full gap-2 disabled:cursor-not-allowed disabled:opacity-50'
+                          }
+                          onClick={() => changeCheckState(key, index)}
+                          disabled={!question.selected && selectedCount >= 100}
+                        >
+                          <Checkbox checked={question.selected} />
+                          <span>{question.question}</span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
 
       {isMobile ?
@@ -250,7 +372,22 @@ function ImportDetails({
           >
             Cancel Import
           </Button>
-          <Button disabled={!fileUploaded}>Next Step</Button>
+          {step === 0 && (
+            <Button
+              disabled={!fileUploaded}
+              onClick={nextStep}
+            >
+              Next Step
+            </Button>
+          )}
+          {step === 1 && (
+            <Button
+              disabled={!fileUploaded}
+              onClick={finishImport}
+            >
+              Finish Import
+            </Button>
+          )}
         </DrawerFooter>
       : <DialogFooter>
           <Button
@@ -259,7 +396,22 @@ function ImportDetails({
           >
             Cancel Import
           </Button>
-          <Button disabled={!fileUploaded}>Next Step</Button>
+          {step === 0 && (
+            <Button
+              disabled={!fileUploaded}
+              onClick={nextStep}
+            >
+              Next Step
+            </Button>
+          )}
+          {step === 1 && (
+            <Button
+              disabled={!fileUploaded}
+              onClick={finishImport}
+            >
+              Finish Import
+            </Button>
+          )}
         </DialogFooter>
       }
     </>
@@ -267,9 +419,11 @@ function ImportDetails({
 }
 
 export default function ImportQuestionModal({
-  trigger
+  trigger,
+  control
 }: {
   trigger: React.ReactNode
+  control: Control<PackData>
 }) {
   const [open, setOpen] = useState(false)
   const isMobile = useIsMobile()
@@ -283,7 +437,10 @@ export default function ImportQuestionModal({
         <DrawerTrigger asChild>{trigger}</DrawerTrigger>
         <DrawerContent>
           <div className="p-4">
-            <ImportDetails setOpen={setOpen} />
+            <ImportDetails
+              setOpen={setOpen}
+              control={control}
+            />
           </div>
         </DrawerContent>
       </Drawer>
@@ -297,7 +454,10 @@ export default function ImportQuestionModal({
     >
       <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent>
-        <ImportDetails setOpen={setOpen} />
+        <ImportDetails
+          setOpen={setOpen}
+          control={control}
+        />
       </DialogContent>
     </Dialog>
   )

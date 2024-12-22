@@ -9,3 +9,11 @@ export const packMap: Record<string, string> = {
   topic: 'Topic',
   mixed: 'Mixed'
 }
+
+export type PackTypes =
+  | 'wouldyourather'
+  | 'neverhaveiever'
+  | 'whatwouldyoudo'
+  | 'truth'
+  | 'dare'
+  | 'topic'

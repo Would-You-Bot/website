@@ -378,6 +378,7 @@ function PackForm() {
                           Import JSON
                         </Button>
                       }
+                      control={control}
                     />
                   </div>
                   <div className="flex flex-col gap-2 justify-center">
