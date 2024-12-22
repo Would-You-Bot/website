@@ -174,6 +174,15 @@ function ImportDetails({
         } catch (error) {
           console.error(error)
           if (error instanceof z.ZodError) {
+            if (error.issues.length === 1) {
+              resetImport('Validation Error', error.issues[0].message)
+              return
+            } else if (error.issues.length > 1) {
+              for (const issue of error.issues) {
+                resetImport('Validation Error', issue.message)
+              }
+            }
+
             resetImport(
               'Validation Error',
               'An error occurred validating your data, please make sure it is valid and try again.'
