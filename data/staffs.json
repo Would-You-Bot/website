@@ -21,6 +21,20 @@
     "websiteUrl": "https://github.com/nidrux"
   },
   {
+    "name": "Taqib",
+    "categories": ["Developers"],
+    "description": "Developer",
+    "imageUrl": "https://cdn.wouldyoubot.gg/staff/developer/Taqib.webp",
+    "websiteUrl": "https://taqib.dev/"
+  },
+  {
+    "name": "Woofer21",
+    "categories": ["Developers"],
+    "description": "Developer",
+    "imageUrl": "https://cdn.wouldyoubot.gg/staff/developer/Woofer.webp",
+    "websiteUrl": "https://woofer21.com/"
+  },
+  {
     "name": "Noam",
     "categories": ["Translators", "Beta Testers"],
     "description": "French Translator, Beta Tester",
