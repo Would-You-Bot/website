@@ -21,7 +21,7 @@ import { Textarea } from '@/components/ui/textarea'
 import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { packTypes } from '@/lib/constants'
-import { PackType } from '@prisma/client'
+import { PackType } from '@/types'
 import { z } from 'zod'
 
 interface QuestionModalProps {
@@ -55,7 +55,9 @@ function QuestionModal({
     questionToEdit !== null ? value[questionToEdit].question : ''
 
   const [questionValue, setQuestionValue] = useState(preFilledQuestion)
-  const [typeValue, setTypeValue] = useState(type === 'mixed' ? null : type)
+  const [typeValue, setTypeValue] = useState<PackType | null>(
+    type === PackType.mixed ? null : type
+  )
   const [typeError, setTypeError] = useState<string | null>(null)
   const [questionError, setQuestionError] = useState<string | null>(null)
   const [formData, setFormData] = useLocalStorage<PackData>(
@@ -70,7 +72,7 @@ function QuestionModal({
       setTypeValue(existingQuestion.type)
     } else {
       setQuestionValue('')
-      setTypeValue(type === 'mixed' ? null : type)
+      setTypeValue(type === PackType.mixed ? null : type)
     }
   }, [questionToEdit, mode, value, type])
 

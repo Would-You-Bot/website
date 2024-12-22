@@ -29,7 +29,7 @@ import { useIsMobile } from '@/hooks/use-mobile'
 import { Button } from '@/components/ui/button'
 import { PackData } from '@/utils/zod/schemas'
 import { Input } from '@/components/ui/input'
-import { packMap, PackTypes } from '@/types'
+import { packMap, PackType } from '@/types'
 import { useState } from 'react'
 import clsx from 'clsx'
 import { z } from 'zod'
@@ -65,7 +65,7 @@ function ImportDetails({
       FileInput
     )
   const [questions, setQuestions] = useState<
-    Record<string, { question: string; selected: boolean }[]>
+    Partial<Record<PackType, { question: string; selected: boolean }[]>>
   >({})
   const [selectedCount, setSelectedCount] = useState(currentQuestions.length)
 
@@ -216,12 +216,12 @@ function ImportDetails({
     }
   }
 
-  const changeCheckState = (category: string, index: number) => {
-    const selected = questions[category][index].selected
+  const changeCheckState = (category: PackType, index: number) => {
+    const selected = questions[category]![index].selected
     if (selected) setSelectedCount(selectedCount - 1)
     else setSelectedCount(selectedCount + 1)
 
-    const newQuestions = [...questions[category]]
+    const newQuestions = [...questions[category]!]
     newQuestions[index].selected = !newQuestions[index].selected
     setQuestions({ ...questions, [category]: newQuestions })
   }
@@ -242,7 +242,7 @@ function ImportDetails({
   }
 
   const finishImport = () => {
-    const newQuestions: { type: PackTypes; question: string }[] = [
+    const newQuestions: { type: PackType; question: string }[] = [
       ...currentQuestions
     ]
 
@@ -250,7 +250,7 @@ function ImportDetails({
       for (const question of value) {
         if (question.selected) {
           newQuestions.push({
-            type: key as PackTypes,
+            type: key as PackType,
             question: question.question
           })
         }
@@ -348,10 +348,10 @@ function ImportDetails({
                     key={key}
                     className="px-4 py-2 bg-white/5 rounded-none"
                   >
-                    {packMap[key]}
+                    {packMap[key as PackType]}
                   </li>
                   <ul className="rounded-none border-none">
-                    {questions[key].map((question, index) => (
+                    {questions[key as PackType]!.map((question, index) => (
                       <li key={`${question}-${index}`}>
                         <button
                           className={
@@ -360,7 +360,9 @@ function ImportDetails({
                           style={{
                             overflowWrap: 'anywhere'
                           }}
-                          onClick={() => changeCheckState(key, index)}
+                          onClick={() =>
+                            changeCheckState(key as PackType, index)
+                          }
                           disabled={!question.selected && selectedCount >= 100}
                         >
                           <Checkbox checked={question.selected} />

@@ -1,20 +1,10 @@
+import { PackType } from '@/types'
 import { z } from 'zod'
 
-const validTypes = z.union(
-  [
-    z.literal('truth'),
-    z.literal('dare'),
-    z.literal('wouldyourather'),
-    z.literal('neverhaveiever'),
-    z.literal('whatwouldyoudo'),
-    z.literal('wwyd'), // alias for whatwouldyoudo
-    z.literal('topic')
-  ],
-  {
-    message:
-      'Invalid question type. Accepted types are: truth, dare, wouldyourather, neverhaveiever, whatwouldyoudo, wwyd, and topic.'
-  }
-)
+const validTypes = z.nativeEnum(PackType, {
+  message:
+    'Invalid question type. Accepted types are: truth, dare, wouldyourather, neverhaveiever, whatwouldyoudo, wyr, nhie, wwyd, and topic.'
+})
 
 export const importQuestionSchemaA = z.record(
   validTypes,

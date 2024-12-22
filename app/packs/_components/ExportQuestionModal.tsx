@@ -22,6 +22,7 @@ import { Button } from '@/components/ui/button'
 import { PackData } from '@/utils/zod/schemas'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { PackType } from '@/types'
 import { useState } from 'react'
 import clsx from 'clsx'
 
@@ -31,13 +32,7 @@ function ExportDetails({
 }: {
   setOpen: React.Dispatch<React.SetStateAction<boolean>>
   questions: {
-    type:
-      | 'wouldyourather'
-      | 'neverhaveiever'
-      | 'whatwouldyoudo'
-      | 'truth'
-      | 'dare'
-      | 'topic'
+    type: PackType
     question: string
   }[]
 }) {
@@ -56,17 +51,7 @@ function ExportDetails({
   }
 
   const exportQuestions = () => {
-    let data: Partial<
-      Record<
-        | 'wouldyourather'
-        | 'neverhaveiever'
-        | 'whatwouldyoudo'
-        | 'truth'
-        | 'dare'
-        | 'topic',
-        string[]
-      >
-    > = {}
+    let data: Partial<Record<PackType, string[]>> = {}
 
     questions.forEach((question) => {
       if (!data[question.type]) {
@@ -169,13 +154,7 @@ export default function ExportQuestionModal({
 }: {
   trigger: React.ReactNode
   questions: {
-    type:
-      | 'wouldyourather'
-      | 'neverhaveiever'
-      | 'whatwouldyoudo'
-      | 'truth'
-      | 'dare'
-      | 'topic'
+    type: PackType
     question: string
   }[]
 }) {
