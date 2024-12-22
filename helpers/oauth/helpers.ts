@@ -5,8 +5,8 @@ import { cookies } from 'next/headers'
 import { parseJWT } from '@oslojs/jwt'
 
 export function getIdToken(inputToken?: string): IdTokenJWT | null {
-  const tokenString = inputToken || cookies().get('ID_TOKEN')?.value
-  return tokenString ? (parseJWT(tokenString) as IdTokenJWT) : null
+	const tokenString = inputToken || cookies().get('ID_TOKEN')?.value
+	return tokenString ? (parseJWT(tokenString) as IdTokenJWT) : null
 }
 
 /**
@@ -16,11 +16,11 @@ export function getIdToken(inputToken?: string): IdTokenJWT | null {
  * @param inputToken Optional token string that takes precedence over cookie value
  */
 export function getAuthToken(inputToken?: string): Promise<OAuthTokenJWT> {
-  const token = inputToken || cookies().get('OAUTH_TOKEN')?.value
-  if (!token) {
-    throw new MissingTokenException()
-  }
-  return verifyJwt(token) as Promise<OAuthTokenJWT>
+	const token = inputToken || cookies().get('OAUTH_TOKEN')?.value
+	if (!token) {
+		throw new MissingTokenException()
+	}
+	return verifyJwt(token) as Promise<OAuthTokenJWT>
 }
 
 /**
@@ -29,14 +29,14 @@ export function getAuthToken(inputToken?: string): Promise<OAuthTokenJWT> {
  * @param inputToken Optional token string that takes precedence over cookie value
  */
 export const getAuthTokenOrNull = async (
-  inputToken?: string
+	inputToken?: string
 ): Promise<OAuthTokenJWT | null> => {
-  try {
-    return await getAuthToken(inputToken)
-  } catch (e) {
-    console.error('Error getting auth token:', e)
-    return null
-  }
+	try {
+		return await getAuthToken(inputToken)
+	} catch (e) {
+		console.error('Error getting auth token:', e)
+		return null
+	}
 }
 
 export abstract class OAuthException extends Error {}

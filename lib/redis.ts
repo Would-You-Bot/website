@@ -3,42 +3,42 @@ import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { Redis } from '@upstash/redis'
 
 const redis = new Redis({
-  url: process.env.REDIS_URL!,
-  token: process.env.REDIS_TOKEN!
+	url: process.env.REDIS_URL!,
+	token: process.env.REDIS_TOKEN!
 })
 
 const getRedis = async () => {
-  return redis
+	return redis
 }
 
 const add = async (key: string, value: any) => {
-  await redis.set(key, JSON.stringify(value))
+	await redis.set(key, JSON.stringify(value))
 }
 
 const get = async (key: string) => {
-  const data = await redis.get(key)
+	const data = await redis.get(key)
 
-  return data
+	return data
 }
 
 const setServer = async (
-  userId: string | undefined,
-  servers: object | Array<object>
+	userId: string | undefined,
+	servers: object | Array<object>
 ) => {
-  if (!userId) return console.log('No user id')
+	if (!userId) return console.log('No user id')
 
-  await redis.set(userId, JSON.stringify(servers))
+	await redis.set(userId, JSON.stringify(servers))
 }
 const getServer = async () => {
-  const authToken = await getAuthTokenOrNull()
+	const authToken = await getAuthTokenOrNull()
 
-  if (!authToken) return null
+	if (!authToken) return null
 
-  const { id } = authToken.payload
+	const { id } = authToken.payload
 
-  let data = await redis.get(id)
+	let data = await redis.get(id)
 
-  return data
+	return data
 }
 
 export { add, get, getServer, setServer, getRedis }
