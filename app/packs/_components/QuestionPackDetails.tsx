@@ -17,7 +17,7 @@ import {
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 import { CopyIcon, ExternalLink, FileUp, Search, XIcon } from 'lucide-react'
-import ExportQuestionModal from '../create/_components/ExportQuestionModal'
+import ExportQuestionModal from './ExportQuestionModal'
 import { Skeleton } from '@/components/ui/skeleton'
 import { toast } from '@/components/ui/use-toast'
 import { useIsMobile } from '@/hooks/use-mobile'
