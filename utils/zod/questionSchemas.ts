@@ -6,6 +6,7 @@ const validTypes = z.union([
   z.literal('wouldyourather'),
   z.literal('neverhaveiever'),
   z.literal('whatwouldyoudo'),
+  z.literal('wwyd'), // alias for whatwouldyoudo
   z.literal('topic')
 ])
 
