@@ -11,10 +11,13 @@ import {
 import {
   ArrowLeft,
   EllipsisVertical,
+  FileInput,
+  FileOutput,
   Loader2,
   Pen,
   Plus,
   Search,
+  Send,
   Trash2,
   XCircle
 } from 'lucide-react'
@@ -30,6 +33,7 @@ import { useLocalStorage } from '@/hooks/use-localstorage'
 import { PackData, packSchema } from '@/utils/zod/schemas'
 import { packLanguages, packTypes } from '@/lib/constants'
 import ImportQuestionModal from './ImportQuestionModal'
+import ExportQuestionModal from './ExportQuestionModal'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from '@/components/ui/use-toast'
@@ -352,7 +356,7 @@ function PackForm() {
             //  second step adding questions to the pack
           : <section className="space-y-8  min-h-[calc(100vh-160px)]">
               <div className="flex flex-col gap-2">
-                <div className="flex flex-wrap items-center gap-6 lg:gap-10">
+                <div className="flex flex-wrap items-center gap-4">
                   <Button
                     className="rounded-lg w-fit py-2 px-4 flex gap-2 self-end"
                     size="sm"
@@ -365,31 +369,49 @@ function PackForm() {
                     Back
                   </Button>
                   <div className="flex flex-col items-center justify-center gap-2">
-                    <span className="text-sm">Pack Questions</span>
                     <ImportQuestionModal
                       trigger={
                         <Button
-                          className="rounded-lg w-fit py-2 px-4"
+                          className="rounded-lg w-fit py-2 px-4 flex gap-2 self-end"
                           size="sm"
                           variant="outline"
                           type="button"
                           disabled={isSubmitting}
                         >
-                          Import JSON
+                          <FileInput className="size-4" />
+                          Import Questions
                         </Button>
                       }
                       control={control}
                     />
                   </div>
+                  <div className="flex flex-col items-center justify-center gap-2">
+                    <ExportQuestionModal
+                      trigger={
+                        <Button
+                          className="rounded-lg w-fit py-2 px-4 flex gap-2 self-end"
+                          size="sm"
+                          variant="outline"
+                          type="button"
+                          disabled={isSubmitting}
+                        >
+                          <FileOutput className="size-4" />
+                          Export Questions
+                        </Button>
+                      }
+                      questions={addedQuestions}
+                    />
+                  </div>
                   <div className="flex flex-col gap-2 justify-center">
-                    <span className="text-sm">Submit Pack</span>
                     <Button
-                      className="rounded-lg w-fit py-2 px-4 bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
+                      className="rounded-lg w-fit py-2 px-4 flex gap-2 self-end"
                       size="sm"
                       type="submit"
                       disabled={isSubmitting}
                     >
-                      {isSubmitting && <Loader2 size={16} />}
+                      {isSubmitting ?
+                        <Loader2 size={16} />
+                      : <Send className="size-4" />}
                       {isSubmitting ? 'Submitting' : 'Submit'}
                     </Button>
                   </div>
