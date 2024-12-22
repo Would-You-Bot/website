@@ -10,6 +10,9 @@ export async function GET() {
 			where: {
 				pending: true
 			},
+      orderBy: {
+        createdAt: 'asc'
+      },
 			select: {
 				denied: true,
 				pending: true,
