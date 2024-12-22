@@ -1,3 +1,4 @@
+import { PackType } from '@/types'
 import z from 'zod'
 
 export const userSchema = z.object({
@@ -16,20 +17,10 @@ export const questionSchema = z.object({
     .string()
     .min(10, 'Make sure your question is at least 10 characters long')
     .max(300, 'Make sure your question is only 300 characters long'),
-  type: z.enum(
-    [
-      'truth',
-      'dare',
-      'wouldyourather',
-      'neverhaveiever',
-      'whatwouldyoudo',
-      'topic'
-    ],
-    {
-      required_error: 'Please select a valid question type',
-      message: 'Please select a valid question type'
-    }
-  )
+  type: z.nativeEnum(PackType, {
+    required_error: 'Please select a valid question type',
+    message: 'Please select a valid question type'
+  })
 })
 
 export const editedPackSchema = z.object({
@@ -57,21 +48,10 @@ export const editedPackSchema = z.object({
 })
 
 export const packSchema = z.object({
-  type: z.enum(
-    [
-      'wouldyourather',
-      'neverhaveiever',
-      'whatwouldyoudo',
-      'truth',
-      'dare',
-      'topic',
-      'mixed'
-    ],
-    {
-      required_error: 'Please select a valid pack type',
-      message: 'Please select a valid pack type'
-    }
-  ),
+  type: z.nativeEnum(PackType, {
+    required_error: 'Please select a valid pack type',
+    message: 'Please select a valid pack type'
+  }),
   language: z.enum(['en_EN', 'de_DE', 'it_IT', 'fr_FR', 'es_ES'], {
     required_error: 'Please select a valid language',
     message: 'Please select a valid language'

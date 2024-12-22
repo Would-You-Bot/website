@@ -16,7 +16,8 @@ import {
 } from '@/components/ui/tooltip'
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
-import { CopyIcon, ExternalLink, Search, XIcon } from 'lucide-react'
+import { CopyIcon, ExternalLink, FileUp, Search, XIcon } from 'lucide-react'
+import ExportQuestionModal from './ExportQuestionModal'
 import { Skeleton } from '@/components/ui/skeleton'
 import { toast } from '@/components/ui/use-toast'
 import { useIsMobile } from '@/hooks/use-mobile'
@@ -141,7 +142,7 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
       <section className="max-md:mt-6">
         <p className="my-2 text-sm capitalize">look inside</p>
         <div className="border rounded-xl overflow-hidden">
-          <div className="dark:bg-[#1D1D1D] bg-background-light flex items-center px-4 py-2 gap-4 border-b">
+          <div className="dark:bg-[#1D1D1D] bg-background-light flex items-center justify-between px-4 py-2 gap-4 border-b">
             <div className="relative w-full md:w-3/4">
               <Search className="size-4 absolute left-2 bottom-3 dark:text-[#666666]" />
               <Input
@@ -151,6 +152,25 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
             </div>
+            <TooltipProvider delayDuration={0}>
+              <Tooltip>
+                <TooltipTrigger>
+                  <ExportQuestionModal
+                    trigger={
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                      >
+                        <FileUp className="size-4" />
+                        <span className="sr-only">Export Questions</span>
+                      </Button>
+                    }
+                    questions={packToShow?.questions}
+                  />
+                </TooltipTrigger>
+                <TooltipContent>Export Questions</TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
           {/*  */}
           {filteredQuestions.length > 0 ?

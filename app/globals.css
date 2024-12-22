@@ -34,6 +34,9 @@
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
+    --success: 120 84.2% 60.2%;
+    --success-foreground: 120 0% 98%;
+
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
     --ring: 0 0% 3.9%;
@@ -77,6 +80,9 @@
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
+
+    --success: 120 62.8% 50%;
+    --success-foreground: 120 0% 98%;
 
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
@@ -189,7 +195,11 @@ body::-webkit-scrollbar-track {
     inset: 0;
     border-radius: calc(var(--radius) + 0.1875rem);
     z-index: -1;
-    background-image: linear-gradient(146.78deg, #0598F6 -1.37%, #F00505 104.43%);
+    background-image: linear-gradient(
+      146.78deg,
+      #0598f6 -1.37%,
+      #f00505 104.43%
+    );
   }
 
   .popular-btn {
