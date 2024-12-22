@@ -74,6 +74,9 @@ ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 ARG NEXT_PUBLIC_PAGE_URL
 ENV NEXT_PUBLIC_PAGE_URL=${NEXT_PUBLIC_PAGE_URL}
 
+ARG WEBHOOK_URL
+ENV WEBHOOK_URL=${WEBHOOK_URL}
+
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
 # Uncomment the following line in case you want to disable telemetry during the build.
@@ -171,6 +174,9 @@ ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 
 ARG NEXT_PUBLIC_PAGE_URL
 ENV NEXT_PUBLIC_PAGE_URL=${NEXT_PUBLIC_PAGE_URL}
+
+ARG WEBHOOK_URL
+ENV WEBHOOK_URL=${WEBHOOK_URL}
 
 USER nextjs
 
