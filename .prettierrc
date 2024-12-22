@@ -6,5 +6,6 @@
   "singleQuote": true,
   "singleAttributePerLine": true,
   "quoteProps": "as-needed",
-  "experimentalTernaries": true
+  "experimentalTernaries": true,
+  "useTabs": true
 }
