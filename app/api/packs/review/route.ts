@@ -79,9 +79,9 @@ export async function PUT(request: NextRequest) {
 		})
 
 		if (approved) {
-			DiscordLogger.approvedQuestion(updatedPack, actionBy)
+			DiscordLogger.approvedQuestion(updatedPack, actionBy, message)
 		} else {
-			DiscordLogger.deniedQuestion(updatedPack, actionBy)
+			DiscordLogger.deniedQuestion(updatedPack, actionBy, message)
 		}
 
 		return NextResponse.json(
