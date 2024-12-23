@@ -9,7 +9,6 @@ export const metadata: Metadata = {
 }
 
 function Review() {
-
 	return (
 		<Container className="pt-8 lg:pt-10 space-y-8 lg:space-y-10 min-h-[calc(100vh-112px)]">
 			<h1 className="text-4xl font-bold">
