@@ -59,7 +59,7 @@ function PageContent({ denied, pending }: PageContentProps) {
 						redText="Previously"
 						blueText="Rejected"
 						level={3}
-						className='text-2xl mb-6 font-semibold'
+						className="text-2xl mb-6 font-semibold"
 					/>
 					<ul className="grid grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))] gap-6">
 						{packs.denied.map((pack) => (

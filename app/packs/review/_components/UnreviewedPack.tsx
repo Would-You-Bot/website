@@ -78,7 +78,6 @@ export default function UnreviewedPack({
 					:	'The pack has been rejected and the author will be notified'
 			})
 
-			
 			setDialogState(null)
 			setRejectionReason('')
 			onStatusChange?.()

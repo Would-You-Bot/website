@@ -124,8 +124,8 @@ const config = {
 					'linear-gradient(92.91deg, #0598F4 -50%,#F00605 150%)'
 			},
 			overflowWrap: {
-				'anywhere': 'anywhere',
-				'normal': 'normal',
+				anywhere: 'anywhere',
+				normal: 'normal',
 				'break-word': 'break-word'
 			}
 		}

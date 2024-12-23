@@ -24,12 +24,12 @@ import { QuestionPackDetails } from './QuestionPackDetails'
 import { toast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
+import { PackType } from '@prisma/client'
 import { packMap } from '@/types'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
-import { PackType } from '@prisma/client'
 
 export interface QuestionPackProps {
 	type: string

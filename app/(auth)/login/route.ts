@@ -229,7 +229,7 @@ async function exchangeAuthorizationCode(code: string) {
 			exp,
 			access_token,
 			refresh_token,
-			user: { id, avatar, username, global_name, customerId: "justme" }
+			user: { id, avatar, username, global_name, customerId: 'justme' }
 		}
 	} catch (error: unknown) {
 		console.error('Authorization code exchange error:', error)

@@ -9,7 +9,6 @@ export const metadata: Metadata = {
 	description: 'Review question packs submitted by users'
 }
 
-
 async function Review() {
 	const packs = await prisma.questionPack.findMany({
 		where: {
@@ -23,7 +22,7 @@ async function Review() {
 			description: true,
 			denied: true,
 			questions: true
-		},
+		}
 		// Maybe paginate?
 	})
 

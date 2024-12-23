@@ -187,7 +187,9 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
 									key={`${question.question}-${index}`}
 									className="px-4 py-2"
 								>
-									<p className="text-sm overflow-wrap-anywhere">{question.question}</p>
+									<p className="text-sm overflow-wrap-anywhere">
+										{question.question}
+									</p>
 								</li>
 							))}
 						</ul>
@@ -226,10 +228,7 @@ export function QuestionPackDetails({
 
 	const buttonContent = (
 		<Button
-			className={cn(
-				'w-full',
-				!isReview && 'text-white'
-			)}
+			className={cn('w-full', !isReview && 'text-white')}
 			variant={isReview ? 'outline' : 'default'}
 		>
 			{isReview ?
