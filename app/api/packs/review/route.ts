@@ -65,7 +65,7 @@ export async function PUT(request: NextRequest) {
 		)
 	}
 
-	const { id, approved } = parsedReviewResult.data
+	const { id, approved, message } = parsedReviewResult.data
 
 	try {
 		const updatedPack = await prisma.questionPack.update({
