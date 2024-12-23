@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss'
+import plugin from 'tailwindcss/plugin'
 
 const config = {
 	darkMode: ['class'],
@@ -121,10 +122,30 @@ const config = {
 					'linear-gradient(to bottom right, #0598F4 0%,#F00605 100%)',
 				['gradient-brand']:
 					'linear-gradient(92.91deg, #0598F4 -50%,#F00605 150%)'
+			},
+			overflowWrap: {
+				'anywhere': 'anywhere',
+				'normal': 'normal',
+				'break-word': 'break-word'
 			}
 		}
 	},
-	plugins: [require('tailwindcss-animate')]
+	plugins: [
+		require('tailwindcss-animate'),
+		plugin(function ({ addUtilities }) {
+			addUtilities({
+				'.overflow-wrap-anywhere': {
+					'overflow-wrap': 'anywhere'
+				},
+				'.overflow-wrap-break': {
+					'overflow-wrap': 'break-word'
+				},
+				'.overflow-wrap': {
+					'overflow-wrap': 'normal'
+				}
+			})
+		})
+	]
 } satisfies Config
 
 export default config

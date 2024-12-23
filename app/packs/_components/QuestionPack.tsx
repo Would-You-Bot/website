@@ -29,6 +29,7 @@ import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import Link from 'next/link'
 import clsx from 'clsx'
+import { PackType } from '@prisma/client'
 
 export interface QuestionPackProps {
 	type: string
@@ -147,7 +148,7 @@ export default function QuestionPack({
 						</div>
 						<div className="flex flex-col gap-0.5">
 							<h3 className="text-sm text-muted-foreground">Type</h3>
-							<p>{packMap[type]}</p>
+							<p>{packMap[type as PackType]}</p>
 						</div>
 					</CardContent>
 				</div>
