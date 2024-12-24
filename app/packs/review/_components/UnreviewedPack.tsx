@@ -57,14 +57,15 @@ export default function UnreviewedPack({
 	const handleAction = async (action: 'accept' | 'reject') => {
 		setIsLoading(true)
 		try {
-			const response = await fetch(`/api/packs/${id}/review`, {
-				method: 'POST',
+			const response = await fetch('/api/packs/review', {
+				method: 'PUT',
 				headers: {
 					'Content-Type': 'application/json'
 				},
 				body: JSON.stringify({
-					action,
-					rejectionReason: action === 'reject' ? rejectionReason : undefined
+					id,
+					approved: action === 'accept' ? true : false,
+					message: action === 'reject' ? rejectionReason : undefined
 				})
 			})
 
@@ -100,14 +101,6 @@ export default function UnreviewedPack({
 
 	return (
 		<Card className="relative border-none h-full flex flex-col justify-between">
-			{/* {isDenied && (
-				<Badge
-					variant="destructive"
-					className="absolute -top-2 right-4 rounded-sm"
-				>
-					Rejected
-				</Badge>
-			)} */}
 			<CardHeader>
 				<CardTitle>{name}</CardTitle>
 				<CardDescription>{description}</CardDescription>
@@ -151,7 +144,7 @@ export default function UnreviewedPack({
 								<AlertDialogCancel>Cancel</AlertDialogCancel>
 								<Button
 									onClick={() => handleAction('accept')}
-									className="text-white"
+									className="text-white gap-3"
 									disabled={isLoading}
 								>
 									{isLoading && (
@@ -163,50 +156,53 @@ export default function UnreviewedPack({
 						</AlertDialogContent>
 					</AlertDialog>
 
-					<AlertDialog
-						open={dialogState === 'reject'}
-						onOpenChange={(open) => !open && handleDialogClose()}
-					>
-						<AlertDialogTrigger asChild>
-							<Button
-								variant="destructive"
-								disabled={isLoading}
-								onClick={() => setDialogState('reject')}
-							>
-								<X className="mr-2 h-4 w-4" />
-								Reject
-							</Button>
-						</AlertDialogTrigger>
-						<AlertDialogContent>
-							<AlertDialogHeader>
-								<AlertDialogTitle>Reject Pack?</AlertDialogTitle>
-								<AlertDialogDescription>
-									Please enter a reason for rejecting the pack below
-								</AlertDialogDescription>
-							</AlertDialogHeader>
-							<Textarea
-								placeholder="Enter rejection reason..."
-								value={rejectionReason}
-								onChange={(e) => setRejectionReason(e.target.value)}
-								className="min-h-[100px]"
-							/>
-							<AlertDialogFooter>
-								<AlertDialogCancel>Cancel</AlertDialogCancel>
+					{!isDenied && (
+						<AlertDialog
+							open={dialogState === 'reject'}
+							onOpenChange={(open) => !open && handleDialogClose()}
+						>
+							<AlertDialogTrigger asChild>
 								<Button
 									variant="destructive"
-									onClick={() => handleAction('reject')}
-									disabled={!rejectionReason.trim() || isLoading}
+									disabled={isLoading}
+									onClick={() => setDialogState('reject')}
 								>
-									{isLoading && (
-										<Loader2 className="size-4 animate-spin transition" />
-									)}
-									{isLoading ? 'Processing...' : 'Confirm'}
+									<X className="mr-2 h-4 w-4" />
+									Reject
 								</Button>
-							</AlertDialogFooter>
-						</AlertDialogContent>
-					</AlertDialog>
+							</AlertDialogTrigger>
+							<AlertDialogContent>
+								<AlertDialogHeader>
+									<AlertDialogTitle>Reject Pack?</AlertDialogTitle>
+									<AlertDialogDescription>
+										Please enter a reason for rejecting the pack below
+									</AlertDialogDescription>
+								</AlertDialogHeader>
+								<Textarea
+									placeholder="Enter rejection reason..."
+									value={rejectionReason}
+									onChange={(e) => setRejectionReason(e.target.value)}
+									className="min-h-[100px]"
+								/>
+								<AlertDialogFooter>
+									<AlertDialogCancel>Cancel</AlertDialogCancel>
+									<Button
+										variant="destructive"
+										onClick={() => handleAction('reject')}
+										disabled={!rejectionReason.trim() || isLoading}
+										className="gpa-3"
+									>
+										{isLoading && (
+											<Loader2 className="size-4 animate-spin transition" />
+										)}
+										{isLoading ? 'Processing...' : 'Confirm'}
+									</Button>
+								</AlertDialogFooter>
+							</AlertDialogContent>
+						</AlertDialog>
+					)}
 
-					<div className="col-span-2">
+					<div className={`${!isDenied ? 'col-span-2' : ''}`}>
 						<QuestionPackDetails
 							id={id}
 							type={type}

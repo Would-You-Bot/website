@@ -6,7 +6,7 @@ import { setServer } from '@/lib/redis'
 import { cookies } from 'next/headers'
 import { stripe } from '@/lib/stripe'
 import { prisma } from '@/lib/prisma'
-// import Stripe from 'stripe'
+import Stripe from 'stripe'
 import { z } from 'zod'
 
 // Environment variables validation
@@ -183,21 +183,21 @@ async function exchangeAuthorizationCode(code: string) {
 
 		await setServer(id, finalGuilds)
 
-		// let customer: Stripe.ApiSearchResult<Stripe.Customer> | Stripe.Customer =
-		// 	await stripe.customers.search({
-		// 		query: `metadata["userID"]: "${id}"`,
-		// 		limit: 1
-		// 	})
-		// customer = customer?.data[0]
-		// if (!customer) {
-		// 	const newCustomer = await stripe.customers.create({
-		// 		name: username,
-		// 		metadata: {
-		// 			userID: id
-		// 		}
-		// 	})
-		// 	customer = newCustomer
-		// }
+		let customer: Stripe.ApiSearchResult<Stripe.Customer> | Stripe.Customer =
+			await stripe.customers.search({
+				query: `metadata["userID"]: "${id}"`,
+				limit: 1
+			})
+		customer = customer?.data[0]
+		if (!customer) {
+			const newCustomer = await stripe.customers.create({
+				name: username,
+				metadata: {
+					userID: id
+				}
+			})
+			customer = newCustomer
+		}
 
 		if (scope.includes('guilds') && scope.includes('guilds.join')) {
 			if (scope.includes('guilds.join') && guilds?.length <= 100) {
