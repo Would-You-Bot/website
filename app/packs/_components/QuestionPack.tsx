@@ -24,6 +24,7 @@ import { QuestionPackDetails } from './QuestionPackDetails'
 import { toast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
+import { PackType } from '@prisma/client'
 import { packMap } from '@/types'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
@@ -147,7 +148,7 @@ export default function QuestionPack({
 						</div>
 						<div className="flex flex-col gap-0.5">
 							<h3 className="text-sm text-muted-foreground">Type</h3>
-							<p>{packMap[type]}</p>
+							<p>{packMap[type as PackType]}</p>
 						</div>
 					</CardContent>
 				</div>
