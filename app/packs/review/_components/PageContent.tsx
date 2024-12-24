@@ -4,7 +4,7 @@ import { JsonValue } from '@prisma/client/runtime/library'
 import GlowingHeading from '@/components/GlowingHeading'
 import UnreviewedPack from './UnreviewedPack'
 import { PackType } from '@prisma/client'
-import React from 'react'
+import { useState } from 'react'
 
 type UnreviedPackData = {
 	type: PackType
@@ -22,7 +22,7 @@ interface PageContentProps {
 }
 
 function PageContent({ denied, pending }: PageContentProps) {
-	const [packs, setPacks] = React.useState({ denied, pending })
+	const [packs, setPacks] = useState({ denied, pending })
 
 	const refreshPacks = () => {
 		// Maybe router.refresh() here?
@@ -35,7 +35,6 @@ function PageContent({ denied, pending }: PageContentProps) {
 	return (
 		<section className="space-y-10">
 			<div>
-				{/* <h2 className="text-2xl font-semibold mb-4">Pending Review</h2> */}
 				<ul className="grid grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))] gap-6">
 					{packs.pending.map((pack) => (
 						<UnreviewedPack
@@ -56,8 +55,8 @@ function PageContent({ denied, pending }: PageContentProps) {
 			{packs.denied.length > 0 && (
 				<div>
 					<GlowingHeading
-						redText="Previously"
-						blueText="Rejected"
+						redText="Rejected"
+						blueText="Packs"
 						level={3}
 						className="text-2xl mb-6 font-semibold"
 					/>

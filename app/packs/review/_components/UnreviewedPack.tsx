@@ -23,17 +23,15 @@ import { Textarea } from '@/components/ui/textarea'
 import { toast } from '@/components/ui/use-toast'
 import { Check, X, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+import { PackType } from '@prisma/client'
 import { packMap } from '@/types'
 import { useState } from 'react'
-
-import { PackType } from '@/types'
 
 interface UnreviewedPackProps {
 	id: string
 	name: string
 	description: string
-	type: string
+	type: PackType
 	questions: any[]
 	isDenied?: boolean
 	onStatusChange?: () => void
@@ -113,7 +111,7 @@ export default function UnreviewedPack({
 					</div>
 					<div className="flex flex-col gap-0.5">
 						<h3 className="text-sm text-muted-foreground">Type</h3>
-						<p className="">{packMap[type as PackType]}</p>
+						<p className="">{packMap[type]}</p>
 					</div>
 				</CardContent>
 				<CardFooter className="grid grid-cols-2 gap-2 mt-auto h-fit">
@@ -123,8 +121,8 @@ export default function UnreviewedPack({
 					>
 						<AlertDialogTrigger asChild>
 							<Button
-								variant="default"
-								className="bg-emerald-500 hover:bg-emerald-600 text-white"
+								variant="success"
+								className='bg-emerald-400'
 								disabled={isLoading}
 								onClick={() => setDialogState('accept')}
 							>
@@ -144,7 +142,8 @@ export default function UnreviewedPack({
 								<AlertDialogCancel>Cancel</AlertDialogCancel>
 								<Button
 									onClick={() => handleAction('accept')}
-									className="text-white gap-3"
+									variant="default"
+									className="flex gap-2"
 									disabled={isLoading}
 								>
 									{isLoading && (
@@ -156,53 +155,51 @@ export default function UnreviewedPack({
 						</AlertDialogContent>
 					</AlertDialog>
 
-					{!isDenied && (
-						<AlertDialog
-							open={dialogState === 'reject'}
-							onOpenChange={(open) => !open && handleDialogClose()}
-						>
-							<AlertDialogTrigger asChild>
+					<AlertDialog
+						open={dialogState === 'reject'}
+						onOpenChange={(open) => !open && handleDialogClose()}
+					>
+						<AlertDialogTrigger asChild>
+							<Button
+								variant="destructive"
+								disabled={isLoading}
+								onClick={() => setDialogState('reject')}
+							>
+								<X className="mr-2 h-4 w-4" />
+								Reject
+							</Button>
+						</AlertDialogTrigger>
+						<AlertDialogContent>
+							<AlertDialogHeader>
+								<AlertDialogTitle>Reject Pack?</AlertDialogTitle>
+								<AlertDialogDescription>
+									Please enter a reason for rejecting the pack below
+								</AlertDialogDescription>
+							</AlertDialogHeader>
+							<Textarea
+								placeholder="Enter rejection reason..."
+								value={rejectionReason}
+								onChange={(e) => setRejectionReason(e.target.value)}
+								className="min-h-[100px]"
+							/>
+							<AlertDialogFooter>
+								<AlertDialogCancel>Cancel</AlertDialogCancel>
 								<Button
 									variant="destructive"
-									disabled={isLoading}
-									onClick={() => setDialogState('reject')}
+									onClick={() => handleAction('reject')}
+									disabled={!rejectionReason.trim() || isLoading}
+									className="flex gap-2"
 								>
-									<X className="mr-2 h-4 w-4" />
-									Reject
+									{isLoading && (
+										<Loader2 className="size-4 animate-spin transition" />
+									)}
+									{isLoading ? 'Processing...' : 'Confirm'}
 								</Button>
-							</AlertDialogTrigger>
-							<AlertDialogContent>
-								<AlertDialogHeader>
-									<AlertDialogTitle>Reject Pack?</AlertDialogTitle>
-									<AlertDialogDescription>
-										Please enter a reason for rejecting the pack below
-									</AlertDialogDescription>
-								</AlertDialogHeader>
-								<Textarea
-									placeholder="Enter rejection reason..."
-									value={rejectionReason}
-									onChange={(e) => setRejectionReason(e.target.value)}
-									className="min-h-[100px]"
-								/>
-								<AlertDialogFooter>
-									<AlertDialogCancel>Cancel</AlertDialogCancel>
-									<Button
-										variant="destructive"
-										onClick={() => handleAction('reject')}
-										disabled={!rejectionReason.trim() || isLoading}
-										className="gpa-3"
-									>
-										{isLoading && (
-											<Loader2 className="size-4 animate-spin transition" />
-										)}
-										{isLoading ? 'Processing...' : 'Confirm'}
-									</Button>
-								</AlertDialogFooter>
-							</AlertDialogContent>
-						</AlertDialog>
-					)}
+							</AlertDialogFooter>
+						</AlertDialogContent>
+					</AlertDialog>
 
-					<div className={`${!isDenied ? 'col-span-2' : ''}`}>
+					<div className="col-span-2">
 						<QuestionPackDetails
 							id={id}
 							type={type}
