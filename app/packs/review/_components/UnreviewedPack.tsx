@@ -122,7 +122,7 @@ export default function UnreviewedPack({
 						<AlertDialogTrigger asChild>
 							<Button
 								variant="success"
-								className='bg-emerald-400'
+								className="bg-emerald-400"
 								disabled={isLoading}
 								onClick={() => setDialogState('accept')}
 							>
