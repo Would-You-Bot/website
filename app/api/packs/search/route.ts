@@ -1,6 +1,6 @@
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { NextRequest, NextResponse } from 'next/server'
-import { PackType, Prisma } from '@prisma/client'
+import { PackType, Prisma, Status } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 
@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
 	const skip = (pageNumber - 1) * PAGE_SIZE
 
 	const where: Prisma.QuestionPackWhereInput = {
-		status: 'approved',
+		status: Status.approved,
 		AND: [
 			(
 				type &&

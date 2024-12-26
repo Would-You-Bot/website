@@ -102,9 +102,7 @@ async function page({
 				{responseData.success && responseData.data.length > 0 ?
 					<section className="min-h-96">
 						<QuestionPackList
-							packList={responseData.data.sort(
-								(a, b) => Number(b.popular) - Number(a.popular)
-							)}
+							packList={responseData.data}
 							userId={userId}
 							isLoggedIn={!!auth}
 						/>

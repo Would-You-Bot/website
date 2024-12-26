@@ -3,7 +3,7 @@
 import QuestionPack from '@/app/packs/_components/QuestionPack'
 import { useEffect, useState } from 'react'
 import { Skeleton } from '../ui/skeleton'
-import { PackType } from '@prisma/client'
+import { PackType, Status } from '@prisma/client'
 import { SearchX } from 'lucide-react'
 
 export interface PackData {
@@ -16,7 +16,7 @@ export interface PackData {
 	tags: string[]
 	likes: string
 	questions: number
-	status: 'pending' | 'approved' | 'resubmit_pending' | 'denied'
+	status: Status
 	userLiked: boolean
 }
 
@@ -54,9 +54,9 @@ export function PackList({ type, id, canEdit }: PackListProps) {
 	const groupedPacks = sortedPacks.reduce(
 		(acc, pack) => {
 			if (type === 'created') {
-				if (pack.status === 'pending') {
+				if (pack.status === Status.pending) {
 					acc.pending.push(pack)
-				} else if (pack.status === 'resubmit_pending') {
+				} else if (pack.status === Status.resubmit_pending) {
 					acc.resubmitPending.push(pack)
 				} else {
 					acc.approved.push(pack)

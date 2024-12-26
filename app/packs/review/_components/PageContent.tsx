@@ -3,7 +3,7 @@
 import { JsonValue } from '@prisma/client/runtime/library'
 import UnreviewedPack from './UnreviewedPack'
 import { useRouter } from 'next/navigation'
-import { PackType } from '@prisma/client'
+import type { PackType, Status } from '@prisma/client'
 import { FolderX } from 'lucide-react'
 import { useState } from 'react'
 
@@ -12,7 +12,7 @@ type UnreviedPackData = {
 	id: string
 	name: string
 	description: string
-	status: 'pending' | 'approved' | 'resubmit_pending' | 'denied'
+	status: Status
 	questions: JsonValue[]
 }
 
