@@ -4,9 +4,9 @@ import QuestionPackList from './_components/QuestionPackList'
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import PacksPagination from './_components/PacksPagination'
 import Filter from './_components/Filter'
+import { PackType } from '@prisma/client'
 import { Metadata, Viewport } from 'next'
 import { Smile } from 'lucide-react'
-import { PackType } from '@prisma/client'
 
 export const metadata: Metadata = {
 	metadataBase: new URL('https://wouldyoubot.gg'),

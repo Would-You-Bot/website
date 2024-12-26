@@ -131,7 +131,10 @@ export async function POST(request: NextRequest) {
 	for (const question of preProcessedQuestions) {
 		questions.push({
 			id: uuidv4(),
-			type: (type === 'mixed' ? question.type : type) as Exclude<PackType, 'mixed'>,
+			type: (type === 'mixed' ? question.type : type) as Exclude<
+				PackType,
+				'mixed'
+			>,
 			question: question.question
 		})
 	}
