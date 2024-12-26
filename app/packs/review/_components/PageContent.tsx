@@ -30,7 +30,6 @@ function PageContent({ pending }: PageContentProps) {
 			pending: [...current.pending].slice(1)
 		}))
 	}
-	console.log(pending)
 	return (
 		<section className="space-y-10">
 			<div>
