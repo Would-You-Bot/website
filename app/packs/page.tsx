@@ -4,6 +4,7 @@ import QuestionPackList from './_components/QuestionPackList'
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import PacksPagination from './_components/PacksPagination'
 import Filter from './_components/Filter'
+import { PackType } from '@prisma/client'
 import { Metadata, Viewport } from 'next'
 import { Smile } from 'lucide-react'
 
@@ -43,9 +44,9 @@ export const dynamic = 'force-dynamic'
 
 export interface PackResponse {
 	data: {
-		type: string
+		type: PackType
 		id: string
-		featured: boolean
+		popular: boolean
 		name: string
 		language: string
 		description: string
@@ -102,9 +103,7 @@ async function page({
 				{responseData.success && responseData.data.length > 0 ?
 					<section className="min-h-96">
 						<QuestionPackList
-							packList={responseData.data.sort(
-								(a, b) => Number(b.featured) - Number(a.featured)
-							)}
+							packList={responseData.data}
 							userId={userId}
 							isLoggedIn={!!auth}
 						/>

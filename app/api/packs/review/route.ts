@@ -1,21 +1,21 @@
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { NextResponse, type NextRequest } from 'next/server'
 import DiscordLogger from '@/lib/logger'
+import { Status } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 
 // Get all packs left to review
 export async function GET() {
 	const question = await prisma.questionPack
-		.findFirst({
+		.findMany({
 			where: {
-				pending: true
+				status: Status.pending
 			},
 			orderBy: {
-				createdAt: 'asc'
+				updatedAt: 'asc'
 			},
 			select: {
-				denied: true,
-				pending: true,
+				status: true,
 				type: true,
 				id: true,
 				name: true,
@@ -32,14 +32,6 @@ export async function GET() {
 			)
 		})
 
-	// @ts-expect-error
-	if (question?.status === 500) {
-		return NextResponse.json(
-			{ message: 'Error getting questions left to review, please fix!' },
-			{ status: 500 }
-		)
-	}
-
 	if (!question) {
 		return NextResponse.json(
 			{ message: 'No more questions left to review' },
@@ -49,7 +41,6 @@ export async function GET() {
 
 	return NextResponse.json({ data: question }, { status: 200 })
 }
-// Review a pack should just be a boolean and an id
 export async function PUT(request: NextRequest) {
 	const tokenData = await getAuthTokenOrNull()
 	const actionBy = tokenData?.payload.id ?? '0'
@@ -73,8 +64,7 @@ export async function PUT(request: NextRequest) {
 				id: id
 			},
 			data: {
-				pending: false,
-				denied: !approved
+				status: approved ? Status.approved : Status.denied
 			}
 		})
 

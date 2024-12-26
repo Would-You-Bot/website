@@ -1,5 +1,6 @@
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { NextResponse, type NextRequest } from 'next/server'
+import { Status } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import validator from 'validator'
 
@@ -54,14 +55,16 @@ export async function GET(
 
 	const where = {
 		...(userData.userID !== userId && {
-			pending: false,
-			denied: false
+			status: {
+				notIn: [Status.pending, Status.resubmit_pending, Status.denied]
+			}
 		}),
 		...(type === 'created' && { authorId: userData.userID }),
 		...(type === 'likes' && {
 			likes: { has: id },
-			pending: false,
-			denied: false
+			status: {
+				notIn: [Status.pending, Status.resubmit_pending, Status.denied]
+			}
 		})
 	}
 
@@ -76,8 +79,7 @@ export async function GET(
 			tags: true,
 			likes: true,
 			questions: true,
-			pending: true,
-			denied: true
+			status: true
 		},
 		skip,
 		take: PAGE_SIZE
@@ -103,7 +105,7 @@ export async function GET(
 		...question,
 		questions: question.questions.length,
 		likes: question.likes.length,
-		featured: false,
+		popular: false,
 		userLiked: question.likes.includes(userId || '')
 	}))
 

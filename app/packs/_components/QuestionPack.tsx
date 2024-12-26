@@ -23,6 +23,7 @@ import { Flame, Heart, Edit, RefreshCw, Trash2 } from 'lucide-react'
 import { QuestionPackDetails } from './QuestionPackDetails'
 import { toast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
+import type { PackType } from '@prisma/client'
 import { useRouter } from 'next/navigation'
 import { packMap } from '@/types'
 import { cn } from '@/lib/utils'
@@ -31,9 +32,9 @@ import Link from 'next/link'
 import clsx from 'clsx'
 
 export interface QuestionPackProps {
-	type: string
+	type: PackType
 	id: string
-	featured: boolean
+	popular: boolean
 	name: string
 	language: string
 	description: string
@@ -41,7 +42,7 @@ export interface QuestionPackProps {
 	likes: string
 	userLiked: boolean
 	questions: number
-	style?: 'default' | 'created' | 'denied' | 'pending'
+	style?: 'default' | 'created' | 'pending' | 'denied' | 'resubmit_pending'
 	canEdit?: boolean
 }
 
@@ -49,7 +50,7 @@ export default function QuestionPack({
 	userId,
 	type,
 	id,
-	featured,
+	popular,
 	name,
 	description,
 	likes: initialLikes,
@@ -122,7 +123,7 @@ export default function QuestionPack({
 	return (
 		<div
 			className={cn('p-[3px]', {
-				'popular-pack': featured
+				'popular-pack': popular
 			})}
 		>
 			<Card className="border-none h-full flex flex-col justify-between">
@@ -132,7 +133,7 @@ export default function QuestionPack({
 						<CardDescription className="line-clamp-4">
 							{description}
 						</CardDescription>
-						{featured && (
+						{popular && (
 							<div className="flex uppercase tracking-wider items-center w-fit gap-1 px-2 py-1 rounded-md text-white popular-badge select-none absolute -top-5 right-6">
 								<Flame className="size-4 fill-white" />
 								<span className="text-[11px] hidden lg:block">Popular</span>

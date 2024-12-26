@@ -21,7 +21,7 @@ import { Textarea } from '@/components/ui/textarea'
 import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { packTypes } from '@/lib/constants'
-import { PackType } from '@/types'
+import { PackType } from '@prisma/client'
 import { z } from 'zod'
 
 interface QuestionModalProps {

@@ -1,6 +1,6 @@
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
+import { PackType, Prisma, Status } from '@prisma/client'
 import { NextRequest, NextResponse } from 'next/server'
-import { PackType, Prisma } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { z } from 'zod'
 
@@ -35,8 +35,7 @@ export async function GET(request: NextRequest) {
 	const skip = (pageNumber - 1) * PAGE_SIZE
 
 	const where: Prisma.QuestionPackWhereInput = {
-		pending: false,
-		denied: false,
+		status: Status.approved,
 		AND: [
 			(
 				type &&
@@ -68,7 +67,7 @@ export async function GET(request: NextRequest) {
 	const select: Prisma.QuestionPackSelect = {
 		type: true,
 		id: true,
-		featured: true,
+		popular: true,
 		name: true,
 		language: true,
 		description: true,
@@ -80,7 +79,7 @@ export async function GET(request: NextRequest) {
 	const [packs, totalCount] = await Promise.all([
 		prisma.questionPack.findMany({
 			where,
-			orderBy: [{ featured: 'desc' }, { createdAt: 'desc' }],
+			orderBy: [{ popular: 'desc' }, { createdAt: 'desc' }],
 			select,
 			skip,
 			take: PAGE_SIZE

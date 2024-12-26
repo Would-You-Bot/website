@@ -1,5 +1,6 @@
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { NextResponse, type NextRequest } from 'next/server'
+import { Status } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import validator from 'validator'
 
@@ -24,7 +25,7 @@ export async function GET(
 				type: true,
 				id: true,
 				language: true,
-				featured: true,
+				popular: true,
 				name: true,
 				description: true,
 				tags: true,
@@ -135,7 +136,7 @@ export async function PATCH(
 			description: data.description,
 			tags: data.tags,
 			questions: data.questions,
-			pending: true
+			status: Status.resubmit_pending
 		}
 	})
 
@@ -166,9 +167,7 @@ export async function DELETE(
 
 	const pack = await prisma.questionPack.findFirst({
 		where: {
-			id: id,
-			pending: false,
-			denied: false
+			id: id
 		},
 		select: {
 			id: true,

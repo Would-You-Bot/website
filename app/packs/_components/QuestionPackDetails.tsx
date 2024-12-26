@@ -14,9 +14,16 @@ import {
 	TooltipProvider,
 	TooltipTrigger
 } from '@/components/ui/tooltip'
+import {
+	CopyIcon,
+	ExternalLink,
+	Eye,
+	FileUp,
+	Search,
+	XIcon
+} from 'lucide-react'
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
-import { CopyIcon, ExternalLink, FileUp, Search, XIcon } from 'lucide-react'
 import ExportQuestionModal from './ExportQuestionModal'
 import { Skeleton } from '@/components/ui/skeleton'
 import { toast } from '@/components/ui/use-toast'
@@ -180,7 +187,9 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
 									key={`${question.question}-${index}`}
 									className="px-4 py-2"
 								>
-									<p className="line-clamp-1 text-sm">{question.question}</p>
+									<p className="text-sm overflow-wrap-anywhere">
+										{question.question}
+									</p>
 								</li>
 							))}
 						</ul>
@@ -207,22 +216,31 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
 
 export function QuestionPackDetails({
 	id,
-	type
+	type,
+	isReview = false
 }: {
 	id: string
 	type: string
+	isReview?: boolean
 }) {
 	const [isOpen, setIsOpen] = useState(false)
 	const isMobile = useIsMobile()
 
 	const buttonContent = (
 		<Button
-			className={cn(
-				'w-full bg-brand-blue-100 hover:bg-brand-blue-200 text-white'
-			)}
+			className={cn('w-full', !isReview && 'text-white')}
+			variant={isReview ? 'outline' : 'default'}
 		>
-			<ExternalLink className="mr-2 h-4 w-4 shrink-0" />
-			<span>Use Pack</span>
+			{isReview ?
+				<>
+					<Eye className="mr-2 h-4 w-4 shrink-0" />
+					<span>View Pack</span>
+				</>
+			:	<>
+					<ExternalLink className="mr-2 h-4 w-4 shrink-0" />
+					<span>Use Pack</span>
+				</>
+			}
 		</Button>
 	)
 

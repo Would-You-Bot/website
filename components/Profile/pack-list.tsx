@@ -1,22 +1,22 @@
 'use client'
 
 import QuestionPack from '@/app/packs/_components/QuestionPack'
+import { PackType, Status } from '@prisma/client'
 import { useEffect, useState } from 'react'
 import { Skeleton } from '../ui/skeleton'
 import { SearchX } from 'lucide-react'
 
 export interface PackData {
-	type: string
+	type: PackType
 	id: string
-	featured: boolean
+	popular: boolean
 	name: string
 	language: string
 	description: string
 	tags: string[]
 	likes: string
 	questions: number
-	pending: boolean
-	denied: boolean
+	status: Status
 	userLiked: boolean
 }
 
@@ -46,18 +46,18 @@ export function PackList({ type, id, canEdit }: PackListProps) {
 	}, [type, id])
 
 	const sortedPacks = [...packs].sort((a, b) => {
-		if (a.featured && !b.featured) return -1
-		if (!a.featured && b.featured) return 1
+		if (a.popular && !b.popular) return -1
+		if (!a.popular && b.popular) return 1
 		return 0
 	})
 
 	const groupedPacks = sortedPacks.reduce(
 		(acc, pack) => {
 			if (type === 'created') {
-				if (pack.pending) {
+				if (pack.status === Status.pending) {
 					acc.pending.push(pack)
-				} else if (pack.denied) {
-					acc.denied.push(pack)
+				} else if (pack.status === Status.resubmit_pending) {
+					acc.resubmitPending.push(pack)
 				} else {
 					acc.approved.push(pack)
 				}
@@ -66,7 +66,7 @@ export function PackList({ type, id, canEdit }: PackListProps) {
 			}
 			return acc
 		},
-		{ all: [], approved: [], denied: [], pending: [] } as Record<
+		{ all: [], approved: [], resubmitPending: [], pending: [] } as Record<
 			string,
 			PackResponse['data']
 		>
@@ -74,7 +74,7 @@ export function PackList({ type, id, canEdit }: PackListProps) {
 
 	const renderPacks = (
 		packs: PackResponse['data'],
-		style: 'default' | 'created' | 'pending' | 'denied'
+		style: 'default' | 'created' | 'pending' | 'denied' | 'resubmit_pending'
 	) => (
 		<>
 			{packs.length > 0 ?
@@ -85,7 +85,7 @@ export function PackList({ type, id, canEdit }: PackListProps) {
 							userId={id}
 							type={pack.type}
 							id={pack.id}
-							featured={pack.featured}
+							popular={pack.popular}
 							name={pack.name}
 							description={pack.description}
 							likes={String(pack.likes)}
@@ -132,10 +132,12 @@ export function PackList({ type, id, canEdit }: PackListProps) {
 							{renderPacks(groupedPacks.approved, 'created')}
 						</>
 					)}
-					{groupedPacks.denied.length > 0 && (
+					{groupedPacks.resubmitPending.length > 0 && (
 						<>
-							<h2 className="text-xl font-semibold mt-8 mb-4">Denied Packs</h2>
-							{renderPacks(groupedPacks.denied, 'denied')}
+							<h2 className="text-xl font-semibold mt-8 mb-4">
+								Resubmit Pending Packs
+							</h2>
+							{renderPacks(groupedPacks.resubmitPending, 'resubmit_pending')}
 						</>
 					)}
 					{groupedPacks.pending.length > 0 && (

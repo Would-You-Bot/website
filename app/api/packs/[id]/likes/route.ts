@@ -1,5 +1,6 @@
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { NextResponse, type NextRequest } from 'next/server'
+import { Status } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import validator from 'validator'
 
@@ -23,8 +24,9 @@ export async function PUT(
 	const questionLikes = await prisma.questionPack.findFirst({
 		where: {
 			id: id,
-			pending: false,
-			denied: false
+			status: {
+				notIn: [Status.pending, Status.resubmit_pending, Status.denied]
+			}
 		},
 		select: {
 			likes: true

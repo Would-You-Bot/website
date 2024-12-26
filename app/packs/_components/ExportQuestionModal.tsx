@@ -22,7 +22,7 @@ import { Button } from '@/components/ui/button'
 import { PackData } from '@/utils/zod/schemas'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { PackType } from '@/types'
+import { PackType } from '@prisma/client'
 import { useState } from 'react'
 import clsx from 'clsx'
 
