@@ -32,11 +32,12 @@ model QuestionPack {
   name        String   @db.String
   description String   @db.String
   tags        String[]
-  popular    Boolean
+  popular     Boolean
   language    String   @db.String
   likes       String[]
   questions   Json[]
   status      Status   @default(pending)
+  nsfw        Boolean  @default(false) // Important for the future not used yet
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
