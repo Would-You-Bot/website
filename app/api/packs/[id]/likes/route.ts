@@ -1,8 +1,8 @@
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { NextResponse, type NextRequest } from 'next/server'
+import { Status } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import validator from 'validator'
-import { Status } from '@prisma/client'
 
 export async function PUT(
 	request: NextRequest,

@@ -15,7 +15,7 @@ export interface PackData {
 	tags: string[]
 	likes: string
 	questions: number
-	status: "pending" | "approved" | "resubmit_pending"
+	status: 'pending' | 'approved' | 'resubmit_pending'
 	userLiked: boolean
 }
 
@@ -133,7 +133,9 @@ export function PackList({ type, id, canEdit }: PackListProps) {
 					)}
 					{groupedPacks.resubmitPending.length > 0 && (
 						<>
-							<h2 className="text-xl font-semibold mt-8 mb-4">Resubmit Pending Packs</h2>
+							<h2 className="text-xl font-semibold mt-8 mb-4">
+								Resubmit Pending Packs
+							</h2>
 							{renderPacks(groupedPacks.resubmitPending, 'resubmit_pending')}
 						</>
 					)}

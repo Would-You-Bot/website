@@ -1,8 +1,8 @@
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { NextResponse, type NextRequest } from 'next/server'
+import { Status } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import validator from 'validator'
-import { Status } from '@prisma/client'
 
 // Get all packs left to review we need request otherwise we can't get the params
 export async function GET(
@@ -168,7 +168,7 @@ export async function DELETE(
 	const pack = await prisma.questionPack.findFirst({
 		where: {
 			id: id,
-			status: { notIn: [Status.pending, Status.resubmit_pending] } 
+			status: { notIn: [Status.pending, Status.resubmit_pending] }
 		},
 		select: {
 			id: true,
