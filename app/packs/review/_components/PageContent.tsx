@@ -2,9 +2,9 @@
 
 import { JsonValue } from '@prisma/client/runtime/library'
 import UnreviewedPack from './UnreviewedPack'
+import { useRouter } from 'next/navigation'
 import { PackType } from '@prisma/client'
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 
 type UnreviedPackData = {
 	type: PackType
@@ -22,7 +22,7 @@ interface PageContentProps {
 function PageContent({ pending }: PageContentProps) {
 	const [packs, setPacks] = useState({ pending })
 	const router = useRouter()
-	
+
 	const refreshPacks = () => {
 		router.refresh()
 		setPacks((current) => ({
