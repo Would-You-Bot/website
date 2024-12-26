@@ -17,10 +17,12 @@ export const questionSchema = z.object({
 		.string()
 		.min(10, 'Make sure your question is at least 10 characters long')
 		.max(300, 'Make sure your question is only 300 characters long'),
-	type: z.nativeEnum(PackType, {
-		required_error: 'Please select a valid question type',
-		message: 'Please select a valid question type'
-	})
+	type: z
+		.nativeEnum(PackType, {
+			required_error: 'Please select a valid question type',
+			message: 'Please select a valid question type'
+		})
+		.refine((type) => type !== 'mixed', 'Question type cannot be mixed')
 })
 
 export const editedPackSchema = z.object({

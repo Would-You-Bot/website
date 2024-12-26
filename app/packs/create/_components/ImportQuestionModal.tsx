@@ -243,15 +243,16 @@ function ImportDetails({
 	}
 
 	const finishImport = () => {
-		const newQuestions: { type: PackType; question: string }[] = [
-			...currentQuestions
-		]
+		const newQuestions: {
+			type: Exclude<PackType, 'mixed'>
+			question: string
+		}[] = [...currentQuestions]
 
 		for (const [key, value] of Object.entries(questions)) {
 			for (const question of value) {
 				if (question.selected) {
 					newQuestions.push({
-						type: key as PackType,
+						type: key as Exclude<PackType, 'mixed'>,
 						question: question.question
 					})
 				}
