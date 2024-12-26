@@ -4,13 +4,14 @@ import { JsonValue } from '@prisma/client/runtime/library'
 import UnreviewedPack from './UnreviewedPack'
 import { PackType } from '@prisma/client'
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 
 type UnreviedPackData = {
 	type: PackType
 	id: string
 	name: string
 	description: string
-	status: string
+	status: 'pending' | 'approved' | 'resubmit_pending' | 'denied'
 	questions: JsonValue[]
 }
 
@@ -20,9 +21,10 @@ interface PageContentProps {
 
 function PageContent({ pending }: PageContentProps) {
 	const [packs, setPacks] = useState({ pending })
-
+	const router = useRouter()
+	
 	const refreshPacks = () => {
-		// Maybe router.refresh() here?
+		router.refresh()
 		setPacks((current) => ({
 			pending: [...current.pending].slice(1)
 		}))
