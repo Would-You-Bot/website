@@ -26,7 +26,13 @@ async function Review() {
 	})
 
 	// Filtered directly by status, no need to split
-	const pending = packs.filter((pack) => pack.status === Status.pending)
+	const pending = packs.sort((a, b) => {
+		if (a.status === Status.pending) return -1
+		if (b.status === Status.pending) return 1
+		if (a.status === Status.resubmit_pending) return -1
+		if (b.status === Status.resubmit_pending) return 1
+		return 0
+	})
 	return (
 		<Container className="pt-8 lg:pt-10 space-y-8 lg:space-y-10 min-h-[calc(100vh-112px)]">
 			<h1 className="text-4xl font-bold">
