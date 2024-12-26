@@ -51,7 +51,9 @@ function PageContent({ pending }: PageContentProps) {
 				:	<div>
 						<div className="flex flex-col items-center justify-center h-[250px] lg:h-[400px] border rounded-md gap-4">
 							<FolderX className="size-20 text-muted-foreground" />
-							<p className="text-muted-foreground text-xl">No pending packs to show</p>
+							<p className="text-muted-foreground text-xl">
+								No pending packs to show
+							</p>
 						</div>
 					</div>
 				}
