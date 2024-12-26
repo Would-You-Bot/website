@@ -91,7 +91,7 @@ export function PackList({ type, id, canEdit }: PackListProps) {
 							likes={String(pack.likes)}
 							userLiked={pack.userLiked}
 							questions={pack.questions}
-							style={style} // TODO: fix
+							style={style}
 							language={pack.language}
 							tags={pack.tags}
 							canEdit={canEdit}
