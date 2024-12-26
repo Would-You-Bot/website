@@ -1,9 +1,9 @@
 'use client'
 
 import { JsonValue } from '@prisma/client/runtime/library'
+import type { PackType, Status } from '@prisma/client'
 import UnreviewedPack from './UnreviewedPack'
 import { useRouter } from 'next/navigation'
-import type { PackType, Status } from '@prisma/client'
 import { FolderX } from 'lucide-react'
 import { useState } from 'react'
 

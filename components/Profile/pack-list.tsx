@@ -1,9 +1,9 @@
 'use client'
 
 import QuestionPack from '@/app/packs/_components/QuestionPack'
+import { PackType, Status } from '@prisma/client'
 import { useEffect, useState } from 'react'
 import { Skeleton } from '../ui/skeleton'
-import { PackType, Status } from '@prisma/client'
 import { SearchX } from 'lucide-react'
 
 export interface PackData {
