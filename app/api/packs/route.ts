@@ -1,5 +1,5 @@
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
-import type { PackType, QuestionPack } from '@prisma/client'
+import  { type QuestionPack, PackType } from '@prisma/client'
 import { NextResponse, type NextRequest } from 'next/server'
 import type { PackData } from '@/utils/zod/schemas'
 import DiscordLogger from '@/lib/logger'
@@ -35,7 +35,6 @@ export async function GET(request: NextRequest) {
 			].includes(TYPE) && { type: TYPE as PackType }),
 		...(PACK_ID && { id: PACK_ID })
 	}
-
 	const questionsPromise = prisma.questionPack.findMany({
 		where,
 		orderBy: {
@@ -58,7 +57,7 @@ export async function GET(request: NextRequest) {
 
 	const totalPagePromise = prisma.questionPack.count({
 		where: {
-			status: { not: Status.approved }
+			status: Status.approved
 		}
 	})
 
@@ -66,7 +65,6 @@ export async function GET(request: NextRequest) {
 		questionsPromise,
 		totalPagePromise
 	])
-
 	if (!questions) {
 		return NextResponse.json(
 			{ message: 'No questions found!' },
@@ -157,8 +155,6 @@ export async function POST(request: NextRequest) {
 				popular: false,
 				likes: [`${tokenData?.payload.id}`],
 				questions,
-				pending: true,
-				denied: false
 			}
 		})
 		.catch((err: Error) => {
