@@ -136,7 +136,7 @@ export async function PATCH(
 			description: data.description,
 			tags: data.tags,
 			questions: data.questions,
-			status: Status.pending
+			status: Status.resubmit_pending
 		}
 	})
 
@@ -167,8 +167,7 @@ export async function DELETE(
 
 	const pack = await prisma.questionPack.findFirst({
 		where: {
-			id: id,
-			status: { notIn: [Status.pending, Status.resubmit_pending] }
+			id: id
 		},
 		select: {
 			id: true,

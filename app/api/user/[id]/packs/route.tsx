@@ -55,12 +55,16 @@ export async function GET(
 
 	const where = {
 		...(userData.userID !== userId && {
-			status: { notIn: [Status.pending, Status.pending] }
+			status: {
+				notIn: [Status.pending, Status.resubmit_pending, Status.denied]
+			}
 		}),
 		...(type === 'created' && { authorId: userData.userID }),
 		...(type === 'likes' && {
 			likes: { has: id },
-			status: { notIn: [Status.pending, Status.pending] }
+			status: {
+				notIn: [Status.pending, Status.resubmit_pending, Status.denied]
+			}
 		})
 	}
 

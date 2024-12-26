@@ -15,7 +15,7 @@ export interface PackData {
 	tags: string[]
 	likes: string
 	questions: number
-	status: 'pending' | 'approved' | 'resubmit_pending'
+	status: 'pending' | 'approved' | 'resubmit_pending' | 'denied'
 	userLiked: boolean
 }
 

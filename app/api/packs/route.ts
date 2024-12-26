@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
 	const skip = (PAGE_NUMBER - 1) * PAGE_SIZE
 
 	const where = {
-		status: { notIn: [Status.pending, Status.pending] },
+		status: { notIn: [Status.pending, Status.resubmit_pending, Status.denied] },
 		...(TYPE &&
 			[
 				'wouldyourather',
