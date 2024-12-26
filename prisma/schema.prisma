@@ -22,6 +22,7 @@ enum Status {
   pending
   resubmit_pending
   approved
+  denied
 }
 
 model QuestionPack {
