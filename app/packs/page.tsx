@@ -45,7 +45,7 @@ export interface PackResponse {
 	data: {
 		type: string
 		id: string
-		featured: boolean
+		popular: boolean
 		name: string
 		language: string
 		description: string
@@ -103,7 +103,7 @@ async function page({
 					<section className="min-h-96">
 						<QuestionPackList
 							packList={responseData.data.sort(
-								(a, b) => Number(b.featured) - Number(a.featured)
+								(a, b) => Number(b.popular) - Number(a.popular)
 							)}
 							userId={userId}
 							isLoggedIn={!!auth}

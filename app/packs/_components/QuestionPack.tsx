@@ -34,7 +34,7 @@ import clsx from 'clsx'
 export interface QuestionPackProps {
 	type: string
 	id: string
-	featured: boolean
+	popular: boolean
 	name: string
 	language: string
 	description: string
@@ -50,7 +50,7 @@ export default function QuestionPack({
 	userId,
 	type,
 	id,
-	featured,
+	popular,
 	name,
 	description,
 	likes: initialLikes,
@@ -123,7 +123,7 @@ export default function QuestionPack({
 	return (
 		<div
 			className={cn('p-[3px]', {
-				'popular-pack': featured
+				'popular-pack': popular
 			})}
 		>
 			<Card className="border-none h-full flex flex-col justify-between">
@@ -133,7 +133,7 @@ export default function QuestionPack({
 						<CardDescription className="line-clamp-4">
 							{description}
 						</CardDescription>
-						{featured && (
+						{popular && (
 							<div className="flex uppercase tracking-wider items-center w-fit gap-1 px-2 py-1 rounded-md text-white popular-badge select-none absolute -top-5 right-6">
 								<Flame className="size-4 fill-white" />
 								<span className="text-[11px] hidden lg:block">Popular</span>

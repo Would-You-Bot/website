@@ -18,6 +18,13 @@ enum PackType {
   mixed
 }
 
+enum Status {
+  pending
+  denied
+  resubmit_pending
+  approved
+}
+
 model QuestionPack {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   authorId    String   @db.String
@@ -25,12 +32,11 @@ model QuestionPack {
   name        String   @db.String
   description String   @db.String
   tags        String[]
-  featured    Boolean
+  popular    Boolean
   language    String   @db.String
   likes       String[]
   questions   Json[]
-  pending     Boolean
-  denied    Boolean
+  status      Status   @default(pending)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

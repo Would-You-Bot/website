@@ -8,7 +8,7 @@ import { SearchX } from 'lucide-react'
 export interface PackData {
 	type: string
 	id: string
-	featured: boolean
+	popular: boolean
 	name: string
 	language: string
 	description: string
@@ -46,8 +46,8 @@ export function PackList({ type, id, canEdit }: PackListProps) {
 	}, [type, id])
 
 	const sortedPacks = [...packs].sort((a, b) => {
-		if (a.featured && !b.featured) return -1
-		if (!a.featured && b.featured) return 1
+		if (a.popular && !b.popular) return -1
+		if (!a.popular && b.popular) return 1
 		return 0
 	})
 
@@ -85,7 +85,7 @@ export function PackList({ type, id, canEdit }: PackListProps) {
 							userId={id}
 							type={pack.type}
 							id={pack.id}
-							featured={pack.featured}
+							popular={pack.popular}
 							name={pack.name}
 							description={pack.description}
 							likes={String(pack.likes)}

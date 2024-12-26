@@ -2,20 +2,20 @@ import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { NextResponse, type NextRequest } from 'next/server'
 import DiscordLogger from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
+import { Status } from '@prisma/client'
 
 // Get all packs left to review
 export async function GET() {
 	const question = await prisma.questionPack
-		.findFirst({
+		.findMany({
 			where: {
-				pending: true
+				status: Status.pending,
 			},
 			orderBy: {
-				createdAt: 'asc'
+				updatedAt: 'asc'
 			},
 			select: {
-				denied: true,
-				pending: true,
+				status: true,
 				type: true,
 				id: true,
 				name: true,
@@ -32,14 +32,6 @@ export async function GET() {
 			)
 		})
 
-	// @ts-expect-error
-	if (question?.status === 500) {
-		return NextResponse.json(
-			{ message: 'Error getting questions left to review, please fix!' },
-			{ status: 500 }
-		)
-	}
-
 	if (!question) {
 		return NextResponse.json(
 			{ message: 'No more questions left to review' },
@@ -49,53 +41,51 @@ export async function GET() {
 
 	return NextResponse.json({ data: question }, { status: 200 })
 }
-// Review a pack should just be a boolean and an id
 export async function PUT(request: NextRequest) {
-	const tokenData = await getAuthTokenOrNull()
-	const actionBy = tokenData?.payload.id ?? '0'
+  const tokenData = await getAuthTokenOrNull()
+  const actionBy = tokenData?.payload.id ?? '0'
 
-	const { reviewQuestionSchema } = await import('@/utils/zod/reviewSchemas')
-	const body = await request.json()
-	const parsedReviewResult = reviewQuestionSchema.safeParse(body)
+  const { reviewQuestionSchema } = await import('@/utils/zod/reviewSchemas')
+  const body = await request.json()
+  const parsedReviewResult = reviewQuestionSchema.safeParse(body)
 
-	if (!parsedReviewResult.success) {
-		return NextResponse.json(
-			{ message: parsedReviewResult.error.issues },
-			{ status: 400 }
-		)
-	}
+  if (!parsedReviewResult.success) {
+    return NextResponse.json(
+      { message: parsedReviewResult.error.issues },
+      { status: 400 }
+    )
+  }
 
-	const { id, approved, message } = parsedReviewResult.data
+  const { id, approved, message } = parsedReviewResult.data
 
-	try {
-		const updatedPack = await prisma.questionPack.update({
-			where: {
-				id: id
-			},
-			data: {
-				pending: false,
-				denied: !approved
-			}
-		})
+  try {
+    const updatedPack = await prisma.questionPack.update({
+      where: {
+        id: id
+      },
+      data: {
+        status: approved ? Status.approved : Status.denied,
+      }
+    })
 
-		if (approved) {
-			DiscordLogger.approvedQuestion(updatedPack, actionBy, message)
-		} else {
-			DiscordLogger.deniedQuestion(updatedPack, actionBy, message)
-		}
+    if (approved) {
+      DiscordLogger.approvedQuestion(updatedPack, actionBy, message)
+    } else {
+      DiscordLogger.deniedQuestion(updatedPack, actionBy, message)
+    }
 
-		return NextResponse.json(
-			{
-				message:
-					approved ? 'Pack approved successfully' : 'Pack denied successfully',
-				data: updatedPack
-			},
-			{ status: 200 }
-		)
-	} catch (error) {
-		return NextResponse.json(
-			{ message: 'Error updating question pack' },
-			{ status: 500 }
-		)
-	}
+    return NextResponse.json(
+      {
+        message:
+          approved ? 'Pack approved successfully' : 'Pack denied successfully',
+        data: updatedPack
+      },
+      { status: 200 }
+    )
+  } catch (error) {
+    return NextResponse.json(
+      { message: 'Error updating question pack' },
+      { status: 500 }
+    )
+  }
 }

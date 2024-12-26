@@ -2,6 +2,7 @@ import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { NextResponse, type NextRequest } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import validator from 'validator'
+import { Status } from '@prisma/client'
 
 // Get all packs left to review we need request otherwise we can't get the params
 export async function GET(
@@ -24,7 +25,7 @@ export async function GET(
 				type: true,
 				id: true,
 				language: true,
-				featured: true,
+				popular: true,
 				name: true,
 				description: true,
 				tags: true,
@@ -135,7 +136,7 @@ export async function PATCH(
 			description: data.description,
 			tags: data.tags,
 			questions: data.questions,
-			pending: true
+			status: Status.pending
 		}
 	})
 
@@ -167,8 +168,7 @@ export async function DELETE(
 	const pack = await prisma.questionPack.findFirst({
 		where: {
 			id: id,
-			pending: false,
-			denied: false
+			status: { notIn: [Status.pending, Status.denied] } 
 		},
 		select: {
 			id: true,

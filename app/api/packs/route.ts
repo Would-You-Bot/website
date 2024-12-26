@@ -2,6 +2,7 @@ import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import type { PackType, QuestionPack } from '@prisma/client'
 import { NextResponse, type NextRequest } from 'next/server'
 import type { PackData } from '@/utils/zod/schemas'
+import { Status } from '@prisma/client'
 import DiscordLogger from '@/lib/logger'
 import { prisma } from '@/lib/prisma'
 import { v4 as uuidv4 } from 'uuid'
@@ -39,12 +40,12 @@ export async function GET(request: NextRequest) {
 	const questionsPromise = prisma.questionPack.findMany({
 		where,
 		orderBy: {
-			featured: 'desc'
+			popular: 'desc'
 		},
 		select: {
 			type: true,
 			id: true,
-			featured: true,
+			popular: true,
 			name: true,
 			language: true,
 			description: true,
@@ -58,7 +59,7 @@ export async function GET(request: NextRequest) {
 
 	const totalPagePromise = prisma.questionPack.count({
 		where: {
-			pending: false
+			status: { not: Status.approved }
 		}
 	})
 
@@ -154,7 +155,7 @@ export async function POST(request: NextRequest) {
 				description,
 				language,
 				tags,
-				featured: false,
+				popular: false,
 				likes: [`${tokenData?.payload.id}`],
 				questions,
 				pending: true,
