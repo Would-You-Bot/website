@@ -32,7 +32,7 @@ import Link from 'next/link'
 import clsx from 'clsx'
 
 export interface QuestionPackProps {
-	type: string
+	type: PackType
 	id: string
 	popular: boolean
 	name: string
@@ -42,7 +42,7 @@ export interface QuestionPackProps {
 	likes: string
 	userLiked: boolean
 	questions: number
-	style?: 'default' | 'created' | 'denied' | 'pending'
+	style?: 'default' | 'created' | 'pending' | 'denied' | 'resubmit_pending'
 	canEdit?: boolean
 }
 
@@ -148,7 +148,7 @@ export default function QuestionPack({
 						</div>
 						<div className="flex flex-col gap-0.5">
 							<h3 className="text-sm text-muted-foreground">Type</h3>
-							<p>{packMap[type as PackType]}</p>
+							<p>{packMap[type]}</p>
 						</div>
 					</CardContent>
 				</div>

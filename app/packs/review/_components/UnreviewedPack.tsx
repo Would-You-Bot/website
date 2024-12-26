@@ -33,7 +33,6 @@ interface UnreviewedPackProps {
 	description: string
 	type: PackType
 	questions: any[]
-	isDenied?: boolean
 	onStatusChange?: () => void
 }
 
@@ -43,7 +42,6 @@ export default function UnreviewedPack({
 	description,
 	type,
 	questions,
-	isDenied,
 	onStatusChange
 }: UnreviewedPackProps) {
 	const [rejectionReason, setRejectionReason] = useState('')
@@ -122,8 +120,6 @@ export default function UnreviewedPack({
 						<AlertDialogTrigger asChild>
 							<Button
 								variant="success"
-								className="bg-emerald-400"
-								disabled={isLoading}
 								onClick={() => setDialogState('accept')}
 							>
 								<Check className="mr-2 h-4 w-4" />
@@ -142,7 +138,6 @@ export default function UnreviewedPack({
 								<AlertDialogCancel>Cancel</AlertDialogCancel>
 								<Button
 									onClick={() => handleAction('accept')}
-									variant="default"
 									className="flex gap-2"
 									disabled={isLoading}
 								>

@@ -4,9 +4,10 @@ import QuestionPack from '@/app/packs/_components/QuestionPack'
 import { useEffect, useState } from 'react'
 import { Skeleton } from '../ui/skeleton'
 import { SearchX } from 'lucide-react'
+import { PackType } from '@prisma/client'
 
 export interface PackData {
-	type: string
+	type: PackType
 	id: string
 	popular: boolean
 	name: string
