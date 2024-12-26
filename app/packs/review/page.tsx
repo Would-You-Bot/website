@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 async function Review() {
 	const packs = await prisma.questionPack.findMany({
 		where: {
-			OR: [{ status: Status.pending }, { status: Status.pending }]
+			OR: [{ status: Status.pending }, { status: Status.resubmit_pending }]
 		},
 		select: {
 			type: true,
