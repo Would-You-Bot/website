@@ -6,6 +6,7 @@ import PacksPagination from './_components/PacksPagination'
 import Filter from './_components/Filter'
 import { Metadata, Viewport } from 'next'
 import { Smile } from 'lucide-react'
+import { PackType } from '@prisma/client'
 
 export const metadata: Metadata = {
 	metadataBase: new URL('https://wouldyoubot.gg'),
@@ -43,7 +44,7 @@ export const dynamic = 'force-dynamic'
 
 export interface PackResponse {
 	data: {
-		type: string
+		type: PackType
 		id: string
 		popular: boolean
 		name: string

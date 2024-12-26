@@ -1,4 +1,4 @@
-import { PackType } from '@/types'
+import { PackType } from '@prisma/client'
 import z from 'zod'
 
 export const userSchema = z.object({
