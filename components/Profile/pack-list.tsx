@@ -15,8 +15,7 @@ export interface PackData {
 	tags: string[]
 	likes: string
 	questions: number
-	pending: boolean
-	denied: boolean
+	status: "pending" | "approved" | "resubmit_pending"
 	userLiked: boolean
 }
 
@@ -54,10 +53,10 @@ export function PackList({ type, id, canEdit }: PackListProps) {
 	const groupedPacks = sortedPacks.reduce(
 		(acc, pack) => {
 			if (type === 'created') {
-				if (pack.pending) {
+				if (pack.status === 'pending') {
 					acc.pending.push(pack)
-				} else if (pack.denied) {
-					acc.denied.push(pack)
+				} else if (pack.status === 'resubmit_pending') {
+					acc.resubmitPending.push(pack)
 				} else {
 					acc.approved.push(pack)
 				}
@@ -66,7 +65,7 @@ export function PackList({ type, id, canEdit }: PackListProps) {
 			}
 			return acc
 		},
-		{ all: [], approved: [], denied: [], pending: [] } as Record<
+		{ all: [], approved: [], resubmitPending: [], pending: [] } as Record<
 			string,
 			PackResponse['data']
 		>
@@ -74,7 +73,7 @@ export function PackList({ type, id, canEdit }: PackListProps) {
 
 	const renderPacks = (
 		packs: PackResponse['data'],
-		style: 'default' | 'created' | 'pending' | 'denied'
+		style: 'default' | 'created' | 'pending' | 'denied' | 'resubmit_pending'
 	) => (
 		<>
 			{packs.length > 0 ?
@@ -91,7 +90,7 @@ export function PackList({ type, id, canEdit }: PackListProps) {
 							likes={String(pack.likes)}
 							userLiked={pack.userLiked}
 							questions={pack.questions}
-							style={style}
+							style={style} // TODO: fix
 							language={pack.language}
 							tags={pack.tags}
 							canEdit={canEdit}
@@ -132,10 +131,10 @@ export function PackList({ type, id, canEdit }: PackListProps) {
 							{renderPacks(groupedPacks.approved, 'created')}
 						</>
 					)}
-					{groupedPacks.denied.length > 0 && (
+					{groupedPacks.resubmitPending.length > 0 && (
 						<>
-							<h2 className="text-xl font-semibold mt-8 mb-4">Denied Packs</h2>
-							{renderPacks(groupedPacks.denied, 'denied')}
+							<h2 className="text-xl font-semibold mt-8 mb-4">Resubmit Pending Packs</h2>
+							{renderPacks(groupedPacks.resubmitPending, 'resubmit_pending')}
 						</>
 					)}
 					{groupedPacks.pending.length > 0 && (

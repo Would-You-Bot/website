@@ -24,7 +24,7 @@ export async function PUT(
 	const questionLikes = await prisma.questionPack.findFirst({
 		where: {
 			id: id,
-			status: { notIn: [Status.pending, Status.denied] }
+			status: { notIn: [Status.pending, Status.resubmit_pending] }
 		},
 		select: {
 			likes: true

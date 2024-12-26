@@ -168,7 +168,7 @@ export async function DELETE(
 	const pack = await prisma.questionPack.findFirst({
 		where: {
 			id: id,
-			status: { notIn: [Status.pending, Status.denied] } 
+			status: { notIn: [Status.pending, Status.resubmit_pending] } 
 		},
 		select: {
 			id: true,

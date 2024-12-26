@@ -20,7 +20,6 @@ enum PackType {
 
 enum Status {
   pending
-  denied
   resubmit_pending
   approved
 }

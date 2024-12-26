@@ -64,7 +64,7 @@ export async function PUT(request: NextRequest) {
         id: id
       },
       data: {
-        status: approved ? Status.approved : Status.denied,
+        status: approved ? Status.approved : Status.resubmit_pending,
       }
     })
 

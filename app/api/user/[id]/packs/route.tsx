@@ -1,8 +1,8 @@
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { NextResponse, type NextRequest } from 'next/server'
+import { Status } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import validator from 'validator'
-import { Status } from '@prisma/client';
 
 export async function GET(
 	request: NextRequest,
@@ -55,15 +55,15 @@ export async function GET(
 
 	const where = {
 		...(userData.userID !== userId && {
-			status: { notIn: [Status.pending, Status.denied] },
+			status: { notIn: [Status.pending, Status.resubmit_pending] }
 		}),
-		...(type === "created" && { authorId: userData.userID }),
-		...(type === "likes" && {
+		...(type === 'created' && { authorId: userData.userID }),
+		...(type === 'likes' && {
 			likes: { has: id },
-			status: { notIn: [Status.pending, Status.denied] },
-		}),
-	};
-	
+			status: { notIn: [Status.pending, Status.resubmit_pending] }
+		})
+	}
+
 	const questionsPromise = prisma.questionPack.findMany({
 		where,
 		select: {
@@ -75,7 +75,7 @@ export async function GET(
 			tags: true,
 			likes: true,
 			questions: true,
-			status: true,
+			status: true
 		},
 		skip,
 		take: PAGE_SIZE
