@@ -56,8 +56,9 @@ export function EditProfile({
 
 	const saveUserSettings = async () => {
 		setIsSaving(true)
-		try {
-			const response = await fetch(`/api/user/${userId}`, {
+
+		toast.promise(
+			fetch(`/api/user/${userId}`, {
 				method: 'PATCH',
 				headers: {
 					'Content-Type': 'application/json'
@@ -68,23 +69,20 @@ export function EditProfile({
 					profilePrivacy,
 					likedPackPrivacy
 				})
-			})
-
-			if (response.ok) {
-				toast.success('Settings saved', {
-					description: 'Your profile has been updated successfully.'
-				})
-				onDataRefresh() // Refresh the data after successful save
-			} else {
-				throw new Error('Failed to save settings')
+			}),
+			{
+				loading: 'Saving...',
+				success: () => {
+					onDataRefresh()
+					return 'Your profile has been updated successfully.'
+				},
+				error: () => {
+					return 'Failed to save settings'
+				}
 			}
-		} catch (error) {
-			toast.error('Error', {
-				description: 'Failed to save settings. Please try again.'
-			})
-		} finally {
-			setIsSaving(false)
-		}
+		)
+
+		setIsSaving(false)
 	}
 
 	return (
