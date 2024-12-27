@@ -2,12 +2,12 @@
 
 import { User, MessageCircle, Heart } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
-import { useToast } from '@/components/ui/use-toast'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
 import { useState } from 'react'
+import { toast } from 'sonner'
 
 interface EditProfileProps {
 	userId: string
@@ -33,7 +33,6 @@ export function EditProfile({
 		initialLikedPackPrivacy
 	)
 	const [isSaving, setIsSaving] = useState(false)
-	const { toast } = useToast()
 
 	const onDescriptionChange = (value: string) => {
 		setDescription(value)
@@ -72,8 +71,7 @@ export function EditProfile({
 			})
 
 			if (response.ok) {
-				toast({
-					title: 'Settings saved',
+				toast.success('Settings saved', {
 					description: 'Your profile has been updated successfully.'
 				})
 				onDataRefresh() // Refresh the data after successful save
@@ -81,10 +79,8 @@ export function EditProfile({
 				throw new Error('Failed to save settings')
 			}
 		} catch (error) {
-			toast({
-				title: 'Error',
-				description: 'Failed to save settings. Please try again.',
-				variant: 'destructive'
+			toast.error('Error', {
+				description: 'Failed to save settings. Please try again.'
 			})
 		} finally {
 			setIsSaving(false)

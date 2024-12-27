@@ -23,7 +23,6 @@ import {
 import { Check, FileInput, FileUp, Loader2, X } from 'lucide-react'
 import { useLocalStorage } from '@/hooks/use-localstorage'
 import { Control, useController } from 'react-hook-form'
-import { useToast } from '@/components/ui/use-toast'
 import { Checkbox } from '@/components/ui/checkbox'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { Button } from '@/components/ui/button'
@@ -32,6 +31,7 @@ import type { PackType } from '@prisma/client'
 import { Input } from '@/components/ui/input'
 import { packMap } from '@/types'
 import { useState } from 'react'
+import { toast } from 'sonner'
 import clsx from 'clsx'
 import { z } from 'zod'
 
@@ -71,7 +71,6 @@ function ImportDetails({
 	const [selectedCount, setSelectedCount] = useState(currentQuestions.length)
 
 	const isMobile = useIsMobile()
-	const toast = useToast()
 
 	const dragOver = (event: React.DragEvent<HTMLLabelElement>) => {
 		event.preventDefault()
@@ -232,10 +231,7 @@ function ImportDetails({
 		setDragEntered(false)
 		setInnerUploadText('Drag and drop or click here to import questions.')
 		setInnerIcon(FileInput)
-		toast.toast({
-			title,
-			description
-		})
+		toast.error(title, { description })
 	}
 
 	const nextStep = () => {

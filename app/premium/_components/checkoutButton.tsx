@@ -1,8 +1,8 @@
 'use client'
-import { useToast } from '@/components/ui/use-toast'
 import { ToastAction } from '@/components/ui/toast'
 import { loadStripe } from '@stripe/stripe-js'
 import { useState } from 'react'
+import { toast } from 'sonner'
 
 interface CheckoutButtonProps {
 	monthly: string
@@ -16,7 +16,6 @@ export default function CheckoutButton({
 	serverId,
 	priceId
 }: CheckoutButtonProps) {
-	const { toast } = useToast()
 	const [loading, setLoading] = useState(false)
 
 	const handleCheckout = async () => {
@@ -41,9 +40,7 @@ export default function CheckoutButton({
 		const data = await response.json()
 
 		if (data?.action) {
-			toast({
-				variant: 'destructive',
-				title: 'Uh oh! Something went wrong.',
+			toast.error('Uh oh! Something went wrong.', {
 				description: data.message,
 				action: (
 					<ToastAction
@@ -64,11 +61,7 @@ export default function CheckoutButton({
 			data.status === 500 ||
 			data.status === 401
 		) {
-			toast({
-				variant: 'destructive',
-				title: 'Uh oh! Something went wrong.',
-				description: data.message
-			})
+			toast.error('Uh oh! Something went wrong.', { description: data.message })
 			setLoading(false)
 			return
 		}

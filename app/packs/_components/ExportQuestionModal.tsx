@@ -16,7 +16,6 @@ import {
 	DialogTitle,
 	DialogTrigger
 } from '@/components/ui/dialog'
-import { useToast } from '@/components/ui/use-toast'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { Button } from '@/components/ui/button'
 import { PackData } from '@/utils/zod/schemas'
@@ -37,7 +36,6 @@ function ExportDetails({
 	}[]
 }) {
 	const isMobile = useIsMobile()
-	const toast = useToast()
 
 	const [fileName, setFileName] = useState('questions')
 
