@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
+import axios, { AxiosError } from 'axios'
 import { useState } from 'react'
 import { toast } from 'sonner'
 
@@ -58,26 +59,27 @@ export function EditProfile({
 		setIsSaving(true)
 
 		toast.promise(
-			fetch(`/api/user/${userId}`, {
-				method: 'PATCH',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					description,
-					votePrivacy,
-					profilePrivacy,
-					likedPackPrivacy
-				})
+			axios.patch(`/api/user/${userId}`, {
+				description,
+				votePrivacy,
+				profilePrivacy,
+				likedPackPrivacy
 			}),
 			{
 				loading: 'Saving...',
 				success: () => {
 					onDataRefresh()
-					return 'Your profile has been updated successfully.'
+					return 'Settings saved'
 				},
 				error: () => {
-					return 'Failed to save settings'
+					return 'Error'
+				},
+				description(data) {
+					console.log(data)
+					if (data instanceof Error)
+						return 'Failed to save settings. Please try again.'
+
+					return 'Your profile has been updated successfully.'
 				}
 			}
 		)
