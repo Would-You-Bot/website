@@ -26,7 +26,6 @@ import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 import ExportQuestionModal from './ExportQuestionModal'
 import { Skeleton } from '@/components/ui/skeleton'
-import { toast } from '@/components/ui/use-toast'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { Button } from '@/components/ui/button'
 import { PackData } from '@/utils/zod/schemas'
@@ -35,6 +34,7 @@ import { useState, useEffect } from 'react'
 import { packMap } from '@/types'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import { toast } from 'sonner'
 
 const PackDetails = ({ id, type }: { id: string; type: string }) => {
 	const [packToShow, setPackToShow] = useState<PackData | null>(null)
@@ -74,9 +74,7 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
 
 	const copyCommand = () => {
 		navigator.clipboard.writeText(`/import ${type} ${id}`)
-		toast({
-			title: 'Copied to clipboard!'
-		})
+		toast.success('Copied to clipboard!')
 	}
 
 	if (!packToShow) return <QuestionPackDetailsSkeleton />
