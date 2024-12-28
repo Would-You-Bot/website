@@ -3,6 +3,7 @@ import { ToastAction } from '@/components/ui/toast'
 import { loadStripe } from '@stripe/stripe-js'
 import { useState } from 'react'
 import { toast } from 'sonner'
+import axios from 'axios'
 
 interface CheckoutButtonProps {
 	monthly: string
@@ -25,23 +26,28 @@ export default function CheckoutButton({
 		)
 		const stripe = await stripePromise
 
-		const response = await fetch('/api/subs', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				priceId: priceId,
-				monthly: monthly,
-				serverId: serverId
-			})
-		})
+		toast.promise(
+			axios.post('/api/subs', {
+				priceId,
+				monthly,
+				serverId
+			}),
+			{
+				loading: 'Checking out...',
+				success: async (data) => {
+					const stripeSession = data.data
+					await stripe?.redirectToCheckout({ sessionId: stripeSession.id })
+					return 'Checkout successful'
+				},
+				error: () => {
+					return 'Uh oh! Something went wrong.'
+				},
+				description(data) {
+					console.log(data)
+					if (data instanceof Error) return data.message
 
-		const data = await response.json()
-
-		if (data?.action) {
-			toast.error('Uh oh! Something went wrong.', {
-				description: data.message,
+					return 'Your subscription has been created successfully.'
+				},
 				action: (
 					<ToastAction
 						onClick={() => window.open('/api/subs/manage', '_blank')}
@@ -50,24 +56,9 @@ export default function CheckoutButton({
 						Manage
 					</ToastAction>
 				)
-			})
-			setLoading(false)
-			return
-		}
+			}
+		)
 
-		if (
-			data.status === 409 ||
-			data.status === 422 ||
-			data.status === 500 ||
-			data.status === 401
-		) {
-			toast.error('Uh oh! Something went wrong.', { description: data.message })
-			setLoading(false)
-			return
-		}
-
-		const stripeSession = data as { id: string }
-		await stripe?.redirectToCheckout({ sessionId: stripeSession.id })
 		setLoading(false)
 	}
 
