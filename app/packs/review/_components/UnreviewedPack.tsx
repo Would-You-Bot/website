@@ -20,12 +20,13 @@ import {
 } from '@/components/ui/card'
 import { QuestionPackDetails } from '../../_components/QuestionPackDetails'
 import { Textarea } from '@/components/ui/textarea'
-import { toast } from '@/components/ui/use-toast'
 import { Check, X, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { PackType } from '@prisma/client'
 import { packMap } from '@/types'
 import { useState } from 'react'
+import { toast } from 'sonner'
+import axios from 'axios'
 
 interface UnreviewedPackProps {
 	id: string
@@ -52,41 +53,36 @@ export default function UnreviewedPack({
 
 	const handleAction = async (action: 'accept' | 'reject') => {
 		setIsLoading(true)
-		try {
-			const response = await fetch('/api/packs/review', {
-				method: 'PUT',
-				headers: {
-					'Content-Type': 'application/json'
+
+		toast.promise(
+			axios.put('/api/packs/review', {
+				id,
+				approved: action === 'accept' ? true : false,
+				message: action === 'reject' ? rejectionReason : undefined
+			}),
+			{
+				loading: 'Processing...',
+				success: () => {
+					setDialogState(null)
+					setRejectionReason('')
+					onStatusChange?.()
+					return action === 'accept' ? 'Pack Accepted' : 'Pack Rejected'
 				},
-				body: JSON.stringify({
-					id,
-					approved: action === 'accept' ? true : false,
-					message: action === 'reject' ? rejectionReason : undefined
-				})
-			})
+				error: (error) => {
+					console.error(error)
+					return 'Error'
+				},
+				description: (data) => {
+					console.log(data)
+					if (data instanceof Error) return 'Failed to process the request'
+					return action === 'accept' ?
+							'The pack has been approved and is now public'
+						:	'The pack has been rejected and the author will be notified'
+				}
+			}
+		)
 
-			if (!response.ok) throw new Error('Failed to process request')
-
-			toast({
-				title: action === 'accept' ? 'Pack Accepted' : 'Pack Rejected',
-				description:
-					action === 'accept' ?
-						'The pack has been approved and is now public'
-					:	'The pack has been rejected and the author will be notified'
-			})
-
-			setDialogState(null)
-			setRejectionReason('')
-			onStatusChange?.()
-		} catch (error) {
-			toast({
-				title: 'Error',
-				description: 'Failed to process the request',
-				variant: 'destructive'
-			})
-		} finally {
-			setIsLoading(false)
-		}
+		setIsLoading(false)
 	}
 
 	const handleDialogClose = () => {
