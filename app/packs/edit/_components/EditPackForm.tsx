@@ -29,7 +29,6 @@ import { PackData, packSchema } from '@/utils/zod/schemas'
 import { packLanguages, packTypes } from '@/lib/constants'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Textarea } from '@/components/ui/textarea'
-import { toast } from '@/components/ui/use-toast'
 import { useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -39,6 +38,8 @@ import { useForm } from 'react-hook-form'
 import { PackType } from '@prisma/client'
 import { PackLanguage } from '@/types'
 import { useState } from 'react'
+import { toast } from 'sonner'
+import axios from 'axios'
 
 interface EditPackFormProps {
 	data: PackData
@@ -81,32 +82,25 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
 	const onSubmit = async (data: PackData) => {
 		const endpoint =
 			resubmit ? `/api/resubmit/${packId}` : `/api/packs/${packId}`
-		try {
-			const res = await fetch(endpoint, {
-				method: 'PATCH',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(data)
-			})
 
-			if (res.ok) {
-				toast({
-					title: 'Success!',
-					description: resubmit ? 'Pack resubmitted!' : 'Pack updated!'
-				})
+		toast.promise(axios.patch(endpoint, data), {
+			loading: 'Updating...',
+			success: () => {
 				router.push(`/profile/${userId}`)
-			} else {
-				throw new Error('Failed to submit pack')
+				return resubmit ? 'Pack resubmitted!' : 'Pack updated!'
+			},
+			error: (error) => {
+				console.error(error)
+				return 'Uh oh!'
+			},
+			description(data) {
+				console.log(data)
+				if (data instanceof Error)
+					return `Something went wrong while ${resubmit ? 'resubmitting' : 'updating'} your pack.`
+
+				return `Your pack has been ${resubmit ? 'resubmitted' : 'updated'} successfully.`
 			}
-		} catch (error) {
-			console.error(error)
-			toast({
-				title: 'Oops',
-				description: `Something went wrong while ${resubmit ? 'resubmitting' : 'updating'} your pack!`,
-				variant: 'destructive'
-			})
-		}
+		})
 	}
 
 	// ADD a tag to the tags array
