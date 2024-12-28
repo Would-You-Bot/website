@@ -1,5 +1,6 @@
 'use client'
-import { ToastAction } from '@/components/ui/toast'
+
+import { Button } from '@/components/ui/button'
 import { loadStripe } from '@stripe/stripe-js'
 import { useState } from 'react'
 import { toast } from 'sonner'
@@ -49,12 +50,9 @@ export default function CheckoutButton({
 					return 'Your subscription has been created successfully.'
 				},
 				action: (
-					<ToastAction
-						onClick={() => window.open('/api/subs/manage', '_blank')}
-						altText="Manage"
-					>
+					<Button onClick={() => window.open('/api/subs/manage', '_blank')}>
 						Manage
-					</ToastAction>
+					</Button>
 				)
 			}
 		)
