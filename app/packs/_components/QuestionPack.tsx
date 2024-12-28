@@ -21,14 +21,15 @@ import {
 } from '@/components/ui/card'
 import { Flame, Heart, Edit, RefreshCw, Trash2 } from 'lucide-react'
 import { QuestionPackDetails } from './QuestionPackDetails'
-import { toast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
 import type { PackType } from '@prisma/client'
 import { useRouter } from 'next/navigation'
 import { packMap } from '@/types'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
+import { toast } from 'sonner'
 import Link from 'next/link'
+import axios from 'axios'
 import clsx from 'clsx'
 
 export interface QuestionPackProps {
@@ -101,23 +102,22 @@ export default function QuestionPack({
 			return
 		}
 
-		try {
-			const response = await fetch(`/api/packs/${id}`, {
-				method: 'DELETE'
-			})
+		toast.promise(axios.delete(`/api/packs/${id}`), {
+			loading: 'Deleting...',
+			success: () => {
+				router.refresh()
+				return 'Pack Deleted'
+			},
+			error: () => {
+				return 'Error'
+			},
+			description(data) {
+				console.log(data)
+				if (data instanceof Error) return data.message
 
-			if (!response.ok) {
-				throw new Error(`Error: ${response.statusText}`)
+				return 'Your pack has been deleted successfully.'
 			}
-			toast({
-				title: 'Deleted',
-				description: 'Pack deleted successfully'
-			})
-
-			router.refresh()
-		} catch (error) {
-			console.error('Error deleting pack:', error)
-		}
+		})
 	}
 
 	return (

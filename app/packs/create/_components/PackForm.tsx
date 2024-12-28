@@ -36,7 +36,6 @@ import { packLanguages, packTypes } from '@/lib/constants'
 import ImportQuestionModal from './ImportQuestionModal'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Textarea } from '@/components/ui/textarea'
-import { toast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
 import type { PackType } from '@prisma/client'
 import { Input } from '@/components/ui/input'
@@ -45,6 +44,8 @@ import QuestionModal from './QuestionModal'
 import { useForm } from 'react-hook-form'
 import { PackLanguage } from '@/types'
 import { useState } from 'react'
+import { toast } from 'sonner'
+import axios from 'axios'
 
 const defaultValues = {
 	type: '',
@@ -180,34 +181,26 @@ function PackForm() {
 	}
 
 	const onSubmit = async (data: PackData) => {
-		try {
-			const res = await fetch('/api/packs', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(data)
-			})
-
-			if (res.ok) {
-				toast({
-					title: 'Success!',
-					description: 'Successfully submitted your question pack!'
-				})
+		toast.promise(axios.post('/api/packs', data), {
+			loading: 'Submitting...',
+			success: () => {
 				router.push('/packs')
 				// Reset storage
 				setFormData(defaultValues as PackData)
-			} else {
-				throw new Error('Failed to submit pack')
+				return 'Pack Submitted'
+			},
+			error: (error) => {
+				console.error(error)
+				return 'Oops!'
+			},
+			description(data) {
+				console.log(data)
+				if (data instanceof Error)
+					return 'Something went wrong while creating your pack!'
+
+				return 'Successfully submitted your question pack for review!'
 			}
-		} catch (error) {
-			console.error(error)
-			toast({
-				title: 'Oops',
-				description: 'Something went wrong with creating your pack!',
-				variant: 'destructive'
-			})
-		}
+		})
 	}
 
 	// NAME and DESCRIPTION are handled by Hook form so they're not automatically updated in local storage on change

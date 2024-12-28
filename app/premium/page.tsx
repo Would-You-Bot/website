@@ -35,7 +35,6 @@ import { LazyMotion, domAnimation, m } from 'framer-motion'
 import CheckoutButton from './_components/checkoutButton'
 import { DiscordGuild, PricingData } from './_types'
 import { ServersListSkeleton } from './_components'
-import { Toaster } from '@/components/ui/toaster'
 import { useIdToken } from '@/helpers/hooks'
 import { Suspense, useState } from 'react'
 import { getServer } from '@/lib/redis'
@@ -293,7 +292,6 @@ export default function Premium() {
 											</Dialog>
 										</div>
 									</div>
-									<Toaster />
 									<a
 										href="https://stripe.com/"
 										target="_blank"

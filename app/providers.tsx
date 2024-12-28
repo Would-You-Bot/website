@@ -1,4 +1,4 @@
-import { Toaster } from '@/components/ui/toaster'
+import { Toaster } from '@/components/ui/sonner'
 import { ThemeProvider } from 'next-themes'
 function Providers({ children }: Readonly<{ children: React.ReactNode }>) {
 	return (

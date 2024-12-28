@@ -2,12 +2,13 @@
 
 import { User, MessageCircle, Heart } from 'lucide-react'
 import { Card, CardContent } from '@/components/ui/card'
-import { useToast } from '@/components/ui/use-toast'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
 import { useState } from 'react'
+import { toast } from 'sonner'
+import axios from 'axios'
 
 interface EditProfileProps {
 	userId: string
@@ -33,7 +34,6 @@ export function EditProfile({
 		initialLikedPackPrivacy
 	)
 	const [isSaving, setIsSaving] = useState(false)
-	const { toast } = useToast()
 
 	const onDescriptionChange = (value: string) => {
 		setDescription(value)
@@ -57,38 +57,34 @@ export function EditProfile({
 
 	const saveUserSettings = async () => {
 		setIsSaving(true)
-		try {
-			const response = await fetch(`/api/user/${userId}`, {
-				method: 'PATCH',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify({
-					description,
-					votePrivacy,
-					profilePrivacy,
-					likedPackPrivacy
-				})
-			})
 
-			if (response.ok) {
-				toast({
-					title: 'Settings saved',
-					description: 'Your profile has been updated successfully.'
-				})
-				onDataRefresh() // Refresh the data after successful save
-			} else {
-				throw new Error('Failed to save settings')
+		toast.promise(
+			axios.patch(`/api/user/${userId}`, {
+				description,
+				votePrivacy,
+				profilePrivacy,
+				likedPackPrivacy
+			}),
+			{
+				loading: 'Saving...',
+				success: () => {
+					onDataRefresh()
+					return 'Settings saved'
+				},
+				error: () => {
+					return 'Error'
+				},
+				description(data) {
+					console.log(data)
+					if (data instanceof Error)
+						return 'Failed to save settings. Please try again.'
+
+					return 'Your profile has been updated successfully.'
+				}
 			}
-		} catch (error) {
-			toast({
-				title: 'Error',
-				description: 'Failed to save settings. Please try again.',
-				variant: 'destructive'
-			})
-		} finally {
-			setIsSaving(false)
-		}
+		)
+
+		setIsSaving(false)
 	}
 
 	return (
