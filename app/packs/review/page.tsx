@@ -1,3 +1,4 @@
+import GlowingHeading from '@/components/GlowingHeading'
 import PageContent from './_components/PageContent'
 import Container from '@/components/Container'
 import { Status } from '@prisma/client'
@@ -35,12 +36,10 @@ async function Review() {
 	})
 	return (
 		<Container className="pt-8 lg:pt-10 space-y-8 lg:space-y-10 min-h-[calc(100vh-112px)]">
-			<h1 className="text-4xl font-bold">
-				<span className="text-brand-red-100 drop-shadow-red-glow">
-					Unreviewed
-				</span>{' '}
-				<span className="text-brand-blue-100 drop-shadow-blue-glow">Packs</span>
-			</h1>
+			<GlowingHeading
+				redText="Unreviewed"
+				blueText="Packs"
+			/>
 			<PageContent pending={pending} />
 		</Container>
 	)

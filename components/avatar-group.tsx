@@ -147,7 +147,7 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
 								)}
 							>
 								<AvatarImage src="" />
-								<AvatarFallback className="bg-brand-customPrimary">
+								<AvatarFallback className="bg-brand-primary">
 									<span className="text-sm text-white">+99</span>
 								</AvatarFallback>
 							</Avatar>

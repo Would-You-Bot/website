@@ -9,7 +9,7 @@ import ServerMarquee from '@/components/ServerMarquee'
 import FeatureItem from '@/components/FeatureItem'
 import { AvatarGroup } from '../avatar-group'
 import { LandingWave } from '../LandingWave'
-import Button from '@/components/Button'
+import { Button } from '../ui/button'
 import Link from 'next/link'
 
 interface HomeContentProps {
@@ -54,15 +54,14 @@ export function HomeContent({
 							Server
 						</span>
 					</h1>
-					<p className="text-lg text-neutral-700 dark:text-neutral-300">
+					<p className="text-lg text-foreground/70">
 						Play fun and entertaining games with Would You, featuring user polls
 						and customization. Play Would You Rather, Truth or Dare, Never Have
-						I Ever, Higher or Lower, and What Would You Do!{' '}
-						<span className="hidden">tempus voicus</span>
+						I Ever, Higher or Lower, and What Would You Do!
 					</p>
 					<div className="flex flex-col lg:flex-row mt-8 items-center gap-4">
 						<AvatarGroup avatars={servers.reverse().slice(0, 5)} />
-						<span className="text-foreground/50">
+						<span className="text-muted-foreground">
 							Trusted by your favorite servers!
 						</span>
 					</div>

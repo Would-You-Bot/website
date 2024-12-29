@@ -203,13 +203,13 @@ function EditPackQuestionModal({
 						rows={5}
 						value={questionValue}
 						onChange={(e) => handleQuestionInput(e.target.value)}
-						className="w-full p-2 dark:bg-[#1D1D1D] rounded-md resize-none"
+						className="w-full p-2 rounded-md resize-none"
 						placeholder="Question Text"
 						minLength={10}
 						maxLength={300}
 					/>
 					{questionError && (
-						<p className="px-1 text-xs text-brand-red-100">{questionError}</p>
+						<p className="px-1 text-xs text-destructive">{questionError}</p>
 					)}
 				</div>
 				{type === 'mixed' && (
@@ -240,7 +240,7 @@ function EditPackQuestionModal({
 							</SelectContent>
 						</Select>
 						{typeError && (
-							<p className="px-1 text-xs text-brand-red-100">{typeError}</p>
+							<p className="px-1 text-xs text-destructive">{typeError}</p>
 						)}
 					</div>
 				)}
@@ -248,16 +248,14 @@ function EditPackQuestionModal({
 					<DialogClose asChild>
 						<Button
 							type="button"
-							className="rounded-lg w-fit py-2 px-6"
-							size="sm"
+							className="w-fit"
 							variant="secondary"
 						>
 							Close
 						</Button>
 					</DialogClose>
 					<Button
-						className="rounded-lg w-fit py-2 px-6 bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
-						size="sm"
+						className="w-fit"
 						type="submit"
 						onClick={mode === 'create' ? addQuestion : editQuestion}
 					>

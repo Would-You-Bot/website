@@ -134,8 +134,8 @@ export default function QuestionPack({
 							{description}
 						</CardDescription>
 						{popular && (
-							<div className="flex uppercase tracking-wider items-center w-fit gap-1 px-2 py-1 rounded-md text-white popular-badge select-none absolute -top-5 right-6">
-								<Flame className="size-4 fill-white" />
+							<div className="flex uppercase tracking-wider items-center w-fit gap-1 px-2 py-1 rounded-md popular-badge select-none absolute -top-5 right-6 text-primary-foreground">
+								<Flame className="size-4 text-primary-foreground" />
 								<span className="text-[11px] hidden lg:block">Popular</span>
 							</div>
 						)}
@@ -160,7 +160,7 @@ export default function QuestionPack({
 								onClick={() => likePack(id)}
 								variant="secondary"
 								disabled={!isLoggedIn}
-								className={clsx('w-full dark:bg-[hsl(0,0%,6%)]', {
+								className={clsx('w-full', {
 									'opacity-50 cursor-not-allowed': !isLoggedIn
 								})}
 							>
@@ -168,14 +168,14 @@ export default function QuestionPack({
 									className={cn(
 										'mr-2 h-4 w-4 shrink-0',
 										userLiked ?
-											'text-red-500 fill-red-500'
-										:	'text-brand-customGrayText fill-brand-customGrayText'
+											'text-destructive fill-destructive'
+										:	'text-muted-foreground'
 									)}
 								/>
 								<span
 									className={cn(
 										'text-muted-foreground',
-										userLiked && 'text-red-500'
+										userLiked && 'text-destructive'
 									)}
 								>
 									{likes === 1 ? `${likes} Like` : `${likes} Likes`}
@@ -233,15 +233,16 @@ export default function QuestionPack({
 					{style === 'denied' && (
 						<>
 							<Button
-								variant="secondary"
-								className="w-full bg-red-500 hover:bg-red-600 text-white dark:bg-red-500 dark:hover:bg-red-600"
+								variant="destructive"
+								className="w-full"
 								onClick={() => router.push(`/packs/edit/${id}?resubmit=true`)}
 							>
 								<RefreshCw className="mr-2 h-4 w-4 shrink-0" />
 								Resubmit
 							</Button>
 							<Button
-								className="w-full bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
+								variant="secondary"
+								className="w-full"
 								onClick={() => router.push(`/packs/edit/${id}`)}
 							>
 								<Edit className="mr-2 h-4 w-4 shrink-0" />
@@ -261,7 +262,7 @@ const DeleteConfirmation = ({ onConfirm }: { onConfirm: () => void }) => {
 			<AlertDialogTrigger asChild>
 				<Button
 					variant="destructive"
-					className="bg-red-500 hover:bg-red-600 text-white dark:bg-red-500 dark:hover:bg-red-600 col-span-2"
+					className="col-span-2"
 				>
 					<Trash2 className="mr-2 h-4 w-4 shrink-0" />
 					Delete
@@ -281,7 +282,6 @@ const DeleteConfirmation = ({ onConfirm }: { onConfirm: () => void }) => {
 						<Button
 							variant="destructive"
 							onClick={() => onConfirm()}
-							className="bg-red-500 hover:bg-red-600 text-white dark:bg-red-500 dark:hover:bg-red-600"
 						>
 							Continue
 						</Button>

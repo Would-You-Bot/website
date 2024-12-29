@@ -1,4 +1,4 @@
-import Button from '@/components/Button'
+import { Button } from '@/components/ui/button'
 import { NextPage } from 'next'
 import Link from 'next/link'
 
@@ -14,7 +14,7 @@ const NotFound: NextPage = () => {
 			</p>
 
 			<Button
-				variant="red"
+				variant="destructive"
 				className="mt-8"
 			>
 				<Link href="/">Home</Link>

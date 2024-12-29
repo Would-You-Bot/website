@@ -77,7 +77,7 @@ function Filter() {
 					>
 						Search for a pack
 					</label>
-					<Search className="size-4 absolute left-4 bottom-4 dark:text-[#666666]" />
+					<Search className="size-4 absolute left-4 bottom-4 text-muted-foreground" />
 					<Input
 						id="search"
 						name="search"
@@ -85,7 +85,7 @@ function Filter() {
 						value={searchQuery}
 						onChange={(e) => setSearchQuery(e.target.value)}
 						onKeyDown={(e) => e.key === 'Enter' && doSearch()}
-						className="pl-10 pr-4 h-12 dark:bg-[#1D1D1D]"
+						className="pl-10 pr-4 h-12"
 					/>
 					<Button
 						variant={'ghost'}
@@ -125,9 +125,9 @@ function Filter() {
 						type="button"
 						onClick={() => selectType('all')}
 						className={cn(
-							'flex items-center gap-1 px-2 py-1.5 text-muted-foreground text-xs rounded-md bg-background-light cursor-pointer shrink-0',
+							'flex items-center gap-1 px-2 py-1.5 text-muted-foreground transition-all text-xs rounded-md bg-background-light cursor-pointer shrink-0',
 							{
-								'bg-brand-customPrimary text-white': !t
+								'bg-brand-primary text-primary-foreground': !t
 							}
 						)}
 					>
@@ -144,7 +144,8 @@ function Filter() {
 							className={cn(
 								'flex items-center gap-1 px-2 py-1.5 text-muted-foreground text-xs rounded-md bg-background-light cursor-pointer',
 								{
-									'bg-brand-customPrimary text-white': t && t === type.slug
+									'bg-brand-primary text-primary-foreground':
+										t && t === type.slug
 								}
 							)}
 						>

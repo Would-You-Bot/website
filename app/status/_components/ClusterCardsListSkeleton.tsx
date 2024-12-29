@@ -19,9 +19,9 @@ export const ClusterCardsListSkeleton = ({
 				return (
 					<Skeleton
 						key={clusterIndex}
-						className="basis-[calc(33.333%-1.5rem)] min-w-[280px] sm:min-w-[420px] space-y-4 bg-foreground/10 dark:bg-black/25 rounded-2xl p-4 sm:p-6"
+						className="basis-[calc(33.333%-1.5rem)] min-w-[280px] sm:min-w-[420px] space-y-4 bg-card rounded-2xl p-4 sm:p-6"
 					>
-						<div className="flex gap-3 items-center text-xl font-bold text-foregorund">
+						<div className="flex gap-3 items-center text-xl font-bold text-foreground">
 							<Skeleton className="w-32 h-5 bg-foreground/15" />
 							<Skeleton className="w-2.5 h-2.5 rounded-full bg-foreground/15" />
 						</div>

@@ -2,6 +2,7 @@ import Head from 'next/head'
 
 import Image from 'next/image' // Import the 'Image' component
 
+import GlowingHeading from '@/components/GlowingHeading'
 import staffs from '@/data/staffs.json' // Import the JSON data
 
 export default function Team() {
@@ -20,17 +21,11 @@ export default function Team() {
 			</Head>
 			<main className="flex flex-col items-center">
 				<div className="flex mt-auto w-full max-w-8xl flex-col px-8">
-					<h1 className="text-4xl font-bold text-foreground">
-						<span className="text-brand-red-100 drop-shadow-red-glow">
-							Meet{' '}
-						</span>{' '}
-						<span className="text-brand-blue-100 drop-shadow-blue-glow">
-							{' '}
-							the{' '}
-						</span>
-						Team
-					</h1>
-					<p className="text-foreground/50">
+					<GlowingHeading
+						redText="Meat the"
+						blueText="Team"
+					/>
+					<p className="text-muted-foreground">
 						Meet the amazing team and contributors behind Would You.
 					</p>
 				</div>
