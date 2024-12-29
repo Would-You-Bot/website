@@ -1,7 +1,7 @@
 // TODO remove the use client directive in favor of a server component
 'use client'
 import { useSearchParams } from 'next/navigation'
-import Button from '@/components/Button'
+import { Button } from '@/components/ui/button'
 import Head from 'next/head'
 
 export default function Premium() {
