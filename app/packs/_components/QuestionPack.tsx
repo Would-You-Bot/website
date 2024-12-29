@@ -169,7 +169,7 @@ export default function QuestionPack({
 										'mr-2 h-4 w-4 shrink-0',
 										userLiked ?
 											'text-red-500 fill-red-500'
-										:	'text-brand-customGrayText fill-brand-customGrayText'
+										:	'text-brand-gray-text fill-brand-gray-text'
 									)}
 								/>
 								<span

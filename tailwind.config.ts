@@ -25,19 +25,29 @@ const config = {
 			},
 			colors: {
 				brand: {
-					customPrimary: 'rgb(5, 152, 244)',
-					customPrimaryLight: 'rgb(60, 178, 251)',
-					customSecondary: 'rgb(5, 152, 244)',
-					customDarkBg1: 'rgb(3, 122, 199)',
-					customDarkBg2: 'rgb(23, 23, 23)',
-					customDarkBg3: 'rgb(20, 20, 20)',
-					customDarkBg3Hover: 'rgb(55, 56, 62)',
-					customContentSubtitle: 'rgb(178, 184, 205)',
-					customGrayBorder: 'rgb(255,255,255,0.1)',
-					customGrayText: 'rgb(161, 161, 161)',
-					customDarkBgTransparent: 'rgb(31, 32, 35, 0.7)',
-					customDarkBgTransparentDarker: 'rgb(0,0,0,0.5)',
-					customDarkBgTransparentLighter: 'rgb(48, 49, 54, 0.7)',
+					primary: {
+						DEFAULT: 'rgb(5, 152, 244)',
+						light: 'rgb(60, 178, 251)'
+					},
+					secondary: {
+						DEFAULT: 'rgb(5, 152, 244)',
+						dark: {
+							bg1: 'rgb(3, 122, 199)',
+							bg2: 'rgb(23, 23, 23)',
+							bg3: 'rgb(20, 20, 20)',
+							bg3Hover: 'rgb(55, 56, 62)'
+						},
+						contentSubtle: 'rgb(178, 184, 205)'
+					},
+					gray: {
+						border: 'rgb(255,255,255,0.1)',
+						text: 'rgb(161, 161, 161)'
+					},
+					dark: {
+						bgTransparent: 'rgb(31, 32, 35, 0.7)',
+						bgTransparentDarker: 'rgb(0,0,0,0.5)',
+						bgTransparentLighter: 'rgb(48, 49, 54, 0.7)'
+					},
 					blue: { 100: '#0598F4', 200: '#037ac7', 300: '#016cb0' },
 					red: { 100: '#F00605', 200: '#b60505', 300: '#9a0404' }
 				},

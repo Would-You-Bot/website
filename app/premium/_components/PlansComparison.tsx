@@ -61,11 +61,11 @@ export default function PlansComparison({
 									</span>
 								}
 							</div>
-							<div className="text-md flex w-full basis-1/3 items-center justify-center font-bold text-brand-customPrimary">
+							<div className="text-md flex w-full basis-1/3 items-center justify-center font-bold text-brand-primary">
 								{typeof item.premium === 'boolean' ?
 									item.premium ?
-										<CheckIcon className="h-5 w-5 text-brand-customPrimary sm:h-7 sm:w-7" />
-									:	<CloseIcon className="h-5 w-5 text-brand-customPrimary sm:h-7 sm:w-7" />
+										<CheckIcon className="h-5 w-5 text-brand-primary sm:h-7 sm:w-7" />
+									:	<CloseIcon className="h-5 w-5 text-brand-primary sm:h-7 sm:w-7" />
 
 								:	<span className="px-2 text-center text-sm sm:text-base">
 										{item.premium}

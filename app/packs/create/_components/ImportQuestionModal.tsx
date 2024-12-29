@@ -297,12 +297,11 @@ function ImportDetails({
 							htmlFor="fileInput"
 							id="file-label"
 							className={clsx(
-								'flex flex-col gap-2 hover:text-brand-customPrimary transition-all items-center py-12 rounded-md border cursor-pointer border-dashed p-4 hover:border-brand-customPrimary',
+								'flex flex-col gap-2 hover:text-brand-primary transition-all items-center py-12 rounded-md border cursor-pointer border-dashed p-4 hover:border-brand-primary',
 								{
 									'border-muted-foreground text-muted-foreground':
 										!dragEntered && !fileDropped && !fileUploaded,
-									'border-brand-customPrimary text-brand-customPrimary':
-										dragEntered,
+									'border-brand-primary text-brand-primary': dragEntered,
 									'border-success text-success pointer-events-none opacity-75':
 										fileDropped || fileUploaded
 								}

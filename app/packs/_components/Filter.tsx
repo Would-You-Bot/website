@@ -127,7 +127,7 @@ function Filter() {
 						className={cn(
 							'flex items-center gap-1 px-2 py-1.5 text-muted-foreground text-xs rounded-md bg-background-light cursor-pointer shrink-0',
 							{
-								'bg-brand-customPrimary text-white': !t
+								'bg-brand-primary text-white': !t
 							}
 						)}
 					>
@@ -144,7 +144,7 @@ function Filter() {
 							className={cn(
 								'flex items-center gap-1 px-2 py-1.5 text-muted-foreground text-xs rounded-md bg-background-light cursor-pointer',
 								{
-									'bg-brand-customPrimary text-white': t && t === type.slug
+									'bg-brand-primary text-white': t && t === type.slug
 								}
 							)}
 						>

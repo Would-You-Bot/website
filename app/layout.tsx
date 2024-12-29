@@ -26,7 +26,7 @@ export default function RootLayout({
 				<Providers>
 					<Alert
 						href="/premium"
-						className="bg-brand-customPrimary text-white"
+						className="bg-brand-primary"
 						active
 					>
 						<b>Would You Bot</b> • Upgrade your server with Premium

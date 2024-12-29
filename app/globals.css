@@ -3,227 +3,227 @@
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --background: 210 1% 98%;
-    --background-dark: 0 0% 93.75%;
-    --background-darker: 0 0% 90%;
-    --background-light: 0 0% 95%;
-    --foreground: 0 0% 3.9%;
+	:root {
+		--background: 210 1% 98%;
+		--background-dark: 0 0% 93.75%;
+		--background-darker: 0 0% 90%;
+		--background-light: 0 0% 95%;
+		--foreground: 0 0% 3.9%;
 
-    --hover: 0 0% 90%;
-    --hover-light: 0 0% 93.5%;
+		--hover: 0 0% 90%;
+		--hover-light: 0 0% 93.5%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+		--card: 0 0% 100%;
+		--card-foreground: 0 0% 3.9%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
+		--popover: 0 0% 100%;
+		--popover-foreground: 0 0% 3.9%;
 
-    --primary: 203 96% 49%;
-    --primary-foreground: 0 0% 98%;
+		--primary: 203 96% 49%;
+		--primary-foreground: 0 0% 98%;
 
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
+		--secondary: 0 0% 96.1%;
+		--secondary-foreground: 0 0% 9%;
 
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
+		--muted: 0 0% 96.1%;
+		--muted-foreground: 0 0% 45.1%;
 
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
+		--accent: 0 0% 96.1%;
+		--accent-foreground: 0 0% 9%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+		--destructive: 0 84.2% 60.2%;
+		--destructive-foreground: 0 0% 98%;
 
-    --success:  158 62% 48%;
-    --success-foreground: 0 0% 98%;
+		--success: 158 62% 48%;
+		--success-foreground: 0 0% 98%;
 
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
+		--border: 0 0% 89.8%;
+		--input: 0 0% 89.8%;
+		--ring: 0 0% 3.9%;
 
-    --radius: 0.5rem;
+		--radius: 0.5rem;
 
-    --scrollbar: 0 0% 75%;
+		--scrollbar: 0 0% 75%;
 
-    --status-green: 112 100% 35%;
-    --status-yellow: 29 100% 50%;
-    --status-red: 0 97% 40%;
-  }
+		--status-green: 112 100% 35%;
+		--status-yellow: 29 100% 50%;
+		--status-red: 0 97% 40%;
+	}
 
-  .dark {
-    --background: 0 0% 9%;
-    --background-dark: 0 0% 6%;
-    --background-darker: 0 0% 13%;
-    --background-light: 0 0% 15%;
-    --foreground: 0 0% 98%;
+	.dark {
+		--background: 0 0% 9%;
+		--background-dark: 0 0% 6%;
+		--background-darker: 0 0% 13%;
+		--background-light: 0 0% 15%;
+		--foreground: 0 0% 98%;
 
-    --hover: 0 0% 10%;
-    --hover-light: 0 0% 13%;
+		--hover: 0 0% 10%;
+		--hover-light: 0 0% 13%;
 
-    --card: 0 0% 8%;
-    --card-foreground: 0 0% 98%;
+		--card: 0 0% 8%;
+		--card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
+		--popover: 0 0% 3.9%;
+		--popover-foreground: 0 0% 98%;
 
-    --primary: 203 96% 49%;
-    --primary-foreground: 0 0% 98%;
+		--primary: 203 96% 49%;
+		--primary-foreground: 0 0% 98%;
 
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
+		--secondary: 0 0% 14.9%;
+		--secondary-foreground: 0 0% 98%;
 
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
+		--muted: 0 0% 14.9%;
+		--muted-foreground: 0 0% 63.9%;
 
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
+		--accent: 0 0% 14.9%;
+		--accent-foreground: 0 0% 98%;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 98%;
+		--destructive: 0 84% 60%;
+		--destructive-foreground: 0 0% 98%;
 
-    --success:  158 64% 52%;
-    --success-foreground: 0 0% 98%;
+		--success: 158 64% 52%;
+		--success-foreground: 0 0% 98%;
 
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
+		--border: 0 0% 14.9%;
+		--input: 0 0% 14.9%;
+		--ring: 0 0% 83.1%;
 
-    --scrollbar: 0 0% 25%;
+		--scrollbar: 0 0% 25%;
 
-    --status-green: 112 100% 72%;
-    --status-yellow: 29 100% 60%;
-    --status-red: 0 97% 48%;
-  }
+		--status-green: 112 100% 72%;
+		--status-yellow: 29 100% 60%;
+		--status-red: 0 97% 48%;
+	}
 }
 
 @layer base {
-  * {
-    @apply rounded border-border ring-offset-background focus-visible:outline-none focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-brand-customPrimaryLight;
-  }
-  body {
-    @apply scroll-smooth bg-background text-foreground;
-  }
-  @media screen and (max-width: 500px) {
-    .discord-message:first-child {
-      @apply w-[95%] !important;
-    }
-    .smalldevice {
-      @apply mx-auto my-[0.5rem] w-[100%] !important;
-    }
-    .order-last {
-      @apply mx-auto w-[100%] !important;
-    }
-    .discord-messages {
-      @apply min-w-0 !important;
-    }
-  }
-  @media screen and (max-width: 350px) {
-    .discord-thread-message .discord-thread-message-content {
-      @apply text-xs;
-    }
-    .discord-thread-message .discord-thread-message-timestamp {
-      @apply text-xs !important;
-    }
-    .discord-thread {
-      @apply max-w-full !important;
-    }
-  }
+	* {
+		@apply rounded border-border ring-offset-background focus-visible:outline-none focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-brand-primary-light;
+	}
+	body {
+		@apply scroll-smooth bg-background text-foreground;
+	}
+	@media screen and (max-width: 500px) {
+		.discord-message:first-child {
+			@apply w-[95%] !important;
+		}
+		.smalldevice {
+			@apply mx-auto my-[0.5rem] w-[100%] !important;
+		}
+		.order-last {
+			@apply mx-auto w-[100%] !important;
+		}
+		.discord-messages {
+			@apply min-w-0 !important;
+		}
+	}
+	@media screen and (max-width: 350px) {
+		.discord-thread-message .discord-thread-message-content {
+			@apply text-xs;
+		}
+		.discord-thread-message .discord-thread-message-timestamp {
+			@apply text-xs !important;
+		}
+		.discord-thread {
+			@apply max-w-full !important;
+		}
+	}
 }
 
 [data-radix-popper-content-wrapper] {
-  outline: none !important;
+	outline: none !important;
 }
 
 body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  align-items: center;
-  font-family: 'Inter', sans-serif;
-  overflow-x: hidden;
-  overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	align-items: center;
+	font-family: 'Inter', sans-serif;
+	overflow-x: hidden;
+	overflow-y: auto;
 }
 
 body::-webkit-scrollbar {
-  width: 0.5rem;
-  border-radius: 20px;
+	width: 0.5rem;
+	border-radius: 20px;
 }
 
 body::-webkit-scrollbar-thumb {
-  width: 0.5rem;
-  background-color: hsl(var(--scrollbar));
-  border-radius: 20px;
+	width: 0.5rem;
+	background-color: hsl(var(--scrollbar));
+	border-radius: 20px;
 }
 body::-webkit-scrollbar-track {
-  width: 0.5rem;
-  background-color: transparent;
+	width: 0.5rem;
+	background-color: transparent;
 }
 
 .discord-button span {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .discord-embed-footer {
-  color: #999999;
+	color: #999999;
 }
 
 .ring-pulse {
-  animation: 2s pulse infinite ease-in-out;
+	animation: 2s pulse infinite ease-in-out;
 }
 
 @keyframes pulse {
-  0% {
-    box-shadow: 0 0 0 0px hsl(var(--foreground) / 0.15);
-  }
+	0% {
+		box-shadow: 0 0 0 0px hsl(var(--foreground) / 0.15);
+	}
 
-  100% {
-    box-shadow: 0 0 0 14px hsl(var(--secondary) / 0);
-  }
+	100% {
+		box-shadow: 0 0 0 14px hsl(var(--secondary) / 0);
+	}
 }
 
 @layer components {
-  .popular-pack {
-    position: relative;
-  }
+	.popular-pack {
+		position: relative;
+	}
 
-  .popular-pack::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    inset: 0;
-    border-radius: calc(var(--radius) + 0.1875rem);
-    z-index: -1;
-    background-image: linear-gradient(
-      146.78deg,
-      #0598f6 -1.37%,
-      #f00505 104.43%
-    );
-  }
+	.popular-pack::before {
+		content: '';
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		inset: 0;
+		border-radius: calc(var(--radius) + 0.1875rem);
+		z-index: -1;
+		background-image: linear-gradient(
+			146.78deg,
+			#0598f6 -1.37%,
+			#f00505 104.43%
+		);
+	}
 
-  .popular-btn {
-    background: linear-gradient(102.07deg, #0e93ed -169.31%, #e10f14 113.25%);
-  }
+	.popular-btn {
+		background: linear-gradient(102.07deg, #0e93ed -169.31%, #e10f14 113.25%);
+	}
 
-  .popular-badge {
-    background: linear-gradient(98.64deg, #4a6db0 -12.21%, #725487 119.79%);
-  }
+	.popular-badge {
+		background: linear-gradient(98.64deg, #4a6db0 -12.21%, #725487 119.79%);
+	}
 }
 
 .thin-scrollbar::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+	width: 6px;
+	height: 6px;
 }
 .thin-scrollbar::-webkit-scrollbar-track {
-  background: transparent;
+	background: transparent;
 }
 .thin-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(155, 155, 155, 0.5);
-  border-radius: 20px;
-  border: transparent;
+	background-color: rgba(155, 155, 155, 0.5);
+	border-radius: 20px;
+	border: transparent;
 }
 .thin-scrollbar {
-  scrollbar-width: thin;
-  scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
+	scrollbar-width: thin;
+	scrollbar-color: rgba(155, 155, 155, 0.5) transparent;
 }

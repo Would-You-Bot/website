@@ -137,7 +137,7 @@ export default function Premium() {
 											checked={!isMonthly}
 											onChange={handleChange}
 										/>
-										<span className="absolute top-0 left-2 z-10 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[10rem] sm:after:w-[20rem] after:rounded-lg after:bg-brand-customPrimaryLight dark:after:bg-brand-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem]"></span>
+										<span className="absolute top-0 left-2 z-10 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[10rem] sm:after:w-[20rem] after:rounded-lg after:bg-brand-primary-light dark:after:bg-brand-primary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem]"></span>
 										<div className="z-20 flex gap-10 text-base font-bold text-foreground">
 											<div className={`${!isMonthly && 'text-foreground/50'}`}>
 												Monthly
@@ -189,7 +189,7 @@ export default function Premium() {
 																	text as keyof (typeof pricingData)['premium']
 																]
 															) ?
-																<CheckIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-brand-customPrimary" />
+																<CheckIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-brand-primary" />
 															:	<CloseIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-[#7A7B7E]" />
 															}
 															<span>{text}</span>
