@@ -131,7 +131,7 @@ const config = {
 				['gradient-premium']:
 					'linear-gradient(to bottom right, #0598F4 0%,#F00605 100%)',
 				['gradient-brand']:
-					'linear-gradient(92.91deg, #0598F4 -50%,#F00605 150%)'
+					'linear-gradient(in oklch 90deg, #0598F4 25%, #F00605 85%)'
 			},
 			overflowWrap: {
 				anywhere: 'anywhere',

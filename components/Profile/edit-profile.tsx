@@ -185,7 +185,6 @@ export function EditProfile({
 					</div>
 
 					<Button
-						className="w-full bg-brand-blue-100 hover:bg-brand-blue-100/90 text-white"
 						onClick={saveUserSettings}
 						disabled={isSaving}
 					>

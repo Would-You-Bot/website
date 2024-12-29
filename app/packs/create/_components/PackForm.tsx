@@ -237,7 +237,7 @@ function PackForm() {
 									</SelectContent>
 								</Select>
 								{errors.type && (
-									<p className="px-1 text-xs text-brand-red-100">
+									<p className="px-1 text-xs text-destructive">
 										{errors.type.message}
 									</p>
 								)}
@@ -265,7 +265,7 @@ function PackForm() {
 									</SelectContent>
 								</Select>
 								{errors.language && (
-									<p className="px-1 text-xs text-brand-red-100">
+									<p className="px-1 text-xs text-destructive">
 										{errors.language.message}
 									</p>
 								)}
@@ -281,7 +281,7 @@ function PackForm() {
 									maxLength={100}
 								/>
 								{errors.name && (
-									<p className="px-1 text-xs text-brand-red-100">
+									<p className="px-1 text-xs text-destructive">
 										{errors.name.message}
 									</p>
 								)}
@@ -298,7 +298,7 @@ function PackForm() {
 									maxLength={500}
 								/>
 								{errors.description && (
-									<p className="px-1 text-xs text-brand-red-100">
+									<p className="px-1 text-xs text-destructive">
 										{errors.description.message}
 									</p>
 								)}
@@ -322,7 +322,7 @@ function PackForm() {
 											type="button"
 											key={tag}
 											onClick={() => deleteTag(tag)}
-											className="flex items-center gap-1 px-2 py-1 mr-1 text-left break-all text-xs rounded-lg dark:bg-[#1D1D1D] bg-background-light cursor-pointer"
+											className="flex items-center gap-1 px-2 py-1 mr-1 text-left break-all text-xs rounded-lg bg-background-darker cursor-pointer"
 										>
 											<span>
 												<XCircle size={14} />
@@ -332,7 +332,7 @@ function PackForm() {
 									))}
 								</div>
 								{errors.tags && (
-									<p className="px-1 text-xs text-brand-red-100">
+									<p className="px-1 text-xs text-destructive">
 										{errors.tags.message}
 									</p>
 								)}
@@ -340,19 +340,17 @@ function PackForm() {
 							<Button
 								type="button"
 								onClick={validateBeforeMoving}
-								className="rounded-lg w-fit py-2 px-4 bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
-								size="sm"
+								className="w-fit"
 							>
 								Next
 							</Button>
 						</section>
 						//  second step adding questions to the pack
-					:	<section className="space-y-8  min-h-[calc(100vh-160px)]">
+					:	<section className="space-y-4 min-h-[calc(100vh-160px)]">
 							<div className="flex flex-col gap-2">
 								<div className="flex flex-wrap items-center gap-4">
 									<Button
-										className="rounded-lg w-fit py-2 px-4 flex gap-2 self-end"
-										size="sm"
+										className="flex gap-2"
 										variant="outline"
 										type="button"
 										disabled={isSubmitting}
@@ -365,8 +363,7 @@ function PackForm() {
 										<ImportQuestionModal
 											trigger={
 												<Button
-													className="rounded-lg w-fit py-2 px-4 flex gap-2 self-end"
-													size="sm"
+													className="flex gap-2"
 													variant="outline"
 													type="button"
 													disabled={isSubmitting}
@@ -382,8 +379,7 @@ function PackForm() {
 										<ExportQuestionModal
 											trigger={
 												<Button
-													className="rounded-lg w-fit py-2 px-4 flex gap-2 self-end"
-													size="sm"
+													className="flex gap-2"
 													variant="outline"
 													type="button"
 													disabled={isSubmitting || addedQuestions.length === 0}
@@ -397,8 +393,7 @@ function PackForm() {
 									</div>
 									<div className="flex flex-col gap-2 justify-center">
 										<Button
-											className="rounded-lg w-fit py-2 px-4 flex gap-2 self-end"
-											size="sm"
+											className="flex gap-2"
 											type="submit"
 											disabled={isSubmitting}
 										>
@@ -418,17 +413,17 @@ function PackForm() {
 									/>
 								</div>
 								{errors.questions && (
-									<p className="px-1 text-xs text-brand-red-100">
+									<p className="px-1 text-xs text-destructive">
 										{errors.questions.message}
 									</p>
 								)}
 							</div>
 							<div className="border rounded-xl overflow-hidden divide-y">
-								<div className="dark:bg-[#1D1D1D] bg-background-light flex justify-between p-2 pl-4 gap-4">
+								<div className="bg-background-darker flex justify-between p-2 pl-4 gap-4">
 									<div className="flex items-center gap-4">
 										<p className="block w-fit">Questions</p>
 										<div className="relative hidden xs:block">
-											<Search className="size-4 absolute left-2 bottom-3 dark:text-[#666666]" />
+											<Search className="size-4 absolute left-2 bottom-3 text-muted-foreground" />
 											<Input
 												placeholder="Search for a question"
 												className="md:w-[441px] pl-8 focus:ring-0"
@@ -461,7 +456,7 @@ function PackForm() {
 														variant={'ghost'}
 														type="button"
 														onClick={() => editQuestion(index)}
-														className="hover:text-brand-blue-100"
+														className="hover:text-primary"
 													>
 														<Pen className="size-4" />
 														<span className="sr-only">edit this question</span>
@@ -471,7 +466,7 @@ function PackForm() {
 														variant={'ghost'}
 														onClick={() => deleteQuestion(index)}
 														type="button"
-														className="hover:text-brand-red-100"
+														className="hover:text-destructive"
 													>
 														<Trash2 className="size-4" />
 														<span className="sr-only">
@@ -503,7 +498,7 @@ function PackForm() {
 																	<span>Edit</span>
 																</button>
 															</DropdownMenuItem>
-															<DropdownMenuItem className="focus:text-red-400">
+															<DropdownMenuItem className="focus:text-destructive">
 																<button
 																	onClick={() => deleteQuestion(index)}
 																	className="w-full flex items-center gap-2"

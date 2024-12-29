@@ -147,9 +147,9 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
 			<section className="max-md:mt-6">
 				<p className="my-2 text-sm capitalize">look inside</p>
 				<div className="border rounded-xl overflow-hidden">
-					<div className="dark:bg-[#1D1D1D] bg-background-light flex items-center justify-between px-4 py-2 gap-4 border-b">
+					<div className="bg-background-darker flex items-center justify-between px-4 py-2 gap-4 border-b">
 						<div className="relative w-full md:w-3/4">
-							<Search className="size-4 absolute left-2 bottom-3 dark:text-[#666666]" />
+							<Search className="size-4 absolute left-2 bottom-3 text-muted-foreground" />
 							<Input
 								placeholder="Search questions"
 								className="w-full pl-8 focus:ring-0"
@@ -226,7 +226,7 @@ export function QuestionPackDetails({
 
 	const buttonContent = (
 		<Button
-			className={cn('w-full', !isReview && 'text-white')}
+			className="w-full"
 			variant={isReview ? 'outline' : 'default'}
 		>
 			{isReview ?
@@ -322,10 +322,10 @@ const QuestionPackDetailsSkeleton = () => {
 			<section>
 				<Skeleton className="w-32 h-4 bg-foreground/15 my-2" />
 				<div className="border rounded-xl overflow-hidden">
-					<div className="dark:bg-[#1D1D1D] bg-background-light flex items-center px-4 py-2 gap-4 border-b">
+					<div className="bg-background-darker flex items-center px-4 py-2 gap-4 border-b">
 						<div className="relative md:w-3/4">
 							<div className="p-3 rounded-lg border">
-								<Search className="size-4 absolute left-2 bottom-3 dark:text-[#666666]" />
+								<Search className="size-4 absolute left-2 bottom-3 text-muted-foreground" />
 								<Skeleton className="w-24 h-4 bg-foreground/15 ml-4" />
 							</div>
 						</div>

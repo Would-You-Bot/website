@@ -78,9 +78,9 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
 					look inside
 				</p>
 				<div className="border rounded-xl overflow-hidden">
-					<div className="dark:bg-[#1D1D1D] bg-background-light flex items-center px-4 py-2 gap-4 border-b">
+					<div className="bg-background-light flex items-center px-4 py-2 gap-4 border-b">
 						<div className="relative md:w-3/4">
-							<Search className="size-4 absolute left-2 bottom-3 dark:text-[#666666]" />
+							<Search className="size-4 absolute left-2 bottom-3 text-muted-foreground" />
 							<Input
 								placeholder="Search questions"
 								className="w-full pl-8 focus:ring-0"
@@ -113,14 +113,7 @@ export function QuestionPackDetails({
 			onOpenChange={setIsOpen}
 		>
 			<DialogTrigger asChild>
-				<Button
-					className={cn(
-						'w-full bg-brand-blue-100 hover:bg-brand-blue-200 text-white',
-						{
-							'popular-btn': false // You might want to adjust this based on your needs
-						}
-					)}
-				>
+				<Button className="w-full">
 					<ExternalLink className="mr-2 h-4 w-4 shrink-0" />{' '}
 					<span>Use Pack</span>
 				</Button>

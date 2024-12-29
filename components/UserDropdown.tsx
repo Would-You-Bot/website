@@ -70,7 +70,7 @@ export default function UserDropdown({
 				<DropdownMenuSeparator />
 				<a
 					href={`/logout?redirect=${encodeURIComponent(currentPathname)}`}
-					className="w-full text-[#F00505]"
+					className="w-full text-destructive"
 				>
 					<DropdownMenuItem className="flex w-full items-center gap-2">
 						<LogOut className="mt-0.5 h-4 w-4" />

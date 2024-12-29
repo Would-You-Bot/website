@@ -49,12 +49,12 @@ export default function PlansComparison({
 								{item.criteria}
 							</div>
 							<div
-								className={`text-md flex w-full basis-1/3 items-center justify-center font-bold text-[#7A7B7E] ${colSeparator ? 'border-x-2 border-background-light' : ''}`}
+								className={`text-md flex w-full basis-1/3 items-center justify-center font-bold text-muted-foreground ${colSeparator ? 'border-x-2 border-background-light' : ''}`}
 							>
 								{typeof item.free === 'boolean' ?
 									item.free ?
-										<CheckIcon className="h-5 w-5 text-[#7A7B7E] sm:h-7 sm:w-7" />
-									:	<CloseIcon className="h-5 w-5 text-[#7A7B7E] sm:h-7 sm:w-7" />
+										<CheckIcon className="h-5 w-5 text-muted-foreground sm:h-7 sm:w-7" />
+									:	<CloseIcon className="h-5 w-5 text-muted-foreground sm:h-7 sm:w-7" />
 
 								:	<span className="px-2 text-center text-sm sm:text-base">
 										{item.free}

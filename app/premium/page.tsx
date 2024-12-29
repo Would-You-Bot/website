@@ -190,7 +190,7 @@ export default function Premium() {
 																]
 															) ?
 																<CheckIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-brand-primary" />
-															:	<CloseIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-[#7A7B7E]" />
+															:	<CloseIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-muted-foreground" />
 															}
 															<span>{text}</span>
 														</li>
@@ -203,7 +203,7 @@ export default function Premium() {
 														onClick={() => {
 															fetchData()
 														}}
-														className="flex w-full text-white items-center justify-center gap-2 rounded-xl bg-green-500 py-2 font-bold leading-loose text-foreground transition hover:bg-green-600 focus:ring-0"
+														className="flex w-full items-center justify-center gap-2 rounded-xl bg-green-500 py-2 font-bold leading-loose text-foreground transition hover:bg-green-600 focus:ring-0"
 													>
 														Continue with Stripe
 														<StripeSquare className="h-5 w-5" />

@@ -3,6 +3,7 @@ import Container from '@/components/Container'
 import QuestionPackList from './_components/QuestionPackList'
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import PacksPagination from './_components/PacksPagination'
+import GlowingHeading from '@/components/GlowingHeading'
 import Filter from './_components/Filter'
 import { PackType } from '@prisma/client'
 import { Metadata, Viewport } from 'next'
@@ -92,12 +93,10 @@ async function page({
 
 	return (
 		<Container className="pt-8 lg:pt-10 space-y-8 min-h-[calc(100vh-112px)]">
-			<h1 className="text-4xl font-bold">
-				<span className="text-brand-red-100 drop-shadow-red-glow">
-					Question
-				</span>{' '}
-				<span className="text-brand-blue-100 drop-shadow-blue-glow">Packs</span>
-			</h1>
+			<GlowingHeading
+				redText="Question"
+				blueText="Packs"
+			/>
 			<div className="space-y-10 lg:space-y-14 mb-10">
 				<Filter />
 				{responseData.success && responseData.data.length > 0 ?

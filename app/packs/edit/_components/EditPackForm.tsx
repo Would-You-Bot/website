@@ -206,7 +206,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
 								</SelectContent>
 							</Select>
 							{errors.type && (
-								<p className="px-1 text-xs text-brand-red-100">
+								<p className="px-1 text-xs text-destructive">
 									{errors.type.message}
 								</p>
 							)}
@@ -234,7 +234,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
 								</SelectContent>
 							</Select>
 							{errors.language && (
-								<p className="px-1 text-xs text-brand-red-100">
+								<p className="px-1 text-xs text-destructive">
 									{errors.language.message}
 								</p>
 							)}
@@ -248,7 +248,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
 								placeholder="My awesome pack"
 							/>
 							{errors.name && (
-								<p className="px-1 text-xs text-brand-red-100">
+								<p className="px-1 text-xs text-destructive">
 									{errors.name.message}
 								</p>
 							)}
@@ -263,7 +263,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
 								placeholder="My awesome pack description"
 							/>
 							{errors.description && (
-								<p className="px-1 text-xs text-brand-red-100">
+								<p className="px-1 text-xs text-destructive">
 									{errors.description.message}
 								</p>
 							)}
@@ -287,7 +287,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
 										type="button"
 										key={tag}
 										onClick={() => deleteTag(tag)}
-										className="flex items-center gap-1 px-2 py-1 mr-1 text-xs rounded-lg dark:bg-[#1D1D1D] bg-background-light cursor-pointer"
+										className="flex items-center gap-1 px-2 py-1 mr-1 text-xs rounded-lg bg-background-darker cursor-pointer"
 									>
 										<span>
 											<XCircle size={14} />
@@ -297,7 +297,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
 								))}
 							</div>
 							{errors.tags && (
-								<p className="px-1 text-xs text-brand-red-100">
+								<p className="px-1 text-xs text-destructive">
 									{errors.tags.message}
 								</p>
 							)}
@@ -318,15 +318,15 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
 					/>
 					<div className="flex flex-col gap-2">
 						{errors.questions && (
-							<p className="px-1 text-xs text-brand-red-100">
+							<p className="px-1 text-xs text-destructive">
 								{errors.questions.message}
 							</p>
 						)}
 					</div>
 					<div className="border rounded-xl overflow-hidden divide-y">
-						<div className="dark:bg-[#1D1D1D] bg-background-light flex justify-between p-2 pl-4 gap-4">
+						<div className="bg-background-darker flex justify-between p-2 pl-4 gap-4">
 							<div className="relative hidden xs:block xs:w-72">
-								<Search className="size-4 absolute left-2 bottom-3 dark:text-[#666666]" />
+								<Search className="size-4 absolute left-2 bottom-3 text-muted-foreground" />
 								<Input
 									placeholder="Search through your questions"
 									className="pl-8"
@@ -398,7 +398,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
 															<span>Edit</span>
 														</button>
 													</DropdownMenuItem>
-													<DropdownMenuItem className="focus:text-red-400">
+													<DropdownMenuItem className="focus:text-destructive">
 														<button
 															onClick={() => deleteQuestion(index)}
 															className="w-full flex items-center gap-2"
@@ -419,7 +419,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
 
 				{/*  */}
 				<div className="lg:col-span-2">
-					<Button className="hover:bg-brand-blue-300 bg-brand-blue-100 w-40 text-white">
+					<Button disabled={isSubmitting}>
 						{isSubmitting && <Loader2 size={16} />}
 						<span className="ml-2">{renderSubmitText()}</span>
 					</Button>

@@ -1,4 +1,5 @@
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
+import GlowingHeading from '@/components/GlowingHeading'
 import EditPackForm from '../_components/EditPackForm'
 import Container from '@/components/Container'
 import { PackData } from '@/utils/zod/schemas'
@@ -56,26 +57,16 @@ async function page({ params, searchParams }: PageProps) {
 
 	return (
 		<Container className="pt-8 lg:pt-10 space-y-8 min-h-[calc(100vh-112px)]">
-			<h1 className="text-4xl font-bold">
-				{!notResubmitting ?
-					<>
-						<span className="text-brand-red-100 drop-shadow-red-glow">
-							Edit
-						</span>{' '}
-						<span className="text-brand-blue-100 drop-shadow-blue-glow">
-							Pack
-						</span>
-					</>
-				:	<>
-						<span className="text-brand-red-100 drop-shadow-red-glow">
-							Update &
-						</span>{' '}
-						<span className="text-brand-blue-100 drop-shadow-blue-glow">
-							Resubmit
-						</span>
-					</>
-				}
-			</h1>
+			{!notResubmitting ?
+				<GlowingHeading
+					redText="Edit"
+					blueText="Pack"
+				/>
+			:	<GlowingHeading
+					redText="Update &"
+					blueText="Resubmit"
+				/>
+			}
 			<EditPackForm
 				data={PackData}
 				userId={userId}
