@@ -3,7 +3,7 @@ import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import ProfileContent from './_components/ProfileContent'
 
 type Props = {
-	params: { id: string }
+	params: Promise<{ id: string }>
 }
 
 export const viewport: Viewport = {
@@ -28,22 +28,20 @@ const getUserData = async (id: string) => {
 	return userData
 }
 
-export async function generateMetadata(
-	{ params }: Props,
-	parent: ResolvingMetadata
-): Promise<Metadata> {
-	const id = params.id
-	const userData = await getUserData(id)
+export async function generateMetadata(props: Props, parent: ResolvingMetadata): Promise<Metadata> {
+    const params = await props.params;
+    const id = params.id
+    const userData = await getUserData(id)
 
-	if (!userData || !userData.data) {
+    if (!userData || !userData.data) {
 		return {
 			title: 'User Not Found'
 		}
 	}
 
-	const user = userData.data
+    const user = userData.data
 
-	return {
+    return {
 		title: `${user.displayName}'s Profile | Would You`,
 		description:
 			user.description ||
@@ -68,15 +66,21 @@ export async function generateMetadata(
 	}
 }
 
-export default async function ProfilePage({ params: { id } }: Props) {
-	const auth = await getAuthTokenOrNull()
-	const userId = auth?.payload?.id
+export default async function ProfilePage(props: Props) {
+    const params = await props.params;
 
-	const canEdit = userId === id
+    const {
+        id
+    } = params;
 
-	const userData = await getUserData(id)
+    const auth = await getAuthTokenOrNull()
+    const userId = auth?.payload?.id
 
-	if (userData.message) {
+    const canEdit = userId === id
+
+    const userData = await getUserData(id)
+
+    if (userData.message) {
 		return (
 			<section className="flex flex-1 items-center justify-center py-8">
 				<span className="text-lg">{userData.message}</span>
@@ -84,7 +88,7 @@ export default async function ProfilePage({ params: { id } }: Props) {
 		)
 	}
 
-	if (!userData || !userData.data) {
+    if (!userData || !userData.data) {
 		return (
 			<section className="flex flex-1 items-center justify-center py-8">
 				<span className="text-lg">User not found.</span>
@@ -92,7 +96,7 @@ export default async function ProfilePage({ params: { id } }: Props) {
 		)
 	}
 
-	return (
+    return (
 		<ProfileContent
 			userData={userData.data}
 			canEdit={canEdit}

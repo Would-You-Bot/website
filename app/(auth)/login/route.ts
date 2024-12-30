@@ -3,7 +3,7 @@ import { discordOAuthClient } from '@/helpers/oauth'
 import { IdTokenData } from '@/helpers/oauth/types'
 import { signJwt } from '@/helpers/jwt'
 import { setServer } from '@/lib/redis'
-import { cookies } from 'next/headers'
+import { cookies, type UnsafeUnwrappedCookies } from 'next/headers';
 import { stripe } from '@/lib/stripe'
 import { prisma } from '@/lib/prisma'
 import Stripe from 'stripe'
@@ -238,11 +238,11 @@ async function exchangeAuthorizationCode(code: string) {
 }
 
 function setSecureHttpOnlyCookie(name: string, value: string) {
-	return cookies().set(name, value, {
+	return (cookies() as unknown as UnsafeUnwrappedCookies).set(name, value, {
 		path: '/',
 		secure: true,
 		httpOnly: true,
 		sameSite: 'lax',
 		maxAge: 24 * 60 * 60
-	})
+	});
 }

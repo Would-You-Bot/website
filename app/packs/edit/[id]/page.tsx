@@ -33,29 +33,31 @@ export const metadata: Metadata = {
 }
 
 interface PageProps {
-	params: { id: string }
-	searchParams: { [key: string]: string | string[] | undefined }
+	params: Promise<{ id: string }>
+	searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-async function page({ params, searchParams }: PageProps) {
-	const { id } = params
-	const { resubmit } = searchParams
+async function page(props: PageProps) {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
+    const { id } = params
+    const { resubmit } = searchParams
 
-	const auth = await getAuthTokenOrNull()
+    const auth = await getAuthTokenOrNull()
 
-	const userId = auth?.payload?.id
+    const userId = auth?.payload?.id
 
-	const canEdit = userId === id
+    const canEdit = userId === id
 
-	const notResubmitting = resubmit !== 'true'
+    const notResubmitting = resubmit !== 'true'
 
-	const PackData = await getPackData(id)
+    const PackData = await getPackData(id)
 
-	if (!PackData || !userId || canEdit) {
+    if (!PackData || !userId || canEdit) {
 		return notFound()
 	}
 
-	return (
+    return (
 		<Container className="pt-8 lg:pt-10 space-y-8 min-h-[calc(100vh-112px)]">
 			{!notResubmitting ?
 				<GlowingHeading

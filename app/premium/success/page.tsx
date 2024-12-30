@@ -3,16 +3,17 @@ import { ExternalLink } from 'lucide-react'
 import Head from 'next/head'
 import Link from 'next/link'
 
-export default function Premium({
-	searchParams
-}: {
-	searchParams: { [key: string]: string | string[] | undefined }
-}) {
-	const type = searchParams.type ? (searchParams.type as string) : 'unknown'
-	const serverId =
+export default async function Premium(
+    props: {
+        searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+    }
+) {
+    const searchParams = await props.searchParams;
+    const type = searchParams.type ? (searchParams.type as string) : 'unknown'
+    const serverId =
 		searchParams.server ? (searchParams.server as string) : 'unknown'
 
-	return (
+    return (
 		<>
 			<Head>
 				<title>Would You - Commands</title>

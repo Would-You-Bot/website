@@ -16,13 +16,13 @@ export default function RootLayout({
 	const idToken = getIdToken()
 
 	return (
-		<html lang="en">
+		<html lang="en" suppressHydrationWarning>
 			<body className={inter.className}>
 				<script
 					defer
 					data-domain="wouldyoubot.gg"
 					src="https://stats.wouldyoubot.gg/js/script.js"
-				></script>
+				/>
 				<Providers>
 					<Alert
 						href="/premium"
