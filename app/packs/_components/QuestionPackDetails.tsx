@@ -32,11 +32,10 @@ import { PackData } from '@/utils/zod/schemas'
 import { Input } from '@/components/ui/input'
 import { useState, useEffect } from 'react'
 import { packMap } from '@/types'
-import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { toast } from 'sonner'
 
-const PackDetails = ({ id, type }: { id: string; type: string }) => {
+export const PackDetails = ({ id, type }: { id: string; type: string }) => {
 	const [packToShow, setPackToShow] = useState<PackData | null>(null)
 	const [userData, setUserData] = useState({
 		username: 'Private User',
