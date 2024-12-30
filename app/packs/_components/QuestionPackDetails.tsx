@@ -146,7 +146,7 @@ export const PackDetails = ({ id, type }: { id: string; type: string }) => {
 			<section className="max-md:mt-6">
 				<p className="my-2 text-sm capitalize">look inside</p>
 				<div className="border rounded-xl overflow-hidden">
-					<div className="bg-background-darker flex items-center justify-between px-4 py-2 gap-4 border-b">
+					<div className="bg-background-darker rounded-none flex items-center justify-between px-4 py-2 gap-4 border-b">
 						<div className="relative w-full md:w-3/4">
 							<Search className="size-4 absolute left-2 bottom-3 text-muted-foreground" />
 							<Input
