@@ -16,7 +16,10 @@ export default function RootLayout({
 	const idToken = getIdToken()
 
 	return (
-		<html lang="en" suppressHydrationWarning>
+		<html
+			lang="en"
+			suppressHydrationWarning
+		>
 			<body className={inter.className}>
 				<script
 					defer

@@ -1,4 +1,4 @@
-import type { JSX } from "react";
+import type { JSX } from 'react'
 export function Schema({ json }: { json: string }): JSX.Element {
 	return (
 		<script

@@ -1,9 +1,9 @@
+import { cookies, type UnsafeUnwrappedCookies } from 'next/headers'
 import { NextRequest, NextResponse } from 'next/server'
 import { discordOAuthClient } from '@/helpers/oauth'
 import { IdTokenData } from '@/helpers/oauth/types'
 import { signJwt } from '@/helpers/jwt'
 import { setServer } from '@/lib/redis'
-import { cookies, type UnsafeUnwrappedCookies } from 'next/headers';
 import { stripe } from '@/lib/stripe'
 import { prisma } from '@/lib/prisma'
 import Stripe from 'stripe'
@@ -244,5 +244,5 @@ function setSecureHttpOnlyCookie(name: string, value: string) {
 		httpOnly: true,
 		sameSite: 'lax',
 		maxAge: 24 * 60 * 60
-	});
+	})
 }

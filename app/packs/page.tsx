@@ -77,22 +77,20 @@ const getQuestionPacks = async (page: string, type: string, query: string) => {
 	return resData
 }
 
-async function page(
-    props: {
-        searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-    }
-) {
-    const searchParams = await props.searchParams;
-    const type = searchParams.type ? (searchParams.type as string) : 'all'
-    const page = searchParams.page ? (searchParams.page as string) : '1'
-    const query = searchParams.query ? (searchParams.query as string) : ''
+async function page(props: {
+	searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+	const searchParams = await props.searchParams
+	const type = searchParams.type ? (searchParams.type as string) : 'all'
+	const page = searchParams.page ? (searchParams.page as string) : '1'
+	const query = searchParams.query ? (searchParams.query as string) : ''
 
-    const auth = await getAuthTokenOrNull()
-    const userId = auth?.payload?.id || null
+	const auth = await getAuthTokenOrNull()
+	const userId = auth?.payload?.id || null
 
-    const responseData = await getQuestionPacks(page, type, query)
+	const responseData = await getQuestionPacks(page, type, query)
 
-    return (
+	return (
 		<Container className="pt-8 lg:pt-10 space-y-8 min-h-[calc(100vh-112px)]">
 			<GlowingHeading
 				redText="Question"

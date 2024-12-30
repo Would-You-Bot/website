@@ -5,21 +5,17 @@ import { postPaths } from '@/utils/mdx'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export async function generateMetadata(
-    props: {
-        params: Promise<{ slug: string }>
-    }
-): Promise<Metadata> {
-    const params = await props.params;
+export async function generateMetadata(props: {
+	params: Promise<{ slug: string }>
+}): Promise<Metadata> {
+	const params = await props.params
 
-    const {
-        slug
-    } = params;
+	const { slug } = params
 
-    const { frontmatter } = await getPost(slug)
-    const title = frontmatter.title + '- Would You Bot'
+	const { frontmatter } = await getPost(slug)
+	const title = frontmatter.title + '- Would You Bot'
 
-    return {
+	return {
 		title,
 		description: frontmatter.description,
 		metadataBase: new URL('https://wouldyoubot.gg/'),
@@ -56,20 +52,18 @@ export const viewport: Viewport = {
 export function generateStaticParams() {
 	return postPaths
 		.map((path) => path.replace(/\.mdx?$/, ''))
-		.map((slug) => ({ slug }));
+		.map((slug) => ({ slug }))
 }
 
 const BlogPost = async (props: { params: Promise<{ slug: string }> }) => {
-    const params = await props.params;
+	const params = await props.params
 
-    const {
-        slug
-    } = params;
+	const { slug } = params
 
-    const result = await getPost(slug)
-    const { frontmatter: frontMatter } = result
+	const result = await getPost(slug)
+	const { frontmatter: frontMatter } = result
 
-    return (
+	return (
 		<>
 			<div className="w-full max-w-8xl mx-auto px-8 text-foreground/70">
 				<Link
