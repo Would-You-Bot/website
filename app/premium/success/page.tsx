@@ -1,14 +1,16 @@
-// TODO remove the use client directive in favor of a server component
-'use client'
-import { useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
+import { ExternalLink } from 'lucide-react'
 import Head from 'next/head'
+import Link from 'next/link'
 
-export default function Premium() {
-	const searchParams = useSearchParams()
-
-	const type = searchParams.get('type')
-	const serverId = searchParams.get('server')
+export default function Premium({
+	searchParams
+}: {
+	searchParams: { [key: string]: string | string[] | undefined }
+}) {
+	const type = searchParams.type ? (searchParams.type as string) : 'unknown'
+	const serverId =
+		searchParams.server ? (searchParams.server as string) : 'unknown'
 
 	return (
 		<>
@@ -20,22 +22,25 @@ export default function Premium() {
 					Payment Successful!
 				</h1>
 				<p className="mb-4 text-lg text-foreground">
-					Your payment for Would You Premium billed{' '}
-					<b>{type === 'monthly' ? 'monthly' : 'annually'}</b> was successful!
+					Your payment for Would You Premium billed <b>{type}</b> was
+					successful!
 				</p>
 				{
 					// TODO: Add space between the premium text
 				}
-				<Button
-					className="w-fit"
-					onClick={() =>
-						window.open(`https://discord.com/channels/${serverId}/`, '_blank')
-					}
+				<Link
+					href={`https://discord.com/channels/${serverId}/`}
+					target="_blank"
+					className="group outline-transparent"
 				>
-					<span>
+					<Button
+						className="w-fit group-focus-within:ring-2 group-focus-within:ring-offset-2 group-focus-within:ring-brand-primary"
+						tabIndex={-1}
+					>
 						Click to visit your new <b>Premium</b> server
-					</span>
-				</Button>
+						<ExternalLink className="size-4 ml-2" />
+					</Button>
+				</Link>
 			</main>
 		</>
 	)
