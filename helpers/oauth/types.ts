@@ -10,6 +10,7 @@ export type IdTokenData = {
 }
 
 export interface IdTokenJWT extends JWT {
+  length: number
   payload: IdTokenData
 }
 
