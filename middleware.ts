@@ -7,7 +7,7 @@ import { ipAddress } from '@vercel/functions'
 export async function middleware(request: NextRequest) {
 	const { pathname } = request.nextUrl
 	const method = request.method
-	const ip = ipAddress(request) ?? '127.0.0.1'
+	const ip = request.headers.get("cf-connecting-ip") ?? "127.0.0.1" // Only works if proxied through cloudflare
 	console.log(ip)
 	const authToken = await getAuthTokenOrNull(
 		request.headers.get('Authorization') ?? undefined
