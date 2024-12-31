@@ -1,12 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
+import type { IdTokenData } from '@/helpers/oauth/types'
 import { discordOAuthClient } from '@/helpers/oauth'
-import { IdTokenData } from '@/helpers/oauth/types'
 import { signJwt } from '@/helpers/jwt'
 import { setServer } from '@/lib/redis'
 import { cookies } from 'next/headers'
 import { stripe } from '@/lib/stripe'
 import { prisma } from '@/lib/prisma'
-import Stripe from 'stripe'
+import type Stripe from 'stripe'
 import { z } from 'zod'
 
 // Environment variables validation
@@ -40,15 +40,14 @@ export async function GET(req: NextRequest) {
 					{ error: 'Authentication failed', details: error },
 					{ status: 400 }
 				)
-			} else {
-				// Store the intended redirect URL in a cookie
-				const finalRedirect = redirectUrl ?? '/'
-				setSecureHttpOnlyCookie('OAUTH_REDIRECT', finalRedirect)
-
-				// Create authorization URL with proper redirect URI
-				const oauthRedirect = await discordOAuthClient.createAuthorizationURL()
-				return NextResponse.redirect(oauthRedirect.href)
 			}
+			// Store the intended redirect URL in a cookie
+			const finalRedirect = redirectUrl ?? '/'
+			setSecureHttpOnlyCookie('OAUTH_REDIRECT', finalRedirect)
+
+			// Create authorization URL with proper redirect URI
+			const oauthRedirect = await discordOAuthClient.createAuthorizationURL()
+			return NextResponse.redirect(oauthRedirect.href)
 		}
 
 		const {
@@ -82,10 +81,7 @@ export async function GET(req: NextRequest) {
 		})
 
 		console.log(
-			'info  - ' +
-				`${user?.username ?? 'Unknown User'} (${user?.id ?? 'Unknown ID'})` +
-				' logged-in on ' +
-				new Date().toUTCString()
+			`info  - ${user?.username ?? 'Unknown User'} (${user?.id ?? 'Unknown ID'}) logged-in on ${new Date().toUTCString()}`
 		)
 
 		// Get the stored redirect URL or fall back to homepage
@@ -173,13 +169,15 @@ async function exchangeAuthorizationCode(code: string) {
 
 		const guilds = await guildsResponse.json()
 
-		const finalGuilds = guilds.map((guild: any) => {
-			return {
-				id: guild.id,
-				name: guild.name,
-				icon: guild.icon
+		const finalGuilds = guilds.map(
+			(guild: { id: string; name: string; icon: string | null }) => {
+				return {
+					id: guild.id,
+					name: guild.name,
+					icon: guild.icon
+				}
 			}
-		})
+		)
 
 		await setServer(id, finalGuilds)
 
@@ -237,8 +235,9 @@ async function exchangeAuthorizationCode(code: string) {
 	}
 }
 
-function setSecureHttpOnlyCookie(name: string, value: string) {
-	return cookies().set(name, value, {
+async function setSecureHttpOnlyCookie(name: string, value: string) {
+	const cookieStore = await cookies()
+	return cookieStore.set(name, value, {
 		path: '/',
 		secure: true,
 		httpOnly: true,

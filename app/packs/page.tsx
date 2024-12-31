@@ -77,11 +77,10 @@ const getQuestionPacks = async (page: string, type: string, query: string) => {
 	return resData
 }
 
-async function page({
-	searchParams
-}: {
-	searchParams: { [key: string]: string | string[] | undefined }
+async function page(props: {
+	searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
+	const searchParams = await props.searchParams
 	const type = searchParams.type ? (searchParams.type as string) : 'all'
 	const page = searchParams.page ? (searchParams.page as string) : '1'
 	const query = searchParams.query ? (searchParams.query as string) : ''

@@ -3,7 +3,7 @@ import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import ProfileContent from './_components/ProfileContent'
 
 type Props = {
-	params: { id: string }
+	params: Promise<{ id: string }>
 }
 
 export const viewport: Viewport = {
@@ -29,9 +29,10 @@ const getUserData = async (id: string) => {
 }
 
 export async function generateMetadata(
-	{ params }: Props,
+	props: Props,
 	parent: ResolvingMetadata
 ): Promise<Metadata> {
+	const params = await props.params
 	const id = params.id
 	const userData = await getUserData(id)
 
@@ -68,7 +69,11 @@ export async function generateMetadata(
 	}
 }
 
-export default async function ProfilePage({ params: { id } }: Props) {
+export default async function ProfilePage(props: Props) {
+	const params = await props.params
+
+	const { id } = params
+
 	const auth = await getAuthTokenOrNull()
 	const userId = auth?.payload?.id
 
