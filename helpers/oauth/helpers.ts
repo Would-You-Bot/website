@@ -1,13 +1,14 @@
-import { cookies, type UnsafeUnwrappedCookies } from 'next/headers'
-import { OAuthTokenJWT } from '@/helpers/oauth/types'
-import { IdTokenJWT } from '@/helpers/hooks'
+import type { OAuthTokenJWT } from '@/helpers/oauth/types'
+import type { IdTokenJWT } from '@/helpers/hooks'
 import { verifyJwt } from '@/helpers/jwt'
+import { cookies } from 'next/headers'
 import { parseJWT } from '@oslojs/jwt'
 
-export function getIdToken(inputToken?: string): IdTokenJWT | null {
-	const tokenString =
-		inputToken ||
-		(cookies() as unknown as UnsafeUnwrappedCookies).get('ID_TOKEN')?.value
+export async function getIdToken(
+	inputToken?: string
+): Promise<IdTokenJWT | null> {
+	const cookieStore = await cookies()
+	const tokenString = inputToken || cookieStore.get('ID_TOKEN')?.value
 	return tokenString ? (parseJWT(tokenString) as IdTokenJWT) : null
 }
 
@@ -17,10 +18,11 @@ export function getIdToken(inputToken?: string): IdTokenJWT | null {
  * Throws if the JWT is invalid or expired.
  * @param inputToken Optional token string that takes precedence over cookie value
  */
-export function getAuthToken(inputToken?: string): Promise<OAuthTokenJWT> {
-	const token =
-		inputToken ||
-		(cookies() as unknown as UnsafeUnwrappedCookies).get('OAUTH_TOKEN')?.value
+export async function getAuthToken(
+	inputToken?: string
+): Promise<OAuthTokenJWT> {
+	const cookieStore = await cookies()
+	const token = inputToken || cookieStore.get('OAUTH_TOKEN')?.value
 	if (!token) {
 		throw new MissingTokenException()
 	}

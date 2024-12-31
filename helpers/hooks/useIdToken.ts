@@ -1,4 +1,4 @@
-import { IdTokenJWT } from '@/helpers/oauth/types'
+import type { IdTokenJWT } from '@/helpers/oauth/types'
 import { useCookies } from '@/helpers/hooks'
 import { parseJWT } from 'oslo/jwt'
 import { useMemo } from 'react'
