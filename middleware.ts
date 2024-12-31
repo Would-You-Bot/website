@@ -8,7 +8,7 @@ export async function middleware(request: NextRequest) {
 	const { pathname } = request.nextUrl
 	const method = request.method
 	const ip = ipAddress(request) ?? '127.0.0.1'
-	console.log(request)
+	console.log(ip)
 	const authToken = await getAuthTokenOrNull(
 		request.headers.get('Authorization') ?? undefined
 	)
