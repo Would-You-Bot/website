@@ -38,6 +38,7 @@
     "@upstash/redis": "^1.30.0",
     "@vercel/functions": "^1.5.2",
     "axios": "^1.7.9",
+    "better-auth": "^1.1.7",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "1.0.0",

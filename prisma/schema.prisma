@@ -1,3 +1,4 @@
+
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,6 +9,7 @@ datasource db {
 }
 
 // For mongodb specific schema docs, read this: https://www.prisma.io/docs/orm/overview/databases/mongodb
+
 enum PackType {
   wouldyourather
   neverhaveiever
@@ -48,41 +50,92 @@ model QuestionPack {
   @@map("questionpacks")
 }
 
-
 type Used {
   command Int @default(0)
   replay  Int @default(0)
 }
 
 type GameStats {
-  yes     Int? @default(0)
-  no      Int? @default(0)
-  used    Used?
-  highscore Int? @default(0)
+  yes       Int?  @default(0)
+  no        Int?  @default(0)
+  used      Used?
+  highscore Int?  @default(0)
 }
 
 model User {
-  id                String     @id @default(auto()) @map("_id") @db.ObjectId
-  userID            String     @unique
-  votePrivacy       Boolean    @default(false)
-  profilePrivacy    Boolean    @default(false)
-  likedPackPrivacy  Boolean    @default(false)
-  language          String     @default("en_EN")
-  wouldyourather    GameStats?
-  neverhaveiever    GameStats?
-  higherlower       GameStats?
-  whatwouldyoudo    GameStats?
-  truth             Used?
-  dare              Used?
-  random            Used?
-  topic             Used?
-  avatarUrl         String?
-  bannerUrl         String?
-  description       String?
-  displayName       String?
-  globalName        String?
-  createdAt         DateTime   @default(now())
-  updatedAt         DateTime   @updatedAt
+  id               String     @id @default(auto()) @map("_id") @db.ObjectId
+  userID           String     @unique
+  votePrivacy      Boolean    @default(false)
+  profilePrivacy   Boolean    @default(false)
+  likedPackPrivacy Boolean    @default(false)
+  language         String     @default("en_EN")
+  wouldyourather   GameStats?
+  neverhaveiever   GameStats?
+  higherlower      GameStats?
+  whatwouldyoudo   GameStats?
+  truth            Used?
+  dare             Used?
+  random           Used?
+  topic            Used?
+  avatarUrl        String?
+  bannerUrl        String?
+  description      String?
+  displayName      String?
+  globalName       String?
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  sessions Session[]
+  accounts Account[]
+
+  email         String?
+  emailVerified Boolean @default(false)
 
   @@map("usermodels")
+}
+
+// Authentication models
+
+model Session {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  expiresAt DateTime
+  token     String   @unique
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String   @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id @default(auto()) @map("_id") @db.ObjectId
+  accountId             String
+  providerId            String
+  userId                String    @db.ObjectId
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
 }
