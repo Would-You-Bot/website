@@ -1,28 +1,28 @@
-import Link from 'next/link'
 import type { Metadata, Viewport } from 'next'
+import Link from 'next/link'
 
- export const metadata: Metadata = {
-    metadataBase: new URL('https://wouldyoubot.gg'),
+export const metadata: Metadata = {
+  metadataBase: new URL('https://wouldyoubot.gg'),
+  title: 'Refund Policy - Would You Bot',
+  description: 'Our refund policy for Would You Premium.',
+  twitter: {
     title: 'Refund Policy - Would You Bot',
-    description: 'Our refund policy for Would You Premium.',
-    twitter: {
-      title: 'Refund Policy - Would You Bot',
-      description: 'Our refund policy for Would You Premium.',
-    },
-    openGraph: {
-      title: 'Refund Policy - Would You Bot',
-      description: 'Our refund policy for Would You Premium.',
-    },
-    robots: {
-      index: true,
-      follow: true
-    }
+    description: 'Our refund policy for Would You Premium.'
+  },
+  openGraph: {
+    title: 'Refund Policy - Would You Bot',
+    description: 'Our refund policy for Would You Premium.'
+  },
+  robots: {
+    index: true,
+    follow: true
   }
+}
 
-  export const viewport: Viewport = {
-    themeColor: '#0598F6',
-    maximumScale: 5
-  }
+export const viewport: Viewport = {
+  themeColor: '#0598F6',
+  maximumScale: 5
+}
 export default function Terms() {
   return (
     <main className="flex mx-auto w-full max-w-8xl flex-1 flex-col gap-8 px-8 text-foreground/70">

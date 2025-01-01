@@ -11,12 +11,12 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Status - Would You Bot',
     description: 'The current status of the Would You clusters.'
-  },
-}
-  export const viewport: Viewport = {
-    themeColor: '#0598F6',
-    maximumScale: 5
   }
+}
+export const viewport: Viewport = {
+  themeColor: '#0598F6',
+  maximumScale: 5
+}
 
 const Status = async () => {
   const cluster = await fetch(process.env.API_URL!, {

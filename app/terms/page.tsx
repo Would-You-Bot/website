@@ -1,28 +1,28 @@
-import Link from 'next/link'
 import type { Metadata, Viewport } from 'next'
+import Link from 'next/link'
 
- export const metadata: Metadata = {
-    metadataBase: new URL('https://wouldyoubot.gg'),
+export const metadata: Metadata = {
+  metadataBase: new URL('https://wouldyoubot.gg'),
+  title: 'Terms of Service - Would You Bot',
+  description: 'The Terms of Service of Would You Bot.',
+  twitter: {
     title: 'Terms of Service - Would You Bot',
-    description: 'The Terms of Service of Would You Bot.',
-    twitter: {
-      title: 'Terms of Service - Would You Bot',
-      description: 'The Terms of Service of Would You Bot.',
-    },
-    openGraph: {
-      title: 'Terms of Service - Would You Bot',
-      description: 'The Terms of Service of Would You Bot.',
-    },
-    robots: {
-      index: true,
-      follow: true
-    }
+    description: 'The Terms of Service of Would You Bot.'
+  },
+  openGraph: {
+    title: 'Terms of Service - Would You Bot',
+    description: 'The Terms of Service of Would You Bot.'
+  },
+  robots: {
+    index: true,
+    follow: true
   }
+}
 
-  export const viewport: Viewport = {
-    themeColor: '#0598F6',
-    maximumScale: 5
-  }
+export const viewport: Viewport = {
+  themeColor: '#0598F6',
+  maximumScale: 5
+}
 
 export default function Terms() {
   return (
@@ -88,7 +88,9 @@ export default function Terms() {
           (&quot;Premium Model&quot;) that provides additional features and
           benefits. By subscribing to the Premium Model, you agree to pay the
           specified subscription fee on a recurring basis using the payment
-          processing services of Stripe, Inc. (&quot;Stripe&quot;). You also agree to us creating a customer object in Stripe with the data you provide us For example by logging into our website.{' '}
+          processing services of Stripe, Inc. (&quot;Stripe&quot;). You also
+          agree to us creating a customer object in Stripe with the data you
+          provide us For example by logging into our website.{' '}
         </p>
         <h4 className="text-md text-foreground-400 my-4 font-bold">
           2.1 Payment Processing
@@ -179,9 +181,9 @@ export default function Terms() {
           7. Contribution licence
         </h3>
         <p>
-          You agree that we may access, store, process, and use any
-          information and personal data that you provide following the terms of
-          the Privacy Policy and your choices (including settings).
+          You agree that we may access, store, process, and use any information
+          and personal data that you provide following the terms of the Privacy
+          Policy and your choices (including settings).
           <br />
           <br />
           By submitting suggestions or other feedback regarding the Site, you

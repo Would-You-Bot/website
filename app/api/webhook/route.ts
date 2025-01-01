@@ -1,8 +1,8 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
-import type Stripe from 'stripe'
 import { prisma } from '@/lib/prisma'
+import type Stripe from 'stripe'
 
 export async function POST(request: NextRequest) {
   try {
@@ -56,14 +56,18 @@ export async function POST(request: NextRequest) {
               premiumUser: userId,
               premium: 1,
               pending: true,
-              premiumExpiration: new Date(subscription.current_period_end * 1000),
+              premiumExpiration: new Date(
+                subscription.current_period_end * 1000
+              ),
               language: 'en_US'
             },
             update: {
               premiumUser: userId,
               premium: 1,
               pending: true,
-              premiumExpiration: new Date(subscription.current_period_end * 1000)
+              premiumExpiration: new Date(
+                subscription.current_period_end * 1000
+              )
             }
           })
         } catch (error) {
@@ -77,20 +81,23 @@ export async function POST(request: NextRequest) {
           )
         }
         break
-        
+
       case 'invoice.paid':
       case 'invoice.payment_succeeded':
         const invoice: Stripe.Invoice = event.data.object
 
-        if(invoice.subscription_details === null) return NextResponse.json(
-          { message: 'No subscription details found', status: 400 },
-          { status: 400 }
-        )
+        if (invoice.subscription_details === null)
+          return NextResponse.json(
+            { message: 'No subscription details found', status: 400 },
+            { status: 400 }
+          )
 
         const userIdInvoice = invoice.subscription_details.metadata?.userId
         const serverIdInvoice = invoice.subscription_details.metadata?.serverId
         const tierInvoice =
-          invoice.subscription_details.metadata?.monthly === 'true' ? 'monthly' : 'yearly'
+          invoice.subscription_details.metadata?.monthly === 'true' ?
+            'monthly'
+          : 'yearly'
 
         if (!userIdInvoice || !serverIdInvoice || !tierInvoice) {
           console.error('One or more variables are undefined.')
@@ -102,7 +109,6 @@ export async function POST(request: NextRequest) {
         switch (invoice.billing_reason) {
           case 'subscription_create':
             try {
-
               await prisma.guild.update({
                 // @ts-ignore
                 where: {
@@ -110,10 +116,11 @@ export async function POST(request: NextRequest) {
                 },
                 data: {
                   pending: false,
-                  premiumExpiration: new Date(invoice.lines.data[0].period.end * 1000)
+                  premiumExpiration: new Date(
+                    invoice.lines.data[0].period.end * 1000
+                  )
                 }
               })
-
             } catch (error) {
               console.error(error)
               return NextResponse.json(
@@ -134,7 +141,9 @@ export async function POST(request: NextRequest) {
                 },
                 data: {
                   pending: false,
-                  premiumExpiration: new Date(invoice.lines.data[0].period.end * 1000)
+                  premiumExpiration: new Date(
+                    invoice.lines.data[0].period.end * 1000
+                  )
                 }
               })
             } catch (error) {
@@ -176,11 +185,13 @@ export async function POST(request: NextRequest) {
           },
           data: {
             premium: 1,
-            premiumExpiration: new Date( subscriptionUpdated.current_period_end * 1000 )
+            premiumExpiration: new Date(
+              subscriptionUpdated.current_period_end * 1000
+            )
           }
         })
 
-        break;
+        break
 
       // in the event of a subscription being deleted
       case 'customer.subscription.deleted':
@@ -200,7 +211,6 @@ export async function POST(request: NextRequest) {
           )
         }
         try {
-          
           await prisma.guild.update({
             // @ts-ignore
             where: {
@@ -212,7 +222,6 @@ export async function POST(request: NextRequest) {
               premiumUser: null
             }
           })
-
         } catch (error) {
           console.error(error)
           return NextResponse.json(

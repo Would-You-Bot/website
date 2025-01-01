@@ -1,6 +1,6 @@
 'use client'
-import Discord from '@/icons/Discord'
 import { usePathname } from 'next/navigation'
+import Discord from '@/icons/Discord'
 interface DiscordLoginButtonProps {
   className?: string
   redirect?: string

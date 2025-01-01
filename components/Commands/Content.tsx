@@ -4,8 +4,8 @@
 import CopyCommandWrapper from '@/components/CopyCommand'
 import { useEffect, useRef, useState } from 'react'
 import commands from '../../data/commands.json'
-import Link from 'next/link'
 import { Input } from '../ui/input'
+import Link from 'next/link'
 
 export default function Commands() {
   interface Command {
@@ -51,16 +51,24 @@ export default function Commands() {
   const categories = ['Settings', 'Utility', 'Games']
 
   return (
-        <><h1 className="text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
-      Commands
-    </h1><div className="mt-8 flex flex-col gap-4">
+    <>
+      <h1 className="text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
+        Commands
+      </h1>
+      <div className="mt-8 flex flex-col gap-4">
         <h2 className="select-none font-semibold text-foreground/70">
           Search for a command
         </h2>
-        <Input type="text" onChange={handleSearchChange} id="search" placeholder="Enter a command to search (e.g., 'help')" />
+        <Input
+          type="text"
+          onChange={handleSearchChange}
+          id="search"
+          placeholder="Enter a command to search (e.g., 'help')"
+        />
         {categories.map((category, index) => {
           // Filter commands for the current category
-          const categoryCommands = filteredCommands.filter((command) => command.category.includes(category)
+          const categoryCommands = filteredCommands.filter((command) =>
+            command.category.includes(category)
           )
 
           // Render only if there are commands in the category
@@ -78,20 +86,22 @@ export default function Commands() {
 
                   return (
                     <div
-                      className={`relative cursor-pointer overflow-hidden rounded-lg p-4 text-foreground/70 transition-all duration-300 ${openedCommand === command.name ?
+                      className={`relative cursor-pointer overflow-hidden rounded-lg p-4 text-foreground/70 transition-all duration-300 ${
+                        openedCommand === command.name ?
                           'max-h-[250px] bg-foreground/10'
-                          : 'max-h-[90px] bg-foreground/5'}`}
-                      onClick={() => isActive ?
-                        setOpenedCommand('')
-                        : setOpenedCommand(command.name)}
+                        : 'max-h-[90px] bg-foreground/5'
+                      }`}
+                      onClick={() =>
+                        isActive ?
+                          setOpenedCommand('')
+                        : setOpenedCommand(command.name)
+                      }
                       key={command.name}
                     >
                       <div className="flex items-center justify-between">
                         <div className="grow overflow-hidden">
                           <h4 className="mb-1 text-lg font-bold text-foreground">
-                            <span className="mr-0.5 text-foreground/50">
-                              /
-                            </span>
+                            <span className="mr-0.5 text-foreground/50">/</span>
                             {command.name}
                           </h4>
                           <p className="mb-3 max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-sm">
@@ -105,9 +115,11 @@ export default function Commands() {
                             height="30"
                             fill="currentColor"
                             viewBox="0 0 30 30"
-                            className={`transition-all duration-300 ${isActive ?
+                            className={`transition-all duration-300 ${
+                              isActive ?
                                 'rotate-180 text-foreground/70'
-                                : 'text-foreground/50'}`}
+                              : 'text-foreground/50'
+                            }`}
                           >
                             <path d="M15 20.938a.93.93 0 0 1-.663-.275l-8.75-8.75a.938.938 0 1 1 1.327-1.327L15 18.674l8.088-8.088a.938.938 0 1 1 1.326 1.327l-8.75 8.75a.94.94 0 0 1-.665.274Z" />
                           </svg>
@@ -117,9 +129,7 @@ export default function Commands() {
                         className={`transition-all duration-300 ${isActive ? 'opacity-100' : 'opacity-0'}`}
                       >
                         <h5 className="mb-1">Usage</h5>
-                        <CopyCommandWrapper>
-                          {command.usage}
-                        </CopyCommandWrapper>
+                        <CopyCommandWrapper>{command.usage}</CopyCommandWrapper>
                         {command.subcommands && (
                           <>
                             <h5 className="mb-1">Subcommands</h5>
@@ -158,6 +168,7 @@ export default function Commands() {
             </Link>
           </p>
         )}
-      </div></>
+      </div>
+    </>
   )
 }
