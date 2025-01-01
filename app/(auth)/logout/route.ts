@@ -7,6 +7,7 @@ import { cookies } from 'next/headers'
 export async function GET(req: NextRequest) {
 	const token = await getAuthTokenOrNull()
 	const redirectUrl = req.nextUrl.searchParams.get('redirect')
+	const cookieStore = await cookies()
 
 	if (token) {
 		await Promise.allSettled([
@@ -21,8 +22,8 @@ export async function GET(req: NextRequest) {
 		])
 	}
 
-	cookies().delete('OAUTH_TOKEN')
-	cookies().delete('ID_TOKEN')
+	cookieStore.delete('OAUTH_TOKEN')
+	cookieStore.delete('ID_TOKEN')
 
 	return redirect(redirectUrl ?? '/')
 }

@@ -33,11 +33,13 @@ export const metadata: Metadata = {
 }
 
 interface PageProps {
-	params: { id: string }
-	searchParams: { [key: string]: string | string[] | undefined }
+	params: Promise<{ id: string }>
+	searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }
 
-async function page({ params, searchParams }: PageProps) {
+async function page(props: PageProps) {
+	const searchParams = await props.searchParams
+	const params = await props.params
 	const { id } = params
 	const { resubmit } = searchParams
 

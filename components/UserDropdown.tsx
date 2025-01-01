@@ -16,7 +16,7 @@ import Link from 'next/link'
 
 interface UserDropdownProps {
 	idToken: IdTokenJWT | null
-	handleIsOpen: any
+	handleIsOpen: () => void
 }
 
 export default function UserDropdown({

@@ -21,12 +21,12 @@ import {
 	importQuestionSchemaB
 } from '@/utils/zod/questionSchemas'
 import { Check, FileInput, FileUp, Loader2, X } from 'lucide-react'
+import { type Control, useController } from 'react-hook-form'
 import { useLocalStorage } from '@/hooks/use-localstorage'
-import { Control, useController } from 'react-hook-form'
 import { Checkbox } from '@/components/ui/checkbox'
+import type { PackData } from '@/utils/zod/schemas'
 import { useIsMobile } from '@/hooks/use-mobile'
 import { Button } from '@/components/ui/button'
-import { PackData } from '@/utils/zod/schemas'
 import type { PackType } from '@prisma/client'
 import { Input } from '@/components/ui/input'
 import { packMap } from '@/types'
@@ -127,7 +127,7 @@ function ImportDetails({
 					let currentCount = selectedCount
 					if (importQuestionSchemaA.safeParse(data).success) {
 						const validData = importQuestionSchemaA.parse(data)
-						let newQuestions: Record<
+						const newQuestions: Record<
 							string,
 							{ question: string; selected: boolean }[]
 						> = {}
@@ -137,16 +137,15 @@ function ImportDetails({
 								if (currentCount < 100) {
 									currentCount++
 									return { question, selected: true }
-								} else {
-									return { question, selected: false }
 								}
+								return { question, selected: false }
 							})
 						}
 
 						setQuestions(newQuestions)
 					} else if (importQuestionSchemaB.safeParse(data)) {
 						const validData = importQuestionSchemaB.parse(data)
-						let newQuestions: Record<
+						const newQuestions: Record<
 							string,
 							{ question: string; selected: boolean }[]
 						> = {}
@@ -156,9 +155,8 @@ function ImportDetails({
 								if (currentCount < 100) {
 									currentCount++
 									return { question: question.question, selected: true }
-								} else {
-									return { question: question.question, selected: false }
 								}
+								return { question: question.question, selected: false }
 							})
 						}
 
@@ -177,7 +175,8 @@ function ImportDetails({
 						if (error.issues.length === 1) {
 							resetImport('Validation Error', error.issues[0].message)
 							return
-						} else if (error.issues.length > 1) {
+						}
+						if (error.issues.length > 1) {
 							for (const issue of error.issues) {
 								resetImport('Validation Error', issue.message)
 							}
@@ -217,11 +216,11 @@ function ImportDetails({
 	}
 
 	const changeCheckState = (category: PackType, index: number) => {
-		const selected = questions[category]![index].selected
+		const selected = questions[category]?.[index].selected
 		if (selected) setSelectedCount(selectedCount - 1)
 		else setSelectedCount(selectedCount + 1)
 
-		const newQuestions = [...questions[category]!]
+		const newQuestions = questions[category] ? [...questions[category]] : []
 		newQuestions[index].selected = !newQuestions[index].selected
 		setQuestions({ ...questions, [category]: newQuestions })
 	}
@@ -292,44 +291,42 @@ function ImportDetails({
 
 			<div className={clsx('', { 'px-4': isMobile })}>
 				{step === 0 && (
-					<>
-						<label
-							htmlFor="fileInput"
-							id="file-label"
-							className={clsx(
-								'flex flex-col gap-2 hover:text-brand-primary transition-all items-center py-12 rounded-md border cursor-pointer border-dashed p-4 hover:border-brand-primary',
-								{
-									'border-muted-foreground text-muted-foreground':
-										!dragEntered && !fileDropped && !fileUploaded,
-									'border-brand-primary text-brand-primary': dragEntered,
-									'border-success text-success pointer-events-none opacity-75':
-										fileDropped || fileUploaded
-								}
-							)}
-							onDragOver={dragOver}
-							onDragEnter={dragEnter}
-							onDragLeave={dragLeave}
-							onDrop={dropFile}
-						>
-							<InnerIcon
-								className={clsx('size-8 pointer-events-none', {
-									'animate-spin': fileDropped
-								})}
-							/>
-							<span className="pointer-events-none">
-								{isMobile ? 'Press to choose file' : innerUploadText}
-							</span>
-							<Input
-								type="file"
-								name="fileInput"
-								className="hidden pointer-events-none"
-								id="fileInput"
-								accept="application/json"
-								max={1}
-								onChange={fileChange}
-							/>
-						</label>
-					</>
+					<label
+						htmlFor="fileInput"
+						id="file-label"
+						className={clsx(
+							'flex flex-col gap-2 hover:text-brand-primary transition-all items-center py-12 rounded-md border cursor-pointer border-dashed p-4 hover:border-brand-primary',
+							{
+								'border-muted-foreground text-muted-foreground':
+									!dragEntered && !fileDropped && !fileUploaded,
+								'border-brand-primary text-brand-primary': dragEntered,
+								'border-success text-success pointer-events-none opacity-75':
+									fileDropped || fileUploaded
+							}
+						)}
+						onDragOver={dragOver}
+						onDragEnter={dragEnter}
+						onDragLeave={dragLeave}
+						onDrop={dropFile}
+					>
+						<InnerIcon
+							className={clsx('size-8 pointer-events-none', {
+								'animate-spin': fileDropped
+							})}
+						/>
+						<span className="pointer-events-none">
+							{isMobile ? 'Press to choose file' : innerUploadText}
+						</span>
+						<Input
+							type="file"
+							name="fileInput"
+							className="hidden pointer-events-none"
+							id="fileInput"
+							accept="application/json"
+							max={1}
+							onChange={fileChange}
+						/>
+					</label>
 				)}
 
 				{step === 1 && (
@@ -340,15 +337,15 @@ function ImportDetails({
 						</div>
 						<ul className={'divide-y overflow-y-auto max-h-96 thin-scrollbar'}>
 							{Object.keys(questions).map((key) => (
-								<>
-									<li
-										key={key}
-										className="px-4 py-2 bg-white/5 rounded-none"
-									>
+								<li key={key}>
+									<div className="px-4 py-2 bg-white/5 rounded-none">
 										{packMap[key as PackType]}
-									</li>
-									<ul className="rounded-none border-none">
-										{questions[key as PackType]!.map((question, index) => (
+									</div>
+									<ul
+										key={`questions-${key}`}
+										className="rounded-none border-none"
+									>
+										{questions[key as PackType]?.map((question, index) => (
 											<li key={`${question}-${index}`}>
 												<button
 													className={
@@ -368,7 +365,7 @@ function ImportDetails({
 											</li>
 										))}
 									</ul>
-								</>
+								</li>
 							))}
 						</ul>
 					</div>

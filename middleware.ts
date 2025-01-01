@@ -2,11 +2,12 @@ import { createRateLimiter, defaultRateLimiter } from './lib/ratelimiter'
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { type NextRequest, NextResponse } from 'next/server'
 import ALLOWED_ADMIN_IDS from './data/reviewers.json'
+import { ipAddress } from '@vercel/functions'
 
 export async function middleware(request: NextRequest) {
 	const { pathname } = request.nextUrl
 	const method = request.method
-	const ip = request.ip ?? '127.0.0.1'
+	const ip = request.headers.get('cf-connecting-ip') ?? '127.0.0.1' // Only works if proxied through cloudflare
 	const authToken = await getAuthTokenOrNull(
 		request.headers.get('Authorization') ?? undefined
 	)
@@ -46,10 +47,11 @@ export async function middleware(request: NextRequest) {
 			}
 
 			if (method === 'POST') {
-				const { success: successID } = await createRateLimiter.limit(
+				const rateLimiter = await createRateLimiter()
+				const { success: successID } = await rateLimiter.limit(
 					authToken.payload.id
 				)
-				const { success: successIP } = await createRateLimiter.limit(ip)
+				const { success: successIP } = await rateLimiter.limit(ip)
 
 				if (!successID || !successIP) {
 					return NextResponse.json(
@@ -86,7 +88,8 @@ export async function middleware(request: NextRequest) {
 			// Handle /api/packs and other routes
 			if (pathname.startsWith('/api/packs')) {
 				if (method === 'GET') {
-					const { success } = await defaultRateLimiter.limit(ip)
+					const rateLimiter = await defaultRateLimiter()
+					const { success } = await rateLimiter.limit(ip)
 					if (!success) {
 						return NextResponse.json(
 							{

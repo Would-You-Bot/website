@@ -18,6 +18,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
 	const { setTheme, theme } = useTheme()
 	const [isOpen, setIsOpen] = useState(false)
 	const idToken = useIdToken(idToken_)
+	const isTokenValid = idToken && idToken.value !== 'null'
 
 	const handleIsOpen = () => {
 		if (window.innerWidth < 1024) setIsOpen(!isOpen)
@@ -129,7 +130,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
 							Premium
 							<Crown />
 						</Link>
-						{idToken ?
+						{isTokenValid ?
 							<UserDropdown
 								idToken={idToken}
 								handleIsOpen={handleIsOpen}
@@ -147,7 +148,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
 							<Moon className="w-6 h-6 sm:w-7 sm:h-7" />
 						:	<Sun className="w-6 h-6 sm:w-7 sm:h-7" />}
 					</button>
-					{idToken ?
+					{isTokenValid ?
 						<UserDropdown
 							idToken={idToken}
 							handleIsOpen={handleIsOpen}
