@@ -5,16 +5,16 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://wouldyoubot.gg'),
   title: 'Impressum - Would You Bot',
   alternates: {
-    canonical: "/legal",
+    canonical: '/legal'
   },
   description: 'Das Impressum von Would You Bot.',
   twitter: {
     title: 'Impressum - Would You Bot',
-    description: 'Das Impressum von Would You Bot.',
+    description: 'Das Impressum von Would You Bot.'
   },
   openGraph: {
     title: 'Impressum - Would You Bot',
-    description: 'Das Impressum von Would You Bot.',
+    description: 'Das Impressum von Would You Bot.'
   },
   robots: {
     index: true,

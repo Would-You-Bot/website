@@ -10,9 +10,8 @@ import { Search } from 'lucide-react'
 // shard_id = (guild_id >> 22) % num_shards
 // Might need to be moved to a simple api route to be used in the frontend
 function shardFromGuild(guildId: string, numShards: number) {
-  return Number(BigInt(guildId) >> 22n) % numShards;
+  return Number(BigInt(guildId) >> 22n) % numShards
 }
-
 
 interface PageContentProps {
   clusterData: ClusterStats[]

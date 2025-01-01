@@ -3,7 +3,7 @@ import { getRandomQuestion } from '@/helpers/getRandomQuestion'
 import { HomeContent } from '@/components/Homepage/Content'
 import type { Metadata, Viewport } from 'next'
 
-export const metadata: Metadata = { 
+export const metadata: Metadata = {
   metadataBase: new URL('https://wouldyoubot.gg'),
   title: 'Would You - The Discord Bot',
   description:
@@ -36,12 +36,13 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: '#0598F6',
-  maximumScale: 5,
+  maximumScale: 5
 }
 
 const Home = async () => {
   const response = await fetch(
-    'https://japi.rest/discord/v1/application/981649513427111957/', {
+    'https://japi.rest/discord/v1/application/981649513427111957/',
+    {
       next: {
         revalidate: 60
       }

@@ -55,7 +55,7 @@ const ServerMarquee: FC<MarqueeProps> = ({
             <Avatar className="rounded-lg size-16">
               <AvatarImage
                 src={s.iconURL}
-                alt={s.name + "s server icon"}
+                alt={s.name + 's server icon'}
               />
               <AvatarFallback className="rounded-lg size-16">
                 <Image

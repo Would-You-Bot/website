@@ -3,29 +3,29 @@ import type { Metadata, Viewport } from 'next'
 import { Suspense } from 'react'
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://wouldyoubot.gg"),
-  title: "Blog - Would You Bot",
+  metadataBase: new URL('https://wouldyoubot.gg'),
+  title: 'Blog - Would You Bot',
   description:
-    "The official blog of Would You Bot. Stay up to date with the latest discord related news, updates, and announcements.",
+    'The official blog of Would You Bot. Stay up to date with the latest discord related news, updates, and announcements.',
   twitter: {
-    title: "Blog - Would You Bot",
+    title: 'Blog - Would You Bot',
     description:
-      "The official blog of Would You Bot. Stay up to date with the latest discord related news, updates, and announcements.",
+      'The official blog of Would You Bot. Stay up to date with the latest discord related news, updates, and announcements.'
   },
   openGraph: {
-    title: "Blog - Would You Bot",
+    title: 'Blog - Would You Bot',
     description:
-      "The official blog of Would You Bot. Stay up to date with the latest discord related news, updates, and announcements.",
+      'The official blog of Would You Bot. Stay up to date with the latest discord related news, updates, and announcements.'
   },
   robots: {
     index: true,
-    follow: true,
-  },
-};
+    follow: true
+  }
+}
 
 export const viewport: Viewport = {
   themeColor: '#0598F6',
-  maximumScale: 5,
+  maximumScale: 5
 }
 
 const BlogPosts = async () => {

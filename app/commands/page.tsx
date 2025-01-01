@@ -1,5 +1,5 @@
-import Content from "@/components/Commands/Content";
-import type { Metadata, Viewport } from "next";
+import Content from '@/components/Commands/Content'
+import type { Metadata, Viewport } from 'next'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://wouldyoubot.gg'),

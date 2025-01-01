@@ -55,7 +55,8 @@ export default function Privacy() {
               className="text-foreground underline"
             >
               https://wouldyoubot.gg
-            </Link>.{' '}
+            </Link>
+            .{' '}
           </li>
           <li>
             - Engage with us in other related ways — including any sales,
@@ -204,9 +205,7 @@ export default function Privacy() {
           please contact the Creator to request deletion of that information.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-foreground">
-        Cookie Usage
-        </h3>
+        <h3 className="my-4 text-lg font-bold text-foreground">Cookie Usage</h3>
         <p>
           To ensure that our app functions as intended, we use cookies. These
           cookies are necessary for the core functionality of the app and cannot
@@ -215,7 +214,9 @@ export default function Privacy() {
           and improve our services. Plausible Analytics is a privacy-focused
           platform that provides aggregate data without tracking or collecting
           any personally identifiable information, and it does not use cookies
-          or store any personal information. However you may opt out of Plausible Analytics tracking by disabling the checkbox in the cookie settings.{' '}
+          or store any personal information. However you may opt out of
+          Plausible Analytics tracking by disabling the checkbox in the cookie
+          settings.{' '}
           <Link
             href="https://plausible.io/data-policy"
             target={'_blank'}

@@ -27,14 +27,14 @@ export async function POST(req: Request) {
   const { priceId, serverId, monthly } =
     (await req.json()) as StripeSubscriptionRequest
 
-    const server = await prisma.guild.findFirst({
-      where: {
-        guildID: serverId
-      }, 
-      select: {
-        premiumExpiration: true
-      }
-    })
+  const server = await prisma.guild.findFirst({
+    where: {
+      guildID: serverId
+    },
+    select: {
+      premiumExpiration: true
+    }
+  })
 
   if (!serverId) {
     return NextResponse.json(

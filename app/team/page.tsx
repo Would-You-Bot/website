@@ -1,29 +1,29 @@
-import Image from 'next/image' // Import the 'Image' component
-import staffs from '@/data/staffs.json' // Import the JSON data
 import type { Metadata, Viewport } from 'next'
+import staffs from '@/data/staffs.json' // Import the JSON data
+import Image from 'next/image' // Import the 'Image' component
 
- export const metadata: Metadata = {
-    metadataBase: new URL('https://wouldyoubot.gg'),
+export const metadata: Metadata = {
+  metadataBase: new URL('https://wouldyoubot.gg'),
+  title: 'Our Team - Would You Bot',
+  description: 'Meet the amazing team and contributors behind Would You.',
+  twitter: {
     title: 'Our Team - Would You Bot',
-    description: 'Meet the amazing team and contributors behind Would You.',
-    twitter: {
-      title: 'Our Team - Would You Bot',
-      description: 'Meet the amazing team and contributors behind Would You.'
-    },
-    openGraph: {
-      title: 'Our Team - Would You Bot',
-      description: 'Meet the amazing team and contributors behind Would You.'
-    },
-    robots: {
-      index: true,
-      follow: true
-    }
+    description: 'Meet the amazing team and contributors behind Would You.'
+  },
+  openGraph: {
+    title: 'Our Team - Would You Bot',
+    description: 'Meet the amazing team and contributors behind Would You.'
+  },
+  robots: {
+    index: true,
+    follow: true
   }
+}
 
-  export const viewport: Viewport = {
-    themeColor: '#0598F6',
-    maximumScale: 5
-  }
+export const viewport: Viewport = {
+  themeColor: '#0598F6',
+  maximumScale: 5
+}
 
 export default function Team() {
   const roles = [

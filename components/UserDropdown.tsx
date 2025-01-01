@@ -1,4 +1,4 @@
-"use client";
+'use client'
 
 import {
   DropdownMenu,
@@ -9,10 +9,10 @@ import {
 } from '@/components/ui/user-dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { IdTokenJWT } from '@/helpers/oauth/types'
+import { usePathname } from 'next/navigation'
 import { LogOut } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation';
 
 interface UserDropdownProps {
   idToken: IdTokenJWT | null

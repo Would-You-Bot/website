@@ -88,7 +88,7 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
         author={profiles.paulos.author}
         avatar={profiles.paulos.avatar}
         roleColor={profiles.paulos.roleColor}
-         // @ts-ignore
+        // @ts-ignore
         clanIcon={profiles.paulos.clanIcon}
         clanTag={profiles.paulos.clanTag}
         lightTheme={theme === 'light'}
@@ -113,7 +113,7 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
         author={profiles.dominik.author}
         avatar={profiles.dominik.avatar}
         roleColor={profiles.dominik.roleColor}
-         // @ts-ignore
+        // @ts-ignore
         clanIcon={profiles.dominik.clanIcon}
         clanTag={profiles.dominik.clanTag}
         lightTheme={theme === 'light'}
@@ -134,7 +134,7 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
           author={profiles.dominik.author}
           avatar={profiles.dominik.avatar}
           roleColor={profiles.dominik.roleColor}
-           // @ts-ignore
+          // @ts-ignore
           clanIcon={profiles.dominik.clanIcon}
           clanTag={profiles.dominik.clanTag}
           lightTheme={theme === 'light'}

@@ -2,7 +2,7 @@
 import DiscordLoginButton from '@/components/DiscordLoginButton'
 import { LayoutDashboardIcon, Moon, Sun } from 'lucide-react'
 import { useIdToken } from '@/helpers/hooks/useIdToken'
-import { useAnimationControls } from "motion/react"
+import { useAnimationControls } from 'motion/react'
 import { IdTokenJWT } from '@/helpers/oauth/types'
 import { Button } from '@/components/ui/button'
 import UserDropdown from './UserDropdown'

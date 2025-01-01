@@ -1,7 +1,7 @@
 import { MainContent, TableOfContents } from '@/app/blog/[slug]/_components'
 import { getPost } from '@/app/blog/[slug]/_data'
+import type { Metadata, Viewport } from 'next'
 import { postPaths } from '@/utils/mdx'
-import { Metadata, Viewport } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -11,7 +11,7 @@ export async function generateMetadata({
   params: { slug: string }
 }): Promise<Metadata> {
   const { frontmatter } = await getPost(slug)
-  const title = frontmatter.title + '- Would You Bot'
+  const title = `${frontmatter.title}- Would You Bot`
 
   return {
     title,
@@ -20,7 +20,7 @@ export async function generateMetadata({
     twitter: {
       title,
       description: frontmatter.description,
-      card: "summary_large_image",
+      card: 'summary_large_image',
       images: frontmatter.thumbnail?.large
     },
     openGraph: {
@@ -34,15 +34,15 @@ export async function generateMetadata({
     },
     robots: {
       index: true,
-      follow: true,
-    },
+      follow: true
+    }
   }
 }
 
 export const viewport: Viewport = {
-	maximumScale: 5,
-	themeColor: "#0598F6",
-};
+  maximumScale: 5,
+  themeColor: '#0598F6'
+}
 
 export function generateStaticParams() {
   return postPaths
@@ -66,7 +66,7 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
         {frontMatter.thumbnail?.banner && (
           <Image
             src={frontMatter.thumbnail.banner}
-            alt={frontMatter.title + '- Would You Bot'}
+            alt={`${frontMatter.title}- Would You Bot`}
             width={1000}
             height={200}
             className="mb-4 h-auto w-full rounded-lg"
@@ -99,12 +99,12 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
             </p>
           ))}
         </div>
-        <div className="xl: relative left-0 top-0 mb-10 flex border-b border-foreground/50 pb-5 xl:fixed xl:left-4 xl:top-40 xl:border-b-0">
-          <TableOfContents toc={frontMatter.toc ?? []} />
-        </div>
       </div>
 
-      <MainContent source={result} />
+      <MainContent
+        source={result}
+        toc={frontMatter.toc ?? []}
+      />
     </>
   )
 }
