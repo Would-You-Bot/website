@@ -1,7 +1,7 @@
-import { prismaAdapter } from 'better-auth/adapters/prisma'
-import { createAuthMiddleware } from 'better-auth/api'
-import { customSession } from 'better-auth/plugins'
-import { betterAuth } from 'better-auth'
+import { prismaAdapter } from '@wouldyou/better-auth/adapters/prisma'
+import { createAuthMiddleware } from '@wouldyou/better-auth/api'
+import { customSession } from '@wouldyou/better-auth/plugins'
+import { betterAuth } from '@wouldyou/better-auth'
 import { stripe } from '@/lib/stripe'
 import { prisma } from './prisma'
 
@@ -14,17 +14,17 @@ export const auth = betterAuth({
 			return {
 				user: {
 					name: user.name,
-          id: user.id,
-          image: user.image,
+					id: user.id,
+					image: user.image
 				},
 				session: {
-          id: session.id,
-          token: session.token
-        }
+					id: session.id,
+					token: session.token
+				}
 			}
 		})
 	],
-  advanced: {
+	advanced: {
 		generateId: false
 	},
 	user: {
@@ -38,7 +38,7 @@ export const auth = betterAuth({
 			clientId: process.env.DISCORD_CLIENT_ID as string,
 			clientSecret: process.env.DISCORD_CLIENT_SECRET as string,
 			scope: ['identify', 'guilds'],
-			getUserInfo: async (account) => {
+      getUserInfo: async (account) => {
 				const response = await fetch('https://discord.com/api/users/@me', {
 					headers: {
 						Authorization: `Bearer ${account.accessToken}`
@@ -46,78 +46,48 @@ export const auth = betterAuth({
 				})
 				const profile = await response.json()
         console.log('profile', profile)
-
+				return profile
+			},
+			mapProfileToUser: (profile) => {
 				return {
-					user: {
-						id: profile.id,
-						name: profile.global_name || profile.username,
-						image: `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.webp`,
-						username: profile.username,
-			      emailVerified: false,
-					},
-					data: profile
+					id: profile.id,
+					language: 'en_EN',
+					userID: profile.id,
+					votePrivacy: false,
+					emailVerified: false,
+					profilePrivacy: false,
+					likedPackPrivacy: false,
+					globalName: profile.username,
+					email: `${profile.username}@wouldyoubot.gg`,
+					displayName: profile.global_name || profile.username,
+					description:
+						"We don't know much about this user yet, but they seem cool!",
+					avatarUrl: `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.webp`,
+					bannerUrl:
+						profile.banner ?
+							`https://cdn.discordapp.com/banners/${profile.id}/${profile.banner}.png?size=480`
+						:	null
 				}
 			}
-			// profile(profile) {
-			// 	return {
-			// 		id: profile.id,
-			// 		name: profile.global_name || profile.username,
-			// 		image: `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.webp`,
-			// 		username: profile.username,
-			// 		banner: profile.banner ?
-			// 			`https://cdn.discordapp.com/banners/${profile.id}/${profile.banner}.png?size=480`
-			// 			: null
-			// 	}
-			// }
 		}
 	},
-	
 	hooks: {
 		after: createAuthMiddleware(async (ctx) => {
-			// console.log('User logged in:', ctx)
+			// This hook is called after the user has been authenticated
+			const profile = ctx.context.newSession
 
-			// Update or create user profile
-			// await prisma.user.upsert({
-			//   where: { userID: profile.id },
-			//   update: {
-			//     displayName: profile.global_name || profile.username,
-			//     avatarUrl: `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.webp`,
-			//     globalName: profile.username,
-			//     bannerUrl: profile.banner ?
-			//       `https://cdn.discordapp.com/banners/${profile.id}/${profile.banner}.png?size=480`
-			//       : null
-			//   },
-			//   create: {
-			//     userID: profile.id,
-			//     displayName: profile.global_name || profile.username,
-			//     avatarUrl: `https://cdn.discordapp.com/avatars/${profile.id}/${profile.avatar}.webp`,
-			//     globalName: profile.username,
-			//     description: "We don't know much about this user yet, but they seem cool!",
-			//     language: 'en_EN',
-			//     bannerUrl: profile.banner ?
-			//       `https://cdn.discordapp.com/banners/${profile.id}/${profile.banner}.png?size=480`
-			//       : null,
-			//     votePrivacy: false,
-			//     profilePrivacy: false,
-			//     likedPackPrivacy: false
-			//   }
-			// })
-
-			// Handle Stripe customer creation
-			// const customerSearch = await stripe.customers.search({
-			//   query: `metadata["userID"]: "${profile.id}"`,
-			//   limit: 1
-			// })
-
-			// if (!customerSearch.data.length) {
-			//   await stripe.customers.create({
-			//     name: profile.username,
-			//     metadata: {
-			//       userID: profile.id
-			//     }
-			//   })
-			// }
-
+			const customerSearch = await stripe.customers.search({
+				query: `metadata["userID"]: "${profile?.user.id}"`,
+				limit: 1
+			})
+			if (!customerSearch.data.length) {
+				await stripe.customers.create({
+					name: profile?.user.globalName as string,
+					metadata: {
+						userID: profile?.user.id as string
+					}
+				})
+			}
 		})
 	}
 })

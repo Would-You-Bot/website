@@ -37,6 +37,7 @@
     "@upstash/ratelimit": "^2.0.5",
     "@upstash/redis": "^1.30.0",
     "@vercel/functions": "^1.5.2",
+    "@wouldyou/better-auth": "^1.1.100",
     "axios": "^1.7.9",
     "better-auth": "^1.1.7",
     "class-variance-authority": "^0.7.0",
