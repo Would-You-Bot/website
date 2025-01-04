@@ -27,10 +27,10 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
 	return (
 		<nav className="sticky left-0 top-[1px] z-50 mb-8 flex h-auto w-full items-center justify-center py-6">
 			<div className="flex h-full w-full max-w-8xl items-center justify-between px-8 transition-all duration-300">
-				<div className="flex h-16 min-w-fit items-center justify-center rounded-[10px] border-2 border-foreground/5 bg-background-light/90 px-6 backdrop-blur">
+				<div className="flex h-16 min-w-fit items-center justify-center rounded-[10px] border-2 border-foreground/5 bg-background-light/90 px-4 xs:px-6 backdrop-blur">
 					<Link
 						href="/"
-						className="flex items-center gap-6"
+						className="flex items-center gap-4 xs:gap-6"
 					>
 						<Image
 							src="/Logo.svg"

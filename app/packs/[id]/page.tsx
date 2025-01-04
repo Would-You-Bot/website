@@ -6,24 +6,18 @@ import {
 	TooltipProvider,
 	TooltipTrigger
 } from '@/components/ui/tooltip'
-import {
-	ArrowLeft,
-	CopyIcon,
-	Edit,
-	FileUp,
-	Heart,
-	LinkIcon
-} from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { ArrowLeft, CopyIcon, FileUp, Heart, LinkIcon } from 'lucide-react'
+import { PackDetailsSkeleton } from './_components/PackDetailsSkeleton'
 import ExportQuestionModal from '../_components/ExportQuestionModal'
+import { PackDetails } from './_components/PackDetails'
+import { Suspense, useEffect, useState } from 'react'
+import type { PackResponse } from '@/types/Packs'
 import { Button } from '@/components/ui/button'
 import Container from '@/components/Container'
-import { PackData } from '@/utils/zod/schemas'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
-import { PackResponse } from '@/types/Packs'
 import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { toast } from 'sonner'
 import Link from 'next/link'
@@ -39,9 +33,11 @@ export default function Page({ params }: { params: { id: string } }) {
 		id: undefined
 	})
 	const [searchQuery, setSearchQuery] = useState('')
+	const [isLoading, setIsLoading] = useState(true)
 
 	useEffect(() => {
 		async function getPack() {
+			setIsLoading(true) // Set loading to true before fetching data
 			const res = await fetch(`/api/packs/${params.id}`)
 			const packData = await res.json()
 
@@ -60,6 +56,7 @@ export default function Page({ params }: { params: { id: string } }) {
 			}
 			// moved this down to avoid flashing private user before fetching user data
 			setPackToShow(packData)
+			setIsLoading(false) // Set loading to false after data is fetched
 		}
 		getPack()
 	}, [params.id])
@@ -109,200 +106,210 @@ export default function Page({ params }: { params: { id: string } }) {
 	}
 
 	return (
-		<TooltipProvider delayDuration={0}>
-			<Container>
-				<div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
-					<div className="bg-card rounded-lg p-4 border space-y-4 lg:sticky lg:top-24 h-max @container">
-						<div className="flex justify-between gap-4">
-							<div className="flex gap-4 items-center">
-								<Tooltip>
-									<TooltipTrigger asChild>
-										<Button
-											onClick={() => router.push('/packs')}
-											variant="ghost"
-											size={'icon'}
-										>
-											<ArrowLeft className="size-4" />
-											<span className="sr-only">Packs</span>
-										</Button>
-									</TooltipTrigger>
-									<TooltipContent>Back to Packs</TooltipContent>
-								</Tooltip>
-								<h1 className="text-2xl text-brand-red-100 drop-shadow-red-glow">
-									Details
-								</h1>
-							</div>
-							<div className="flex gap-2">
-								<Tooltip>
-									<TooltipTrigger asChild>
-										<Button
-											onClick={toggleLike}
-											variant="ghost"
-											className="flex items-center gap-2"
-										>
-											<Heart
-												className={clsx('size-4', {
-													'text-destructive fill-destructive':
-														packToShow?.userLiked
-												})}
-											/>
-											<span
-												className={clsx('', {
-													'text-muted-foreground': !packToShow?.userLiked
-												})}
-											>
-												{packToShow?.likes}
-											</span>
-										</Button>
-									</TooltipTrigger>
-									<TooltipContent>
-										{packToShow?.userLiked ? 'Unlike' : 'Like'} pack
-									</TooltipContent>
-								</Tooltip>
-
-								<Tooltip>
-									<TooltipTrigger asChild>
-										<Button
-											onClick={copyShareLink}
-											variant="ghost"
-											size={'icon'}
-										>
-											<LinkIcon className="size-4" />
-											<span className="sr-only">Share</span>
-										</Button>
-									</TooltipTrigger>
-									<TooltipContent>Copy share link</TooltipContent>
-								</Tooltip>
-							</div>
-						</div>
-
-						<PackDetailsContainer>
-							<PackDetailsHeader>Name</PackDetailsHeader>
-							<PackDetailsText>{packToShow?.data.name}</PackDetailsText>
-						</PackDetailsContainer>
-
-						<PackDetailsContainer>
-							<PackDetailsHeader>Description</PackDetailsHeader>
-							<PackDetailsText>{packToShow?.data.description}</PackDetailsText>
-						</PackDetailsContainer>
-
-						<PackDetailsContainer>
-							<PackDetailsHeader>Type</PackDetailsHeader>
-							<p className="font-light">{packToShow?.data.type}</p>
-						</PackDetailsContainer>
-
-						<PackDetailsContainer>
-							<PackDetailsHeader>Language</PackDetailsHeader>
-							<p className="font-light">{packToShow?.data.language}</p>
-						</PackDetailsContainer>
-
-						<PackDetailsContainer>
-							<PackDetailsHeader>Use Pack</PackDetailsHeader>
-							<Tooltip>
-								<TooltipTrigger asChild>
-									<div
-										className="w-full relative cursor-pointer group"
-										onClick={copyCommand}
-									>
-										<Input
-											id="command"
-											defaultValue={`/import ${packToShow?.data.type} ${params.id}`}
-											readOnly
-											className="group-hover:bg-brand-blue-100/10 group-hover:text-brand-blue-100 focus:bg-brand-blue-100/10 focus:text-brand-blue-100 pr-10 text-sm text-muted-foreground cursor-pointer"
-										/>
-										<p className="p-2 h-fit text-brand-blue-100 absolute right-2 top-1">
-											<span className="sr-only">Copy command</span>
-											<CopyIcon className="h-4 w-4" />
-										</p>
-									</div>
-								</TooltipTrigger>
-								<TooltipContent>Copy Command</TooltipContent>
-							</Tooltip>
-						</PackDetailsContainer>
-
-						<PackDetailsContainer>
-							<PackDetailsHeader>Author</PackDetailsHeader>
-							{userData.id == undefined}
-							<Link
-								href={
-									userData.id === undefined ? '' : `/profile/${userData.id}`
-								}
-								className="flex items-center gap-1"
-							>
-								<Avatar className="w-6 h-6">
-									<AvatarImage
-										alt={userData.username + "'s avatar"}
-										src={userData.avatar}
-									/>
-									<AvatarFallback>
-										<Image
-											src="/Logo.png'"
-											alt="Fallback Avatar"
-											width={40}
-											height={40}
-										/>
-									</AvatarFallback>
-								</Avatar>
-								<p className="capitalize text-sm">{userData.username}</p>
-							</Link>
-						</PackDetailsContainer>
-
-						<PackDetailsContainer>
-							<PackDetailsHeader>Tags</PackDetailsHeader>
-							{packToShow?.data.tags.map((tag) => (
-								<Badge
-									key={tag}
-									className="pointer-events-none"
-									variant={'secondary'}
-								>
-									{tag}
-								</Badge>
-							))}
-						</PackDetailsContainer>
-					</div>
-
-					<div className="bg-card rounded-lg p-4 border lg:col-span-3">
-						<div className="flex flex-row justify-between">
-							<h2 className="text-2xl text-brand-blue-100 drop-shadow-blue-glow">
-								Questions
-							</h2>
-							<div>
-								<Tooltip>
-									<TooltipTrigger>
-										<ExportQuestionModal
-											trigger={
+		<>
+			{isLoading ?
+				<PackDetailsSkeleton />
+			:	<TooltipProvider delayDuration={0}>
+					<Container>
+						<div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
+							<div className="bg-card rounded-lg p-4 border space-y-4 lg:sticky lg:top-28 h-max @container">
+								<div className="flex flex-wrap justify-between gap-4">
+									<div className="flex gap-4 items-center">
+										<Tooltip>
+											<TooltipTrigger asChild>
 												<Button
+													onClick={() => router.push('/packs')}
 													variant="ghost"
-													size="icon"
+													size={'icon'}
 												>
-													<FileUp className="size-4" />
-													<span className="sr-only">Export Questions</span>
+													<ArrowLeft className="size-4" />
+													<span className="sr-only">Packs</span>
 												</Button>
-											}
-											questions={packToShow?.data.questions!}
-										/>
-									</TooltipTrigger>
-									<TooltipContent>Export Questions</TooltipContent>
-								</Tooltip>
+											</TooltipTrigger>
+											<TooltipContent>Back to Packs</TooltipContent>
+										</Tooltip>
+										<h1 className="text-2xl text-brand-red-100 drop-shadow-red-glow font-bold">
+											Details
+										</h1>
+									</div>
+									<div className="flex gap-2">
+										<Tooltip>
+											<TooltipTrigger asChild>
+												<Button
+													onClick={toggleLike}
+													variant="ghost"
+													className="flex items-center gap-2"
+												>
+													<Heart
+														className={clsx('size-4', {
+															'text-destructive fill-destructive':
+																packToShow?.userLiked
+														})}
+													/>
+													<span
+														className={clsx('', {
+															'text-muted-foreground': !packToShow?.userLiked
+														})}
+													>
+														{packToShow?.likes}
+													</span>
+												</Button>
+											</TooltipTrigger>
+											<TooltipContent>
+												{packToShow?.userLiked ? 'Unlike' : 'Like'} pack
+											</TooltipContent>
+										</Tooltip>
+
+										<Tooltip>
+											<TooltipTrigger asChild>
+												<Button
+													onClick={copyShareLink}
+													variant="ghost"
+													size={'icon'}
+												>
+													<LinkIcon className="size-4" />
+													<span className="sr-only">Share</span>
+												</Button>
+											</TooltipTrigger>
+											<TooltipContent>Copy share link</TooltipContent>
+										</Tooltip>
+									</div>
+								</div>
+
+								<PackDetailsContainer>
+									<PackDetailsHeader>Name</PackDetailsHeader>
+									<PackDetailsText>{packToShow?.data.name}</PackDetailsText>
+								</PackDetailsContainer>
+
+								<PackDetailsContainer>
+									<PackDetailsHeader>Description</PackDetailsHeader>
+									<PackDetailsText>
+										{packToShow?.data.description}
+									</PackDetailsText>
+								</PackDetailsContainer>
+
+								<PackDetailsContainer>
+									<PackDetailsHeader>Type</PackDetailsHeader>
+									<p className="font-light">{packToShow?.data.type}</p>
+								</PackDetailsContainer>
+
+								<PackDetailsContainer>
+									<PackDetailsHeader>Language</PackDetailsHeader>
+									<p className="font-light">{packToShow?.data.language}</p>
+								</PackDetailsContainer>
+
+								<PackDetailsContainer>
+									<PackDetailsHeader>Use Pack</PackDetailsHeader>
+									<Tooltip>
+										<TooltipTrigger asChild>
+											<div
+												className="w-full relative cursor-pointer group"
+												onClick={copyCommand}
+											>
+												<Input
+													id="command"
+													defaultValue={`/import ${packToShow?.data.type} ${params.id}`}
+													readOnly
+													className="group-hover:bg-brand-blue-100/10 group-hover:text-brand-blue-100 focus:bg-brand-blue-100/10 focus:text-brand-blue-100 pr-10 text-sm text-muted-foreground cursor-pointer"
+												/>
+												<p className="p-2 h-fit text-brand-blue-100 absolute right-2 top-1">
+													<span className="sr-only">Copy command</span>
+													<CopyIcon className="h-4 w-4" />
+												</p>
+											</div>
+										</TooltipTrigger>
+										<TooltipContent>Copy Command</TooltipContent>
+									</Tooltip>
+								</PackDetailsContainer>
+
+								<PackDetailsContainer>
+									<PackDetailsHeader>Author</PackDetailsHeader>
+									{userData.id === undefined}
+									<Link
+										href={
+											userData.id === undefined ? '' : `/profile/${userData.id}`
+										}
+										className="flex items-center gap-1"
+									>
+										<Avatar className="w-6 h-6">
+											<AvatarImage
+												alt={`${userData.username}'s avatar`}
+												src={userData.avatar}
+											/>
+											<AvatarFallback>
+												<Image
+													src="/Logo.png'"
+													alt="Fallback Avatar"
+													width={40}
+													height={40}
+												/>
+											</AvatarFallback>
+										</Avatar>
+										<p className="capitalize text-sm">{userData.username}</p>
+									</Link>
+								</PackDetailsContainer>
+
+								<PackDetailsContainer>
+									<PackDetailsHeader>Tags</PackDetailsHeader>
+									<div className="flex flex-wrap gap-1">
+										{packToShow?.data.tags.map((tag) => (
+											<Badge
+												key={tag}
+												className="pointer-events-none"
+												variant={'secondary'}
+											>
+												{tag}
+											</Badge>
+										))}
+									</div>
+								</PackDetailsContainer>
+							</div>
+
+							<div className="bg-card rounded-lg p-4 border lg:col-span-3">
+								<div className="flex flex-row justify-between">
+									<h2 className="text-2xl text-brand-blue-100 drop-shadow-blue-glow font-bold">
+										Questions
+									</h2>
+									<div>
+										<Tooltip>
+											<TooltipTrigger>
+												<ExportQuestionModal
+													trigger={
+														<Button
+															variant="ghost"
+															size="icon"
+														>
+															<FileUp className="size-4" />
+															<span className="sr-only">Export Questions</span>
+														</Button>
+													}
+													questions={packToShow?.data.questions!}
+												/>
+											</TooltipTrigger>
+											<TooltipContent>Export Questions</TooltipContent>
+										</Tooltip>
+									</div>
+								</div>
+
+								<div>
+									{packToShow?.data.questions.map((question, index) => (
+										<div
+											key={question.id}
+											className={clsx('py-2 rounded-none', {
+												'border-b':
+													index !== packToShow?.data.questions.length - 1
+											})}
+										>
+											<p className="break-words">{question.question}</p>
+										</div>
+									))}
+								</div>
 							</div>
 						</div>
-
-						<div>
-							{packToShow?.data.questions.map((question, index) => (
-								<div
-									key={question.id}
-									className={clsx('py-2 rounded-none', {
-										'border-b': index !== packToShow?.data.questions.length - 1
-									})}
-								>
-									<p className="break-words">{question.question}</p>
-								</div>
-							))}
-						</div>
-					</div>
-				</div>
-			</Container>
-		</TooltipProvider>
+					</Container>
+				</TooltipProvider>
+			}
+		</>
 	)
 }
 
