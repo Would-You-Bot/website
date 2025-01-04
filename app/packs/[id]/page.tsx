@@ -10,8 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { ArrowLeft, CopyIcon, FileUp, Heart, LinkIcon } from 'lucide-react'
 import { PackDetailsSkeleton } from './_components/PackDetailsSkeleton'
 import ExportQuestionModal from '../_components/ExportQuestionModal'
-import { PackDetails } from './_components/PackDetails'
-import { Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { PackResponse } from '@/types/Packs'
 import { Button } from '@/components/ui/button'
 import Container from '@/components/Container'
@@ -23,8 +22,10 @@ import { toast } from 'sonner'
 import Link from 'next/link'
 import axios from 'axios'
 import clsx from 'clsx'
+import { languageMap } from '@/helpers'
+import { packMap } from '@/types'
 
-export default function Page({ params }: { params: { id: string } }) {
+export default function PackDetails({ params }: { params: { id: string } }) {
 	const router = useRouter()
 	const [packToShow, setPackToShow] = useState<PackResponse | null>(null)
 	const [userData, setUserData] = useState({
@@ -190,12 +191,12 @@ export default function Page({ params }: { params: { id: string } }) {
 
 								<PackDetailsContainer>
 									<PackDetailsHeader>Type</PackDetailsHeader>
-									<p className="font-light">{packToShow?.data.type}</p>
+									<p className="font-light">{packMap[packToShow?.data.type!]}</p>
 								</PackDetailsContainer>
 
 								<PackDetailsContainer>
 									<PackDetailsHeader>Language</PackDetailsHeader>
-									<p className="font-light">{packToShow?.data.language}</p>
+									<p className="font-light">{languageMap[packToShow?.data.language!]}</p>
 								</PackDetailsContainer>
 
 								<PackDetailsContainer>
