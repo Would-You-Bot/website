@@ -40,7 +40,7 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
 
 	return (
 		<DiscordMessages
-			lightTheme={theme === 'light' ? true : false}
+			lightTheme={theme === 'light'}
 			className="overflow-x-hidden rounded-lg text-left shadow"
 		>
 			<DiscordMessage
@@ -76,8 +76,19 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
 				</DiscordEmbed>
 				<DiscordAttachments slot="components">
 					<DiscordActionRow>
-						<DiscordButton type="secondary">Results</DiscordButton>
-						<DiscordButton type="primary">
+						<DiscordButton
+							type="secondary"
+							onClick={() => setMessageType('results')}
+						>
+							Results
+						</DiscordButton>
+						<DiscordButton
+							type="primary"
+							onClick={() => {
+								setHaveDone(true)
+								setMessageType('vote')
+							}}
+						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 36 36"
