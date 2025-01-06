@@ -106,8 +106,8 @@ importers:
         specifier: ^0.0.0
         version: 0.0.0
       lucide-react:
-        specifier: ^0.376.0
-        version: 0.376.0(react@19.0.0)
+        specifier: ^0.468.0
+        version: 0.468.0(react@19.0.0)
       mongoose:
         specifier: ^8.4.0
         version: 8.9.2
@@ -2509,10 +2509,10 @@ packages:
   lru-cache@10.4.3:
     resolution: {integrity: sha512-JNAzZcXrCt42VGLuYz0zfAzDfAvJWW6AfYlDBQyDV5DClI2m5sAmK+OIO7s59XfsRsWHp02jAJrRadPRGTt6SQ==}
 
-  lucide-react@0.376.0:
-    resolution: {integrity: sha512-g91IX3ERD6yUR1TL2dsL4BkcGygpZz/EsqjAeL/kcRQV0EApIOr/9eBfKhYOVyQIcGGuotFGjF3xKLHMEz+b7g==}
+  lucide-react@0.468.0:
+    resolution: {integrity: sha512-6koYRhnM2N0GGZIdXzSeiNwguv1gt/FAjZOiPl76roBi3xKEXa4WmfpxgQwTTL4KipXjefrnf3oV4IsYhi4JFA==}
     peerDependencies:
-      react: ^16.5.1 || ^17.0.0 || ^18.0.0
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc
 
   markdown-extensions@1.1.1:
     resolution: {integrity: sha512-WWC0ZuMzCyDHYCasEGs4IPvLyTGftYwh6wIEOULOF0HXcqZlhwRzrK0w2VUlxWA98xnvb/jszw4ZSkJ6ADpM6Q==}
@@ -6038,7 +6038,7 @@ snapshots:
 
   lru-cache@10.4.3: {}
 
-  lucide-react@0.376.0(react@19.0.0):
+  lucide-react@0.468.0(react@19.0.0):
     dependencies:
       react: 19.0.0
 
