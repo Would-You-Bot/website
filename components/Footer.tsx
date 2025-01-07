@@ -1,9 +1,14 @@
-'use server'
+'use client'
 
+import { useCookieContext } from './cookies'
+import { Settings } from 'lucide-react'
+import { Button } from './ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
 
-const Footer = async () => {
+const Footer = () => {
+	const { showCookieDialog } = useCookieContext()
+
 	const recommendedLinks = [
 		{
 			name: 'Home',
@@ -94,6 +99,15 @@ const Footer = async () => {
 						</Link>
 						. All rights reserved.
 					</p>
+					{/* <StatusBadge /> */}
+					<Button
+						variant="ghost"
+						className="gap-1 mt-auto"
+						onClick={showCookieDialog}
+					>
+						<Settings className="size-4" />
+						Manage Cookies
+					</Button>
 				</div>
 				<div className="flex w-full flex-col items-center md:items-start">
 					<h4 className="mb-2 text-lg font-bold text-foreground">
