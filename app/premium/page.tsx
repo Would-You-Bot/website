@@ -22,23 +22,33 @@ import {
 	DialogTrigger
 } from '@/components/ui/dialog'
 import {
-	Select,
-	SelectContent,
-	SelectItem,
-	SelectTrigger,
-	SelectValue
-} from '@/components/ui/select'
+	Command,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList
+} from '@/components/ui/command'
+import {
+	Popover,
+	PopoverContent,
+	PopoverTrigger
+} from '@/components/ui/popover'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import DiscordLoginButton from '@/components/DiscordLoginButton'
 import PlansComparison from './_components/PlansComparison'
 import { LazyMotion, domAnimation, m } from 'framer-motion'
 import CheckoutButton from './_components/checkoutButton'
-import { DiscordGuild, PricingData } from './_types'
+import type { DiscordGuild, PricingData } from './_types'
+import { Suspense, useEffect, useState } from 'react'
+import { Check, ChevronsUpDown } from 'lucide-react'
 import { ServersListSkeleton } from './_components'
+import { Button } from '@/components/ui/button'
 import { useIdToken } from '@/helpers/hooks'
-import { Suspense, useState } from 'react'
 import { getServer } from '@/lib/redis'
+import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import { set } from 'mongoose'
 import Head from 'next/head'
 
 const pricingData: PricingData = {
@@ -96,6 +106,7 @@ export default function Premium() {
 	const [isMonthly, setIsMonthly] = useState(true)
 	const [serversData, setServersData] = useState<DiscordGuild[]>([])
 	const [serverId, setServerId] = useState<string>()
+	const [open, setOpen] = useState(false)
 	const idToken = useIdToken(null)
 
 	const handleChange = () => {
@@ -105,6 +116,14 @@ export default function Premium() {
 	const fetchData = async () => {
 		const servers = (await getServer()) as DiscordGuild[]
 		setServersData(servers)
+	}
+
+	const handleSelectServer = (id: string) => {
+		if (serverId === id) {
+			setServerId('')
+		} else {
+			setServerId(id)
+		}
 	}
 
 	return (
@@ -137,7 +156,7 @@ export default function Premium() {
 											checked={!isMonthly}
 											onChange={handleChange}
 										/>
-										<span className="absolute top-0 left-2 z-10 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[10rem] sm:after:w-[20rem] after:rounded-lg after:bg-brand-primary-light dark:after:bg-brand-primary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem]"></span>
+										<span className="absolute top-0 left-2 z-10 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[10rem] sm:after:w-[20rem] after:rounded-lg after:bg-brand-primary-light dark:after:bg-brand-primary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem]" />
 										<div className="z-20 flex gap-10 text-base font-bold text-foreground">
 											<div className={`${!isMonthly && 'text-foreground/50'}`}>
 												Monthly
@@ -213,7 +232,7 @@ export default function Premium() {
 														redirect="/premium"
 													/>
 												}
-												<DialogContent className="w-fit border-none bg-background">
+												<DialogContent className="flex flex-col w-fit h-fit border-none bg-background">
 													<DialogHeader>
 														<DialogTitle className="text-xl font-bold text-foreground">
 															<div>
@@ -227,19 +246,21 @@ export default function Premium() {
 														</DialogTitle>
 													</DialogHeader>
 													<DialogDescription className="w-full !rounded-2xl">
-														<Select
-															onValueChange={setServerId}
-															defaultValue={serverId ? serverId : ''}
-														>
-															<SelectTrigger className="w-[300px] sm:w-[400px]">
-																<SelectValue placeholder="Select a server to continue" />
-															</SelectTrigger>
-															<SelectContent className="max-h-[40vh] max-w-[300px] sm:max-w-[400px]">
-																<Suspense fallback={<ServersListSkeleton />}>
+														<Command className="bg-background border rounded h-96 w-[300px] sm:w-[400px]">
+															<CommandInput
+																className="p-2 rounded-none disable-focus"
+																placeholder="Search server..."
+															/>
+															<CommandList>
+																<CommandEmpty>No server found.</CommandEmpty>
+																<CommandGroup className="bg-background w-full">
 																	{serversData.map((server: DiscordGuild) => (
-																		<SelectItem
+																		<CommandItem
 																			key={server.id}
-																			value={server.id}
+																			value={server.name}
+																			onSelect={() => {
+																				handleSelectServer(server.id)
+																			}}
 																		>
 																			<div className="flex items-center gap-2">
 																				<Avatar className="h-6 w-6">
@@ -259,11 +280,19 @@ export default function Premium() {
 																					{server.name}
 																				</span>
 																			</div>
-																		</SelectItem>
+																			<Check
+																				className={cn(
+																					'ml-auto',
+																					serverId === server.id ?
+																						'opacity-100'
+																					:	'opacity-0'
+																				)}
+																			/>
+																		</CommandItem>
 																	))}
-																</Suspense>
-															</SelectContent>
-														</Select>
+																</CommandGroup>
+															</CommandList>
+														</Command>
 														<CheckoutButton
 															monthly={String(isMonthly)}
 															priceId={

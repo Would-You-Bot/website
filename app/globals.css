@@ -98,7 +98,7 @@
 
 @layer base {
 	* {
-		@apply brand-focus rounded border-border ring-offset-background;
+		@apply brand-focus border-border ring-offset-background;
 	}
 
 	body {
