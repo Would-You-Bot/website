@@ -136,15 +136,8 @@
     "name": "Paulos",
     "categories": ["Developers"],
     "description": "Frontend Guy",
-    "imageUrl": "https://cdn.wouldyoubot.gg/staff/special/Paulos.webp",
+    "imageUrl": "https://cdn.wouldyoubot.gg/staff/developer/Paulos.webp",
     "websiteUrl": "https://dpaulos6.com?utm_source=wouldyoubot.gg"
-  },
-  {
-    "name": "Paul",
-    "categories": ["Developers"],
-    "description": "Full-stack Developer",
-    "imageUrl": "https://cdn.wouldyoubot.gg/staff/developer/Paul.webp",
-    "websiteUrl": "https://github.com/Jester0027"
   },
   {
     "name": "Dan",
