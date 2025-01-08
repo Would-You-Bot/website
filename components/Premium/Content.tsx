@@ -2,14 +2,6 @@
 'use client'
 
 import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger
-} from '@/components/ui/dialog'
-import {
 	CloseIcon,
 	StripeSquare,
 	ApplePay,
@@ -19,6 +11,14 @@ import {
 	PayPal,
 	Stripe
 } from '@/app/premium/_components/icons'
+import {
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger
+} from '@/components/ui/dialog'
 import {
 	Select,
 	SelectContent,
