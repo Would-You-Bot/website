@@ -56,6 +56,12 @@
     "usage": "/ping"
   },
   {
+    "name": "placeholders",
+    "category": "Utility",
+    "description": "Gives you a list of placeholders that you can use in your welcome messages",
+    "usage": "/placeholders"
+  },
+  {
     "name": "privacy",
     "category": "Settings",
     "description": "Changes your privacy settings.",
