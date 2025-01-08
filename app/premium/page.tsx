@@ -29,26 +29,18 @@ import {
 	CommandItem,
 	CommandList
 } from '@/components/ui/command'
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger
-} from '@/components/ui/popover'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import DiscordLoginButton from '@/components/DiscordLoginButton'
 import PlansComparison from './_components/PlansComparison'
 import { LazyMotion, domAnimation, m } from 'framer-motion'
 import CheckoutButton from './_components/checkoutButton'
 import type { DiscordGuild, PricingData } from './_types'
-import { Suspense, useEffect, useState } from 'react'
-import { Check, ChevronsUpDown } from 'lucide-react'
-import { ServersListSkeleton } from './_components'
-import { Button } from '@/components/ui/button'
 import { useIdToken } from '@/helpers/hooks'
 import { getServer } from '@/lib/redis'
+import { Check } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useState } from 'react'
 import Image from 'next/image'
-import { set } from 'mongoose'
 import Head from 'next/head'
 
 const pricingData: PricingData = {
@@ -106,7 +98,6 @@ export default function Premium() {
 	const [isMonthly, setIsMonthly] = useState(true)
 	const [serversData, setServersData] = useState<DiscordGuild[]>([])
 	const [serverId, setServerId] = useState<string>()
-	const [open, setOpen] = useState(false)
 	const idToken = useIdToken(null)
 
 	const handleChange = () => {
@@ -124,6 +115,15 @@ export default function Premium() {
 		} else {
 			setServerId(id)
 		}
+	}
+
+	const handlePrice = () => {
+		const montlyPriceId = process.env.NEXT_PUBLIC_PREMIUM_MONTHLY_PRICE_ID
+		const yearlyPriceId = process.env.NEXT_PUBLIC_PREMIUM_YEARLY_PRICE_ID
+		if (!montlyPriceId && !yearlyPriceId) {
+			throw new Error('Price ID not found')
+		}
+		return String(isMonthly ? montlyPriceId : yearlyPriceId)
 	}
 
 	return (
@@ -197,17 +197,13 @@ export default function Premium() {
 												Experience the full power of our Would You bot.
 											</p>
 											<ul className="mb-16 text-foreground">
-												{Object.keys(pricingData['premium']).map(
-													(text, index) => (
+												{Object.entries(pricingData.premium).map(
+													([text, value]) => (
 														<li
+															key={text}
 															className="mb-4 flex items-center"
-															key={index}
 														>
-															{(
-																pricingData['premium'][
-																	text as keyof (typeof pricingData)['premium']
-																]
-															) ?
+															{value ?
 																<CheckIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-brand-primary" />
 															:	<CloseIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-muted-foreground" />
 															}
@@ -295,13 +291,7 @@ export default function Premium() {
 														</Command>
 														<CheckoutButton
 															monthly={String(isMonthly)}
-															priceId={
-																isMonthly ?
-																	process.env
-																		.NEXT_PUBLIC_PREMIUM_MONTHLY_PRICE_ID!
-																:	process.env
-																		.NEXT_PUBLIC_PREMIUM_YEARLY_PRICE_ID!
-															}
+															priceId={handlePrice()}
 															serverId={serverId}
 														/>
 													</DialogDescription>
@@ -325,6 +315,8 @@ export default function Premium() {
 										href="https://stripe.com/"
 										target="_blank"
 										className="flex flex-wrap justify-center gap-2 sm:gap-3"
+										rel="noreferrer noopener"
+										title="Stripe Website"
 									>
 										<Stripe />
 										<ApplePay />
