@@ -152,6 +152,8 @@ const PersonCard = ({ ...props }: PersonCardProps) => {
                 <TooltipTrigger className="">
                   <Link
                     href={websiteUrl}
+                    target="_blank"
+                    rel="noreferrer"
                     className="opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition"
                   >
                     <Globe className="size-5 text-foreground/70 hover:text-foreground transition" />
