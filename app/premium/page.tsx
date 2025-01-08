@@ -315,7 +315,6 @@ export default function Premium() {
 										href="https://stripe.com/"
 										target="_blank"
 										className="flex flex-wrap justify-center gap-2 sm:gap-3"
-										rel="noreferrer noopener"
 										title="Stripe Website"
 									>
 										<Stripe />
