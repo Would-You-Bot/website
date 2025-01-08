@@ -1,126 +1,127 @@
 'use client'
 
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from '@/components/ui/dialog'
-import {
-  CloseIcon,
-  StripeSquare,
-  ApplePay,
-  GooglePay,
-  MasterCard,
-  Visa,
-  PayPal,
-  Stripe
+	CloseIcon,
+	StripeSquare,
+	ApplePay,
+	GooglePay,
+	MasterCard,
+	Visa,
+	PayPal,
+	Stripe
 } from '@/app/premium/_components/icons'
 import {
-  Command,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList
+	Dialog,
+	DialogContent,
+	DialogDescription,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger
+} from '@/components/ui/dialog'
+import {
+	Command,
+	CommandEmpty,
+	CommandGroup,
+	CommandInput,
+	CommandItem,
+	CommandList
 } from '@/components/ui/command'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import PlansComparison from '@/app/premium/_components/PlansComparison'
 import CheckoutButton from '@/app/premium/_components/checkoutButton'
-import DiscordLoginButton from '@/components/DiscordLoginButton'
 import type { PricingData, DiscordGuild } from '@/app/premium/_types'
 import { CheckIcon, Link } from 'lucide-react'
 import { useIdToken } from '@/helpers/hooks'
 import { Fragment, useState } from 'react'
+import { randomUUID } from 'node:crypto'
 import { getServer } from '@/lib/redis'
+import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import Head from 'next/head'
 import { cn } from '@/lib/utils'
 
 const pricingData: PricingData = {
-  price: { monthly: 2.99, yearly: 29.99 },
-  premium: {
-    'All Freemium Features': true,
-    'Unlimited Custom Questions': true,
-    'Customized Webhook Branding': true,
-    'Prevent Questions from Repeating': true,
-    'Get Rid of Button Ads': true,
-    'Auto Pin Daily Messages': true,
-    'Support the Development': true
-  }
+	price: { monthly: 2.99, yearly: 29.99 },
+	premium: {
+		'All Freemium Features': true,
+		'Unlimited Custom Questions': true,
+		'Customized Webhook Branding': true,
+		'Prevent Questions from Repeating': true,
+		'Get Rid of Button Ads': true,
+		'Auto Pin Daily Messages': true,
+		'Support the Development': true
+	}
 }
 
 const data = [
-  {
-    criteria: '5 Gamemodes',
-    free: true,
-    premium: true
-  },
-  {
-    criteria: 'Question of the Day',
-    free: true,
-    premium: true
-  },
-  {
-    criteria: 'Question Repeat Prevention',
-    free: false,
-    premium: true
-  },
-  {
-    criteria: 'Thousands of Questions',
-    free: true,
-    premium: true
-  },
-  {
-    criteria: 'Custom Questions',
-    free: 'Limited (100 per category)',
-    premium: 'Unlimited'
-  },
-  {
-    criteria: 'Custom Webhook Branding',
-    free: false,
-    premium: true
-  },
-  {
-    criteria: 'Auto Pin Daily Messages',
-    free: false,
-    premium: true
-  }
+	{
+		criteria: '5 Gamemodes',
+		free: true,
+		premium: true
+	},
+	{
+		criteria: 'Question of the Day',
+		free: true,
+		premium: true
+	},
+	{
+		criteria: 'Question Repeat Prevention',
+		free: false,
+		premium: true
+	},
+	{
+		criteria: 'Thousands of Questions',
+		free: true,
+		premium: true
+	},
+	{
+		criteria: 'Custom Questions',
+		free: 'Limited (100 per category)',
+		premium: 'Unlimited'
+	},
+	{
+		criteria: 'Custom Webhook Branding',
+		free: false,
+		premium: true
+	},
+	{
+		criteria: 'Auto Pin Daily Messages',
+		free: false,
+		premium: true
+	}
 ]
 
 export default function Premium() {
-  const [isMonthly, setIsMonthly] = useState(true)
-  const [serversData, setServersData] = useState<DiscordGuild[]>([])
-  const [serverId, setServerId] = useState<string>()
-  const idToken = useIdToken(null)
+	const [isMonthly, setIsMonthly] = useState(true)
+	const [serversData, setServersData] = useState<DiscordGuild[]>([])
+	const [serverId, setServerId] = useState<string>()
+	const idToken = useIdToken(null)
 
-  const handleChange = () => {
-    setIsMonthly(!isMonthly)
-  }
+	const handleChange = () => {
+		setIsMonthly(!isMonthly)
+	}
 
-  const fetchData = async () => {
-    const servers = (await getServer()) as DiscordGuild[]
-    setServersData(servers)
-  }
+	const fetchData = async () => {
+		const servers = (await getServer()) as DiscordGuild[]
+		setServersData(servers)
+	}
 
-  const handleSelectServer = (id: string) => {
-    if (serverId === id) {
-      setServerId('')
-    } else {
-      setServerId(id)
-    }
-  }
+	const handleSelectServer = (id: string) => {
+		if (serverId === id) {
+			setServerId('')
+		} else {
+			setServerId(id)
+		}
+	}
 
-  const handlePrice = () => {
-    const montlyPriceId = process.env.NEXT_PUBLIC_PREMIUM_MONTHLY_PRICE_ID
-    const yearlyPriceId = process.env.NEXT_PUBLIC_PREMIUM_YEARLY_PRICE_ID
-    if (!montlyPriceId && !yearlyPriceId) {
-      throw new Error('Price ID not found')
-    }
-    return String(isMonthly ? montlyPriceId : yearlyPriceId)
-  }
+	const handlePrice = () => {
+		const montlyPriceId = process.env.NEXT_PUBLIC_PREMIUM_MONTHLY_PRICE_ID
+		const yearlyPriceId = process.env.NEXT_PUBLIC_PREMIUM_YEARLY_PRICE_ID
+		if (!montlyPriceId && !yearlyPriceId) {
+			throw new Error('Price ID not found')
+		}
+		return String(isMonthly ? montlyPriceId : yearlyPriceId)
+	}
 
   return (
     <>
