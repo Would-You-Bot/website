@@ -31,13 +31,12 @@ import PlansComparison from '@/app/premium/_components/PlansComparison'
 import CheckoutButton from '@/app/premium/_components/checkoutButton'
 import DiscordLoginButton from '@/components/DiscordLoginButton'
 import type { PricingData, DiscordGuild } from '@/app/premium/_types'
-import { Check, CheckIcon, Link } from 'lucide-react'
+import { CheckIcon, Link } from 'lucide-react'
 import { useIdToken } from '@/helpers/hooks'
 import { Fragment, useState } from 'react'
 import { getServer } from '@/lib/redis'
 import Image from 'next/image'
 import Head from 'next/head'
-import { randomUUID } from 'node:crypto'
 import { cn } from '@/lib/utils'
 
 const pricingData: PricingData = {
@@ -266,7 +265,7 @@ export default function Premium() {
                                           {server.name}
                                         </span>
                                       </div>
-                                      <Check
+                                      <CheckIcon
                                         className={cn(
                                           'ml-auto',
                                           serverId === server.id ?
