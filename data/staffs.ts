@@ -1,0 +1,152 @@
+import type { Staff } from '@/types'
+
+export const staffs: Staff[] = [
+	{
+		name: 'Dominik Koch',
+		categories: ['Developers', 'Translators'],
+		description: 'Founder, Lead Developer, German Translator',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/developer/Dominik.webp',
+		websiteUrl: 'https://brickver.com/@dominik'
+	},
+	{
+		name: 'ForGetFulSkyBro',
+		categories: ['Developers'],
+		description: 'CO-Founder, Developer',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/developer/Sky.webp',
+		websiteUrl: 'https://forgetful.vercel.app/'
+	},
+	{
+		name: 'Skeleton Man',
+		categories: ['Developers'],
+		description: 'Developer',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/developer/Skeleton.webp',
+		websiteUrl: 'https://github.com/nidrux'
+	},
+	{
+		name: 'Taqib',
+		categories: ['Developers'],
+		description: 'Developer',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/developer/Taqib.webp',
+		websiteUrl: 'https://taqib.dev/'
+	},
+	{
+		name: 'Woofer21',
+		categories: ['Developers'],
+		description: 'Developer',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/developer/Woofer.webp',
+		websiteUrl: 'https://woofer21.com/'
+	},
+	{
+		name: 'Noam',
+		categories: ['Translators', 'Beta Testers'],
+		description: 'French Translator, Beta Tester',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/translator/Noam.webp',
+		websiteUrl: 'https://noam120606.fr/'
+	},
+	{
+		name: 'iGosko',
+		categories: ['Translators'],
+		description: 'Spanish Translator',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/translator/IGosko.webp',
+		websiteUrl: null
+	},
+	{
+		name: 'Filipe',
+		categories: ['Translators'],
+		description: 'Portuguese Translator',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/translator/Filipe.webp',
+		websiteUrl:
+			'https://filipee.notion.site/Filipe-e949b6c5fc6f430381349e8e8e1c7c54'
+	},
+	{
+		name: 'Mia',
+		categories: ['Translators'],
+		description: 'Spanish Translator',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/translator/Mia.webp',
+		websiteUrl: 'https://github.com/marta23silva'
+	},
+	{
+		name: 'Finn',
+		categories: ['Contributors'],
+		description: 'Higher or Lower Developer',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/special/Finn.webp',
+		websiteUrl: 'https://github.com/finnkoetting'
+	},
+	{
+		name: 'NightKiller',
+		categories: ['Contributors', 'Beta Testers'],
+		description: 'Reddit Moderator, Beta Tester, Bug Hunter',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/special/NightKiller.webp',
+		websiteUrl: 'https://www.reddit.com/user/NightKiller_2/'
+	},
+	{
+		name: 'InvalidKiller',
+		categories: ['Admins'],
+		description: 'Discord Moderator',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/moderator/InvalidKiller.webp',
+		websiteUrl: null
+	},
+	{
+		name: '331/332',
+		categories: ['Beta Testers'],
+		description: 'Beta Tester, Bug Hunter',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/bughunter/331.webp',
+		websiteUrl: 'https://github.com/331332'
+	},
+	{
+		name: 'Austin',
+		categories: ['Beta Testers'],
+		description: 'Beta Tester, Bug Hunter',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/bughunter/Austin.webp',
+		websiteUrl: 'https://austinn.profile.lol'
+	},
+	{
+		name: 'DowDaw',
+		categories: ['Beta Testers'],
+		description: 'Beta Tester',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/bughunter/DowDaw.webp',
+		websiteUrl: 'https://discord.gg/Fu6HJ75n9m'
+	},
+	{
+		name: 'Grass',
+		categories: ['Beta Testers'],
+		description: 'Beta Tester',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/bughunter/Grass.webp',
+		websiteUrl: null
+	},
+	{
+		name: 'Nova',
+		categories: ['Beta Testers'],
+		description: 'Beta Tester, Bug Hunter',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/bughunter/Nova.webp',
+		websiteUrl: null
+	},
+	{
+		name: 'Sdriver',
+		categories: ['Beta Testers'],
+		description: 'Beta Tester',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/bughunter/Sdriver.webp',
+		websiteUrl: 'https://sdriver1.carrd.co/'
+	},
+	{
+		name: 'Yareaj',
+		categories: ['Beta Testers'],
+		description: 'Beta Tester, Documentation Writer',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/bughunter/Yareaj.webp',
+		websiteUrl: null
+	},
+	{
+		name: 'Paulos',
+		categories: ['Developers'],
+		description: 'Frontend Guy',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/developer/Paulos.webp',
+		websiteUrl: 'https://dpaulos6.com?utm_source=wouldyoubot.gg'
+	},
+	{
+		name: 'Dan',
+		categories: ['Contributors'],
+		description: 'Website Interactivity',
+		imageUrl: 'https://cdn.wouldyoubot.gg/staff/special/Dan.webp',
+		websiteUrl: 'https://compiles.me/'
+	}
+]

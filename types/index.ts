@@ -11,3 +11,11 @@ export const packMap: Record<PackType, string> = {
 	topic: 'Topic',
 	mixed: 'Mixed'
 }
+
+export type Staff = {
+	name: string
+	categories: string[]
+	description: string
+	imageUrl: string
+	websiteUrl?: string | null
+}
