@@ -30,12 +30,13 @@ import PlansComparison from '@/app/premium/_components/PlansComparison'
 import CheckoutButton from '@/app/premium/_components/checkoutButton'
 import type { PricingData, DiscordGuild } from '@/app/premium/_types'
 import DiscordLoginButton from '@/components/DiscordLoginButton'
+import { Skeleton } from '@/components/ui/skeleton'
 import { CheckIcon, Link } from 'lucide-react'
+import { useCallback, useState } from 'react'
 import { useIdToken } from '@/helpers/hooks'
-import { useEffect, useState } from 'react'
-import { getServer } from '@/lib/redis'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import { toast } from 'sonner'
 
 const pricingData: PricingData = {
 	price: { monthly: 2.99, yearly: 29.99 },
@@ -98,30 +99,32 @@ export default function Premium() {
 		setIsMonthly(!isMonthly)
 	}
 
-	const fetchData = async () => {
-		const servers = (await getServer()) as DiscordGuild[]
-		setServersData(servers)
-	}
-
 	const handleSelectServer = (id: string) => {
-		if (serverId === id) {
-			setServerId('')
-		} else {
-			setServerId(id)
-		}
+		setServerId((prevId) => (prevId === id ? '' : id))
 	}
 
 	const handlePrice = () => {
-		const montlyPriceId = process.env.NEXT_PUBLIC_PREMIUM_MONTHLY_PRICE_ID
+		const monthlyPriceId = process.env.NEXT_PUBLIC_PREMIUM_MONTHLY_PRICE_ID
 		const yearlyPriceId = process.env.NEXT_PUBLIC_PREMIUM_YEARLY_PRICE_ID
-		if (!montlyPriceId && !yearlyPriceId) {
+		if (!monthlyPriceId && !yearlyPriceId) {
 			throw new Error('Price ID not found')
 		}
-		return String(isMonthly ? montlyPriceId : yearlyPriceId)
+		return String(isMonthly ? monthlyPriceId : yearlyPriceId)
 	}
 
-	useEffect(() => {
-		fetchData()
+	const fetchData = useCallback(async () => {
+		try {
+			const response = await fetch('/api/servers')
+			if (!response.ok) {
+				throw new Error(`Failed to fetch: ${response.statusText}`)
+			}
+
+			const data = await response.json()
+			console.log(data)
+			setServersData(data)
+		} catch (error) {
+			console.error('Error fetching data:', error)
+		}
 	}, [])
 
 	return (
@@ -203,9 +206,7 @@ export default function Premium() {
 									<Dialog>
 										{idToken ?
 											<DialogTrigger
-												onClick={() => {
-													fetchData()
-												}}
+												onClick={fetchData}
 												className="flex w-full items-center justify-center gap-2 rounded-xl bg-green-500 py-2 font-bold leading-loose text-foreground transition hover:bg-green-600 focus:ring-0"
 											>
 												Continue with Stripe
@@ -236,42 +237,19 @@ export default function Premium() {
 													<CommandList>
 														<CommandEmpty>No servers found.</CommandEmpty>
 														<CommandGroup className="bg-background w-full">
-															{serversData.map((server: DiscordGuild) => (
-																<CommandItem
-																	key={server.id}
-																	value={server.name}
-																	onSelect={() => {
-																		handleSelectServer(server.id)
-																	}}
-																>
-																	<div className="flex items-center gap-2">
-																		<Avatar className="h-6 w-6">
-																			<AvatarImage
-																				src={`https://cdn.discordapp.com/icons/${server.id}/${server.icon}.webp`}
-																			/>
-																			<AvatarFallback>
-																				<Image
-																					src="https://cdn.discordapp.com/embed/avatars/0.png"
-																					alt="avatar example"
-																					width={90}
-																					height={90}
-																				/>
-																			</AvatarFallback>
-																		</Avatar>
-																		<span className="line-clamp-1 text-ellipsis">
-																			{server.name}
-																		</span>
-																	</div>
-																	<CheckIcon
-																		className={cn(
-																			'ml-auto',
-																			serverId === server.id ?
-																				'opacity-100'
-																			:	'opacity-0'
-																		)}
+															{serversData.length === 0 ?
+																Array.from({ length: 15 }).map((_, i) => (
+																	<ServerItemSkeleton key={i} />
+																))
+															:	serversData.map((server: DiscordGuild) => (
+																	<ServerItem
+																		key={server.id}
+																		server={server}
+																		serverId={null}
+																		handleSelectServer={handleSelectServer}
 																	/>
-																</CommandItem>
-															))}
+																))
+															}
 														</CommandGroup>
 													</CommandList>
 												</Command>
@@ -324,5 +302,64 @@ export default function Premium() {
 				</div>
 			</div>
 		</main>
+	)
+}
+
+interface ServerItemProps {
+	server: DiscordGuild
+	handleSelectServer: (id: string) => void
+	serverId: string | null
+}
+
+const ServerItem = ({
+	server,
+	handleSelectServer,
+	serverId
+}: ServerItemProps) => {
+	return (
+		<CommandItem
+			key={server.id}
+			value={server.name}
+			onSelect={() => handleSelectServer(server.id)}
+		>
+			<div className="flex items-center gap-2">
+				<Avatar className="h-6 w-6">
+					<AvatarImage
+						src={`https://cdn.discordapp.com/icons/${server.id}/${server.icon}.webp`}
+					/>
+					<AvatarFallback>
+						<Image
+							src="https://cdn.discordapp.com/embed/avatars/0.png"
+							alt="avatar example"
+							width={90}
+							height={90}
+						/>
+					</AvatarFallback>
+				</Avatar>
+				<span className="line-clamp-1 text-ellipsis">{server.name}</span>
+			</div>
+			<CheckIcon
+				className={cn(
+					'ml-auto',
+					serverId === server.id ? 'opacity-100' : 'opacity-0'
+				)}
+			/>
+		</CommandItem>
+	)
+}
+
+const ServerItemSkeleton: React.FC = () => {
+	return (
+		<CommandItem>
+			<div className="flex items-center gap-2">
+				<Avatar className="h-6 w-6">
+					<AvatarFallback>
+						<Skeleton className="h-6 w-6 rounded-full" />
+					</AvatarFallback>
+				</Avatar>
+				<Skeleton className="w-52 h-4" />
+			</div>
+			<CheckIcon className="ml-auto opacity-0" />
+		</CommandItem>
 	)
 }
