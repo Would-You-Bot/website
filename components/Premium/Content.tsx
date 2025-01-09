@@ -175,7 +175,7 @@ export default function Premium() {
 										<div className="mr-2 mt-4 text-left text-4xl font-bold text-foreground sm:text-5xl">
 											{isMonthly ?
 												pricingData.price.monthly
-											:	pricingData.price.yearly}
+												: pricingData.price.yearly}
 										</div>
 										<div className="text-foreground/60">
 											{isMonthly ? '/ month' : '/ year'}
@@ -193,7 +193,7 @@ export default function Premium() {
 												>
 													{value ?
 														<CheckIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-brand-primary" />
-													:	<CloseIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-muted-foreground" />
+														: <CloseIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-muted-foreground" />
 													}
 													<span>{text}</span>
 												</li>
@@ -211,7 +211,7 @@ export default function Premium() {
 												Continue with Stripe
 												<StripeSquare className="h-5 w-5" />
 											</DialogTrigger>
-										:	<DiscordLoginButton
+											: <DiscordLoginButton
 												className="rounded-xl font-bold"
 												redirect="/premium"
 											/>
@@ -234,7 +234,7 @@ export default function Premium() {
 														placeholder="Search server..."
 													/>
 													<CommandList>
-														<CommandEmpty>No server found.</CommandEmpty>
+														<CommandEmpty>No servers found.</CommandEmpty>
 														<CommandGroup className="bg-background w-full">
 															{serversData.map((server: DiscordGuild) => (
 																<CommandItem
@@ -267,7 +267,7 @@ export default function Premium() {
 																			'ml-auto',
 																			serverId === server.id ?
 																				'opacity-100'
-																			:	'opacity-0'
+																				: 'opacity-0'
 																		)}
 																	/>
 																</CommandItem>
@@ -293,7 +293,7 @@ export default function Premium() {
 												</a>{' '}
 												to manage your subscriptions
 											</p>
-										:	null}
+											: null}
 									</Dialog>
 								</div>
 							</div>
