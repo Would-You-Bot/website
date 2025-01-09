@@ -1,30 +1,38 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
+import { Button, type ButtonProps } from '@/components/ui/button'
+import { Fragment, useEffect, useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
-import { useState } from 'react'
+import { LoadingSvg } from '@/icons/loading'
 import { toast } from 'sonner'
 import axios from 'axios'
 
-interface CheckoutButtonProps {
+interface CheckoutButtonProps extends ButtonProps {
 	monthly: string
 	serverId: string | undefined
 	priceId: string
+	loading?: boolean
 }
 
 // sub button
 export default function CheckoutButton({
 	monthly,
 	serverId,
-	priceId
+	priceId,
+	loading
 }: CheckoutButtonProps) {
-	const [loading, setLoading] = useState(false)
+	const [isLoading, setIsLoading] = useState(loading)
+
+	const handleClick = async () => {
+		setIsLoading(true)
+		await handleCheckout()
+	}
 
 	const handleCheckout = async () => {
-		setLoading(true)
-		const stripePromise = loadStripe(
-			process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
-		)
+		const stripeKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+		if (!stripeKey) throw new Error('Stripe key not found')
+
+		const stripePromise = loadStripe(stripeKey)
 		const stripe = await stripePromise
 
 		toast.promise(
@@ -56,48 +64,24 @@ export default function CheckoutButton({
 				)
 			}
 		)
-
-		setLoading(false)
 	}
+
+	useEffect(() => {
+		setIsLoading(loading)
+	}, [loading])
 
 	return (
 		<button
-			disabled={!serverId || loading}
-			onClick={handleCheckout}
+			type="button"
 			className="ml-auto mt-4 flex w-fit items-center justify-center rounded-lg bg-brand-blue-100 px-5 py-1 text-sm font-bold leading-loose text-white disabled:cursor-not-allowed disabled:bg-background-darker disabled:text-foreground/40"
+			onClick={handleClick}
+			disabled={isLoading ? isLoading : !serverId}
 		>
-			{loading ?
-				<>
-					<svg
-						width="100"
-						height="101"
-						className="mr-2 inline h-4 w-4 animate-spin text-foreground"
-						viewBox="0 0 100 101"
-						fill="none"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<g clip-path="url(#clip0_353_3030)">
-							<path
-								d="M100 50.5907C100 78.205 77.6142 100.591 50 100.591C22.3858 100.591 0 78.205 0 50.5907C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5907ZM9.08144 50.5907C9.08144 73.1894 27.4013 91.5092 50 91.5092C72.5987 91.5092 90.9186 73.1894 90.9186 50.5907C90.9186 27.9921 72.5987 9.67224 50 9.67224C27.4013 9.67224 9.08144 27.9921 9.08144 50.5907Z"
-								fill="#171717"
-							/>
-							<path
-								d="M93.9683 39.0409C96.3937 38.4038 97.8631 35.9116 97.0086 33.5539C95.2939 28.8227 92.8717 24.3692 89.8174 20.348C85.8459 15.1192 80.8833 10.7238 75.2131 7.41289C69.5429 4.10194 63.2761 1.94025 56.7705 1.05124C51.7673 0.367542 46.6983 0.446844 41.7352 1.27873C39.262 1.69328 37.8137 4.19778 38.4508 6.62326C39.088 9.04874 41.5701 10.4717 44.0512 10.1071C47.8518 9.54855 51.7198 9.52689 55.5409 10.0491C60.8649 10.7766 65.9935 12.5457 70.6338 15.2552C75.2742 17.9648 79.3354 21.5619 82.5856 25.841C84.9182 28.9121 86.8004 32.2913 88.1818 35.8758C89.0837 38.2158 91.5428 39.6781 93.9683 39.0409Z"
-								fill="#0598F4"
-							/>
-						</g>
-						<defs>
-							<clipPath id="clip0_353_3030">
-								<rect
-									width="100"
-									height="101"
-									fill="white"
-								/>
-							</clipPath>
-						</defs>
-					</svg>
+			{isLoading ?
+				<Fragment>
+					<LoadingSvg />
 					Loading...
-				</>
+				</Fragment>
 			:	'Checkout'}
 		</button>
 	)

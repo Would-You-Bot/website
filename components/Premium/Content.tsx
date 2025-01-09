@@ -34,9 +34,10 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { CheckIcon, Link } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { useIdToken } from '@/helpers/hooks'
+import { LoadingSvg } from '@/icons/loading'
+import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
-import { toast } from 'sonner'
 
 const pricingData: PricingData = {
 	price: { monthly: 2.99, yearly: 29.99 },
@@ -120,7 +121,6 @@ export default function Premium() {
 			}
 
 			const data = await response.json()
-			console.log(data)
 			setServersData(data)
 		} catch (error) {
 			console.error('Error fetching data:', error)
@@ -245,7 +245,7 @@ export default function Premium() {
 																	<ServerItem
 																		key={server.id}
 																		server={server}
-																		serverId={null}
+																		serverId={serverId || ''}
 																		handleSelectServer={handleSelectServer}
 																	/>
 																))
@@ -257,6 +257,7 @@ export default function Premium() {
 													monthly={String(isMonthly)}
 													priceId={handlePrice()}
 													serverId={serverId}
+													loading={serversData.length === 0}
 												/>
 											</div>
 										</DialogContent>
@@ -308,7 +309,7 @@ export default function Premium() {
 interface ServerItemProps {
 	server: DiscordGuild
 	handleSelectServer: (id: string) => void
-	serverId: string | null
+	serverId: string
 }
 
 const ServerItem = ({
@@ -340,7 +341,7 @@ const ServerItem = ({
 			</div>
 			<CheckIcon
 				className={cn(
-					'ml-auto',
+					'ml-auto opacity-100',
 					serverId === server.id ? 'opacity-100' : 'opacity-0'
 				)}
 			/>
