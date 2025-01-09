@@ -3,7 +3,7 @@
 import { Button, type ButtonProps } from '@/components/ui/button'
 import { Fragment, useEffect, useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
-import { LoadingSvg } from '@/icons/loading'
+import { LoaderCircle } from 'lucide-react'
 import { toast } from 'sonner'
 import axios from 'axios'
 
@@ -79,7 +79,7 @@ export default function CheckoutButton({
 		>
 			{isLoading ?
 				<Fragment>
-					<LoadingSvg />
+					<LoaderCircle className="animate-spin size-4 mr-2" />
 					Loading...
 				</Fragment>
 			:	'Checkout'}

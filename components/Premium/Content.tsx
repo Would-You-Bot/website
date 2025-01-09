@@ -34,8 +34,6 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { CheckIcon, Link } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { useIdToken } from '@/helpers/hooks'
-import { LoadingSvg } from '@/icons/loading'
-import { Button } from '../ui/button'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 
