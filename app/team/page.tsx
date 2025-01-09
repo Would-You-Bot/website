@@ -92,16 +92,18 @@ export default function Team() {
           ))}
         </div>
         <div className="w-full h-fit flex gap-4 flex-wrap items-center justify-center">
-          {data.map((data) => (
-            <PersonCard
-              key={data.name}
-              name={data.name}
-              categories={data.categories}
-              description={data.description}
-              imageUrl={data.imageUrl}
-              websiteUrl={data.websiteUrl}
-            />
-          ))}
+          {data
+            .sort((a, b) => a.name.localeCompare(b.name))
+            .map((data) => (
+              <PersonCard
+                key={data.name}
+                name={data.name}
+                categories={data.categories}
+                description={data.description}
+                imageUrl={data.imageUrl}
+                websiteUrl={data.websiteUrl}
+              />
+            ))}
         </div>
       </main>
     </Fragment>
