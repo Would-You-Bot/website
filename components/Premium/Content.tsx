@@ -11,14 +11,6 @@ import {
 	Stripe
 } from '@/app/premium/_components/icons'
 import {
-	Dialog,
-	DialogContent,
-	DialogDescription,
-	DialogHeader,
-	DialogTitle,
-	DialogTrigger
-} from '@/components/ui/dialog'
-import {
 	Command,
 	CommandEmpty,
 	CommandGroup,
@@ -26,6 +18,13 @@ import {
 	CommandItem,
 	CommandList
 } from '@/components/ui/command'
+import {
+	Dialog,
+	DialogContent,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger
+} from '@/components/ui/dialog'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import PlansComparison from '@/app/premium/_components/PlansComparison'
 import CheckoutButton from '@/app/premium/_components/checkoutButton'
@@ -33,9 +32,9 @@ import type { PricingData, DiscordGuild } from '@/app/premium/_types'
 import DiscordLoginButton from '@/components/DiscordLoginButton'
 import { CheckIcon, Link } from 'lucide-react'
 import { useIdToken } from '@/helpers/hooks'
-import { Fragment, useState } from 'react'
 import { getServer } from '@/lib/redis'
 import { cn } from '@/lib/utils'
+import { useState } from 'react'
 import Image from 'next/image'
 
 const pricingData: PricingData = {
@@ -224,65 +223,60 @@ export default function Premium() {
 													</div>
 												</DialogTitle>
 											</DialogHeader>
-											<DialogDescription
-												className="w-full !rounded-2xl"
-												asChild
-											>
-												<Fragment>
-													<Command className="bg-background border rounded h-96 w-[300px] sm:w-[400px]">
-														<CommandInput
-															className="p-2 rounded-none disable-focus"
-															placeholder="Search server..."
-														/>
-														<CommandList>
-															<CommandEmpty>No server found.</CommandEmpty>
-															<CommandGroup className="bg-background w-full">
-																{serversData.map((server: DiscordGuild) => (
-																	<CommandItem
-																		key={server.id}
-																		value={server.name}
-																		onSelect={() => {
-																			handleSelectServer(server.id)
-																		}}
-																	>
-																		<div className="flex items-center gap-2">
-																			<Avatar className="h-6 w-6">
-																				<AvatarImage
-																					src={`https://cdn.discordapp.com/icons/${server.id}/${server.icon}.webp`}
-																				/>
-																				<AvatarFallback>
-																					<Image
-																						src="https://cdn.discordapp.com/embed/avatars/0.png"
-																						alt="avatar example"
-																						width={90}
-																						height={90}
-																					/>
-																				</AvatarFallback>
-																			</Avatar>
-																			<span className="line-clamp-1 text-ellipsis">
-																				{server.name}
-																			</span>
-																		</div>
-																		<CheckIcon
-																			className={cn(
-																				'ml-auto',
-																				serverId === server.id ?
-																					'opacity-100'
-																				:	'opacity-0'
-																			)}
-																		/>
-																	</CommandItem>
-																))}
-															</CommandGroup>
-														</CommandList>
-													</Command>
-													<CheckoutButton
-														monthly={String(isMonthly)}
-														priceId={handlePrice()}
-														serverId={serverId}
+											<div>
+												<Command className="bg-background border rounded h-96 w-[300px] sm:w-[400px]">
+													<CommandInput
+														className="p-2 rounded-none disable-focus"
+														placeholder="Search server..."
 													/>
-												</Fragment>
-											</DialogDescription>
+													<CommandList>
+														<CommandEmpty>No server found.</CommandEmpty>
+														<CommandGroup className="bg-background w-full">
+															{serversData.map((server: DiscordGuild) => (
+																<CommandItem
+																	key={server.id}
+																	value={server.name}
+																	onSelect={() => {
+																		handleSelectServer(server.id)
+																	}}
+																>
+																	<div className="flex items-center gap-2">
+																		<Avatar className="h-6 w-6">
+																			<AvatarImage
+																				src={`https://cdn.discordapp.com/icons/${server.id}/${server.icon}.webp`}
+																			/>
+																			<AvatarFallback>
+																				<Image
+																					src="https://cdn.discordapp.com/embed/avatars/0.png"
+																					alt="avatar example"
+																					width={90}
+																					height={90}
+																				/>
+																			</AvatarFallback>
+																		</Avatar>
+																		<span className="line-clamp-1 text-ellipsis">
+																			{server.name}
+																		</span>
+																	</div>
+																	<CheckIcon
+																		className={cn(
+																			'ml-auto',
+																			serverId === server.id ?
+																				'opacity-100'
+																			:	'opacity-0'
+																		)}
+																	/>
+																</CommandItem>
+															))}
+														</CommandGroup>
+													</CommandList>
+												</Command>
+												<CheckoutButton
+													monthly={String(isMonthly)}
+													priceId={handlePrice()}
+													serverId={serverId}
+												/>
+											</div>
 										</DialogContent>
 										{idToken ?
 											<p className="text-foreground/60 text-center pt-3 mb-[-15] text-wrap">
