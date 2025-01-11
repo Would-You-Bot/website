@@ -64,7 +64,6 @@ const Home = async () => {
 
   const serverData = await serverResponse.json()
   const servers = JSON.parse(serverData.result ?? null) ?? []
-  const filteredServers = servers.filter((g: any) => g.name !== 'Pornhub')
 
   return (
     <>
