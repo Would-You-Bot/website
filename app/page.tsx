@@ -72,7 +72,7 @@ const Home = async () => {
           initialRatherQuestion={getRandomQuestion('rather')}
           initialNhieQuestion={getRandomQuestion('nhie')}
           serverCount={serverCount}
-          servers={filteredServers}
+          servers={servers}
         />
       </main>
       <HomeSchemaMetadata />
