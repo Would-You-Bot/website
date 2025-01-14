@@ -8,7 +8,8 @@ import {
 	MasterCard,
 	Visa,
 	PayPal,
-	Stripe
+	Stripe,
+	Link
 } from '@/app/premium/_components/icons'
 import {
 	Command,
@@ -31,7 +32,7 @@ import CheckoutButton from '@/app/premium/_components/checkoutButton'
 import type { PricingData, DiscordGuild } from '@/app/premium/_types'
 import DiscordLoginButton from '@/components/DiscordLoginButton'
 import { Skeleton } from '@/components/ui/skeleton'
-import { CheckIcon, Link } from 'lucide-react'
+import { CheckIcon } from 'lucide-react'
 import { useCallback, useState } from 'react'
 import { useIdToken } from '@/helpers/hooks'
 import { cn } from '@/lib/utils'
