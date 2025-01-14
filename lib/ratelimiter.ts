@@ -1,8 +1,16 @@
-import { Ratelimit } from '@upstash/ratelimit'
-import { getRedis } from './redis'
+/**
+ * Rate limiting helper functions to enforce API request limits.
+ * @module rateLimit
+ */
 
+import { Ratelimit } from '@upstash/ratelimit'
+import { redis } from '@/helpers/redis'
+
+/**
+ * Creates a default rate limiter with a sliding window limit of 120 requests per 60 seconds.
+ * @returns {Promise<Ratelimit>} A promise that resolves to the rate limiter instance.
+ */
 export async function defaultRateLimiter() {
-	const redis = await getRedis()
 	return new Ratelimit({
 		redis,
 		limiter: Ratelimit.slidingWindow(120, '60 s'),
@@ -10,8 +18,11 @@ export async function defaultRateLimiter() {
 	})
 }
 
+/**
+ * Creates a custom rate limiter with a sliding window limit of 6 requests per 60 seconds.
+ * @returns {Promise<Ratelimit>} A promise that resolves to the rate limiter instance.
+ */
 export async function createRateLimiter() {
-	const redis = await getRedis()
 	return new Ratelimit({
 		redis,
 		limiter: Ratelimit.slidingWindow(6, '60 s'),
