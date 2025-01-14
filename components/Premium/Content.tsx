@@ -230,7 +230,7 @@ export default function Premium() {
 												<Command className="bg-background border rounded h-96 w-[300px] sm:w-[400px]">
 													<CommandInput
 														className="p-2 rounded-none disable-focus"
-														placeholder="Search server..."
+														placeholder="Search for a server..."
 													/>
 													<CommandList>
 														<CommandEmpty>No servers found.</CommandEmpty>
