@@ -151,8 +151,8 @@ export default function Terms() {
           5. Question Pack Submission and Usage Rights
         </h3>
         <p>
-          Users may submit collections of "Would You Rather" questions
-          ("Question Packs") to the platform. By submitting a Question Pack, you
+          Users may submit collections of &quot;Would You Rather&quot; questions
+          (&quot;Question Packs&quot;) to the platform. By submitting a Question Pack, you
           grant Would You Bot a worldwide, non-exclusive, royalty-free,
           sublicensable, and transferable license to use, reproduce, modify,
           adapt, publish, translate, distribute, publicly perform, and display
