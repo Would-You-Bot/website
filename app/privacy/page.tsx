@@ -132,12 +132,12 @@ export default function Privacy() {
         </p>
         <ul>
           <li>
-            - Your discord user id, avatar and custom questions uploaded to our
+            - Your Discord user id, avatar and custom questions uploaded to our
             marketplace by the user.
           </li>
           <li>- Questions you liked or shared on our marketplace.</li>
           <li>
-            - Data about your discord server including your server id, avatar,
+            - Data about your Discord server including your server id, avatar,
             settings, webhook urls, custom uploaded messages and
           </li>
           <li>

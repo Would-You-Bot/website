@@ -170,7 +170,7 @@ export function HomeContent({
                   Entertain your server
                 </h4>
                 <p className="text-center text-lg text-foreground/70 md:text-left">
-                  Entertain your discord server with fun and interactive games
+                  Entertain your Discord server with fun and interactive games
                   like Would You Rather, Truth or Dare, Never Have I Ever,
                   Higher or Lower, and What Would You Do!
                 </p>

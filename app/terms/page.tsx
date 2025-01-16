@@ -82,7 +82,7 @@ export default function Terms() {
           2. Premium Subscription
         </h3>
         <p>
-          The Would You discord Bot offers a premium subscription model
+          The Would You Discord Bot offers a premium subscription model
           (&quot;Premium Model&quot;) that provides additional features and
           benefits. By subscribing to the Premium Model, you agree to pay the
           specified subscription fee on a recurring basis using the payment
@@ -152,12 +152,13 @@ export default function Terms() {
         </h3>
         <p>
           Users may submit collections of &quot;Would You Rather&quot; questions
-          (&quot;Question Packs&quot;) to the platform. By submitting a Question Pack, you
-          grant Would You Bot a worldwide, non-exclusive, royalty-free,
-          sublicensable, and transferable license to use, reproduce, modify,
-          adapt, publish, translate, distribute, publicly perform, and display
-          your content across our website, Discord bot, mobile applications, and
-          any related services or platforms operated by us.
+          (&quot;Question Packs&quot;) to the platform. By submitting a Question
+          Pack, you grant Would You Bot a worldwide, non-exclusive,
+          royalty-free, sublicensable, and transferable license to use,
+          reproduce, modify, adapt, publish, translate, distribute, publicly
+          perform, and display your content across our website, Discord bot,
+          mobile applications, and any related services or platforms operated by
+          us.
         </p>
         <p>
           This license allows us to feature your content, integrate it into our
