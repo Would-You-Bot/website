@@ -3,10 +3,10 @@
 import { Schema } from '../Schema'
 
 export async function HomeSchemaMetadata() {
-  return (
-    <>
-      <Schema
-        json={`
+	return (
+		<>
+			<Schema
+				json={`
             {
               "@context": "https://schema.org",
               "@type": "FAQPage",
@@ -38,10 +38,10 @@ export async function HomeSchemaMetadata() {
               ]
             }
   `}
-      />
+			/>
 
-      <Schema
-        json={`
+			<Schema
+				json={`
         {
           "@context": "http://schema.org",
           "@type": "VideoObject",
@@ -54,7 +54,7 @@ export async function HomeSchemaMetadata() {
           "interactionCount": "166"
         }
       `}
-      />
-    </>
-  )
+			/>
+		</>
+	)
 }
