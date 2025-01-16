@@ -47,7 +47,8 @@ const pricingData: PricingData = {
 		'Prevent Questions from Repeating': true,
 		'Get Rid of Button Ads': true,
 		'Auto Pin Daily Messages': true,
-		'Support the Development': true
+		'Support the Development': true,
+		'Take your goldfish for a walk': false
 	}
 }
 
@@ -127,7 +128,6 @@ export default function Premium() {
 	}, [])
 
 	return (
-		<main className="relative mb-40 flex w-full justify-center">
 			<div className="flex w-full max-w-8xl flex-col gap-52 px-8">
 				<div>
 					<div className="container mx-auto px-4">
@@ -301,7 +301,6 @@ export default function Premium() {
 					/>
 				</div>
 			</div>
-		</main>
 	)
 }
 
