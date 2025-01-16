@@ -134,7 +134,7 @@ export default function Premium() {
 							Premium
 						</h1>
 						<p className="text-customGrayText mb-6 mt-4 text-foreground/70">
-							Select the plan that suits your needs and benefit from our discord
+							Select the plan that suits your needs and benefit from our Discord
 							bot.
 						</p>
 						<div className="mx-auto my-4 max-w-2xl text-center">

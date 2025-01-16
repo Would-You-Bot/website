@@ -60,7 +60,7 @@ export default function Terms() {
 					2. Premium Subscription
 				</h3>
 				<p>
-					The Would You discord Bot offers a premium subscription model
+					The Would You Discord Bot offers a premium subscription model
 					(&quot;Premium Model&quot;) that provides additional features and
 					benefits. By subscribing to the Premium Model, you agree to pay the
 					specified subscription fee on a recurring basis using the payment
