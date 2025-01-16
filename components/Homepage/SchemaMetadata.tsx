@@ -21,7 +21,7 @@ export async function HomeSchemaMetadata() {
                 },
                 {
                   "@type": "Question",
-                  "name": "How do I invite the would you rather discord bot?",
+                  "name": "How do I invite the would you rather Discord bot?",
                   "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "To invite the Would You Discord bot, visit their website at https://wouldyoubot.gg/ and click on the 'unleash the fun' button. This will take you to Discord, where you will be prompted to invite the bot."
