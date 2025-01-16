@@ -128,179 +128,176 @@ export default function Premium() {
 	}, [])
 
 	return (
-			<div className="flex w-full max-w-8xl flex-col gap-52 px-8">
-				<div>
-					<div className="container mx-auto px-4">
-						<h1 className="text-4xl font-bold text-yellow-500 drop-shadow-gold-glow">
-							Premium
-						</h1>
-						<p className="text-customGrayText mb-6 mt-4 text-foreground/70">
-							Select the plan that suits your needs and benefit from our discord
-							bot.
-						</p>
-						<div className="mx-auto my-4 max-w-2xl text-center">
-							<label className="group relative mx-auto flex h-16 w-full max-w-[13rem] cursor-pointer items-center justify-center pl-6 pr-8 rounded-2xl bg-background-light text-xl select-none">
-								<input
-									type="checkbox"
-									className="peer appearance-none"
-									checked={!isMonthly}
-									onChange={handleChange}
-								/>
-								<span className="absolute top-0 left-2 z-10 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[10rem] sm:after:w-[20rem] after:rounded-lg after:bg-brand-primary-light dark:after:bg-brand-primary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem]" />
-								<div className="z-20 flex gap-10 text-base font-bold text-foreground">
-									<div className={`${!isMonthly && 'text-foreground/50'}`}>
-										Monthly
-									</div>
-									<div className={`${isMonthly && 'text-foreground/50'}`}>
-										Yearly
-									</div>
+		<div className="flex w-full max-w-8xl flex-col gap-52 px-8">
+			<div>
+				<div className="container mx-auto px-4">
+					<h1 className="text-4xl font-bold text-yellow-500 drop-shadow-gold-glow">
+						Premium
+					</h1>
+					<p className="text-customGrayText mb-6 mt-4 text-foreground/70">
+						Select the plan that suits your needs and benefit from our discord
+						bot.
+					</p>
+					<div className="mx-auto my-4 max-w-2xl text-center">
+						<label className="group relative mx-auto flex h-16 w-full max-w-[13rem] cursor-pointer items-center justify-center pl-6 pr-8 rounded-2xl bg-background-light text-xl select-none">
+							<input
+								type="checkbox"
+								className="peer appearance-none"
+								checked={!isMonthly}
+								onChange={handleChange}
+							/>
+							<span className="absolute top-0 left-2 z-10 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[10rem] sm:after:w-[20rem] after:rounded-lg after:bg-brand-primary-light dark:after:bg-brand-primary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem]" />
+							<div className="z-20 flex gap-10 text-base font-bold text-foreground">
+								<div className={`${!isMonthly && 'text-foreground/50'}`}>
+									Monthly
 								</div>
-							</label>
-						</div>
-						<div className="mx-auto flex w-fit flex-col">
-							<div className="mb-4 w-auto rounded-[1.7rem] bg-gradient-premium p-[4px]">
-								<div className="relative overflow-hidden rounded-3xl bg-background-dark px-8 py-8">
-									<span
-										className={`${!isMonthly ? 'top-7' : 'pointer-events-none -top-10 opacity-0'} hidden xs:flex text-mb absolute right-6 cursor-default rounded-xl bg-foreground/10 px-4 py-2 text-foreground transition-all duration-300`}
-									>
-										2 months free
-									</span>
-									<h4 className="font-heading mb-2 text-left text-2xl font-bold text-foreground 2xl:mb-4">
-										Premium
-									</h4>
-									<span
-										className={`${isMonthly && 'absolute -top-10 pointer-events-none opacity-0'} flex xs:hidden w-fit text-mb cursor-default rounded-xl bg-foreground/15 px-4 py-2 text-foreground transition-all duration-300`}
-									>
-										2 months free
-									</span>
-									<div className="flex items-end justify-start">
-										<div className="mr-2 mt-4 text-left text-4xl font-bold text-foreground sm:text-5xl">
-											{isMonthly ?
-												pricingData.price.monthly
-											:	pricingData.price.yearly}
-										</div>
-										<div className="text-foreground/60">
-											{isMonthly ? '/ month' : '/ year'}
-										</div>
-									</div>
-									<p className="mb-8 mt-1 text-left leading-loose text-foreground/60">
-										Experience the full power of our Would You bot.
-									</p>
-									<ul className="mb-16 text-foreground">
-										{Object.entries(pricingData.premium).map(
-											([text, value]) => (
-												<li
-													key={text}
-													className="mb-4 flex items-center"
-												>
-													{value ?
-														<CheckIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-brand-primary" />
-													:	<CloseIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-muted-foreground" />
-													}
-													<span>{text}</span>
-												</li>
-											)
-										)}
-									</ul>
-									<Dialog>
-										{idToken ?
-											<DialogTrigger
-												onClick={fetchData}
-												className="flex w-full items-center justify-center gap-2 rounded-xl bg-green-500 py-2 font-bold leading-loose text-foreground transition hover:bg-green-600 focus:ring-0"
-											>
-												Continue with Stripe
-												<StripeSquare className="h-5 w-5" />
-											</DialogTrigger>
-										:	<DiscordLoginButton
-												className="rounded-xl font-bold"
-												redirect="/premium"
-											/>
-										}
-										<DialogContent className="w-fit border-none bg-background">
-											<DialogHeader>
-												<DialogTitle className="text-xl font-bold text-foreground">
-													<div>
-														Buy{' '}
-														<span className="text-brand-red-100">Would</span>{' '}
-														<span className="text-brand-blue-100">You</span>
-														{isMonthly ? ' Monthly' : ' Yearly'}
-													</div>
-												</DialogTitle>
-											</DialogHeader>
-											<div>
-												<Command className="bg-background border rounded h-96 w-[300px] sm:w-[400px]">
-													<CommandInput
-														className="p-2 rounded-none disable-focus"
-														placeholder="Search for a server..."
-													/>
-													<CommandList>
-														<CommandEmpty>No servers found.</CommandEmpty>
-														<CommandGroup className="bg-background w-full">
-															{serversData.length === 0 ?
-																Array.from({ length: 15 }).map((_, i) => (
-																	<ServerItemSkeleton key={i} />
-																))
-															:	serversData.map((server: DiscordGuild) => (
-																	<ServerItem
-																		key={server.id}
-																		server={server}
-																		serverId={serverId || ''}
-																		handleSelectServer={handleSelectServer}
-																	/>
-																))
-															}
-														</CommandGroup>
-													</CommandList>
-												</Command>
-												<CheckoutButton
-													monthly={String(isMonthly)}
-													priceId={handlePrice()}
-													serverId={serverId}
-													loading={serversData.length === 0}
-												/>
-											</div>
-										</DialogContent>
-										{idToken ?
-											<p className="text-foreground/60 text-center pt-3 mb-[-15] text-wrap">
-												Or click{' '}
-												<a
-													href="/api/subs/manage"
-													className="underline font-bold text-foreground/70"
-												>
-													here
-												</a>{' '}
-												to manage your subscriptions
-											</p>
-										:	null}
-									</Dialog>
+								<div className={`${isMonthly && 'text-foreground/50'}`}>
+									Yearly
 								</div>
 							</div>
-							<a
-								href="https://stripe.com/"
-								target="_blank"
-								className="flex flex-wrap justify-center gap-2 sm:gap-3"
-								rel="noreferrer"
-								title="Stripe Website"
-							>
-								<Stripe />
-								<ApplePay />
-								<GooglePay />
-								<MasterCard />
-								<Visa />
-								<PayPal />
-								<Link />
-							</a>
+						</label>
+					</div>
+					<div className="mx-auto flex w-fit flex-col">
+						<div className="mb-4 w-auto rounded-[1.7rem] bg-gradient-premium p-[4px]">
+							<div className="relative overflow-hidden rounded-3xl bg-background-dark px-8 py-8">
+								<span
+									className={`${!isMonthly ? 'top-7' : 'pointer-events-none -top-10 opacity-0'} hidden xs:flex text-mb absolute right-6 cursor-default rounded-xl bg-foreground/10 px-4 py-2 text-foreground transition-all duration-300`}
+								>
+									2 months free
+								</span>
+								<h4 className="font-heading mb-2 text-left text-2xl font-bold text-foreground 2xl:mb-4">
+									Premium
+								</h4>
+								<span
+									className={`${isMonthly && 'absolute -top-10 pointer-events-none opacity-0'} flex xs:hidden w-fit text-mb cursor-default rounded-xl bg-foreground/15 px-4 py-2 text-foreground transition-all duration-300`}
+								>
+									2 months free
+								</span>
+								<div className="flex items-end justify-start">
+									<div className="mr-2 mt-4 text-left text-4xl font-bold text-foreground sm:text-5xl">
+										{isMonthly ?
+											pricingData.price.monthly
+										:	pricingData.price.yearly}
+									</div>
+									<div className="text-foreground/60">
+										{isMonthly ? '/ month' : '/ year'}
+									</div>
+								</div>
+								<p className="mb-8 mt-1 text-left leading-loose text-foreground/60">
+									Experience the full power of our Would You bot.
+								</p>
+								<ul className="mb-16 text-foreground">
+									{Object.entries(pricingData.premium).map(([text, value]) => (
+										<li
+											key={text}
+											className="mb-4 flex items-center"
+										>
+											{value ?
+												<CheckIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-brand-primary" />
+											:	<CloseIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-muted-foreground" />
+											}
+											<span>{text}</span>
+										</li>
+									))}
+								</ul>
+								<Dialog>
+									{idToken ?
+										<DialogTrigger
+											onClick={fetchData}
+											className="flex w-full items-center justify-center gap-2 rounded-xl bg-green-500 py-2 font-bold leading-loose text-foreground transition hover:bg-green-600 focus:ring-0"
+										>
+											Continue with Stripe
+											<StripeSquare className="h-5 w-5" />
+										</DialogTrigger>
+									:	<DiscordLoginButton
+											className="rounded-xl font-bold"
+											redirect="/premium"
+										/>
+									}
+									<DialogContent className="w-fit border-none bg-background">
+										<DialogHeader>
+											<DialogTitle className="text-xl font-bold text-foreground">
+												<div>
+													Buy <span className="text-brand-red-100">Would</span>{' '}
+													<span className="text-brand-blue-100">You</span>
+													{isMonthly ? ' Monthly' : ' Yearly'}
+												</div>
+											</DialogTitle>
+										</DialogHeader>
+										<div>
+											<Command className="bg-background border rounded h-96 w-[300px] sm:w-[400px]">
+												<CommandInput
+													className="p-2 rounded-none disable-focus"
+													placeholder="Search for a server..."
+												/>
+												<CommandList>
+													<CommandEmpty>No servers found.</CommandEmpty>
+													<CommandGroup className="bg-background w-full">
+														{serversData.length === 0 ?
+															Array.from({ length: 15 }).map((_, i) => (
+																<ServerItemSkeleton key={i} />
+															))
+														:	serversData.map((server: DiscordGuild) => (
+																<ServerItem
+																	key={server.id}
+																	server={server}
+																	serverId={serverId || ''}
+																	handleSelectServer={handleSelectServer}
+																/>
+															))
+														}
+													</CommandGroup>
+												</CommandList>
+											</Command>
+											<CheckoutButton
+												monthly={String(isMonthly)}
+												priceId={handlePrice()}
+												serverId={serverId}
+												loading={serversData.length === 0}
+											/>
+										</div>
+									</DialogContent>
+									{idToken ?
+										<p className="text-foreground/60 text-center pt-3 mb-[-15] text-wrap">
+											Or click{' '}
+											<a
+												href="/api/subs/manage"
+												className="underline font-bold text-foreground/70"
+											>
+												here
+											</a>{' '}
+											to manage your subscriptions
+										</p>
+									:	null}
+								</Dialog>
+							</div>
 						</div>
+						<a
+							href="https://stripe.com/"
+							target="_blank"
+							className="flex flex-wrap justify-center gap-2 sm:gap-3"
+							rel="noreferrer"
+							title="Stripe Website"
+						>
+							<Stripe />
+							<ApplePay />
+							<GooglePay />
+							<MasterCard />
+							<Visa />
+							<PayPal />
+							<Link />
+						</a>
 					</div>
 				</div>
-				<div>
-					<PlansComparison
-						data={data}
-						rowSeparator
-						colSeparator
-					/>
-				</div>
 			</div>
+			<div>
+				<PlansComparison
+					data={data}
+					rowSeparator
+					colSeparator
+				/>
+			</div>
+		</div>
 	)
 }
 
