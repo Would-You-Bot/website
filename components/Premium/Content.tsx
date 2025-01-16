@@ -1,14 +1,6 @@
 'use client'
 
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from '@/components/ui/dialog'
-import {
   Link,
   CloseIcon,
   StripeSquare,
@@ -19,6 +11,14 @@ import {
   PayPal,
   Stripe
 } from '@/app/premium/_components/icons'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog'
 import {
   Select,
   SelectContent,
@@ -113,7 +113,7 @@ export default function Content() {
             Premium
           </h1>
           <p className="text-customGrayText mb-6 mt-4 text-foreground/70">
-            Select the plan that suits your needs and benefit from our discord
+            Select the plan that suits your needs and benefit from our Discord
             bot.
           </p>
           <div className="mx-auto my-4 max-w-2xl text-center">

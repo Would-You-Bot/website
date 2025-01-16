@@ -6,16 +6,16 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://wouldyoubot.gg'),
   title: 'Blog - Would You Bot',
   description:
-    'The official blog of Would You Bot. Stay up to date with the latest discord related news, updates, and announcements.',
+    'The official blog of Would You Bot. Stay up to date with the latest Discord related news, updates, and announcements.',
   twitter: {
     title: 'Blog - Would You Bot',
     description:
-      'The official blog of Would You Bot. Stay up to date with the latest discord related news, updates, and announcements.'
+      'The official blog of Would You Bot. Stay up to date with the latest Discord related news, updates, and announcements.'
   },
   openGraph: {
     title: 'Blog - Would You Bot',
     description:
-      'The official blog of Would You Bot. Stay up to date with the latest discord related news, updates, and announcements.'
+      'The official blog of Would You Bot. Stay up to date with the latest Discord related news, updates, and announcements.'
   },
   robots: {
     index: true,
