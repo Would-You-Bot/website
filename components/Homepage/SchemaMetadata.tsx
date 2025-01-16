@@ -3,10 +3,10 @@
 import { Schema } from '../Schema'
 
 export async function HomeSchemaMetadata() {
-	return (
-		<>
-			<Schema
-				json={`
+  return (
+    <>
+      <Schema
+        json={`
             {
               "@context": "https://schema.org",
               "@type": "FAQPage",
@@ -21,7 +21,7 @@ export async function HomeSchemaMetadata() {
                 },
                 {
                   "@type": "Question",
-                  "name": "How do I invite the would you rather discord bot?",
+                  "name": "How do I invite the would you rather Discord bot?",
                   "acceptedAnswer": {
                     "@type": "Answer",
                     "text": "To invite the Would You Discord bot, visit their website at https://wouldyoubot.gg/ and click on the 'unleash the fun' button. This will take you to Discord, where you will be prompted to invite the bot."
@@ -38,10 +38,10 @@ export async function HomeSchemaMetadata() {
               ]
             }
   `}
-			/>
+      />
 
-			<Schema
-				json={`
+      <Schema
+        json={`
         {
           "@context": "http://schema.org",
           "@type": "VideoObject",
@@ -54,7 +54,7 @@ export async function HomeSchemaMetadata() {
           "interactionCount": "166"
         }
       `}
-			/>
-		</>
-	)
+      />
+    </>
+  )
 }
