@@ -5,19 +5,19 @@ export const metadata: Metadata = {
 	title: 'Status - Would You Bot',
 	description: 'The current status of the Would You clusters.',
 	twitter: {
-	  title: 'Status - Would You Bot',
-	  description: 'The current status of the Would You clusters.'
+		title: 'Status - Would You Bot',
+		description: 'The current status of the Would You clusters.'
 	},
 	openGraph: {
-	  title: 'Status - Would You Bot',
-	  description: 'The current status of the Would You clusters.'
+		title: 'Status - Would You Bot',
+		description: 'The current status of the Would You clusters.'
 	}
-  }
-  export const viewport: Viewport = {
+}
+export const viewport: Viewport = {
 	themeColor: '#0598F6',
 	maximumScale: 5
-  }
-  
+}
+
 const Status = async () => {
 	let clusterData = null
 	let error = null
