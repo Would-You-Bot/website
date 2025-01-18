@@ -27,7 +27,7 @@ export const viewport: Viewport = {
 export default function Premium() {
 	return (
 		<>
-			<main className="relative mb-40 flex w-full justify-center">
+			<main className="relative mb-40 flex w-full justify-center mx-auto max-w-8xl px-8">
 				<Content />
 			</main>
 		</>

@@ -86,3 +86,17 @@ model User {
 
   @@map("usermodels")
 }
+
+model Guild {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  guildID           String   @db.String @unique
+  language          String   @db.String @default("en_US")
+  premium           Int      @db.Int @default(0)
+  pending           Boolean? @default(true)
+  premiumExpiration DateTime? @db.Date
+  premiumUser       String?  @db.String 
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("guildProfile")
+}

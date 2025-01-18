@@ -1,9 +1,29 @@
-import Head from 'next/head'
-
+import type { Metadata, Viewport } from 'next'
+import staffs from '@/data/staffs.json' // Import the JSON data
 import Image from 'next/image' // Import the 'Image' component
 
-import GlowingHeading from '@/components/GlowingHeading'
-import staffs from '@/data/staffs.json' // Import the JSON data
+export const metadata: Metadata = {
+	metadataBase: new URL('https://wouldyoubot.gg'),
+	title: 'Our Team - Would You Bot',
+	description: 'Meet the amazing team and contributors behind Would You.',
+	twitter: {
+		title: 'Our Team - Would You Bot',
+		description: 'Meet the amazing team and contributors behind Would You.'
+	},
+	openGraph: {
+		title: 'Our Team - Would You Bot',
+		description: 'Meet the amazing team and contributors behind Would You.'
+	},
+	robots: {
+		index: true,
+		follow: true
+	}
+}
+
+export const viewport: Viewport = {
+	themeColor: '#0598F6',
+	maximumScale: 5
+}
 
 export default function Team() {
 	const roles = [
@@ -16,16 +36,19 @@ export default function Team() {
 
 	return (
 		<>
-			<Head>
-				<title>Would You - Team</title>
-			</Head>
 			<main className="flex flex-col items-center">
 				<div className="flex mt-auto w-full max-w-8xl flex-col px-8">
-					<GlowingHeading
-						redText="Meat the"
-						blueText="Team"
-					/>
-					<p className="text-muted-foreground">
+					<h1 className="text-4xl font-bold text-foreground">
+						<span className="text-brand-red-100 drop-shadow-red-glow">
+							Meet{' '}
+						</span>{' '}
+						<span className="text-brand-blue-100 drop-shadow-blue-glow">
+							{' '}
+							the{' '}
+						</span>
+						Team
+					</h1>
+					<p className="text-foreground/50">
 						Meet the amazing team and contributors behind Would You.
 					</p>
 				</div>
@@ -55,7 +78,7 @@ export default function Team() {
 												src={staff.imageUrl}
 												width={128}
 												height={128}
-												alt=""
+												alt={`${staff.name}'s profile picture`}
 											/>
 											<h3 className="mt-6 text-base font-semibold leading-7 tracking-tight text-foreground">
 												{staff.name}

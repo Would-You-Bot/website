@@ -1,7 +1,7 @@
-import guildProfileSchema from '@/models/Guild'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
+import { prisma } from '@/lib/prisma'
 import type Stripe from 'stripe'
 
 export async function POST(request: NextRequest) {
@@ -47,18 +47,29 @@ export async function POST(request: NextRequest) {
 					)
 				}
 				try {
-					await guildProfileSchema.findOneAndUpdate(
-						{ guildID: serverId },
-						{
+					await prisma.guild.upsert({
+						where: {
+							guildID: serverId
+						},
+						create: {
 							guildID: serverId,
 							premiumUser: userId,
 							premium: 1,
+							pending: true,
+							premiumExpiration: new Date(
+								subscription.current_period_end * 1000
+							),
+							language: 'en_US'
+						},
+						update: {
+							premiumUser: userId,
+							premium: 1,
+							pending: true,
 							premiumExpiration: new Date(
 								subscription.current_period_end * 1000
 							)
-						},
-						{ upsert: true }
-					)
+						}
+					})
 				} catch (error) {
 					console.error(error)
 					return NextResponse.json(
@@ -68,6 +79,84 @@ export async function POST(request: NextRequest) {
 						},
 						{ status: 500 }
 					)
+				}
+				break
+
+			case 'invoice.paid':
+			case 'invoice.payment_succeeded':
+				const invoice: Stripe.Invoice = event.data.object
+
+				if (invoice.subscription_details === null)
+					return NextResponse.json(
+						{ message: 'No subscription details found', status: 400 },
+						{ status: 400 }
+					)
+
+				const userIdInvoice = invoice.subscription_details.metadata?.userId
+				const serverIdInvoice = invoice.subscription_details.metadata?.serverId
+				const tierInvoice =
+					invoice.subscription_details.metadata?.monthly === 'true' ?
+						'monthly'
+					:	'yearly'
+
+				if (!userIdInvoice || !serverIdInvoice || !tierInvoice) {
+					console.error('One or more variables are undefined.')
+					return NextResponse.json(
+						{ message: 'One or more variables are missing', status: 400 },
+						{ status: 400 }
+					)
+				}
+				switch (invoice.billing_reason) {
+					case 'subscription_create':
+						try {
+							await prisma.guild.update({
+								// @ts-ignore
+								where: {
+									guildID: serverIdInvoice
+								},
+								data: {
+									pending: false,
+									premiumExpiration: new Date(
+										invoice.lines.data[0].period.end * 1000
+									)
+								}
+							})
+						} catch (error) {
+							console.error(error)
+							return NextResponse.json(
+								{
+									message: 'An error occurred while updating the database.',
+									status: 500
+								},
+								{ status: 500 }
+							)
+						}
+						break
+					case 'subscription_update':
+						try {
+							await prisma.guild.update({
+								// @ts-ignore
+								where: {
+									guildID: serverIdInvoice
+								},
+								data: {
+									pending: false,
+									premiumExpiration: new Date(
+										invoice.lines.data[0].period.end * 1000
+									)
+								}
+							})
+						} catch (error) {
+							console.error(error)
+							return NextResponse.json(
+								{
+									message: 'An error occurred while updating the database.',
+									status: 500
+								},
+								{ status: 500 }
+							)
+						}
+						break
 				}
 				break
 
@@ -89,16 +178,19 @@ export async function POST(request: NextRequest) {
 					)
 				}
 
-				await guildProfileSchema.findOneAndUpdate(
-					{ guildID: serverIdUpdated },
-					{
+				await prisma.guild.update({
+					// @ts-ignore
+					where: {
+						guildID: serverIdUpdated
+					},
+					data: {
 						premium: 1,
 						premiumExpiration: new Date(
 							subscriptionUpdated.current_period_end * 1000
 						)
-					},
-					{ upsert: true }
-				)
+					}
+				})
+
 				break
 
 			// in the event of a subscription being deleted
@@ -119,14 +211,17 @@ export async function POST(request: NextRequest) {
 					)
 				}
 				try {
-					await guildProfileSchema.findOneAndUpdate(
-						{ guildID: serverIdDeleted },
-						{
-							premiumUser: null,
+					await prisma.guild.update({
+						// @ts-ignore
+						where: {
+							guildID: serverIdDeleted
+						},
+						data: {
 							premium: 0,
-							premiumExpiration: null
+							premiumExpiration: null,
+							premiumUser: null
 						}
-					)
+					})
 				} catch (error) {
 					console.error(error)
 					return NextResponse.json(
