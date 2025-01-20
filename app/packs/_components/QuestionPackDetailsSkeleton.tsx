@@ -57,7 +57,7 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
 				<div className="w-full relative">
 					<Input
 						id="command"
-						defaultValue={`/import ${type} ${id}`}
+						defaultValue={`/import ${id}`}
 						readOnly
 						className="focus:bg-brand-blue-100/10 focus:text-brand-blue-100"
 					/>

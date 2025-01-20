@@ -73,7 +73,7 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
 		) ?? []
 
 	const copyCommand = () => {
-		navigator.clipboard.writeText(`/import ${type} ${id}`)
+		navigator.clipboard.writeText(`/import ${id}`)
 		toast.success('Copied to clipboard!')
 	}
 
@@ -129,7 +129,7 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
 							>
 								<Input
 									id="command"
-									defaultValue={`/import ${type} ${id}`}
+									defaultValue={`/import ${id}`}
 									readOnly
 									className="group-hover:bg-brand-blue-100/10 group-hover:text-brand-blue-100 focus:bg-brand-blue-100/10 focus:text-brand-blue-100 pr-10 text-sm text-muted-foreground cursor-pointer"
 								/>
