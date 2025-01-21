@@ -44,11 +44,11 @@ export async function POST(request: NextRequest) {
         }
 
         const subscription = await stripe.subscriptions.search({
-          query: `metadata['serverId']:'${serverId}'`,
-        });
+          query: `metadata['serverId']:'${serverId}'`
+        })
 
         try {
-          const prismaResultCreate = await prisma.guild.upsert({
+          await prisma.guild.upsert({
             where: {
               guildID: serverId
             },
@@ -56,22 +56,19 @@ export async function POST(request: NextRequest) {
               guildID: serverId,
               premiumUser: subscription?.data[0]?.metadata.userId,
               premium: 1,
-              pending: true,
               premiumExpiration: new Date(
-                subscription.data[0].current_period_end * 1000,
+                subscription.data[0].current_period_end * 1000
               ),
               language: 'en_US'
             },
             update: {
               premiumUser: subscription?.data[0]?.metadata.userId,
               premium: 1,
-              pending: true,
               premiumExpiration: new Date(
-                subscription.data[0].current_period_end * 1000,
-              ),
+                subscription.data[0].current_period_end * 1000
+              )
             }
           })
-          console.log(prismaResultCreate)
         } catch (error) {
           console.error(error)
           return NextResponse.json(
@@ -94,32 +91,29 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           )
 
-        const userIdInvoice = invoice.subscription_details.metadata?.userId
         const serverIdInvoice = invoice.subscription_details.metadata?.serverId
-        const tierInvoice =
-          invoice.subscription_details.metadata?.monthly === 'true' ?
-            'monthly'
-          : 'yearly'
 
-        if (!userIdInvoice || !serverIdInvoice || !tierInvoice) {
-          console.error('One or more variables are undefined.')
+        if (!serverIdInvoice) {
           return NextResponse.json(
             { message: 'One or more variables are missing', status: 400 },
             { status: 400 }
           )
         }
+
+        const subscriptionInvoice = await stripe.subscriptions.search({
+          query: `metadata['serverId']:'${serverIdInvoice}'`
+        })
+
         switch (invoice.billing_reason) {
           case 'subscription_create':
             try {
               await prisma.guild.update({
-                // @ts-ignore
                 where: {
                   guildID: serverIdInvoice
                 },
                 data: {
-                  pending: false,
                   premiumExpiration: new Date(
-                    invoice.lines.data[0].period.end * 1000
+                    subscriptionInvoice.data[0].current_period_end * 1000
                   )
                 }
               })
@@ -137,14 +131,13 @@ export async function POST(request: NextRequest) {
           case 'subscription_update':
             try {
               await prisma.guild.update({
-                // @ts-ignore
                 where: {
                   guildID: serverIdInvoice
                 },
                 data: {
                   pending: false,
                   premiumExpiration: new Date(
-                    invoice.lines.data[0].period.end * 1000
+                    subscriptionInvoice.data[0].current_period_end * 1000
                   )
                 }
               })
@@ -164,31 +157,28 @@ export async function POST(request: NextRequest) {
 
       // in the event of a subscription being updated
       case 'customer.subscription.updated':
-        const subscriptionUpdated: Stripe.Subscription = event.data.object
-        const userIdUpdated = subscriptionUpdated.metadata?.userId
-        const serverIdUpdated = subscriptionUpdated.metadata?.serverId
-        const tierUpdated =
-          subscriptionUpdated.metadata?.monthly === 'true' ?
-            'monthly'
-          : 'yearly'
+        const subscriptionDataUpdated: Stripe.Subscription = event.data.object
+        const serverIdUpdated = subscriptionDataUpdated.metadata?.serverId
 
-        if (!userIdUpdated || !serverIdUpdated || !tierUpdated) {
-          console.error('One or more variables are undefined.')
+        if (!serverIdUpdated) {
           return NextResponse.json(
             { message: 'One or more variables are missing', status: 400 },
             { status: 400 }
           )
         }
 
+        const subscriptionUpdated = await stripe.subscriptions.search({
+          query: `metadata['serverId']:'${serverIdUpdated}'`
+        })
+
         await prisma.guild.update({
-          // @ts-ignore
           where: {
             guildID: serverIdUpdated
           },
           data: {
             premium: 1,
             premiumExpiration: new Date(
-              subscriptionUpdated.current_period_end * 1000
+              subscriptionUpdated.data[0].current_period_end * 1000
             )
           }
         })
@@ -197,24 +187,19 @@ export async function POST(request: NextRequest) {
 
       // in the event of a subscription being deleted
       case 'customer.subscription.deleted':
-        const subscriptionDeleted: Stripe.Subscription = event.data.object
-        const userIdDeleted = subscriptionDeleted.metadata?.userId
-        const serverIdDeleted = subscriptionDeleted.metadata?.serverId
-        const tierDeleted =
-          subscriptionDeleted.metadata?.monthly === 'true' ?
-            'monthly'
-          : 'yearly'
+        const subscriptionDataDeleted: Stripe.Subscription = event.data.object
+        const serverIdDeleted = subscriptionDataDeleted.metadata?.serverId
 
-        if (!userIdDeleted || !serverIdDeleted || !tierDeleted) {
+        if (!serverIdDeleted) {
           console.error('One or more variables are undefined.')
           return NextResponse.json(
             { message: 'One or more variables are missing', status: 400 },
             { status: 400 }
           )
         }
+
         try {
           await prisma.guild.update({
-            // @ts-ignore
             where: {
               guildID: serverIdDeleted
             },
