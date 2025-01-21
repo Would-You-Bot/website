@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
         });
 
         try {
-          await prisma.guild.upsert({
+          const prismaResultCreate = await prisma.guild.upsert({
             where: {
               guildID: serverId
             },
@@ -71,6 +71,7 @@ export async function POST(request: NextRequest) {
               ),
             }
           })
+          console.log(prismaResultCreate)
         } catch (error) {
           console.error(error)
           return NextResponse.json(
