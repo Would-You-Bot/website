@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
       // in the event of a successful checkout
       case 'customer.subscription.created':
         const subscriptionData: Stripe.Subscription = event.data.object
-        const serverId = subscriptionData.metadata?.guildId
+        const serverId = subscriptionData.metadata?.serverId
 
         if (!serverId) {
           return NextResponse.json(
