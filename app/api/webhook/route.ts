@@ -103,55 +103,27 @@ export async function POST(request: NextRequest) {
         const subscriptionInvoice = await stripe.subscriptions.search({
           query: `metadata['serverId']:'${serverIdInvoice}'`
         })
-
-        switch (invoice.billing_reason) {
-          case 'subscription_create':
-            try {
-              await prisma.guild.update({
-                where: {
-                  guildID: serverIdInvoice
-                },
-                data: {
-                  premiumExpiration: new Date(
-                    subscriptionInvoice.data[0].current_period_end * 1000
-                  )
-                }
-              })
-            } catch (error) {
-              console.error(error)
-              return NextResponse.json(
-                {
-                  message: 'An error occurred while updating the database.',
-                  status: 500
-                },
-                { status: 500 }
+        try {
+          await prisma.guild.update({
+            where: {
+              guildID: serverIdInvoice
+            },
+            data: {
+              pending: false,
+              premiumExpiration: new Date(
+                subscriptionInvoice.data[0].current_period_end * 1000
               )
             }
-            break
-          case 'subscription_update':
-            try {
-              await prisma.guild.update({
-                where: {
-                  guildID: serverIdInvoice
-                },
-                data: {
-                  pending: false,
-                  premiumExpiration: new Date(
-                    subscriptionInvoice.data[0].current_period_end * 1000
-                  )
-                }
-              })
-            } catch (error) {
-              console.error(error)
-              return NextResponse.json(
-                {
-                  message: 'An error occurred while updating the database.',
-                  status: 500
-                },
-                { status: 500 }
-              )
-            }
-            break
+          })
+        } catch (error) {
+          console.error(error)
+          return NextResponse.json(
+            {
+              message: 'An error occurred while updating the database.',
+              status: 500
+            },
+            { status: 500 }
+          )
         }
         break
 
