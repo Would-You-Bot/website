@@ -33,19 +33,20 @@ export async function POST(request: NextRequest) {
     switch (event.type) {
       // in the event of a successful checkout
       case 'customer.subscription.created':
-        const subscription: Stripe.Subscription = event.data.object
-        const userId = subscription.metadata?.userId
-        const serverId = subscription.metadata?.serverId
-        const tier =
-          subscription.metadata?.monthly === 'true' ? 'monthly' : 'yearly'
+        const subscriptionData: Stripe.Subscription = event.data.object
+        const serverId = subscriptionData.metadata?.guildId
 
-        if (!userId || !serverId || !tier) {
-          console.error('One or more variables are undefined.')
+        if (!serverId) {
           return NextResponse.json(
             { message: 'One or more variables are missing', status: 400 },
             { status: 400 }
           )
         }
+
+        const subscription = await stripe.subscriptions.search({
+          query: `metadata['serverId']:'${serverId}'`,
+        });
+
         try {
           await prisma.guild.upsert({
             where: {
@@ -53,21 +54,21 @@ export async function POST(request: NextRequest) {
             },
             create: {
               guildID: serverId,
-              premiumUser: userId,
+              premiumUser: subscription?.data[0]?.metadata.userId,
               premium: 1,
               pending: true,
               premiumExpiration: new Date(
-                subscription.current_period_end * 1000
+                subscription.data[0].current_period_end * 1000,
               ),
               language: 'en_US'
             },
             update: {
-              premiumUser: userId,
+              premiumUser: subscription?.data[0]?.metadata.userId,
               premium: 1,
               pending: true,
               premiumExpiration: new Date(
-                subscription.current_period_end * 1000
-              )
+                subscription.data[0].current_period_end * 1000,
+              ),
             }
           })
         } catch (error) {
