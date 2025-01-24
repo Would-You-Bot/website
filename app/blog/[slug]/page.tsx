@@ -52,7 +52,7 @@ export const viewport: Viewport = {
 export function generateStaticParams() {
 	return postPaths
 		.map((path) => path.replace(/\.mdx?$/, ''))
-		.map((slug) => ({ slug }))
+		.map((slug) => ({ slug }));
 }
 
 const BlogPost = async (props: { params: Promise<{ slug: string }> }) => {

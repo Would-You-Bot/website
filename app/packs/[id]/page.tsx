@@ -10,7 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { ArrowLeft, CopyIcon, FileUp, Heart, LinkIcon } from 'lucide-react'
 import { PackDetailsSkeleton } from './_components/PackDetailsSkeleton'
 import ExportQuestionModal from '../_components/ExportQuestionModal'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, use } from 'react';
 import type { PackResponse } from '@/types/Packs'
 import { Button } from '@/components/ui/button'
 import Container from '@/components/Container'
@@ -25,18 +25,19 @@ import clsx from 'clsx'
 import { languageMap } from '@/helpers'
 import { packMap } from '@/types'
 
-export default function PackDetails({ params }: { params: { id: string } }) {
-	const router = useRouter()
-	const [packToShow, setPackToShow] = useState<PackResponse | null>(null)
-	const [userData, setUserData] = useState({
+export default function PackDetails(props: { params: Promise<{ id: string }> }) {
+    const params = use(props.params);
+    const router = useRouter()
+    const [packToShow, setPackToShow] = useState<PackResponse | null>(null)
+    const [userData, setUserData] = useState({
 		username: 'Private User',
 		avatar: '/Logo.png',
 		id: undefined
 	})
-	const [searchQuery, setSearchQuery] = useState('')
-	const [isLoading, setIsLoading] = useState(true)
+    const [searchQuery, setSearchQuery] = useState('')
+    const [isLoading, setIsLoading] = useState(true)
 
-	useEffect(() => {
+    useEffect(() => {
 		async function getPack() {
 			setIsLoading(true) // Set loading to true before fetching data
 			const res = await fetch(`/api/packs/${params.id}`)
@@ -62,12 +63,12 @@ export default function PackDetails({ params }: { params: { id: string } }) {
 		getPack()
 	}, [params.id])
 
-	const filteredQuestions =
+    const filteredQuestions =
 		packToShow?.data.questions.filter((question) =>
 			question.question.toLowerCase().includes(searchQuery.toLowerCase())
 		) ?? []
 
-	const toggleLike = async () => {
+    const toggleLike = async () => {
 		try {
 			const response = await axios.put(`/api/packs/${params.id}/likes`)
 
@@ -92,21 +93,21 @@ export default function PackDetails({ params }: { params: { id: string } }) {
 		}
 	}
 
-	const copyShareLink = () => {
+    const copyShareLink = () => {
 		navigator.clipboard.writeText(
 			`${process.env.NEXT_PUBLIC_PAGE_URL}/packs/${params.id}`
 		)
 		toast.success('Copied to clipboard!')
 	}
 
-	const copyCommand = () => {
+    const copyCommand = () => {
 		navigator.clipboard.writeText(
 			`/import ${packToShow?.data.type} ${params.id}`
 		)
 		toast.success('Copied to clipboard!')
 	}
 
-	return (
+    return (
 		<>
 			{isLoading ?
 				<PackDetailsSkeleton />
