@@ -71,11 +71,11 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
                     'border-[2px] border-background bg-background group-hover:scale-105 group-hover:z-50 transition-all'
                   )}
                 >
-                  <AvatarImage src={avatar.iconURL} />
+                  <AvatarImage src={avatar.iconURL} alt={avatar.name + "'s Server Avatar"} />
                   <AvatarFallback>
                     <Image
                       src="https://cdn.discordapp.com/embed/avatars/0.png"
-                      alt="avatar example"
+                      alt="Fallback Discord Avatar"
                       width={90}
                       height={90}
                     />
@@ -146,7 +146,7 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
                   'border-[2px] border-background bg-background -ml-3 z-10'
                 )}
               >
-                <AvatarImage src="" />
+                <AvatarImage alt='sussy' src="" />
                 <AvatarFallback className="bg-brand-customPrimary">
                   <span className="text-sm text-white">+99</span>
                 </AvatarFallback>
