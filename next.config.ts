@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
 		ignoreBuildErrors: true
 	},
 	experimental: {
+		reactCompiler: true,
 		serverActions: {
 			allowedOrigins: ['wouldyoubot.gg']
 		}
