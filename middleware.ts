@@ -2,7 +2,6 @@ import { createRateLimiter, defaultRateLimiter } from './lib/ratelimiter'
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { type NextRequest, NextResponse } from 'next/server'
 import ALLOWED_ADMIN_IDS from './data/reviewers.json'
-import { ipAddress } from '@vercel/functions'
 
 export async function middleware(request: NextRequest) {
 	const { pathname } = request.nextUrl
