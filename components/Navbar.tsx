@@ -1,9 +1,9 @@
 'use client'
+import ThemeToggle from '@/components/ThemeToggle'
 import DiscordLoginButton from '@/components/DiscordLoginButton'
 import { useIdToken } from '@/helpers/hooks/useIdToken'
 import type { IdTokenJWT } from '@/helpers/oauth/types'
 import UserDropdown from './UserDropdown'
-import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Crown } from '@/icons/Crown'
 import { useState } from 'react'
@@ -15,7 +15,6 @@ interface NavbarProps {
 }
 
 const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
-	const { setTheme, theme } = useTheme()
 	const [isOpen, setIsOpen] = useState(false)
 	const idToken = useIdToken(idToken_)
 	const isTokenValid = idToken && idToken.value !== 'null'
@@ -92,15 +91,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
 					<div
 						className={`mb-auto flex h-full w-full flex-col items-center justify-center gap-8 p-4 text-foreground lg:hidden ${isOpen ? 'pointer-events-auto opacity-100 transition-all delay-150 duration-300' : 'pointer-events-none opacity-0'}`}
 					>
-						<button
-							type="button"
-							className="flex items-center justify-center text-foreground/70 hover:text-foreground/90"
-							onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-						>
-							{theme === 'light' ?
-								<Moon className="w-6 h-6" />
-							:	<Sun className="w-6 h-6" />}
-						</button>
+						<ThemeToggle />
 						<Link
 							href="/commands"
 							onClick={handleIsOpen}
@@ -139,15 +130,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
 					</div>
 				</div>
 				<div className="hidden h-16 min-w-fit items-center justify-center lg:flex gap-1 p-1 rounded-xl border-2 border-foreground/5 bg-background-light/90 backdrop-blur">
-					<button
-						type="button"
-						className="flex h-full w-auto aspect-square rounded-[8px] items-center justify-center text-foreground/70 hover:text-foreground/90 hover:bg-foreground/5 transition"
-						onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-					>
-						{theme === 'light' ?
-							<Moon className="w-6 h-6 sm:w-7 sm:h-7" />
-						:	<Sun className="w-6 h-6 sm:w-7 sm:h-7" />}
-					</button>
+					<ThemeToggle />
 					{isTokenValid ?
 						<UserDropdown
 							idToken={idToken}
