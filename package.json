@@ -36,7 +36,6 @@
     "@types/validator": "^13.12.2",
     "@upstash/ratelimit": "^2.0.5",
     "@upstash/redis": "^1.30.0",
-    "@vercel/functions": "^1.5.2",
     "axios": "^1.7.9",
     "babel-plugin-react-compiler": "19.0.0-beta-27714ef-20250124",
     "class-variance-authority": "^0.7.0",
