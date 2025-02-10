@@ -1,10 +1,9 @@
 'use client'
+import ThemeToggle from '@/components/ThemeToggle'
 import DiscordLoginButton from '@/components/DiscordLoginButton'
 import { useIdToken } from '@/helpers/hooks/useIdToken'
 import type { IdTokenJWT } from '@/helpers/oauth/types'
-import ThemeToggle from '@/components/ThemeToggle'
 import UserDropdown from './UserDropdown'
-import { useTheme } from 'next-themes'
 import { Crown } from '@/icons/Crown'
 import { useState } from 'react'
 import Image from 'next/image'
@@ -126,7 +125,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
 								idToken={idToken}
 								handleIsOpen={handleIsOpen}
 							/>
-						:	<DiscordLoginButton className="h-16 rounded-[10px] px-6" />}
+							: <DiscordLoginButton className="h-16 rounded-[10px] px-6" />}
 					</div>
 				</div>
 				<div className="hidden h-16 min-w-fit items-center justify-center lg:flex gap-1 p-1 rounded-xl border-2 border-foreground/5 bg-background-light/90 backdrop-blur">
@@ -136,7 +135,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
 							idToken={idToken}
 							handleIsOpen={handleIsOpen}
 						/>
-					:	<DiscordLoginButton className="h-full rounded-[8px] px-6" />}
+						: <DiscordLoginButton className="h-full rounded-[8px] px-6" />}
 				</div>
 			</div>
 		</nav>

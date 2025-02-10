@@ -44,7 +44,7 @@ function QuestionModal({
 	setIsOpen
 }: QuestionModalProps) {
 	const {
-		field: { onChange, value }
+		field: { onChange, value, }
 	} = useController({
 		name: 'questions',
 		control,
@@ -71,10 +71,18 @@ function QuestionModal({
 			setQuestionValue(existingQuestion.question)
 			setTypeValue(existingQuestion.type)
 		} else {
-			setQuestionValue('')
+			// For create mode, set the prefix based on type
+			const prefix = type === "wouldyourather"
+				? "Would you rather "
+				: type === "whatwouldyoudo"
+					? "What would you do "
+					: type === "neverhaveiever"
+						? "Never have I ever "
+						: ""
+			setQuestionValue(prefix)
 			setTypeValue(type === PackType.mixed ? null : type)
 		}
-	}, [questionToEdit, mode, value, type])
+	}, [questionToEdit, mode, value, type, isOpen])
 
 	const validateQuestion = () => {
 		const questionData = {
@@ -196,7 +204,7 @@ function QuestionModal({
 								Add a <span className="text-brand-red-100">New</span>{' '}
 								<span className="text-brand-blue-100">Question</span>
 							</>
-						:	<>
+							: <>
 								<span className="text-brand-red-100">Edit</span>{' '}
 								<span className="text-brand-blue-100">Question</span>
 							</>
@@ -205,7 +213,7 @@ function QuestionModal({
 					<DialogDescription className="sr-only">
 						{mode === 'create' ?
 							'Add a new question to your pack'
-						:	'Edit your question'}
+							: 'Edit your question'}
 					</DialogDescription>
 				</DialogHeader>
 				<div className="grid flex-1 gap-2">
