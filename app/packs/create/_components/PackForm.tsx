@@ -213,7 +213,7 @@ function PackForm() {
 			<form onSubmit={handleSubmit(onSubmit)}>
 				{
 					!step || step === '1' ?
-						<section className="grid gap-6 max-w-screen-md">
+						<section className="grid gap-6 max-w-(--breakpoint-md)">
 							{/* type select */}
 							<div className="space-y-3">
 								<label htmlFor="type">Pack Type</label>

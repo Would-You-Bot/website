@@ -88,7 +88,7 @@ export function EditProfile({
 	}
 
 	return (
-		<Card className="border shadow-sm">
+		<Card className="border shadow-xs">
 			<CardContent className="p-6">
 				<h2 className="text-2xl font-bold text-foreground mb-4">
 					<span className="text-brand-red-100 drop-shadow-red-glow">Edit</span>{' '}

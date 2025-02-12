@@ -45,7 +45,7 @@ export function UserCard({ userData }: UserCardProps) {
 	}
 
 	return (
-		<Card className="border shadow-sm h-fit sticky top-[112px]">
+		<Card className="border shadow-xs h-fit sticky top-[112px]">
 			<CardContent className="p-4">
 				<div className="relative">
 					<div className="h-20 rounded-lg overflow-hidden">

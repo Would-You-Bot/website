@@ -34,7 +34,7 @@ function PageContent({ pending }: PageContentProps) {
 		<section className="space-y-10">
 			<div>
 				{packs.pending.length > 0 ?
-					<ul className="grid grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))] gap-6">
+					<ul className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-6">
 						{packs.pending.map((pack) => (
 							<UnreviewedPack
 								key={pack.id}

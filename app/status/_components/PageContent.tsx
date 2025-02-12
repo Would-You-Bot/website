@@ -55,7 +55,7 @@ const PageContent = ({ clusterData }: PageContentProps) => {
 						type="text"
 						placeholder="Guild ID"
 						onChange={(e) => setGuildId(e.target.value)}
-						className="flex h-11 w-full rounded-md bg-transparent py-3 text-base outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+						className="flex h-11 w-full rounded-md bg-transparent py-3 text-base outline-hidden placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
 					/>
 				</div>
 			</div>

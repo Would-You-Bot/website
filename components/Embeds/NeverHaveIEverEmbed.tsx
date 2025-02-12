@@ -41,7 +41,7 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
 	return (
 		<DiscordMessages
 			lightTheme={theme === 'light'}
-			className="overflow-x-hidden rounded-lg text-left shadow"
+			className="overflow-x-hidden rounded-lg text-left shadow-sm"
 		>
 			<DiscordMessage
 				profile="wouldyou"

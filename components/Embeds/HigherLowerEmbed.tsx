@@ -24,7 +24,7 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
 	return (
 		<DiscordMessages
 			lightTheme={theme === 'light'}
-			className="overflow-x-hidden rounded-lg shadow"
+			className="overflow-x-hidden rounded-lg shadow-sm"
 		>
 			<DiscordMessage
 				profile="wouldyou"

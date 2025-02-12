@@ -17,7 +17,7 @@ function QuestionPackList({
 	const type = searchParams.get('type')
 
 	return (
-		<ul className="grid grid-cols-[repeat(auto-fill,_minmax(320px,_1fr))] gap-10 lg:gap-x-12 xl:gap-x-14 max-md:max-w-[500px] max-md:mx-auto">
+		<ul className="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-10 lg:gap-x-12 xl:gap-x-14 max-md:max-w-[500px] max-md:mx-auto">
 			{packList.map((question) => (
 				<React.Fragment key={`pack-${question.id}`}>
 					<QuestionPack
