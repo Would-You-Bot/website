@@ -24,8 +24,6 @@ importers:
       '@prisma/client':
         specifier: 6.2.1
         version: 6.2.1(prisma@6.2.1)
-        specifier: 6.2.1
-        version: 6.2.1(prisma@6.2.1)
       '@radix-ui/react-alert-dialog':
         specifier: ^1.1.4
         version: 1.1.4(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -83,6 +81,9 @@ importers:
       '@upstash/redis':
         specifier: ^1.30.0
         version: 1.34.3
+      '@vercel/functions':
+        specifier: ^1.5.2
+        version: 1.5.2
       axios:
         specifier: ^1.7.9
         version: 1.7.9
@@ -98,6 +99,9 @@ importers:
       cmdk:
         specifier: 1.0.0
         version: 1.0.0(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      framer-motion:
+        specifier: ^11.5.4
+        version: 11.15.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       gray-matter:
         specifier: ^4.0.3
         version: 4.0.3
@@ -109,19 +113,19 @@ importers:
         version: 0.473.0(react@19.0.0)
       mongoose:
         specifier: ^8.9.5
-        version: 8.9.5
+        version: 8.10.0
       motion:
         specifier: ^11.16.0
-        version: 11.16.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 11.18.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next:
         specifier: 15.1.6
-        version: 15.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 15.1.6(babel-plugin-react-compiler@19.0.0-beta-27714ef-20250124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-mdx-remote:
         specifier: ^4.4.1
         version: 4.4.1(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       next-sitemap:
         specifier: ^4.2.3
-        version: 4.2.3(next@15.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
+        version: 4.2.3(next@15.1.6(babel-plugin-react-compiler@19.0.0-beta-27714ef-20250124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))
       next-themes:
         specifier: ^0.4.4
         version: 0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -232,8 +236,8 @@ packages:
     resolution: {integrity: sha512-FDSOghenHTiToteC/QRlv2q3DhPZ/oOXTBoirfWNx1Cx3TMVcGWQtMMmQcSvb/JjpNeGzx8Pq/b4fKEJuWm1sw==}
     engines: {node: '>=6.9.0'}
 
-  '@babel/types@7.26.7':
-    resolution: {integrity: sha512-t8kDRGrKXyp6+tjUh7hw2RLyclsW4TRoRvRHtSyAX9Bb5ldlFh+90YAYY6awRXrlB4G5G2izNeGySpATlFzmOg==}
+  '@babel/types@7.26.8':
+    resolution: {integrity: sha512-eUuWapzEGWFEpHFxgEaBG8e3n6S8L3MSu0oda755rOfabWPnh0Our1AozNFVUxGFIhbKgd1ksprsoDGMinTOTA==}
     engines: {node: '>=6.9.0'}
 
   '@corex/deepmerge@4.0.43':
@@ -1510,6 +1514,15 @@ packages:
   '@upstash/redis@1.34.3':
     resolution: {integrity: sha512-VT25TyODGy/8ljl7GADnJoMmtmJ1F8d84UXfGonRRF8fWYJz7+2J6GzW+a6ETGtk4OyuRTt7FRSvFG5GvrfSdQ==}
 
+  '@vercel/functions@1.5.2':
+    resolution: {integrity: sha512-9XuynFoM/J1X+LSahgjhuAZCbZ96vm9mpXapCkSS1MX890U7zLh7n2RW/2KLNuxsXt8u8h2dOCw+Njtg+7pXgQ==}
+    engines: {node: '>= 16'}
+    peerDependencies:
+      '@aws-sdk/credential-provider-web-identity': '*'
+    peerDependenciesMeta:
+      '@aws-sdk/credential-provider-web-identity':
+        optional: true
+
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
     peerDependencies:
@@ -2118,8 +2131,22 @@ packages:
   fraction.js@4.3.7:
     resolution: {integrity: sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==}
 
-  framer-motion@11.16.0:
-    resolution: {integrity: sha512-oL2AWqLQuw0+CNEUa0sz3mWC/n3i147CckvpQn8bLRs30b+HxTxlRi0YR2FpHHhAbWV7DKjNdHU42KHLfBWh/g==}
+  framer-motion@11.15.0:
+    resolution: {integrity: sha512-MLk8IvZntxOMg7lDBLw2qgTHHv664bYoYmnFTmE0Gm/FW67aOJk0WM3ctMcG+Xhcv+vh5uyyXwxvxhSeJzSe+w==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
+  framer-motion@11.18.2:
+    resolution: {integrity: sha512-5F5Och7wrvtLVElIpclDT0CBzMVg3dL22B64aZwHtsIY8RB4mXICLrkajK4G9R+ieSAGcgrLeae2SeUTg2pr6w==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -2696,11 +2723,11 @@ packages:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
     engines: {node: '>=16 || 14 >=14.17'}
 
-  mongodb-connection-string-url@3.0.2:
-    resolution: {integrity: sha512-rMO7CGo/9BFwyZABcKAWL8UJwH/Kc2x0g72uhDWzG48URRax5TCIcJ7Rc3RZqffZzO/Gwff/jyKwCU9TN8gehA==}
+  mongodb-connection-string-url@3.0.1:
+    resolution: {integrity: sha512-XqMGwRX0Lgn05TDB4PyG2h2kKO/FfWJyCzYQbIhXUxz7ETt0I/FqHjUeqj37irJ+Dl1ZtU82uYyj14u2XsZKfg==}
 
-  mongodb@6.12.0:
-    resolution: {integrity: sha512-RM7AHlvYfS7jv7+BXund/kR64DryVI+cHbVAy9P61fnb1RcWZqOW1/Wj2YhqMCx+MuYhqTRGv7AwHBzmsCKBfA==}
+  mongodb@6.13.0:
+    resolution: {integrity: sha512-KeESYR5TEaFxOuwRqkOm3XOsMqCSkdeDMjaW5u2nuKfX7rqaofp7JQGoi7sVqQcNJTKuveNbzZtWMstb8ABP6Q==}
     engines: {node: '>=16.20.1'}
     peerDependencies:
       '@aws-sdk/credential-providers': ^3.188.0
@@ -2726,18 +2753,24 @@ packages:
       socks:
         optional: true
 
-  mongoose@8.9.5:
-    resolution: {integrity: sha512-SPhOrgBm0nKV3b+IIHGqpUTOmgVL5Z3OO9AwkFEmvOZznXTvplbomstCnPOGAyungtRXE5pJTgKpKcZTdjeESg==}
+  mongoose@8.10.0:
+    resolution: {integrity: sha512-nLhk3Qrv6q/HpD2k1O7kbBqsq+/kmKpdv5KJ+LLhQlII3e1p/SSLoLP6jMuSiU6+iLK7zFw4T1niAk3mA3QVug==}
     engines: {node: '>=16.20.1'}
 
-  motion-dom@11.16.0:
-    resolution: {integrity: sha512-4bmEwajSdrljzDAYpu6ceEdtI4J5PH25fmN8YSx7Qxk6OMrC10CXM0D5y+VO/pFZjhmCvm2bGf7Rus482kwhzA==}
+  motion-dom@11.14.3:
+    resolution: {integrity: sha512-lW+D2wBy5vxLJi6aCP0xyxTxlTfiu+b+zcpVbGVFUxotwThqhdpPRSmX8xztAgtZMPMeU0WGVn/k1w4I+TbPqA==}
 
-  motion-utils@11.16.0:
-    resolution: {integrity: sha512-ngdWPjg31rD4WGXFi0eZ00DQQqKKu04QExyv/ymlC+3k+WIgYVFbt6gS5JsFPbJODTF/r8XiE/X+SsoT9c0ocw==}
+  motion-dom@11.18.1:
+    resolution: {integrity: sha512-g76KvA001z+atjfxczdRtw/RXOM3OMSdd1f4DL77qCTF/+avrRJiawSG4yDibEQ215sr9kpinSlX2pCTJ9zbhw==}
 
-  motion@11.16.0:
-    resolution: {integrity: sha512-d7EhBRFFBm6Ee6Q81Od45KOr3feA7UL/eAL+OKNZmf6rQJEwiXfvc/nkM522Ahiuvole1/8rNQyOX8JHKr8QoQ==}
+  motion-utils@11.14.3:
+    resolution: {integrity: sha512-Xg+8xnqIJTpr0L/cidfTTBFkvRw26ZtGGuIhA94J9PQ2p4mEa06Xx7QVYZH0BP+EpMSaDlu+q0I0mmvwADPsaQ==}
+
+  motion-utils@11.18.1:
+    resolution: {integrity: sha512-49Kt+HKjtbJKLtgO/LKj9Ld+6vw9BjH5d9sc40R/kVyH8GLAXgT42M2NnuPcJNuA3s9ZfZBUcwIgpmZWGEE+hA==}
+
+  motion@11.18.2:
+    resolution: {integrity: sha512-JLjvFDuFr42NFtcVoMAyC2sEjnpA8xpy6qWPyzQvCloznAyQ8FIXioxWfHiLtgYhoVpfUqSWpn1h9++skj9+Wg==}
     peerDependencies:
       '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
@@ -2873,7 +2906,6 @@ packages:
 
   oslo@1.2.1:
     resolution: {integrity: sha512-HfIhB5ruTdQv0XX2XlncWQiJ5SIHZ7NHZhVyHth0CSZ/xzge00etRyYy/3wp/Dsu+PkxMC+6+B2lS/GcKoewkA==}
-    deprecated: Package is no longer supported. Please see https://oslojs.dev for the successor project.
 
   p-limit@3.1.0:
     resolution: {integrity: sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ==}
@@ -3425,9 +3457,9 @@ packages:
     resolution: {integrity: sha512-65P7iz6X5yEr1cwcgvQxbbIw7Uk3gOy5dIdtZ4rDveLqhrdJP+Li/Hx6tyK0NEb+2GCyneCMJiGqrADCSNk8sQ==}
     engines: {node: '>=8.0'}
 
-  tr46@5.0.0:
-    resolution: {integrity: sha512-tk2G5R2KRwBd+ZN0zaEXpmzdKyOYksXwywulIX95MBODjSzMIuQnQ3m8JxgbhnL1LeVo7lqQKsYa1O3Htl7K5g==}
-    engines: {node: '>=18'}
+  tr46@4.1.1:
+    resolution: {integrity: sha512-2lv/66T7e5yNyhAAC4NaKe5nVavzuGJQVVtRYLyQ2OI8tsJ61PMLlelehb0wi2Hx6+hT/OJUWZcw8MjlSRnxvw==}
+    engines: {node: '>=14'}
 
   trim-lines@3.0.1:
     resolution: {integrity: sha512-kRj8B+YHZCc9kQYdWfJB2/oUl9rA99qbowYYBtr4ui4mZyAQ2JpvVBd/6U2YloATfqBhBTSMhTpgBHtU0Mf3Rg==}
@@ -3577,9 +3609,9 @@ packages:
     resolution: {integrity: sha512-VwddBukDzu71offAQR975unBIGqfKZpM+8ZX6ySk8nYhVoo5CYaZyzt3YBvYtRtO+aoGlqxPg/B87NGVZ/fu6g==}
     engines: {node: '>=12'}
 
-  whatwg-url@14.1.0:
-    resolution: {integrity: sha512-jlf/foYIKywAt3x/XWKZ/3rz8OSJPiWktjmk891alJUEjiVxKX9LEO92qH3hv4aJ0mN3MWPvGMCy8jQi95xK4w==}
-    engines: {node: '>=18'}
+  whatwg-url@13.0.0:
+    resolution: {integrity: sha512-9WWbymnqj57+XEuqADHrCJ2eSXzn8WXIW/YSGaZtb2WKAInQ6CHfaUUcTyyver0p8BDg5StLQq8h1vtZuwmOig==}
+    engines: {node: '>=16'}
 
   which-boxed-primitive@1.1.1:
     resolution: {integrity: sha512-TbX3mj8n0odCBFVlY8AxkqcHASw3L60jIuF8jFP78az3C2YhmGvqbHBpAjTRH2/xqYunrJ9g1jSyjCjpoWzIAA==}
@@ -3647,7 +3679,7 @@ snapshots:
     dependencies:
       regenerator-runtime: 0.14.1
 
-  '@babel/types@7.26.7':
+  '@babel/types@7.26.8':
     dependencies:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
@@ -4881,6 +4913,8 @@ snapshots:
     dependencies:
       crypto-js: 4.2.0
 
+  '@vercel/functions@1.5.2': {}
+
   acorn-jsx@5.3.2(acorn@8.14.0):
     dependencies:
       acorn: 8.14.0
@@ -5025,7 +5059,7 @@ snapshots:
 
   babel-plugin-react-compiler@19.0.0-beta-27714ef-20250124:
     dependencies:
-      '@babel/types': 7.26.7
+      '@babel/types': 7.26.8
 
   bail@2.0.2: {}
 
@@ -5361,8 +5395,8 @@ snapshots:
       '@typescript-eslint/parser': 6.21.0(eslint@8.57.1)(typescript@5.7.2)
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 3.7.0(eslint-plugin-import@2.31.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1)
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-typescript@3.7.0(eslint-plugin-import@2.31.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1)
+      eslint-import-resolver-typescript: 3.7.0(eslint-plugin-import@2.31.0)(eslint@8.57.1)
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-typescript@3.7.0)(eslint@8.57.1)
       eslint-plugin-jsx-a11y: 6.10.2(eslint@8.57.1)
       eslint-plugin-react: 7.37.3(eslint@8.57.1)
       eslint-plugin-react-hooks: 5.1.0(eslint@8.57.1)
@@ -5381,7 +5415,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-import-resolver-typescript@3.7.0(eslint-plugin-import@2.31.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1):
+  eslint-import-resolver-typescript@3.7.0(eslint-plugin-import@2.31.0)(eslint@8.57.1):
     dependencies:
       '@nolyfill/is-core-module': 1.0.39
       debug: 4.4.0
@@ -5393,22 +5427,22 @@ snapshots:
       is-glob: 4.0.3
       stable-hash: 0.0.4
     optionalDependencies:
-      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-typescript@3.7.0(eslint-plugin-import@2.31.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1)
+      eslint-plugin-import: 2.31.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-typescript@3.7.0)(eslint@8.57.1)
     transitivePeerDependencies:
       - supports-color
 
-  eslint-module-utils@2.12.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.7.0(eslint-plugin-import@2.31.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1):
+  eslint-module-utils@2.12.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.7.0)(eslint@8.57.1):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
       '@typescript-eslint/parser': 6.21.0(eslint@8.57.1)(typescript@5.7.2)
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-import-resolver-typescript: 3.7.0(eslint-plugin-import@2.31.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1)
+      eslint-import-resolver-typescript: 3.7.0(eslint-plugin-import@2.31.0)(eslint@8.57.1)
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.31.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-typescript@3.7.0(eslint-plugin-import@2.31.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1):
+  eslint-plugin-import@2.31.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-typescript@3.7.0)(eslint@8.57.1):
     dependencies:
       '@rtsao/scc': 1.1.0
       array-includes: 3.1.8
@@ -5419,7 +5453,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.12.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.7.0(eslint-plugin-import@2.31.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint@8.57.1))(eslint@8.57.1))(eslint@8.57.1)
+      eslint-module-utils: 2.12.0(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.7.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.7.0)(eslint@8.57.1)
       hasown: 2.0.2
       is-core-module: 2.16.1
       is-glob: 4.0.3
@@ -5653,10 +5687,19 @@ snapshots:
 
   fraction.js@4.3.7: {}
 
-  framer-motion@11.16.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  framer-motion@11.15.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
-      motion-dom: 11.16.0
-      motion-utils: 11.16.0
+      motion-dom: 11.14.3
+      motion-utils: 11.14.3
+      tslib: 2.8.1
+    optionalDependencies:
+      react: 19.0.0
+      react-dom: 19.0.0(react@19.0.0)
+
+  framer-motion@11.18.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      motion-dom: 11.18.1
+      motion-utils: 11.18.1
       tslib: 2.8.1
     optionalDependencies:
       react: 19.0.0
@@ -6434,22 +6477,22 @@ snapshots:
 
   minipass@7.1.2: {}
 
-  mongodb-connection-string-url@3.0.2:
+  mongodb-connection-string-url@3.0.1:
     dependencies:
       '@types/whatwg-url': 11.0.5
-      whatwg-url: 14.1.0
+      whatwg-url: 13.0.0
 
-  mongodb@6.12.0:
+  mongodb@6.13.0:
     dependencies:
       '@mongodb-js/saslprep': 1.1.9
       bson: 6.10.1
-      mongodb-connection-string-url: 3.0.2
+      mongodb-connection-string-url: 3.0.1
 
-  mongoose@8.9.5:
+  mongoose@8.10.0:
     dependencies:
       bson: 6.10.1
       kareem: 2.6.3
-      mongodb: 6.12.0
+      mongodb: 6.13.0
       mpath: 0.9.0
       mquery: 5.0.0
       ms: 2.1.3
@@ -6464,15 +6507,19 @@ snapshots:
       - socks
       - supports-color
 
-  motion-dom@11.16.0:
-    dependencies:
-      motion-utils: 11.16.0
+  motion-dom@11.14.3: {}
 
-  motion-utils@11.16.0: {}
-
-  motion@11.16.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  motion-dom@11.18.1:
     dependencies:
-      framer-motion: 11.16.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      motion-utils: 11.18.1
+
+  motion-utils@11.14.3: {}
+
+  motion-utils@11.18.1: {}
+
+  motion@11.18.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+    dependencies:
+      framer-motion: 11.18.2(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       tslib: 2.8.1
     optionalDependencies:
       react: 19.0.0
@@ -6511,20 +6558,20 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  next-sitemap@4.2.3(next@15.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)):
+  next-sitemap@4.2.3(next@15.1.6(babel-plugin-react-compiler@19.0.0-beta-27714ef-20250124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)):
     dependencies:
       '@corex/deepmerge': 4.0.43
       '@next/env': 13.5.8
       fast-glob: 3.3.2
       minimist: 1.2.8
-      next: 15.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      next: 15.1.6(babel-plugin-react-compiler@19.0.0-beta-27714ef-20250124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
 
   next-themes@0.4.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  next@15.1.6(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
+  next@15.1.6(babel-plugin-react-compiler@19.0.0-beta-27714ef-20250124)(react-dom@19.0.0(react@19.0.0))(react@19.0.0):
     dependencies:
       '@next/env': 15.1.6
       '@swc/counter': 0.1.3
@@ -6544,6 +6591,7 @@ snapshots:
       '@next/swc-linux-x64-musl': 15.1.6
       '@next/swc-win32-arm64-msvc': 15.1.6
       '@next/swc-win32-x64-msvc': 15.1.6
+      babel-plugin-react-compiler: 19.0.0-beta-27714ef-20250124
       sharp: 0.33.5
     transitivePeerDependencies:
       - '@babel/core'
@@ -7186,7 +7234,7 @@ snapshots:
     dependencies:
       is-number: 7.0.0
 
-  tr46@5.0.0:
+  tr46@4.1.1:
     dependencies:
       punycode: 2.3.1
 
@@ -7370,9 +7418,9 @@ snapshots:
 
   webidl-conversions@7.0.0: {}
 
-  whatwg-url@14.1.0:
+  whatwg-url@13.0.0:
     dependencies:
-      tr46: 5.0.0
+      tr46: 4.1.1
       webidl-conversions: 7.0.0
 
   which-boxed-primitive@1.1.1:
