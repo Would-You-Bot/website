@@ -43,7 +43,7 @@ const MainDiscordEmbed: FC<MainProps> = ({ initialQuestion }) => {
 		>
 			<DiscordMessages
 				lightTheme={theme === 'light' ? true : false}
-				className="mx-auto w-auto overflow-x-hidden rounded-lg text-left shadow sm:w-2/3 lg:w-auto"
+				className="mx-auto w-auto overflow-x-hidden rounded-lg text-left shadow-sm sm:w-2/3 lg:w-auto"
 			>
 				<DiscordMessage
 					profile="wouldyou"

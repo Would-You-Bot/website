@@ -181,7 +181,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
 				onSubmit={handleSubmit(onSubmit)}
 				className="grid gap-10 lg:grid-cols-2"
 			>
-				<section className="grid gap-6 max-w-screen-md">
+				<section className="grid gap-6 max-w-(--breakpoint-md)">
 					<div className="space-y-8">
 						{/* type select */}
 						<div className="space-y-3">

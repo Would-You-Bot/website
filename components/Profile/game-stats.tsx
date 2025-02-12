@@ -34,7 +34,7 @@ export function GameStats({
 	higherLower
 }: GameStatsProps) {
 	return (
-		<Card className="border shadow-sm">
+		<Card className="border shadow-xs">
 			<CardContent className="p-6 space-y-6">
 				{wouldYouRather && (
 					<GameStatSection

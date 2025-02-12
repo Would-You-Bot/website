@@ -14,7 +14,7 @@ export function StatsOverview({
 	totalNo
 }: StatsOverviewProps) {
 	return (
-		<Card className="border shadow-sm">
+		<Card className="border shadow-xs">
 			<CardContent className="p-6">
 				<div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
 					<div className="text-center">

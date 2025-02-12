@@ -71,7 +71,7 @@ export const ClusterCardsList = ({ data }: ClusterCardProps) => {
 												shard.selected && 'ring-pulse', // Apply ring-pulse to the selected shard
 												isAnyShardSelected &&
 													!shard.selected &&
-													'opacity-50 !text-foreground/50' // Apply global styles if any shard is selected
+													'opacity-50 text-foreground/50!' // Apply global styles if any shard is selected
 											)}
 										>
 											{index}

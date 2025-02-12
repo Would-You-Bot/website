@@ -22,7 +22,7 @@ const DailyMessageEmbed: FC<MainProps> = ({ threadName }) => {
 	return (
 		<DiscordMessages
 			lightTheme={theme === 'light'}
-			className="min-w-fit overflow-x-hidden rounded-lg shadow"
+			className="min-w-fit overflow-x-hidden rounded-lg shadow-sm"
 		>
 			<DiscordMessage
 				profile="wouldyou"
