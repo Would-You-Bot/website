@@ -1,6 +1,7 @@
 {
-  "css.customData": [
-    ".vscode/tailwind.json"
-  ],
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+	"css.customData": [".vscode/tailwind.json"],
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"[typescriptreact]": {
+		"editor.defaultFormatter": "vscode.typescript-language-features"
+	}
 }

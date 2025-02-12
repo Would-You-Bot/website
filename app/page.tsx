@@ -61,7 +61,6 @@ const Home = async () => {
 
 	const serverData = await serverResponse.json()
 	const servers = JSON.parse(serverData.result ?? null) ?? []
-	const filteredServers = servers.filter((g: any) => g.name !== 'Pornhub')
 
 	return (
 		<>
@@ -70,7 +69,7 @@ const Home = async () => {
 					initialRatherQuestion={getRandomQuestion('rather')}
 					initialNhieQuestion={getRandomQuestion('nhie')}
 					serverCount={serverCount}
-					servers={filteredServers}
+					servers={servers}
 				/>
 			</main>
 			<HomeSchemaMetadata />

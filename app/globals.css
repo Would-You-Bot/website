@@ -98,11 +98,21 @@
 
 @layer base {
 	* {
-		@apply rounded border-border ring-offset-background focus-visible:outline-none focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-brand-primary-light;
+		@apply brand-focus border-border ring-offset-background;
 	}
+
 	body {
 		@apply scroll-smooth bg-background text-foreground;
 	}
+
+	.brand-focus {
+		@apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-primary-light focus-visible:ring-offset-2;
+	}
+
+	.disable-focus {
+		@apply focus:ring-0 focus:ring-offset-0;
+	}
+
 	@media screen and (max-width: 500px) {
 		.discord-message:first-child {
 			@apply w-[95%] !important;
@@ -117,6 +127,7 @@
 			@apply min-w-0 !important;
 		}
 	}
+
 	@media screen and (max-width: 350px) {
 		.discord-thread-message .discord-thread-message-content {
 			@apply text-xs;

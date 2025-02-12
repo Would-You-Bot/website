@@ -4,7 +4,7 @@
     "categories": ["Developers", "Translators"],
     "description": "Founder, Lead Developer, German Translator",
     "imageUrl": "https://cdn.wouldyoubot.gg/staff/developer/Dominik.webp",
-    "websiteUrl": "https://dominikko.ch/"
+    "websiteUrl": "https://brickver.com/@dominik"
   },
   {
     "name": "ForGetFulSkyBro",
@@ -19,6 +19,20 @@
     "description": "Developer",
     "imageUrl": "https://cdn.wouldyoubot.gg/staff/developer/Skeleton.webp",
     "websiteUrl": "https://github.com/nidrux"
+  },
+  {
+    "name": "Taqib",
+    "categories": ["Developers"],
+    "description": "Developer",
+    "imageUrl": "https://cdn.wouldyoubot.gg/staff/developer/Taqib.webp",
+    "websiteUrl": "https://taqib.dev/"
+  },
+  {
+    "name": "Woofer21",
+    "categories": ["Developers"],
+    "description": "Developer",
+    "imageUrl": "https://cdn.wouldyoubot.gg/staff/developer/Woofer.webp",
+    "websiteUrl": "https://woofer21.com/"
   },
   {
     "name": "Noam",
@@ -54,13 +68,6 @@
     "description": "Higher or Lower Developer",
     "imageUrl": "https://cdn.wouldyoubot.gg/staff/special/Finn.webp",
     "websiteUrl": "https://github.com/finnkoetting"
-  },
-  {
-    "name": "Sean",
-    "categories": ["Contributors"],
-    "description": "EX-Developer",
-    "imageUrl": "https://cdn.wouldyoubot.gg/staff/special/Sean.webp",
-    "websiteUrl": "https://sattler.dev/"
   },
   {
     "name": "NightKiller",
@@ -129,15 +136,8 @@
     "name": "Paulos",
     "categories": ["Developers"],
     "description": "Frontend Guy",
-    "imageUrl": "https://cdn.wouldyoubot.gg/staff/special/Paulos.webp",
+    "imageUrl": "https://cdn.wouldyoubot.gg/staff/developer/Paulos.webp",
     "websiteUrl": "https://dpaulos6.com?utm_source=wouldyoubot.gg"
-  },
-  {
-    "name": "Paul",
-    "categories": ["Developers"],
-    "description": "Full-stack Developer",
-    "imageUrl": "https://cdn.wouldyoubot.gg/staff/developer/Paul.webp",
-    "websiteUrl": "https://github.com/Jester0027"
   },
   {
     "name": "Dan",

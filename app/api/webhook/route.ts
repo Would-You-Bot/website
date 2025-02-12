@@ -1,7 +1,7 @@
-import guildProfileSchema from '@/models/Guild'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
+import { prisma } from '@/lib/prisma'
 import type Stripe from 'stripe'
 
 export async function POST(request: NextRequest) {
@@ -33,32 +33,88 @@ export async function POST(request: NextRequest) {
 		switch (event.type) {
 			// in the event of a successful checkout
 			case 'customer.subscription.created':
-				const subscription: Stripe.Subscription = event.data.object
-				const userId = subscription.metadata?.userId
-				const serverId = subscription.metadata?.serverId
-				const tier =
-					subscription.metadata?.monthly === 'true' ? 'monthly' : 'yearly'
+				const subscriptionData: Stripe.Subscription = event.data.object
+				const serverId = subscriptionData.metadata?.serverId
 
-				if (!userId || !serverId || !tier) {
-					console.error('One or more variables are undefined.')
+				if (!serverId) {
 					return NextResponse.json(
 						{ message: 'One or more variables are missing', status: 400 },
 						{ status: 400 }
 					)
 				}
+
+				const subscription = await stripe.subscriptions.search({
+					query: `metadata['serverId']:'${serverId}'`
+				})
+
 				try {
-					await guildProfileSchema.findOneAndUpdate(
-						{ guildID: serverId },
-						{
+					await prisma.guild.upsert({
+						where: {
+							guildID: serverId
+						},
+						create: {
 							guildID: serverId,
-							premiumUser: userId,
+							premiumUser: subscription?.data[0]?.metadata.userId,
 							premium: 1,
 							premiumExpiration: new Date(
-								subscription.current_period_end * 1000
-							)
+								subscription.data[0].current_period_end * 1000
+							),
+							language: 'en_US'
 						},
-						{ upsert: true }
+						update: {
+							premiumUser: subscription?.data[0]?.metadata.userId,
+							premium: 1,
+							premiumExpiration: new Date(
+								subscription.data[0].current_period_end * 1000
+							)
+						}
+					})
+				} catch (error) {
+					console.error(error)
+					return NextResponse.json(
+						{
+							message: 'An error occurred while updating the database.',
+							status: 500
+						},
+						{ status: 500 }
 					)
+				}
+				break
+
+			case 'invoice.paid':
+			case 'invoice.payment_succeeded':
+				const invoice: Stripe.Invoice = event.data.object
+
+				if (invoice.subscription_details === null)
+					return NextResponse.json(
+						{ message: 'No subscription details found', status: 400 },
+						{ status: 400 }
+					)
+
+				const serverIdInvoice = invoice.subscription_details.metadata?.serverId
+
+				if (!serverIdInvoice) {
+					return NextResponse.json(
+						{ message: 'One or more variables are missing', status: 400 },
+						{ status: 400 }
+					)
+				}
+
+				const subscriptionInvoice = await stripe.subscriptions.search({
+					query: `metadata['serverId']:'${serverIdInvoice}'`
+				})
+				try {
+					await prisma.guild.update({
+						where: {
+							guildID: serverIdInvoice
+						},
+						data: {
+							pending: false,
+							premiumExpiration: new Date(
+								subscriptionInvoice.data[0].current_period_end * 1000
+							)
+						}
+					})
 				} catch (error) {
 					console.error(error)
 					return NextResponse.json(
@@ -73,60 +129,58 @@ export async function POST(request: NextRequest) {
 
 			// in the event of a subscription being updated
 			case 'customer.subscription.updated':
-				const subscriptionUpdated: Stripe.Subscription = event.data.object
-				const userIdUpdated = subscriptionUpdated.metadata?.userId
-				const serverIdUpdated = subscriptionUpdated.metadata?.serverId
-				const tierUpdated =
-					subscriptionUpdated.metadata?.monthly === 'true' ?
-						'monthly'
-					:	'yearly'
+				const subscriptionDataUpdated: Stripe.Subscription = event.data.object
+				const serverIdUpdated = subscriptionDataUpdated.metadata?.serverId
 
-				if (!userIdUpdated || !serverIdUpdated || !tierUpdated) {
-					console.error('One or more variables are undefined.')
+				if (!serverIdUpdated) {
 					return NextResponse.json(
 						{ message: 'One or more variables are missing', status: 400 },
 						{ status: 400 }
 					)
 				}
 
-				await guildProfileSchema.findOneAndUpdate(
-					{ guildID: serverIdUpdated },
-					{
+				const subscriptionUpdated = await stripe.subscriptions.search({
+					query: `metadata['serverId']:'${serverIdUpdated}'`
+				})
+
+				await prisma.guild.update({
+					where: {
+						guildID: serverIdUpdated
+					},
+					data: {
 						premium: 1,
 						premiumExpiration: new Date(
-							subscriptionUpdated.current_period_end * 1000
+							subscriptionUpdated.data[0].current_period_end * 1000
 						)
-					},
-					{ upsert: true }
-				)
+					}
+				})
+
 				break
 
 			// in the event of a subscription being deleted
 			case 'customer.subscription.deleted':
-				const subscriptionDeleted: Stripe.Subscription = event.data.object
-				const userIdDeleted = subscriptionDeleted.metadata?.userId
-				const serverIdDeleted = subscriptionDeleted.metadata?.serverId
-				const tierDeleted =
-					subscriptionDeleted.metadata?.monthly === 'true' ?
-						'monthly'
-					:	'yearly'
+				const subscriptionDataDeleted: Stripe.Subscription = event.data.object
+				const serverIdDeleted = subscriptionDataDeleted.metadata?.serverId
 
-				if (!userIdDeleted || !serverIdDeleted || !tierDeleted) {
+				if (!serverIdDeleted) {
 					console.error('One or more variables are undefined.')
 					return NextResponse.json(
 						{ message: 'One or more variables are missing', status: 400 },
 						{ status: 400 }
 					)
 				}
+
 				try {
-					await guildProfileSchema.findOneAndUpdate(
-						{ guildID: serverIdDeleted },
-						{
-							premiumUser: null,
+					await prisma.guild.update({
+						where: {
+							guildID: serverIdDeleted
+						},
+						data: {
 							premium: 0,
-							premiumExpiration: null
+							premiumExpiration: null,
+							premiumUser: null
 						}
-					)
+					})
 				} catch (error) {
 					console.error(error)
 					return NextResponse.json(

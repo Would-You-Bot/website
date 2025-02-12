@@ -71,10 +71,16 @@ function QuestionModal({
 			setQuestionValue(existingQuestion.question)
 			setTypeValue(existingQuestion.type)
 		} else {
-			setQuestionValue('')
+			// For create mode, set the prefix based on type
+			const prefix =
+				type === 'wouldyourather' ? 'Would you rather '
+				: type === 'whatwouldyoudo' ? 'What would you do '
+				: type === 'neverhaveiever' ? 'Never have I ever '
+				: ''
+			setQuestionValue(prefix)
 			setTypeValue(type === PackType.mixed ? null : type)
 		}
-	}, [questionToEdit, mode, value, type])
+	}, [questionToEdit, mode, value, type, isOpen])
 
 	const validateQuestion = () => {
 		const questionData = {

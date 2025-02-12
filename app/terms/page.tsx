@@ -1,4 +1,28 @@
+import type { Metadata, Viewport } from 'next'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+	metadataBase: new URL('https://wouldyoubot.gg'),
+	title: 'Terms of Service - Would You Bot',
+	description: 'The Terms of Service of Would You Bot.',
+	twitter: {
+		title: 'Terms of Service - Would You Bot',
+		description: 'The Terms of Service of Would You Bot.'
+	},
+	openGraph: {
+		title: 'Terms of Service - Would You Bot',
+		description: 'The Terms of Service of Would You Bot.'
+	},
+	robots: {
+		index: true,
+		follow: true
+	}
+}
+
+export const viewport: Viewport = {
+	themeColor: '#0598F6',
+	maximumScale: 5
+}
 
 export default function Terms() {
 	return (
@@ -8,7 +32,7 @@ export default function Terms() {
 			</h1>
 			<div>
 				<h3 className="my-4 text-lg font-bold text-foreground">
-					Last updated and effective: May 16, 2024
+					Last updated and effective: Jan 15, 2025
 				</h3>
 				<h3 className="my-4 text-lg font-bold text-foreground">
 					Agreement to Terms
@@ -23,7 +47,7 @@ export default function Terms() {
 					&quot;Discord&quot; (accessible at{' '}
 					<Link
 						href="https://discord.com"
-						target={'_blank'}
+						target="_blank"
 						className="text-foreground underline"
 					>
 						https://discord.com
@@ -32,7 +56,7 @@ export default function Terms() {
 					Discord&apos;s public API (its documentation is accessible at{' '}
 					<Link
 						href="https://discord.dev"
-						target={'_blank'}
+						target="_blank"
 						className="text-foreground underline"
 					>
 						https://discord.dev
@@ -42,7 +66,6 @@ export default function Terms() {
 					not want, is not trying to and is not knowingly abusing any of
 					Discord&apos;s services.
 				</p>
-
 				<h3 className="my-4 text-lg font-bold text-foreground">
 					1. Age Restriction
 				</h3>
@@ -55,23 +78,24 @@ export default function Terms() {
 					access to the Would You Bot and delete any personal information
 					collected from them, if applicable.
 				</p>
-
 				<h3 className="my-4 text-lg font-bold text-foreground">
 					2. Premium Subscription
 				</h3>
 				<p>
-					The Would You discord Bot offers a premium subscription model
+					The Would You Discord Bot offers a premium subscription model
 					(&quot;Premium Model&quot;) that provides additional features and
 					benefits. By subscribing to the Premium Model, you agree to pay the
 					specified subscription fee on a recurring basis using the payment
-					processing services of Stripe, Inc. (&quot;Stripe&quot;).
+					processing services of Stripe, Inc. (&quot;Stripe&quot;). You also
+					agree to us creating a customer object in Stripe with the data you
+					provide us For example by logging into our website.{' '}
 				</p>
 				<h4 className="text-md text-foreground-400 my-4 font-bold">
 					2.1 Payment Processing
 				</h4>
 				<p>
 					All payments for the Premium Service are processed securely through
-					Stripe. By subscribing to the Premium Model, you authorise the Creator
+					Stripe. By subscribing to the Premium Model, you authorize the Creator
 					to automatically charge the applicable subscription fee to your chosen
 					payment method on a recurring basis until you cancel your
 					subscription.{' '}
@@ -85,9 +109,8 @@ export default function Terms() {
 					contacting the Creator directly. No refunds will be given for any
 					unused portion of the subscription period.
 				</p>
-
 				<h3 className="my-4 text-lg font-bold text-foreground">
-					3. Intellectual property rights
+					3. Intellectual Property Rights
 				</h3>
 				<p>
 					Would You and all content and software associated with the bot,
@@ -124,9 +147,34 @@ export default function Terms() {
 					account and refuse any and all current or future use of the Site (or
 					any portion thereof).
 				</p>
+				<h3 className="my-4 text-lg font-bold text-foreground">
+					5. Question Pack Submission and Usage Rights
+				</h3>
+				<p>
+					Users may submit collections of &quot;Would You Rather&quot; questions
+					(&quot;Question Packs&quot;) to the platform. By submitting a Question
+					Pack, you grant Would You Bot a worldwide, non-exclusive,
+					royalty-free, sublicensable, and transferable license to use,
+					reproduce, modify, adapt, publish, translate, distribute, publicly
+					perform, and display your content across our website, Discord bot,
+					mobile applications, and any related services or platforms operated by
+					us.
+				</p>
+				<p>
+					This license allows us to feature your content, integrate it into our
+					services, and promote it to our user base. The license remains in
+					effect unless you explicitly request the removal of your content from
+					our platform, subject to review and approval by our team.
+				</p>
+				<p>
+					All Question Packs are subject to review and approval by the
+					moderation team before being published on the platform. We reserve the
+					right to reject, modify, or remove any Question Pack at our sole
+					discretion, without providing a detailed explanation.
+				</p>
 
 				<h3 className="my-4 text-lg font-bold text-foreground">
-					5. Warranty Disclaimer
+					6. Warranty Disclaimer
 				</h3>
 				<p>
 					1. The bot may experience downtime, errors, or technical issues beyond
@@ -144,7 +192,7 @@ export default function Terms() {
 					<br />
 				</p>
 
-				<h3 className="my-4 text-lg font-bold text-foreground">6. Products</h3>
+				<h3 className="my-4 text-lg font-bold text-foreground">7. Products</h3>
 				<p>
 					All products are subject to availability. We reserve the right to
 					discontinue any products at any time for any reason. Prices for all
@@ -152,12 +200,12 @@ export default function Terms() {
 				</p>
 
 				<h3 className="my-4 text-lg font-bold text-foreground">
-					7. Contribution licence
+					8. Contribution licence
 				</h3>
 				<p>
-					You and Site agree that we may access, store, process, and use any
-					information and personal data that you provide following the terms of
-					the Privacy Policy and your choices (including settings).
+					You agree that we may access, store, process, and use any information
+					and personal data that you provide following the terms of the Privacy
+					Policy and your choices (including settings).
 					<br />
 					<br />
 					By submitting suggestions or other feedback regarding the Site, you
@@ -176,7 +224,7 @@ export default function Terms() {
 				</p>
 
 				<h3 className="my-4 text-lg font-bold text-foreground">
-					8. Term and Termination
+					9. Term and Termination
 				</h3>
 				<p>
 					These Terms of Use shall remain in full force and effect while you use
@@ -202,7 +250,7 @@ export default function Terms() {
 				</p>
 
 				<h3 className="my-4 text-lg font-bold text-foreground">
-					9. Modifications and interruptions
+					10. Modifications and interruptions
 				</h3>
 				<p>
 					The company reserves the right to change, modify, or remove the
@@ -231,7 +279,7 @@ export default function Terms() {
 				</p>
 
 				<h3 className="my-4 text-lg font-bold text-foreground">
-					10. Governing Law
+					11. Governing Law
 				</h3>
 				<p>
 					These Terms and your use of Would You will be governed by and
@@ -245,7 +293,7 @@ export default function Terms() {
 				</p>
 
 				<h3 className="my-4 text-lg font-bold text-foreground">
-					11. Disclaimer
+					12. Disclaimer
 				</h3>
 				<p>
 					Would You is provided &quot;as is&quot; and &quot;as available&quot;,
@@ -259,7 +307,7 @@ export default function Terms() {
 				</p>
 
 				<h3 className="my-4 text-lg font-bold text-foreground">
-					12. Limitation of Liability
+					13. Limitation of Liability
 				</h3>
 				<p>
 					The Company will not be liable to you or any third party for any
@@ -269,7 +317,7 @@ export default function Terms() {
 				</p>
 
 				<h3 className="my-4 text-lg font-bold text-foreground">
-					13. Miscellaneous
+					14. Miscellaneous
 				</h3>
 				<p>
 					These Terms of Use and any policies or operating rules posted by us on

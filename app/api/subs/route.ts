@@ -1,8 +1,8 @@
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
-import guildProfileSchema from '@/models/Guild'
 import { NextResponse } from 'next/server'
 import connectDb from '@/lib/mongodb'
 import { stripe } from '@/lib/stripe'
+import { prisma } from '@/lib/prisma'
 
 interface StripeSubscriptionRequest {
 	monthly: string
@@ -27,7 +27,14 @@ export async function POST(req: Request) {
 	const { priceId, serverId, monthly } =
 		(await req.json()) as StripeSubscriptionRequest
 
-	const server = await guildProfileSchema.findOne({ guildID: serverId })
+	const server = await prisma.guild.findFirst({
+		where: {
+			guildID: serverId
+		},
+		select: {
+			premiumExpiration: true
+		}
+	})
 
 	if (!serverId) {
 		return NextResponse.json(

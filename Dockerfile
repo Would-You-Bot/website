@@ -1,5 +1,9 @@
-FROM node:18-alpine AS base
+# Use Node.js 20
+FROM node:20-alpine AS base
 RUN apk add --no-cache openssl openssl-dev
+
+# Update Corepack
+RUN corepack enable && npm i -g corepack@latest
 
 # Install dependencies only when needed
 FROM base AS deps
