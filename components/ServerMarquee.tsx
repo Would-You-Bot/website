@@ -4,18 +4,10 @@ import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
-
-interface Server {
-  name: string
-  members: string
-  avatar: string
-  verified: boolean
-  partnered: boolean
-  invite: string
-}
+import FeaturedServer from '@/types/FeaturedServer'
 
 interface MarqueeProps {
-  servers: Server[]
+  servers: FeaturedServer[]
   speed: number
   direction?: 'left' | 'right'
   className?: string
