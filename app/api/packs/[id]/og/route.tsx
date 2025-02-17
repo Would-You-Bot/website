@@ -2,6 +2,8 @@
 import { ImageResponse } from 'next/og'
 import { prisma } from '@/lib/prisma'
 import validator from 'validator'
+import axios from 'axios'
+import sharp from 'sharp';
 
 async function loadGoogleFont(font: string) {
   const url = `https://fonts.googleapis.com/css2?family=${font}:opsz,wght@14..32,600..900&display=swap" rel="stylesheet`
@@ -18,6 +20,17 @@ async function loadGoogleFont(font: string) {
   throw new Error('failed to load font data')
 }
 
+async function getImageBase64(url: string) {
+  return axios.get<ArrayBuffer>(url, {
+    responseType: 'arraybuffer',
+  }).then(async (res) => {
+    const buffer = await sharp(res.data).toFormat('png').toBuffer()
+    return {
+      url: `data:${'image/png'};base64,${buffer.toString('base64')}`,
+    };
+  })
+}
+
 export async function GET(request: Request, props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
 
@@ -32,8 +45,6 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
       likes: true,
     }
   })
-
-  console.log(packData)
 
   if (!packData) {
     return new ImageResponse(
@@ -58,8 +69,6 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
     select: { globalName: true, avatarUrl: true, profilePrivacy: true }
   })
 
-  console.log(authorData)
-
   if (!authorData) {
     return new ImageResponse(
       <div style={{
@@ -81,14 +90,18 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
   if (authorData.profilePrivacy) {
     authorData.globalName = "Private"
     authorData.avatarUrl = "https://cdn.discordapp.com/embed/avatars/0.png"
+  } else {
+    const res = await getImageBase64(authorData.avatarUrl!)
+    authorData.avatarUrl = res.url
   }
 
+
   return new ImageResponse(
-		(
-			<div
-				style={{ fontFamily: 'Inter' }}
-				tw="relative flex items-center justify-center w-full h-full"
-			>
+    (
+      <div
+        style={{ fontFamily: 'Inter' }}
+        tw="relative flex items-center justify-center w-full h-full"
+      >
         {/* Background Image for the entire canvas */}
         <div
           tw="absolute inset-0 w-full h-full"
@@ -103,6 +116,8 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
         <div tw="flex items-center bg-gray-800/80 px-4 py-2 rounded-lg">
           <img
             src={authorData?.avatarUrl!}
+            width={24}
+            height={24}
             alt="Author avatar"
             tw="w-8 h-8 rounded-full"
           />
@@ -110,7 +125,7 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
         </div>
 
         {/* Content Section */}
-        <div tw="flex flex-col gap-6 z-10">
+        <div tw="flex flex-col gap-6">
           <h1 tw="text-6xl font-bold text-white">{packData.name}</h1>
           <p tw="text-3xl text-gray-400 max-w-2xl leading-snug">
             {packData.description}
@@ -118,7 +133,7 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
         </div>
 
         {/* Stats Section */}
-        <div tw="flex gap-12 mt-auto z-10">
+        <div tw="flex gap-12 mt-auto">
           <div tw="flex items-center gap-3">
             <svg width="28" height="28" viewBox="0 0 20 20" fill="#EF4444">
               <path
@@ -138,8 +153,8 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
         </div>
 
         {/* Logo */}
-        <div tw="absolute bottom-16 right-16 w-20 h-20">
-          <div tw="w-full h-full rounded-xl bg-gradient-to-r from-red-500 to-blue-500" />
+        <div tw="absolute flex bottom-16 right-16 w-20 h-20">
+          <span tw="w-full h-full rounded-xl bg-gradient-to-r from-red-500 to-blue-500"></span>
         </div>
       </div>
     ),

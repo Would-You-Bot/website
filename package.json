@@ -58,7 +58,7 @@
 		"react-fast-marquee": "^1.6.4",
 		"react-hook-form": "^7.53.0",
 		"rss": "^1.2.2",
-		"sharp": "^0.33.4",
+		"sharp": "^0.33.5",
 		"sonner": "^1.7.1",
 		"stripe": "^15.8.0",
 		"tailwind-merge": "^2.3.0",
