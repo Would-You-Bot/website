@@ -2,34 +2,7 @@
 import { ImageResponse } from 'next/og'
 import { prisma } from '@/lib/prisma'
 import validator from 'validator'
-import axios from 'axios'
-import sharp from 'sharp';
-
-async function loadGoogleFont(font: string) {
-  const url = `https://fonts.googleapis.com/css2?family=${font}:opsz,wght@14..32,600..900&display=swap" rel="stylesheet`
-  const css = await (await fetch(url)).text()
-  const resource = css.match(/src: url\((.+)\) format\('(opentype|truetype)'\)/)
-
-  if (resource) {
-    const response = await fetch(resource[1])
-    if (response.status == 200) {
-      return await response.arrayBuffer()
-    }
-  }
-
-  throw new Error('failed to load font data')
-}
-
-async function getImageBase64(url: string) {
-  return axios.get<ArrayBuffer>(url, {
-    responseType: 'arraybuffer',
-  }).then(async (res) => {
-    const buffer = await sharp(res.data).toFormat('png').toBuffer()
-    return {
-      url: `data:${'image/png'};base64,${buffer.toString('base64')}`,
-    };
-  })
-}
+import loadGoogleFont from '@/helpers/og/loadGoogleFont';
 
 export async function GET(request: Request, props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
@@ -91,6 +64,7 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
     authorData.globalName = "Private"
     authorData.avatarUrl = "https://cdn.discordapp.com/embed/avatars/0.png"
   } else {
+    const getImageBase64 = (await import('@/helpers/og/getImageBase64')).default;
     const res = await getImageBase64(authorData.avatarUrl!)
     authorData.avatarUrl = res.url
   }
