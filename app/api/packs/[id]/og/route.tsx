@@ -70,7 +70,6 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
     select: { globalName: true, avatarUrl: true, profilePrivacy: true }
   })
 
-  const desc = "If you want to render the generated SVG to another image format such as PNG, it would be better to use base64 encoded image data (or buffer) directly as props.src so no extra I/O is needed in Satori If you want to render the generated SVG to another image format such as PNG, it would be better to use base64 encoded image data (or buffer) directly as props.src so no extra I/O is needed in Satori:"
 
   const descriptionToShow = packData.description.length > 200 ? packData.description.slice(0, 200) + "..." : packData.description;
 
