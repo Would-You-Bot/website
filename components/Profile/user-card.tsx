@@ -12,6 +12,7 @@ import { Badge } from '@/components/ui/badge'
 import roles from '@/data/roles.json'
 import { useState } from 'react'
 import Image from 'next/image'
+import { languageMap } from '@/helpers'
 
 interface UserCardProps {
 	userData: {
@@ -24,14 +25,6 @@ interface UserCardProps {
 		createdAt: string
 		language: string
 	}
-}
-
-const languageMap: Record<string, string> = {
-	en_EN: 'English',
-	es_ES: 'Spanish',
-	fr_FR: 'French',
-	de_DE: 'German',
-	it_IT: 'Italian'
 }
 
 export function UserCard({ userData }: UserCardProps) {

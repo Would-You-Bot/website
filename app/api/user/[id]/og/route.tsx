@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import type { NextRequest } from 'next/server'
 import { ImageResponse } from 'next/og'
 import { prisma } from '@/lib/prisma'
 import validator from 'validator'
@@ -19,15 +18,10 @@ async function loadGoogleFont(font: string) {
 	throw new Error('failed to load font data')
 }
 
-export async function GET(
-	request: NextRequest,
-	{
-		params
-	}: {
-		params: Promise<{ id: string }>
-	}
-) {
-	const id = validator.escape((await params).id) // Sanitize ID
+export async function GET(request: Request, props: { params: Promise<{ id: string }> }) {
+	const params = await props.params;
+
+	const id = validator.escape(params.id) // Sanitize ID
 
 	const userData = await prisma.user.findFirst({
 		where: {
