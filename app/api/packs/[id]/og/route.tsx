@@ -104,7 +104,7 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
         }}
         tw="relative flex flex-col items-center justify-center w-full h-full p-10"
       >
-        <div tw="w-full flex flex-col gap-8 mb-auto mt-24">
+        <div tw="w-full flex flex-col mb-auto mt-24">
           <div tw="flex items-center justify-between">
             <div tw="flex items-center bg-gray-800/50 border border-gray-800 px-4 py-2 rounded-lg">
               <img
