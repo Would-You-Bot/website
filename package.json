@@ -11,6 +11,7 @@
 		"format": "prettier --write ./**/*.{ts,tsx}",
 		"docker:build": "docker compose build -t website-wy",
 		"docker:start": "docker compose up -d",
+		"prisma:gen": "prisma generate",
 		"prisma:migrate:dev": "prisma migrate dev"
 	},
 	"dependencies": {
