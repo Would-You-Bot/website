@@ -4,32 +4,8 @@ import { prisma } from '@/lib/prisma'
 import validator from 'validator'
 import axios from 'axios'
 import sharp from 'sharp';
-
-async function loadGoogleFont(font: string) {
-  const url = `https://fonts.googleapis.com/css2?family=${font}:opsz,wght@14..32,600..900&display=swap" rel="stylesheet`
-  const css = await (await fetch(url)).text()
-  const resource = css.match(/src: url\((.+)\) format\('(opentype|truetype)'\)/)
-
-  if (resource) {
-    const response = await fetch(resource[1])
-    if (response.status == 200) {
-      return await response.arrayBuffer()
-    }
-  }
-
-  throw new Error('failed to load font data')
-}
-
-async function getImageBase64(url: string) {
-  return axios.get<ArrayBuffer>(url, {
-    responseType: 'arraybuffer',
-  }).then(async (res) => {
-    const buffer = await sharp(res.data).toFormat('png').toBuffer()
-    return {
-      url: `data:${'image/png'};base64,${buffer.toString('base64')}`,
-    };
-  })
-}
+import getImageBase64 from '@/helpers/og/getImageBase64';
+import loadGoogleFont from '@/helpers/og/loadGoogleFont';
 
 export async function GET(request: Request, props: { params: Promise<{ id: string }> }) {
   const params = await props.params;
@@ -131,9 +107,9 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
 
           {/* Content Section */}
           <div tw="flex flex-col">
-            <h1 tw="text-6xl font-bold text-white -mb-1">{packData.name}</h1>
+            <h1 tw="text-6xl font-bold text-white -mb-1">{packData.nsfw ? "NSFW Question Pack" : packData.name}</h1>
             <p tw="text-2xl text-white max-w-2xl leading-snug">
-              {descriptionToShow}
+              {packData.nsfw ? "This question pack includes NSFW questions." : descriptionToShow}
             </p>
           </div>
         </div>
@@ -157,14 +133,14 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
                   d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
                 />
               </svg>
-              <span tw="text-white text-2xl ml-3">{packData.likes.length} Likes</span>
+              <span tw="text-white text-2xl ml-3">{packData.likes.length ?? 0} Likes</span>
             </div>
 
             <div tw="flex items-center ml-10">
               <svg width="28" height="28" viewBox="0 0 20 20" fill="#3B82F6">
                 <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z" />
               </svg>
-              <span tw="text-white text-2xl ml-3">{packData.uses.length ?? 0} Uses</span>
+              <span tw="text-white text-2xl ml-3">{packData.uses ?? 0} Uses</span>
             </div>
           </div>
           {/* Logo */}
