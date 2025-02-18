@@ -2,8 +2,6 @@
 import { ImageResponse } from 'next/og'
 import { prisma } from '@/lib/prisma'
 import validator from 'validator'
-import axios from 'axios'
-import sharp from 'sharp';
 import getImageBase64 from '@/helpers/og/getImageBase64';
 import loadGoogleFont from '@/helpers/og/loadGoogleFont';
 
