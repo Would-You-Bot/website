@@ -38,6 +38,7 @@ model QuestionPack {
   questions   Json[]
   status      Status   @default(pending)
   nsfw        Boolean  @default(false) // Important for the future not used yet
+  uses        Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

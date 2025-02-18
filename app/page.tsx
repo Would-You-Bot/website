@@ -1,6 +1,7 @@
 import { HomeSchemaMetadata } from '@/components/Homepage/SchemaMetadata'
 import { getRandomQuestion } from '@/helpers/getRandomQuestion'
 import { HomeContent } from '@/components/Homepage/Content'
+import FeaturedServer from '@/types/FeaturedServer'
 import type { Metadata, Viewport } from 'next'
 
 export const metadata: Metadata = {
@@ -69,7 +70,7 @@ const Home = async () => {
 					initialRatherQuestion={getRandomQuestion('rather')}
 					initialNhieQuestion={getRandomQuestion('nhie')}
 					serverCount={serverCount}
-					servers={servers}
+					servers={servers.filter((n: FeaturedServer) => n.name !== 'Pornhub')}
 				/>
 			</main>
 			<HomeSchemaMetadata />

@@ -1,33 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
-import type { NextRequest } from 'next/server'
 import { ImageResponse } from 'next/og'
 import { prisma } from '@/lib/prisma'
 import validator from 'validator'
+import loadGoogleFont from '@/helpers/og/loadGoogleFont';
+import getImageBase64 from '@/helpers/og/getImageBase64';
 
-async function loadGoogleFont(font: string) {
-	const url = `https://fonts.googleapis.com/css2?family=${font}:opsz,wght@14..32,600..900&display=swap" rel="stylesheet`
-	const css = await (await fetch(url)).text()
-	const resource = css.match(/src: url\((.+)\) format\('(opentype|truetype)'\)/)
+export async function GET(request: Request, props: { params: Promise<{ id: string }> }) {
+	const params = await props.params;
 
-	if (resource) {
-		const response = await fetch(resource[1])
-		if (response.status == 200) {
-			return await response.arrayBuffer()
-		}
-	}
-
-	throw new Error('failed to load font data')
-}
-
-export async function GET(
-	request: NextRequest,
-	{
-		params
-	}: {
-		params: Promise<{ id: string }>
-	}
-) {
-	const id = validator.escape((await params).id) // Sanitize ID
+	const id = validator.escape(params.id) // Sanitize ID
 
 	const userData = await prisma.user.findFirst({
 		where: {
@@ -62,10 +43,6 @@ export async function GET(
 		)
 	}
 
-	const profilePic =
-		userData.avatarUrl?.replace('.webp', '.png').replace('128', '512') ??
-		'https://discord.com/assets/322c936a8c8be1b803cd94861bdfa868.png'
-
 	return new ImageResponse(
 		(
 			<div
@@ -86,7 +63,7 @@ export async function GET(
 				<div tw="flex flex-col items-center justify-center w-[45%] max-w-[800px] p-8 ">
 					{/* Profile Picture */}
 					<img
-						src={profilePic}
+						src={(await getImageBase64(userData.avatarUrl!)).url}
 						alt={`${userData.displayName}'s profile`}
 						width={150}
 						height={150}
