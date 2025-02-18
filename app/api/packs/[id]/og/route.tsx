@@ -167,7 +167,7 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
           </div>
           {/* Logo */}
           <div tw="flex w-16 h-16 ml-auto">
-            <img src="https://wouldyoubot.gg/Logo.svg" alt="Logo" tw="w-full h-full" />
+            <img src="https://wouldyoubot.gg/Logo-Square.svg" alt="Logo" tw="w-full h-full rounded-md" />
           </div>
         </div>
       </div>
