@@ -43,8 +43,6 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
 		)
 	}
 
-	console.log((await getImageBase64(userData.avatarUrl!)).url)
-
 	return new ImageResponse(
 		(
 			<div
