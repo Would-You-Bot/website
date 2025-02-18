@@ -27,6 +27,14 @@ const nextConfig: NextConfig = {
 					{
 						key: 'X-Frame-Options',
 						value: 'SAMEORIGIN'
+					},
+					{
+						key: 'Referrer-Policy',
+						value: 'origin-when-cross-origin'
+					},
+					{
+						key: 'X-Content-Type-Options',
+						value: 'nosniff'
 					}
 				]
 			}
