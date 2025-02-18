@@ -3,6 +3,7 @@ import { ImageResponse } from 'next/og'
 import { prisma } from '@/lib/prisma'
 import validator from 'validator'
 import loadGoogleFont from '@/helpers/og/loadGoogleFont';
+import getImageBase64 from '@/helpers/og/getImageBase64';
 
 export async function GET(request: Request, props: { params: Promise<{ id: string }> }) {
 	const params = await props.params;
@@ -42,9 +43,7 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
 		)
 	}
 
-	const profilePic =
-		userData.avatarUrl?.replace('.webp', '.png').replace('128', '512') ??
-		'https://discord.com/assets/322c936a8c8be1b803cd94861bdfa868.png'
+	console.log((await getImageBase64(userData.avatarUrl!)).url)
 
 	return new ImageResponse(
 		(
@@ -66,7 +65,7 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
 				<div tw="flex flex-col items-center justify-center w-[45%] max-w-[800px] p-8 ">
 					{/* Profile Picture */}
 					<img
-						src={profilePic}
+						src={(await getImageBase64(userData.avatarUrl!)).url}
 						alt={`${userData.displayName}'s profile`}
 						width={150}
 						height={150}
