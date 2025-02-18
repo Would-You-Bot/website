@@ -10,18 +10,27 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
 
   const id = validator.escape(params.id)
 
-  const packData = await prisma.questionPack.findFirst({
-    where: { id: id },
-    select: {
-      name: true,
-      description: true,
-      authorId: true,
-      likes: true,
-      type: true,
-      nsfw: true,
-      uses: true
+  let packData;
+  try {
+    packData = await prisma.questionPack.findFirst({
+      where: { id: id },
+      select: {
+        name: true,
+        description: true,
+        authorId: true,
+        likes: true,
+        type: true,
+        nsfw: true,
+        uses: true
+      }
+    })
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.stack);
+    } else {
+      console.log("Bad things happened");
     }
-  })
+  }
 
   if (!packData) {
     return new ImageResponse(
@@ -41,13 +50,19 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
     )
   }
 
-  const authorData = await prisma.user.findFirst({
-    where: { userID: packData.authorId },
-    select: { globalName: true, avatarUrl: true, profilePrivacy: true }
-  })
-
-
-  const descriptionToShow = packData.description.length > 200 ? packData.description.slice(0, 200) + "..." : packData.description;
+  let authorData;
+  try {
+    authorData = await prisma.user.findFirst({
+      where: { userID: packData.authorId },
+      select: { globalName: true, avatarUrl: true, profilePrivacy: true }
+    })
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.stack);
+    } else {
+      console.log("Bad things happened");
+    }
+  }
 
   if (!authorData) {
     return new ImageResponse(
@@ -66,6 +81,8 @@ export async function GET(request: Request, props: { params: Promise<{ id: strin
       { width: 1200, height: 630 }
     )
   }
+
+  const descriptionToShow = packData.description.length > 200 ? packData.description.slice(0, 200) + "..." : packData.description;
 
   if (authorData.profilePrivacy) {
     authorData.globalName = "Private"
