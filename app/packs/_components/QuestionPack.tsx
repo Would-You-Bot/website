@@ -176,7 +176,7 @@ export default function QuestionPack({
 										'mr-2 h-4 w-4 shrink-0',
 										userLiked ?
 											'text-destructive fill-destructive'
-										:	'text-muted-foreground'
+											: 'text-muted-foreground'
 									)}
 								/>
 								<span
@@ -191,7 +191,7 @@ export default function QuestionPack({
 
 							<Button
 								className="w-full"
-								onClick={() => router.push(`/packs/${id}`)}
+								onClick={() => router.push(`/packs/id/${id}`)}
 							>
 								<ExternalLink className="mr-2 h-4 w-4 shrink-0" />
 								<span>Use Pack</span>

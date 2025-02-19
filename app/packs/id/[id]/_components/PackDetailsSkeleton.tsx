@@ -1,16 +1,14 @@
 'use client'
 
 import { ArrowLeft, CopyIcon, FileUp, Heart, LinkIcon } from 'lucide-react'
-import ExportQuestionModal from '../../_components/ExportQuestionModal'
-import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Button } from '@/components/ui/button'
 import Container from '@/components/Container'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
-import Image from 'next/image'
 import Link from 'next/link'
 import clsx from 'clsx'
+import ExportQuestionModal from '@/app/packs/_components/ExportQuestionModal'
 
 export function PackDetailsSkeleton() {
 	return (
@@ -64,16 +62,16 @@ export function PackDetailsSkeleton() {
 
 					<PackDetailsContainer>
 						<PackDetailsHeader>Type</PackDetailsHeader>
-						<p className="font-light">
+						<span className="font-light">
 							<Skeleton className="h-4 w-16 rounded-md" />
-						</p>
+						</span>
 					</PackDetailsContainer>
 
 					<PackDetailsContainer>
 						<PackDetailsHeader>Language</PackDetailsHeader>
-						<p className="font-light">
+						<span className="font-light">
 							<Skeleton className="h-4 w-16 rounded-md" />
-						</p>
+						</span>
 					</PackDetailsContainer>
 
 					<PackDetailsContainer>
@@ -93,13 +91,12 @@ export function PackDetailsSkeleton() {
 					</PackDetailsContainer>
 					<PackDetailsContainer>
 						<PackDetailsHeader>Author</PackDetailsHeader>
-						<Link
-							href="/"
+						<div
 							className="flex items-center gap-1"
 						>
 							<Skeleton className="size-6 rounded-full" />
 							<Skeleton className="h-4 w-16 rounded-md" />
-						</Link>
+						</div>
 					</PackDetailsContainer>
 
 					<PackDetailsContainer>
@@ -175,5 +172,5 @@ function PackDetailsHeader({ children }: { children: React.ReactNode }) {
 }
 
 function PackDetailsText({ children }: { children: React.ReactNode }) {
-	return <p className="font-light">{children}</p>
+	return <span className="font-light">{children}</span>
 }
