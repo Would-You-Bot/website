@@ -16,22 +16,14 @@ import {
 } from '@/components/ui/select'
 import { PackData, questionSchema } from '@/utils/zod/schemas'
 import { useLocalStorage } from '@/hooks/use-localstorage'
-import { Control, useController } from 'react-hook-form'
+import { useController } from 'react-hook-form'
 import { Textarea } from '@/components/ui/textarea'
 import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { packTypes } from '@/lib/constants'
 import { PackType } from '@prisma/client'
 import { z } from 'zod'
-
-interface QuestionModalProps {
-	control: Control<PackData>
-	type: PackType
-	mode: 'create' | 'update'
-	questionToEdit: number | null
-	isOpen?: boolean
-	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
+import QuestionModalProps from '@/types/packs/QuestionModalProps'
 
 type QuestionType = Exclude<PackType, 'mixed'>
 
