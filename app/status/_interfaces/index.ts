@@ -21,4 +21,23 @@ export const Status = {
   Resuming: 8
 } as const
 
+export const statusArray = [
+  'Ready',
+  'Connecting',
+  'Reconnecting',
+  'Idle',
+  'Nearly',
+  'Disconnected',
+  'Waiting For Guilds',
+  'Identifying',
+  'Resuming'
+]
+
 export type Status = (typeof Status)[keyof typeof Status]
+
+export interface ShardStats {
+  id: number
+  status: Status
+  ping: number
+  selected?: boolean
+}

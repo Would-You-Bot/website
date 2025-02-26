@@ -6,7 +6,7 @@ import {
   TooltipProvider,
   TooltipTrigger
 } from '@/components/ui/tooltip'
-import { ClusterStats, Status } from '../_interfaces'
+import { ClusterStats, Status, statusArray } from '../_interfaces'
 import { cn } from '@/lib/utils'
 
 interface ClusterCardProps {
@@ -46,10 +46,7 @@ export const ClusterCardsList = ({ data }: ClusterCardProps) => {
               ></span>
             </div>
             <div
-              className={cn(
-                'flex flex-wrap gap-2 xs:gap-3 sm:gap-4',
-                cluster.length > 5 && 'sm:justify-between'
-              )}
+              className="flex flex-wrap gap-2 xs:gap-3 sm:gap-4"             
             >
               {cluster.map((shard, index) => (
                 <Tooltip key={shard.id}>
@@ -86,7 +83,7 @@ export const ClusterCardsList = ({ data }: ClusterCardProps) => {
                       </div>
                       <div className="flex flex-col items-start gap-1 text-foreground">
                         <span>{shard.id}</span>
-                        <span>{Status[shard.status]}</span>
+                        <span>{statusArray[shard.status]}</span>
                         <span
                           className={cn(
                             shard.ping > 0 ? 'text-status-green'
