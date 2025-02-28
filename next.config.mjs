@@ -93,6 +93,12 @@ const nextConfig = {
         hostname: 'cdn.wouldyoubot.gg',
         port: '',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'startupfa.me',
+        port: '',
+        pathname: '/**'
       }
     ]
   }
