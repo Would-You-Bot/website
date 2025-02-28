@@ -85,7 +85,6 @@ const nextConfig: NextConfig = {
 			{
 				source: '/manage/subscription',
 				destination: '/api/subs/manage',
-				permanent: true
 			}
 		]
 	},
