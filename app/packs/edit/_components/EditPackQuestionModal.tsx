@@ -15,7 +15,6 @@ import {
 	SelectValue
 } from '@/components/ui/select'
 import { PackData, questionSchema } from '@/utils/zod/schemas'
-import { useLocalStorage } from '@/hooks/use-localstorage'
 import { Control, useController } from 'react-hook-form'
 import { Textarea } from '@/components/ui/textarea'
 import React, { useEffect, useState } from 'react'

@@ -77,7 +77,11 @@ const nextConfig: NextConfig = {
 				source: '/impressum',
 				destination: '/legal-de',
 				permanent: true
-			},
+			}
+		]
+	},
+	async rewrites() {
+		return [
 			{
 				source: '/manage/subscription',
 				destination: '/api/subs/manage',
