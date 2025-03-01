@@ -5,11 +5,11 @@ export interface ShardStats {
 	guilds: number
 	members: number
 	selected?: boolean
-  }
-  
-  export interface ClusterStats extends Array<ShardStats> {}
-  
-  export const Status = {
+}
+
+export interface ClusterStats extends Array<ShardStats> {}
+
+export const Status = {
 	Ready: 0,
 	Connecting: 1,
 	Reconnecting: 2,
@@ -19,9 +19,9 @@ export interface ShardStats {
 	'Waiting For Guilds': 6,
 	Identifying: 7,
 	Resuming: 8
-  } as const
-  
-  export const statusArray = [
+} as const
+
+export const statusArray = [
 	'Ready',
 	'Connecting',
 	'Reconnecting',
@@ -31,13 +31,13 @@ export interface ShardStats {
 	'Waiting For Guilds',
 	'Identifying',
 	'Resuming'
-  ]
-  
-  export type Status = (typeof Status)[keyof typeof Status]
-  
-  export interface ShardStats {
+]
+
+export type Status = (typeof Status)[keyof typeof Status]
+
+export interface ShardStats {
 	id: number
 	status: Status
 	ping: number
 	selected?: boolean
-  }
+}

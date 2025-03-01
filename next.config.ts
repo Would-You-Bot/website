@@ -107,7 +107,7 @@ const nextConfig: NextConfig = {
 				hostname: 'startupfa.me',
 				port: '',
 				pathname: '/**'
-			  }
+			}
 		]
 	}
 }
