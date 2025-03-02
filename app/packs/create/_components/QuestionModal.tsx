@@ -252,6 +252,8 @@ function QuestionModal({
 							</SelectTrigger>
 							<SelectContent>
 								{packTypes.map((type) => (
+									type.value === 'mixed' ? null
+									:
 									<SelectItem
 										key={type.id}
 										value={type.value}

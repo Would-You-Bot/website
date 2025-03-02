@@ -34,6 +34,7 @@ import { useState, useEffect } from 'react'
 import { packMap } from '@/types'
 import Image from 'next/image'
 import { toast } from 'sonner'
+import { PackType } from '@prisma/client'
 
 const PackDetails = ({ id, type }: { id: string; type: string }) => {
 	const [packToShow, setPackToShow] = useState<PackData | null>(null)
@@ -42,6 +43,14 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
 		avatar: '/Logo.png'
 	})
 	const [searchQuery, setSearchQuery] = useState('')
+	const [collapsedTypes, setCollapsedTypes] = useState<{ [key: string]: boolean }>({});
+
+	const toggleTypeCollapse = (type: PackType) => {
+		setCollapsedTypes(prev => ({
+			...prev,
+			[type]: !prev[type]
+		}));
+	};
 
 	useEffect(() => {
 		async function getPack() {
@@ -65,11 +74,30 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
 		}
 		getPack()
 	}, [id])
-
-	const filteredQuestions =
-		packToShow?.questions.filter((question) =>
+		
+		const filteredQuestions =
+		  packToShow?.questions.filter((question) =>
 			question.question.toLowerCase().includes(searchQuery.toLowerCase())
-		) ?? []
+		  ) ?? [];
+		
+		interface QuestionGroups {
+		  [key: string]: Array<typeof filteredQuestions[0]>;
+		}
+		
+		const isMixedPack = packToShow?.type === "mixed";
+		
+		const questionsByType = isMixedPack 
+		  ? filteredQuestions.reduce<QuestionGroups>((groups, question) => {
+			  const type = question.type;
+			  if (!groups[type]) {
+				groups[type] = [];
+			  }
+			  groups[type].push(question);
+			  return groups;
+			}, {})
+		  : {};
+		
+		const sortedTypes: PackType[] = isMixedPack ? Object.keys(questionsByType).sort() as PackType[] : [];
 
 	const copyCommand = () => {
 		navigator.clipboard.writeText(`/import ${id}`)
@@ -177,20 +205,64 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
 						</TooltipProvider>
 					</div>
 					{/*  */}
-					{filteredQuestions.length > 0 ?
-						<ul className="divide-y max-h-[100px] md:max-h-[200px] overflow-y-auto thin-scrollbar">
-							{filteredQuestions.map((question, index) => (
-								<li
-									key={`${question.question}-${index}`}
-									className="px-4 py-2"
-								>
-									<p className="text-sm overflow-wrap-anywhere">
-										{question.question}
-									</p>
-								</li>
-							))}
-						</ul>
-					:	<div className="px-4 py-8 text-center">
+					{filteredQuestions.length > 0 ? (
+						isMixedPack ? (
+							// Grouped view for mixed packs
+							<ul className="max-h-[100px] md:max-h-[200px] overflow-y-auto thin-scrollbar">
+								{sortedTypes.map((type: PackType) => {
+									const questionCount = questionsByType[type].length;
+									const isCollapsed = collapsedTypes[type] || false;
+
+									return (
+										<li key={type} className="border-b last:border-b-0">
+											{/* Type header - clickable to collapse */}
+											<div
+												className="px-4 py-2 bg-muted/30 font-medium text-sm flex justify-between items-center cursor-pointer hover:bg-muted/50 transition-colors"
+												onClick={() => toggleTypeCollapse(type)}
+											>
+												<div className="flex items-center space-x-2">
+													<span>{isCollapsed ? "▶" : "▼"}</span>
+													<span className="capitalize">{packMap[type]}</span>
+													<span className="text-xs text-muted-foreground ml-2">({questionCount})</span>
+												</div>
+											</div>
+
+											{/* Questions of this type - collapsible */}
+											{!isCollapsed && (
+												<ul className="divide-y border-t border-muted/20">
+													{questionsByType[type].map((question, index) => (
+														<li
+															key={`${question.question}-${index}`}
+															className="px-6 py-2 bg-background hover:bg-muted/10 transition-colors"
+														>
+															<p className="text-sm overflow-wrap-anywhere">
+																{question.question}
+															</p>
+														</li>
+													))}
+												</ul>
+											)}
+										</li>
+									);
+								})}
+							</ul>
+						) : (
+							// Regular view for non-mixed packs
+							<ul className="divide-y max-h-[100px] md:max-h-[200px] overflow-y-auto thin-scrollbar">
+								{filteredQuestions.map((question, index) => (
+									<li
+										key={`${question.question}-${index}`}
+										className="px-4 py-2"
+									>
+										<p className="text-sm overflow-wrap-anywhere">
+											{question.question}
+										</p>
+									</li>
+								))}
+							</ul>
+						)
+					) : (
+						<div className="px-4 py-8 text-center">
 							<p className="text-muted-foreground text-sm mb-2">
 								No questions found
 							</p>
@@ -204,7 +276,7 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
 								Clear search
 							</Button>
 						</div>
-					}
+					)}
 				</div>
 			</section>
 		</>
@@ -233,7 +305,7 @@ export function QuestionPackDetails({
 					<Eye className="mr-2 h-4 w-4 shrink-0" />
 					<span>View Pack</span>
 				</>
-			:	<>
+				: <>
 					<ExternalLink className="mr-2 h-4 w-4 shrink-0" />
 					<span>Use Pack</span>
 				</>
