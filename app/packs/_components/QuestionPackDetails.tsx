@@ -32,7 +32,6 @@ import { PackData } from '@/utils/zod/schemas'
 import { Input } from '@/components/ui/input'
 import { useState, useEffect } from 'react'
 import { packMap } from '@/types'
-import { cn } from '@/lib/utils'
 import Image from 'next/image'
 import { toast } from 'sonner'
 
