@@ -35,6 +35,12 @@ export default function legalnoticede() {
       </h1>
       <p>Informationen gemäß § 5 TMG.</p>
       <div>
+        <h3 className="text-lg font-bold text-foreground">Einzelunternehmen</h3>
+        <p className="select-none">
+          Dominik Koch
+        </p>
+      </div>
+      <div>
         <h3 className="text-lg font-bold text-foreground">Kontakt</h3>
         <p className="select-none">
           Dominik Koch
