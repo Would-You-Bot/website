@@ -227,15 +227,17 @@ function EditPackQuestionModal({
 								<SelectValue placeholder="What type does this question fall under?" />
 							</SelectTrigger>
 							<SelectContent>
-								{packTypes.map((type) => (
-									<SelectItem
-										key={type.id}
-										value={type.value}
-										className="text-foreground"
-									>
-										{type.label}
-									</SelectItem>
-								))}
+								{packTypes.map((type) =>
+									type.value === 'mixed' ?
+										null
+									:	<SelectItem
+											key={type.id}
+											value={type.value}
+											className="text-foreground"
+										>
+											{type.label}
+										</SelectItem>
+								)}
 							</SelectContent>
 						</Select>
 						{typeError && (

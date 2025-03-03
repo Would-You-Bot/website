@@ -2,12 +2,14 @@
 
 import { useCookieContext } from './cookies'
 import { Settings } from 'lucide-react'
+import { useTheme } from 'next-themes'
 import { Button } from './ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
 
 const Footer = () => {
 	const { showCookieDialog } = useCookieContext()
+	const { theme } = useTheme()
 
 	const recommendedLinks = [
 		{
@@ -113,7 +115,11 @@ const Footer = () => {
 						target="_blank"
 					>
 						<Image
-							src="https://startupfa.me/badges/featured-badge-small.webp"
+							src={
+								theme === 'light' ?
+									'https://startupfa.me/badges/featured-badge-small.webp'
+								:	'https://startupfa.me/badges/featured-badge-small-dark.webp'
+							}
 							alt="Would You - Entertain Your Discord Server | Startup Fame"
 							width="224"
 							height="36"
