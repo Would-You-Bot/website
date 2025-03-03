@@ -38,7 +38,7 @@ export const editedPackSchema = z.object({
 		.array(
 			z
 				.string()
-				.min(4, 'Make sure your tag is at least 4 characters long')
+				.min(3, 'Make sure your tag is at least 3 characters long')
 				.max(50, 'Make sure your tag is only 50 characters long')
 		)
 		.min(1, 'At least one tag is required')
