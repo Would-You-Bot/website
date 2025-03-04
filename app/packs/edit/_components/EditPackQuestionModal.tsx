@@ -171,7 +171,7 @@ function EditPackQuestionModal({
 								Add a <span className="text-brand-red-100">New</span>{' '}
 								<span className="text-brand-blue-100">Question</span>
 							</>
-							: <>
+						:	<>
 								<span className="text-brand-red-100">Edit</span>{' '}
 								<span className="text-brand-blue-100">Question</span>
 							</>
@@ -180,7 +180,7 @@ function EditPackQuestionModal({
 					<DialogDescription className="sr-only">
 						{mode === 'create' ?
 							'Add a new question to your pack'
-							: 'Edit your question'}
+						:	'Edit your question'}
 					</DialogDescription>
 				</DialogHeader>
 				<div className="grid flex-1 gap-2">
@@ -220,17 +220,17 @@ function EditPackQuestionModal({
 								<SelectValue placeholder="What type does this question fall under?" />
 							</SelectTrigger>
 							<SelectContent>
-								{packTypes.map((type) => (
-									type.value === 'mixed' ? null
-										:
-										<SelectItem
+								{packTypes.map((type) =>
+									type.value === 'mixed' ?
+										null
+									:	<SelectItem
 											key={type.id}
 											value={type.value}
 											className="text-foreground"
 										>
 											{type.label}
 										</SelectItem>
-								))}
+								)}
 							</SelectContent>
 						</Select>
 						{typeError && (

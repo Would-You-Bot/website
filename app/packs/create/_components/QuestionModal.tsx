@@ -74,9 +74,9 @@ function QuestionModal({
 			// For create mode, set the prefix based on type
 			const prefix =
 				type === 'wouldyourather' ? 'Would you rather '
-					: type === 'whatwouldyoudo' ? 'What would you do '
-						: type === 'neverhaveiever' ? 'Never have I ever '
-							: ''
+				: type === 'whatwouldyoudo' ? 'What would you do '
+				: type === 'neverhaveiever' ? 'Never have I ever '
+				: ''
 			setQuestionValue(prefix)
 			setTypeValue(type === PackType.mixed ? null : type)
 		}
@@ -194,7 +194,7 @@ function QuestionModal({
 								Add a <span className="text-brand-red-100">New</span>{' '}
 								<span className="text-brand-blue-100">Question</span>
 							</>
-							: <>
+						:	<>
 								<span className="text-brand-red-100">Edit</span>{' '}
 								<span className="text-brand-blue-100">Question</span>
 							</>
@@ -203,7 +203,7 @@ function QuestionModal({
 					<DialogDescription className="sr-only">
 						{mode === 'create' ?
 							'Add a new question to your pack'
-							: 'Edit your question'}
+						:	'Edit your question'}
 					</DialogDescription>
 				</DialogHeader>
 				<div className="grid flex-1 gap-2">
@@ -243,17 +243,17 @@ function QuestionModal({
 								<SelectValue placeholder="What type does this question fall under?" />
 							</SelectTrigger>
 							<SelectContent>
-								{packTypes.map((type) => (
-									type.value === 'mixed' ? null
-										:
-										<SelectItem
+								{packTypes.map((type) =>
+									type.value === 'mixed' ?
+										null
+									:	<SelectItem
 											key={type.id}
 											value={type.value}
 											className="text-foreground"
 										>
 											{type.label}
 										</SelectItem>
-								))}
+								)}
 							</SelectContent>
 						</Select>
 						{typeError && (
