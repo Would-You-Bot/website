@@ -18,7 +18,7 @@ import { PackData, questionSchema } from '@/utils/zod/schemas'
 import { useLocalStorage } from '@/hooks/use-localstorage'
 import { Control, useController } from 'react-hook-form'
 import { Textarea } from '@/components/ui/textarea'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Button } from '@/components/ui/button'
 import { packTypes } from '@/lib/constants'
 import { PackType } from '@prisma/client'
@@ -73,10 +73,10 @@ function QuestionModal({
 		} else {
 			// For create mode, set the prefix based on type
 			const prefix =
-				type === 'wouldyourather' ? 'Would you rather '
-				: type === 'whatwouldyoudo' ? 'What would you do '
-				: type === 'neverhaveiever' ? 'Never have I ever '
-				: ''
+				type === 'wouldyourather' ? 'Would you rather'
+					: type === 'whatwouldyoudo' ? 'What would you do'
+						: type === 'neverhaveiever' ? 'Never have I ever'
+							: ''
 			setQuestionValue(prefix)
 			setTypeValue(type === PackType.mixed ? null : type)
 		}
@@ -194,7 +194,7 @@ function QuestionModal({
 								Add a <span className="text-brand-red-100">New</span>{' '}
 								<span className="text-brand-blue-100">Question</span>
 							</>
-						:	<>
+							: <>
 								<span className="text-brand-red-100">Edit</span>{' '}
 								<span className="text-brand-blue-100">Question</span>
 							</>
@@ -203,7 +203,7 @@ function QuestionModal({
 					<DialogDescription className="sr-only">
 						{mode === 'create' ?
 							'Add a new question to your pack'
-						:	'Edit your question'}
+							: 'Edit your question'}
 					</DialogDescription>
 				</DialogHeader>
 				<div className="grid flex-1 gap-2">
@@ -222,6 +222,11 @@ function QuestionModal({
 						placeholder="Question Text"
 						minLength={10}
 						maxLength={300}
+						autoFocus
+						onFocus={(e) => {
+							const length = e.target.value.length
+							e.target.setSelectionRange(length, length)
+						}}
 					/>
 					{questionError && (
 						<p className="px-1 text-xs text-destructive">{questionError}</p>
@@ -246,7 +251,7 @@ function QuestionModal({
 								{packTypes.map((type) =>
 									type.value === 'mixed' ?
 										null
-									:	<SelectItem
+										: <SelectItem
 											key={type.id}
 											value={type.value}
 											className="text-foreground"
