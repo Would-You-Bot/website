@@ -274,9 +274,9 @@ export default function PackDetails(props: { params: Promise<{ id: string }> }) 
 									</h2>
 									<div>
 										<Tooltip>
-											<TooltipTrigger>
-												<ExportQuestionModal
-													trigger={
+											<ExportQuestionModal
+												trigger={
+													<TooltipTrigger asChild>
 														<Button
 															variant="ghost"
 															size="icon"
@@ -284,10 +284,10 @@ export default function PackDetails(props: { params: Promise<{ id: string }> }) 
 															<FileUp className="size-4" />
 															<span className="sr-only">Export Questions</span>
 														</Button>
-													}
-													questions={packToShow?.data.questions!}
-												/>
-											</TooltipTrigger>
+													</TooltipTrigger>
+												}
+												questions={packToShow?.data.questions!}
+											/>
 											<TooltipContent>Export Questions</TooltipContent>
 										</Tooltip>
 									</div>
