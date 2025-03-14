@@ -20,12 +20,8 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
 	return (
 		<>
 			<DialogHeader>
-				<DialogTitle>
-					<Skeleton />
-				</DialogTitle>
-				<DialogDescription>
-					<Skeleton />
-				</DialogDescription>
+				<Skeleton />
+				<Skeleton />
 			</DialogHeader>
 
 			<section className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 my-2 lg:my-4">
