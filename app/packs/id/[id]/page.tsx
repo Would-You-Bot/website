@@ -7,7 +7,7 @@ import {
 	TooltipTrigger
 } from '@/components/ui/tooltip'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { ArrowLeft, CopyIcon, FileUp, Heart, LinkIcon } from 'lucide-react'
+import { ArrowLeft, ChevronDown, ChevronRight, CopyIcon, FileUp, Heart, LinkIcon, XIcon } from 'lucide-react'
 import { PackDetailsSkeleton } from './_components/PackDetailsSkeleton'
 import { useEffect, useState, use } from 'react';
 import type { PackResponse } from '@/types/Packs'
@@ -24,6 +24,7 @@ import clsx from 'clsx'
 import { languageMap } from '@/helpers'
 import { packMap } from '@/types'
 import ExportQuestionModal from '../../_components/ExportQuestionModal'
+import { PackType } from '@prisma/client'
 
 export default function PackDetails(props: { params: Promise<{ id: string }> }) {
 	const params = use(props.params);
@@ -36,6 +37,16 @@ export default function PackDetails(props: { params: Promise<{ id: string }> }) 
 	})
 	const [searchQuery, setSearchQuery] = useState('')
 	const [isLoading, setIsLoading] = useState(true)
+	const [collapsedTypes, setCollapsedTypes] = useState<{
+		[key: string]: boolean
+	}>({})
+
+	const toggleTypeCollapse = (type: PackType) => {
+		setCollapsedTypes((prev) => ({
+			...prev,
+			[type]: !prev[type]
+		}))
+	}
 
 	useEffect(() => {
 		async function getPack() {
@@ -67,6 +78,27 @@ export default function PackDetails(props: { params: Promise<{ id: string }> }) 
 		packToShow?.data.questions.filter((question) =>
 			question.question.toLowerCase().includes(searchQuery.toLowerCase())
 		) ?? []
+
+	interface QuestionGroups {
+		[key: string]: Array<(typeof filteredQuestions)[0]>
+	}
+
+	const isMixedPack = packToShow?.data.type === 'mixed'
+
+	const questionsByType =
+		isMixedPack ?
+			filteredQuestions.reduce<QuestionGroups>((groups, question) => {
+				const type = question.type
+				if (!groups[type]) {
+					groups[type] = []
+				}
+				groups[type].push(question)
+				return groups
+			}, {})
+			: {}
+
+	const sortedTypes: PackType[] =
+		isMixedPack ? (Object.keys(questionsByType).sort() as PackType[]) : []
 
 	const toggleLike = async () => {
 		try {
@@ -294,17 +326,81 @@ export default function PackDetails(props: { params: Promise<{ id: string }> }) 
 								</div>
 
 								<div>
-									{packToShow?.data.questions.map((question, index) => (
-										<div
-											key={question.id}
-											className={clsx('py-2 rounded-none', {
-												'border-b':
-													index !== packToShow?.data.questions.length - 1
-											})}
-										>
-											<p className="break-words">{question.question}</p>
+									{filteredQuestions.length > 0 ?
+										isMixedPack ?
+											// Grouped view for mixed packs
+											<ul>
+												{sortedTypes.map((type: PackType) => {
+													const questionCount = questionsByType[type].length
+													const isCollapsed = collapsedTypes[type] || false
+
+													return (
+														<li
+															key={type}
+															className="border-b last:border-b-0"
+														>
+															{/* Type header - clickable to collapse */}
+															<div
+																className="px-2 py-2 bg-muted/30 font-medium text-sm flex justify-between items-center cursor-pointer hover:bg-muted/50 transition-colors"
+																onClick={() => toggleTypeCollapse(type)}
+															>
+																<div className="flex items-center space-x-2">
+																	{isCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+																	<span className="capitalize">{packMap[type]}</span>
+																	<span className="text-xs text-muted-foreground ml-2">
+																		({questionCount})
+																	</span>
+																</div>
+															</div>
+
+															{/* Questions of this type - collapsible */}
+															{!isCollapsed && (
+																<ul className="divide-y border-t border-muted/20">
+																	{questionsByType[type].map((question, index) => (
+																		<li
+																			key={`${question.question}-${index}`}
+																			className="px-4 py-2 hover:bg-muted/10 transition-colors"
+																		>
+																			<p className="text-sm overflow-wrap-anywhere">
+																				{question.question}
+																			</p>
+																		</li>
+																	))}
+																</ul>
+															)}
+														</li>
+													)
+												})}
+											</ul>
+											// Regular view for non-mixed packs
+											: <ul className="divide-y overflow-y-auto thin-scrollbar">
+												{filteredQuestions.map((question, index) => (
+													<li
+														key={`${question.question}-${index}`}
+														className="px-4 py-2"
+													>
+														<p className="text-sm overflow-wrap-anywhere">
+															{question.question}
+														</p>
+													</li>
+												))}
+											</ul>
+
+										: <div className="px-4 py-8 text-center">
+											<p className="text-muted-foreground text-sm mb-2">
+												No questions found
+											</p>
+											<Button
+												variant="outline"
+												size="sm"
+												onClick={() => setSearchQuery('')}
+												className="gap-2"
+											>
+												<XIcon className="h-4 w-4" />
+												Clear search
+											</Button>
 										</div>
-									))}
+									}
 								</div>
 							</div>
 						</div>
