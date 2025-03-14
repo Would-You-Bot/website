@@ -9,6 +9,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { GamepadIcon, Languages } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { languageMap } from '@/helpers'
 import roles from '@/data/roles.json'
 import { useState } from 'react'
 import Image from 'next/image'
@@ -24,14 +25,6 @@ interface UserCardProps {
 		createdAt: string
 		language: string
 	}
-}
-
-const languageMap: Record<string, string> = {
-	en_EN: 'English',
-	es_ES: 'Spanish',
-	fr_FR: 'French',
-	de_DE: 'German',
-	it_IT: 'Italian'
 }
 
 export function UserCard({ userData }: UserCardProps) {

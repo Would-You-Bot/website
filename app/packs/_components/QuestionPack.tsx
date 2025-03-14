@@ -19,7 +19,14 @@ import {
 	CardHeader,
 	CardTitle
 } from '@/components/ui/card'
-import { Flame, Heart, Edit, RefreshCw, Trash2 } from 'lucide-react'
+import {
+	Flame,
+	Heart,
+	Edit,
+	RefreshCw,
+	Trash2,
+	ExternalLink
+} from 'lucide-react'
 import { QuestionPackDetails } from './QuestionPackDetails'
 import { Button } from '@/components/ui/button'
 import type { PackType } from '@prisma/client'
@@ -182,10 +189,13 @@ export default function QuestionPack({
 								</span>
 							</Button>
 
-							<QuestionPackDetails
-								id={id}
-								type={type}
-							/>
+							<Button
+								className="w-full"
+								onClick={() => router.push(`/packs/id/${id}`)}
+							>
+								<ExternalLink className="mr-2 h-4 w-4 shrink-0" />
+								<span>Use Pack</span>
+							</Button>
 						</>
 					)}
 

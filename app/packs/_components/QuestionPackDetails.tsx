@@ -9,12 +9,8 @@ import {
 	DialogTrigger
 } from '@/components/ui/dialog'
 import {
-	Tooltip,
-	TooltipContent,
-	TooltipProvider,
-	TooltipTrigger
-} from '@/components/ui/tooltip'
-import {
+	ChevronDown,
+	ChevronRight,
 	CopyIcon,
 	ExternalLink,
 	Eye,
@@ -22,6 +18,12 @@ import {
 	Search,
 	XIcon
 } from 'lucide-react'
+import {
+	Tooltip,
+	TooltipContent,
+	TooltipProvider,
+	TooltipTrigger
+} from '@/components/ui/tooltip'
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 import ExportQuestionModal from './ExportQuestionModal'
@@ -36,7 +38,7 @@ import { packMap } from '@/types'
 import Image from 'next/image'
 import { toast } from 'sonner'
 
-const PackDetails = ({ id, type }: { id: string; type: string }) => {
+export const PackDetails = ({ id, type }: { id: string; type: string }) => {
 	const [packToShow, setPackToShow] = useState<PackData | null>(null)
 	const [userData, setUserData] = useState({
 		username: 'Private User',
@@ -178,7 +180,7 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
 			<section className="max-md:mt-6">
 				<p className="my-2 text-sm capitalize">look inside</p>
 				<div className="border rounded-xl overflow-hidden">
-					<div className="bg-background-darker flex items-center justify-between px-4 py-2 gap-4 border-b">
+					<div className="bg-background-darker rounded-none flex items-center justify-between px-4 py-2 gap-4 border-b">
 						<div className="relative w-full md:w-3/4">
 							<Search className="size-4 absolute left-2 bottom-3 text-muted-foreground" />
 							<Input
@@ -228,7 +230,9 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
 												onClick={() => toggleTypeCollapse(type)}
 											>
 												<div className="flex items-center space-x-2">
-													<span>{isCollapsed ? '▶' : '▼'}</span>
+													{isCollapsed ?
+														<ChevronRight className="h-4 w-4" />
+													:	<ChevronDown className="h-4 w-4" />}
 													<span className="capitalize">{packMap[type]}</span>
 													<span className="text-xs text-muted-foreground ml-2">
 														({questionCount})
