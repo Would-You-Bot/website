@@ -15,6 +15,8 @@ import {
 	TooltipTrigger
 } from '@/components/ui/tooltip'
 import {
+	ChevronDown,
+	ChevronRight,
 	CopyIcon,
 	ExternalLink,
 	Eye,
@@ -98,7 +100,7 @@ export const PackDetails = ({ id, type }: { id: string; type: string }) => {
 				groups[type].push(question)
 				return groups
 			}, {})
-		:	{}
+			: {}
 
 	const sortedTypes: PackType[] =
 		isMixedPack ? (Object.keys(questionsByType).sort() as PackType[]) : []
@@ -228,7 +230,7 @@ export const PackDetails = ({ id, type }: { id: string; type: string }) => {
 												onClick={() => toggleTypeCollapse(type)}
 											>
 												<div className="flex items-center space-x-2">
-													<span>{isCollapsed ? '▶' : '▼'}</span>
+													{isCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
 													<span className="capitalize">{packMap[type]}</span>
 													<span className="text-xs text-muted-foreground ml-2">
 														({questionCount})
@@ -256,7 +258,7 @@ export const PackDetails = ({ id, type }: { id: string; type: string }) => {
 								})}
 							</ul>
 							// Regular view for non-mixed packs
-						:	<ul className="divide-y max-h-[100px] md:max-h-[200px] overflow-y-auto thin-scrollbar">
+							: <ul className="divide-y max-h-[100px] md:max-h-[200px] overflow-y-auto thin-scrollbar">
 								{filteredQuestions.map((question, index) => (
 									<li
 										key={`${question.question}-${index}`}
@@ -269,7 +271,7 @@ export const PackDetails = ({ id, type }: { id: string; type: string }) => {
 								))}
 							</ul>
 
-					:	<div className="px-4 py-8 text-center">
+						: <div className="px-4 py-8 text-center">
 							<p className="text-muted-foreground text-sm mb-2">
 								No questions found
 							</p>
@@ -312,7 +314,7 @@ export function QuestionPackDetails({
 					<Eye className="mr-2 h-4 w-4 shrink-0" />
 					<span>View Pack</span>
 				</>
-			:	<>
+				: <>
 					<ExternalLink className="mr-2 h-4 w-4 shrink-0" />
 					<span>Use Pack</span>
 				</>
