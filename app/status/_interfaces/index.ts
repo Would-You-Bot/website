@@ -9,14 +9,35 @@ export interface ShardStats {
 
 export interface ClusterStats extends Array<ShardStats> {}
 
-export enum Status {
-	Ready = 0,
-	Connecting = 1,
-	Reconnecting = 2,
-	Idle = 3,
-	Nearly = 4,
-	Disconnected = 5,
-	WaitingForGuilds = 6,
-	Identifying = 7,
-	Resuming = 8
+export const Status = {
+	Ready: 0,
+	Connecting: 1,
+	Reconnecting: 2,
+	Idle: 3,
+	Nearly: 4,
+	Disconnected: 5,
+	'Waiting For Guilds': 6,
+	Identifying: 7,
+	Resuming: 8
+} as const
+
+export const statusArray = [
+	'Ready',
+	'Connecting',
+	'Reconnecting',
+	'Idle',
+	'Nearly',
+	'Disconnected',
+	'Waiting For Guilds',
+	'Identifying',
+	'Resuming'
+]
+
+export type Status = (typeof Status)[keyof typeof Status]
+
+export interface ShardStats {
+	id: number
+	status: Status
+	ping: number
+	selected?: boolean
 }

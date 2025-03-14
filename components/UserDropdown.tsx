@@ -7,9 +7,15 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger
 } from '@/components/ui/user-dropdown-menu'
+import {
+	LayoutDashboardIcon,
+	LogOut,
+	ShieldEllipsis,
+	UserRound
+} from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { LayoutDashboardIcon, LogOut, UserRound } from 'lucide-react'
 import type { IdTokenJWT } from '@/helpers/oauth/types'
+import ALLOWED_ADMIN_IDS from '@/data/reviewers.json'
 import { usePathname } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -57,6 +63,18 @@ export default function UserDropdown({
 						<span>View Profile</span>
 					</DropdownMenuItem>
 				</Link>
+				{user?.id && ALLOWED_ADMIN_IDS.includes(user?.id) && (
+					<Link
+						key="Review Packs"
+						href="/packs/review"
+						onClick={handleIsOpen}
+					>
+						<DropdownMenuItem className="flex gap-2">
+							<ShieldEllipsis className="mt-0.5 h-4 w-4" />
+							<span>Review Packs</span>
+						</DropdownMenuItem>
+					</Link>
+				)}
 				<Link
 					key="Manage Subscription"
 					href="/manage/subscription"

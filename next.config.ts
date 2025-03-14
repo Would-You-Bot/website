@@ -6,6 +6,11 @@ const nextConfig: NextConfig = {
 	typescript: {
 		ignoreBuildErrors: true
 	},
+	compiler: {
+		removeConsole: process.env.NODE_ENV === 'production' && {
+			exclude: ['error']
+		}
+	},
 	experimental: {
 		serverActions: {
 			allowedOrigins: ['wouldyoubot.gg']
@@ -27,6 +32,14 @@ const nextConfig: NextConfig = {
 					{
 						key: 'X-Frame-Options',
 						value: 'SAMEORIGIN'
+					},
+					{
+						key: 'Referrer-Policy',
+						value: 'origin-when-cross-origin'
+					},
+					{
+						key: 'X-Content-Type-Options',
+						value: 'nosniff'
 					}
 				]
 			}
@@ -69,11 +82,14 @@ const nextConfig: NextConfig = {
 				source: '/impressum',
 				destination: '/legal-de',
 				permanent: true
-			},
+			}
+		]
+	},
+	async rewrites() {
+		return [
 			{
 				source: '/manage/subscription',
-				destination: '/api/subs/manage',
-				permanent: true
+				destination: '/api/subs/manage'
 			}
 		]
 	},
@@ -88,6 +104,12 @@ const nextConfig: NextConfig = {
 			{
 				protocol: 'https',
 				hostname: 'cdn.wouldyoubot.gg',
+				port: '',
+				pathname: '/**'
+			},
+			{
+				protocol: 'https',
+				hostname: 'startupfa.me',
 				port: '',
 				pathname: '/**'
 			}

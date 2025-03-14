@@ -38,7 +38,7 @@ export const editedPackSchema = z.object({
 		.array(
 			z
 				.string()
-				.min(4, 'Make sure your tag is at least 4 characters long')
+				.min(3, 'Make sure your tag is at least 3 characters long')
 				.max(50, 'Make sure your tag is only 50 characters long')
 		)
 		.min(1, 'At least one tag is required')
@@ -49,27 +49,54 @@ export const editedPackSchema = z.object({
 		.max(150, 'You can only have 100 questions in a pack')
 })
 
-export const packSchema = z.object({
-	type: z.nativeEnum(PackType, {
-		required_error: 'Please select a valid pack type',
-		message: 'Please select a valid pack type'
-	}),
-	language: z.enum(['en_EN', 'de_DE', 'it_IT', 'fr_FR', 'es_ES'], {
-		required_error: 'Please select a valid language',
-		message: 'Please select a valid language'
-	}),
-	name: z
-		.string()
-		.min(4, 'Make sure your packs name is at least 4 characters long')
-		.max(100, 'Make sure your packs name is only 100 characters long'),
-	description: z
-		.string()
-		.min(10, 'Make sure your packs description is at least 10 characters long')
-		.max(500, 'Make sure your packs description is only 500 characters long'),
-	tags: z.array(z.string()).min(1, 'At least one tag is required').max(10),
-	questions: z
-		.array(questionSchema)
-		.min(1, 'At least one question is required')
-		.max(100, 'You can only have 100 questions in a pack')
-})
+export const packSchema = z
+	.object({
+		type: z.nativeEnum(PackType, {
+			required_error: 'Please select a valid pack type',
+			message: 'Please select a valid pack type'
+		}),
+		language: z.enum(['en_EN', 'de_DE', 'it_IT', 'fr_FR', 'es_ES'], {
+			required_error: 'Please select a valid language',
+			message: 'Please select a valid language'
+		}),
+		name: z
+			.string()
+			.min(4, 'Make sure your packs name is at least 4 characters long')
+			.max(100, 'Make sure your packs name is only 100 characters long'),
+		description: z
+			.string()
+			.min(
+				10,
+				'Make sure your packs description is at least 10 characters long'
+			)
+			.max(500, 'Make sure your packs description is only 500 characters long'),
+		tags: z
+			.array(
+				z
+					.string()
+					.min(3, 'Make sure your tag is at least 3 characters long')
+					.max(50, 'Make sure your tag is only 50 characters long')
+			)
+			.min(1, 'At least one tag is required')
+			.max(10),
+		questions: z
+			.array(questionSchema)
+			.min(1, 'At least one question is required')
+			.max(100, 'You can only have 100 questions in a pack')
+	})
+	.refine(
+		(data) => {
+			// If pack type is mixed, no additional validation needed
+			if (data.type === 'mixed') return true
+
+			// If pack type is not mixed, all questions must have the same type as the pack
+			return data.questions.every((question) => question.type === data.type)
+		},
+		{
+			message:
+				"All questions must have the same type as the pack when pack type is not 'mixed'",
+			path: ['questions'] // This will show the error on the questions field
+		}
+	)
+
 export type PackData = z.infer<typeof packSchema>

@@ -421,7 +421,9 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
 				<div className="lg:col-span-2">
 					<Button disabled={isSubmitting}>
 						{isSubmitting && <Loader2 size={16} />}
-						<span className="ml-2">{renderSubmitText()}</span>
+						<span className={isSubmitting ? 'ml-2' : ''}>
+							{renderSubmitText()}
+						</span>
 					</Button>
 				</div>
 			</form>

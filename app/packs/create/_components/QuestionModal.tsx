@@ -16,9 +16,9 @@ import {
 } from '@/components/ui/select'
 import { PackData, questionSchema } from '@/utils/zod/schemas'
 import { useLocalStorage } from '@/hooks/use-localstorage'
+import React, { useEffect, useState, useRef } from 'react'
 import { Control, useController } from 'react-hook-form'
 import { Textarea } from '@/components/ui/textarea'
-import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { packTypes } from '@/lib/constants'
 import { PackType } from '@prisma/client'
@@ -73,9 +73,9 @@ function QuestionModal({
 		} else {
 			// For create mode, set the prefix based on type
 			const prefix =
-				type === 'wouldyourather' ? 'Would you rather '
-				: type === 'whatwouldyoudo' ? 'What would you do '
-				: type === 'neverhaveiever' ? 'Never have I ever '
+				type === 'wouldyourather' ? 'Would you rather'
+				: type === 'whatwouldyoudo' ? 'What would you do'
+				: type === 'neverhaveiever' ? 'Never have I ever'
 				: ''
 			setQuestionValue(prefix)
 			setTypeValue(type === PackType.mixed ? null : type)
@@ -181,14 +181,6 @@ function QuestionModal({
 			setQuestionError(null)
 		}
 	}
-
-	const getTypeValue = () => {
-		if (mode === 'update' && questionToEdit !== null) {
-			return value[questionToEdit].type
-		}
-		return undefined
-	}
-
 	return (
 		<Dialog
 			open={isOpen}
@@ -230,6 +222,11 @@ function QuestionModal({
 						placeholder="Question Text"
 						minLength={10}
 						maxLength={300}
+						autoFocus
+						onFocus={(e) => {
+							const length = e.target.value.length
+							e.target.setSelectionRange(length, length)
+						}}
 					/>
 					{questionError && (
 						<p className="px-1 text-xs text-destructive">{questionError}</p>
@@ -244,22 +241,24 @@ function QuestionModal({
 							Type
 						</label>
 						<Select
-							value={getTypeValue()}
+							value={typeValue || ''}
 							onValueChange={handleTypeChange}
 						>
 							<SelectTrigger>
 								<SelectValue placeholder="What type does this question fall under?" />
 							</SelectTrigger>
 							<SelectContent>
-								{packTypes.map((type) => (
-									<SelectItem
-										key={type.id}
-										value={type.value}
-										className="text-foreground"
-									>
-										{type.label}
-									</SelectItem>
-								))}
+								{packTypes.map((type) =>
+									type.value === 'mixed' ?
+										null
+									:	<SelectItem
+											key={type.id}
+											value={type.value}
+											className="text-foreground"
+										>
+											{type.label}
+										</SelectItem>
+								)}
 							</SelectContent>
 						</Select>
 						{typeError && (

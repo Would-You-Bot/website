@@ -15,7 +15,6 @@ import {
 	SelectValue
 } from '@/components/ui/select'
 import { PackData, questionSchema } from '@/utils/zod/schemas'
-import { useLocalStorage } from '@/hooks/use-localstorage'
 import { Control, useController } from 'react-hook-form'
 import { Textarea } from '@/components/ui/textarea'
 import React, { useEffect, useState } from 'react'
@@ -159,13 +158,6 @@ function EditPackQuestionModal({
 		}
 	}
 
-	const getTypeValue = () => {
-		if (mode === 'update' && questionToEdit !== null) {
-			return value[questionToEdit].type
-		}
-		return undefined
-	}
-
 	return (
 		<Dialog
 			open={isOpen}
@@ -221,22 +213,24 @@ function EditPackQuestionModal({
 							Type
 						</label>
 						<Select
-							value={getTypeValue()}
+							value={typeValue || ''}
 							onValueChange={handleTypeChange}
 						>
 							<SelectTrigger>
 								<SelectValue placeholder="What type does this question fall under?" />
 							</SelectTrigger>
 							<SelectContent>
-								{packTypes.map((type) => (
-									<SelectItem
-										key={type.id}
-										value={type.value}
-										className="text-foreground"
-									>
-										{type.label}
-									</SelectItem>
-								))}
+								{packTypes.map((type) =>
+									type.value === 'mixed' ?
+										null
+									:	<SelectItem
+											key={type.id}
+											value={type.value}
+											className="text-foreground"
+										>
+											{type.label}
+										</SelectItem>
+								)}
 							</SelectContent>
 						</Select>
 						{typeError && (
