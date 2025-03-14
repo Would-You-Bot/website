@@ -1,33 +1,44 @@
 'use client'
 
 import {
+	ArrowLeft,
+	ChevronDown,
+	ChevronRight,
+	CopyIcon,
+	FileUp,
+	Heart,
+	LinkIcon,
+	XIcon
+} from 'lucide-react'
+import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger
 } from '@/components/ui/tooltip'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { ArrowLeft, ChevronDown, ChevronRight, CopyIcon, FileUp, Heart, LinkIcon, XIcon } from 'lucide-react'
+import ExportQuestionModal from '../../_components/ExportQuestionModal'
 import { PackDetailsSkeleton } from './_components/PackDetailsSkeleton'
-import { useEffect, useState, use } from 'react';
 import type { PackResponse } from '@/types/Packs'
+import { useEffect, useState, use } from 'react'
 import { Button } from '@/components/ui/button'
 import Container from '@/components/Container'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import { useRouter } from 'next/navigation'
+import { PackType } from '@prisma/client'
+import { languageMap } from '@/helpers'
+import { packMap } from '@/types'
 import Image from 'next/image'
 import { toast } from 'sonner'
 import Link from 'next/link'
 import axios from 'axios'
 import clsx from 'clsx'
-import { languageMap } from '@/helpers'
-import { packMap } from '@/types'
-import ExportQuestionModal from '../../_components/ExportQuestionModal'
-import { PackType } from '@prisma/client'
 
-export default function PackDetails(props: { params: Promise<{ id: string }> }) {
-	const params = use(props.params);
+export default function PackDetails(props: {
+	params: Promise<{ id: string }>
+}) {
+	const params = use(props.params)
 	const router = useRouter()
 	const [packToShow, setPackToShow] = useState<PackResponse | null>(null)
 	const [userData, setUserData] = useState({
@@ -95,7 +106,7 @@ export default function PackDetails(props: { params: Promise<{ id: string }> }) 
 				groups[type].push(question)
 				return groups
 			}, {})
-			: {}
+		:	{}
 
 	const sortedTypes: PackType[] =
 		isMixedPack ? (Object.keys(questionsByType).sort() as PackType[]) : []
@@ -114,7 +125,7 @@ export default function PackDetails(props: { params: Promise<{ id: string }> }) 
 						likes:
 							updatedLikes.userLiked ?
 								prev!.data.likes.filter((id) => id !== updatedLikes.id)
-								: [...prev!.data.likes, updatedLikes.id]
+							:	[...prev!.data.likes, updatedLikes.id]
 					},
 					likes: updatedLikes.likes,
 					userLiked: updatedLikes.userLiked
@@ -143,7 +154,7 @@ export default function PackDetails(props: { params: Promise<{ id: string }> }) 
 		<>
 			{isLoading ?
 				<PackDetailsSkeleton />
-				: <TooltipProvider delayDuration={0}>
+			:	<TooltipProvider delayDuration={0}>
 					<Container>
 						<div className="grid grid-cols-1 lg:grid-cols-4 gap-4">
 							<div className="bg-card rounded-lg p-4 border space-y-4 lg:sticky lg:top-28 h-max @container">
@@ -224,12 +235,16 @@ export default function PackDetails(props: { params: Promise<{ id: string }> }) 
 
 								<PackDetailsContainer>
 									<PackDetailsHeader>Type</PackDetailsHeader>
-									<p className="font-light">{packMap[packToShow?.data.type!]}</p>
+									<p className="font-light">
+										{packMap[packToShow?.data.type!]}
+									</p>
 								</PackDetailsContainer>
 
 								<PackDetailsContainer>
 									<PackDetailsHeader>Language</PackDetailsHeader>
-									<p className="font-light">{languageMap[packToShow?.data.language!]}</p>
+									<p className="font-light">
+										{languageMap[packToShow?.data.language!]}
+									</p>
 								</PackDetailsContainer>
 
 								<PackDetailsContainer>
@@ -345,8 +360,12 @@ export default function PackDetails(props: { params: Promise<{ id: string }> }) 
 																onClick={() => toggleTypeCollapse(type)}
 															>
 																<div className="flex items-center space-x-2">
-																	{isCollapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
-																	<span className="capitalize">{packMap[type]}</span>
+																	{isCollapsed ?
+																		<ChevronRight className="h-4 w-4" />
+																	:	<ChevronDown className="h-4 w-4" />}
+																	<span className="capitalize">
+																		{packMap[type]}
+																	</span>
 																	<span className="text-xs text-muted-foreground ml-2">
 																		({questionCount})
 																	</span>
@@ -356,16 +375,18 @@ export default function PackDetails(props: { params: Promise<{ id: string }> }) 
 															{/* Questions of this type - collapsible */}
 															{!isCollapsed && (
 																<ul className="divide-y border-t border-muted/20">
-																	{questionsByType[type].map((question, index) => (
-																		<li
-																			key={`${question.question}-${index}`}
-																			className="px-4 py-2 hover:bg-muted/10 transition-colors"
-																		>
-																			<p className="text-sm overflow-wrap-anywhere">
-																				{question.question}
-																			</p>
-																		</li>
-																	))}
+																	{questionsByType[type].map(
+																		(question, index) => (
+																			<li
+																				key={`${question.question}-${index}`}
+																				className="px-4 py-2 hover:bg-muted/10 transition-colors"
+																			>
+																				<p className="text-sm overflow-wrap-anywhere">
+																					{question.question}
+																				</p>
+																			</li>
+																		)
+																	)}
 																</ul>
 															)}
 														</li>
@@ -373,7 +394,7 @@ export default function PackDetails(props: { params: Promise<{ id: string }> }) 
 												})}
 											</ul>
 											// Regular view for non-mixed packs
-											: <ul className="divide-y overflow-y-auto thin-scrollbar">
+										:	<ul className="divide-y overflow-y-auto thin-scrollbar">
 												{filteredQuestions.map((question, index) => (
 													<li
 														key={`${question.question}-${index}`}
@@ -386,7 +407,7 @@ export default function PackDetails(props: { params: Promise<{ id: string }> }) 
 												))}
 											</ul>
 
-										: <div className="px-4 py-8 text-center">
+									:	<div className="px-4 py-8 text-center">
 											<p className="text-muted-foreground text-sm mb-2">
 												No questions found
 											</p>

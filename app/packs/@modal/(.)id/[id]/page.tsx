@@ -1,5 +1,5 @@
-'use client';
-import { use } from "react";
+'use client'
+import { use } from 'react'
 
 import { PackDetails } from '../../../_components/QuestionPackDetails'
 import { Dialog, DialogContent } from '@/components/ui/dialog'
@@ -8,7 +8,7 @@ import { useIsMobile } from '@/hooks/use-mobile'
 import { useRouter } from 'next/navigation'
 
 export default function Page(props: { params: Promise<{ id: string }> }) {
-	const params = use(props.params);
+	const params = use(props.params)
 	const router = useRouter()
 	const isMobile = useIsMobile()
 

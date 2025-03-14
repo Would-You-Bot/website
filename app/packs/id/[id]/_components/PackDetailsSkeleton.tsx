@@ -1,5 +1,6 @@
 'use client'
 
+import ExportQuestionModal from '@/app/packs/_components/ExportQuestionModal'
 import { ArrowLeft, CopyIcon, FileUp, Heart, LinkIcon } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Button } from '@/components/ui/button'
@@ -8,7 +9,6 @@ import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
 import Link from 'next/link'
 import clsx from 'clsx'
-import ExportQuestionModal from '@/app/packs/_components/ExportQuestionModal'
 
 export function PackDetailsSkeleton() {
 	return (
@@ -91,9 +91,7 @@ export function PackDetailsSkeleton() {
 					</PackDetailsContainer>
 					<PackDetailsContainer>
 						<PackDetailsHeader>Author</PackDetailsHeader>
-						<div
-							className="flex items-center gap-1"
-						>
+						<div className="flex items-center gap-1">
 							<Skeleton className="size-6 rounded-full" />
 							<Skeleton className="h-4 w-16 rounded-md" />
 						</div>

@@ -1,12 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
+import loadGoogleFont from '@/helpers/og/loadGoogleFont'
+import getImageBase64 from '@/helpers/og/getImageBase64'
 import { ImageResponse } from 'next/og'
 import { prisma } from '@/lib/prisma'
 import validator from 'validator'
-import loadGoogleFont from '@/helpers/og/loadGoogleFont';
-import getImageBase64 from '@/helpers/og/getImageBase64';
 
-export async function GET(request: Request, props: { params: Promise<{ id: string }> }) {
-	const params = await props.params;
+export async function GET(
+	request: Request,
+	props: { params: Promise<{ id: string }> }
+) {
+	const params = await props.params
 
 	const id = validator.escape(params.id) // Sanitize ID
 

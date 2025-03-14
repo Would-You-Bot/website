@@ -9,10 +9,10 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { GamepadIcon, Languages } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
+import { languageMap } from '@/helpers'
 import roles from '@/data/roles.json'
 import { useState } from 'react'
 import Image from 'next/image'
-import { languageMap } from '@/helpers'
 
 interface UserCardProps {
 	userData: {
