@@ -27,7 +27,7 @@ const nextConfig = {
 					},
 					{
 						key: 'Content-Security-Policy',
-						value: "frame-ancestors 'self' https://top.gg https://bottom.gg;"
+						value: "frame-ancestors 'self' https://top.gg https://bottom.gg https://dsc.bot https://nightly.dsc.bot;"
 					},
 					{
 						key: 'X-Frame-Options',
