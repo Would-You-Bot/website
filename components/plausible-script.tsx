@@ -10,7 +10,7 @@ export function PlausibleScript() {
       <script
         defer
         data-domain="wouldyoubot.gg"
-        src="https://stats.wouldyoubot.gg/js/script.js"
+        src="https://stats.rivo.gg/js/script.js"
       />
     )
   } else {
