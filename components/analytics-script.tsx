@@ -2,15 +2,15 @@
 
 import { useCookiePreferences } from '@/helpers/hooks/useCookies'
 
-export function PlausibleScript() {
+export function AnalyticsScript() {
   const { hasAnalytics } = useCookiePreferences()
 
   if (hasAnalytics()) {
     return (
       <script
         defer
-        data-domain="wouldyoubot.gg"
-        src="https://stats.rivo.gg/js/script.js"
+        data-site-id="1"
+        src="https://rybbit.rivo.gg/api/script.js"
       />
     )
   } else {

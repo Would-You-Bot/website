@@ -32,7 +32,7 @@ export default function Privacy() {
       </h1>
       <div>
         <h3 className="mb-4 text-lg font-bold text-foreground">
-          Last updated and effective January 11, 2025
+          Last updated and effective May 30, 2025
         </h3>
         <p>
           Thank you for choosing to be part of our community at Would
@@ -244,19 +244,19 @@ export default function Privacy() {
           To ensure that our app functions as intended, we use cookies. These
           cookies are necessary for the core functionality of the app and cannot
           be disabled. Additionally, we may use optional analytics tools,
-          including Plausible Analytics, to help us understand visitor trends
-          and improve our services. Plausible Analytics is a privacy-focused
+          including Rybbit Analytics, to help us understand visitor trends
+          and improve our services. Rybbit Analytics is a privacy-focused
           platform that provides aggregate data without tracking or collecting
           any personally identifiable information, and it does not use cookies
           or store any personal information. However you may opt out of
-          Plausible Analytics tracking by disabling the checkbox in the cookie
+          Rybbit Analytics tracking by disabling the checkbox in the cookie
           settings.{' '}
           <Link
-            href="https://plausible.io/data-policy"
+            href="https://www.rybbit.io/privacy"
             target={'_blank'}
             className="text-foreground underline"
           >
-            See the Plausible Analytics Data Policy.
+            See the Rybbit Analytics Data Policy.
           </Link>
         </p>
 

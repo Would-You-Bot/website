@@ -1,4 +1,4 @@
-import { PlausibleScript } from '@/components/plausible-script'
+import { AnalyticsScript } from '@/components/analytics-script'
 import { CookieProvider } from '@/components/cookies'
 import { getIdToken } from '@/helpers/oauth'
 import { ThemeProvider } from 'next-themes'
@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <PlausibleScript />
+        <AnalyticsScript />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
