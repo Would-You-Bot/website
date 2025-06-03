@@ -31,9 +31,9 @@ export default function Privacy() {
         Privacy Policy
       </h1>
       <div>
-        <h3 className="mb-4 text-lg font-bold text-foreground">
-          Last updated and effective May 30, 2025
-        </h3>
+        <h2 className="mb-4 text-lg font-bold text-foreground">
+          Last updated and effective <strong>June 03, 2025</strong>
+        </h2>
         <p>
           Thank you for choosing to be part of our community at Would
           You(&quot;we,&quot; &quot;us,&quot; or &quot;our&quot;). By using our
@@ -244,19 +244,26 @@ export default function Privacy() {
           To ensure that our app functions as intended, we use cookies. These
           cookies are necessary for the core functionality of the app and cannot
           be disabled. Additionally, we may use optional analytics tools,
-          including Rybbit Analytics, to help us understand visitor trends
-          and improve our services. Rybbit Analytics is a privacy-focused
-          platform that provides aggregate data without tracking or collecting
-          any personally identifiable information, and it does not use cookies
-          or store any personal information. However you may opt out of
-          Rybbit Analytics tracking by disabling the checkbox in the cookie
-          settings.{' '}
+          including Rybbit and Databuddy Analytics, to help us understand
+          visitor trends and improve our services. Rybbit and Databuddy
+          Analytics are privacy-focused platforms that provide aggregated data
+          without tracking or collecting any personally identifiable
+          information, and they do not use cookies or store any personal
+          information. However you may opt out of Rybbit and Databuddy Analytics
+          tracking by disabling the checkbox in the cookie settings.{' '}
           <Link
             href="https://www.rybbit.io/privacy"
             target={'_blank'}
             className="text-foreground underline"
           >
             See the Rybbit Analytics Data Policy.
+          </Link>
+          <Link
+            href="https://www.databuddy.cc/privacy"
+            target={'_blank'}
+            className="text-foreground underline"
+          >
+            See the Databuddy Analytics Data Policy.
           </Link>
         </p>
 

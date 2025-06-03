@@ -53,10 +53,10 @@ export default function legalnotice() {
       </p>
       <p>Information according to § 5 TMG.</p>
       <div>
-        <h3 className="text-lg font-bold text-foreground">Sole proprietorship</h3>
-        <p className="select-none">
-          Dominik Koch
-        </p>
+        <h3 className="text-lg font-bold text-foreground">
+          Sole proprietorship
+        </h3>
+        <p className="select-none">Dominik Koch</p>
       </div>
       <div>
         <h3 className="text-lg font-bold text-foreground">Contact</h3>

@@ -1,8 +1,8 @@
 import { HomeSchemaMetadata } from '@/components/Homepage/SchemaMetadata'
 import { getRandomQuestion } from '@/helpers/getRandomQuestion'
 import { HomeContent } from '@/components/Homepage/Content'
-import type { Metadata, Viewport } from 'next'
 import FeaturedServer from '@/types/FeaturedServer'
+import type { Metadata, Viewport } from 'next'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://wouldyoubot.gg'),

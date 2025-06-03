@@ -45,9 +45,7 @@ export const ClusterCardsList = ({ data }: ClusterCardProps) => {
                 )}
               ></span>
             </div>
-            <div
-              className="flex flex-wrap gap-2 xs:gap-3 sm:gap-4"             
-            >
+            <div className="flex flex-wrap gap-2 xs:gap-3 sm:gap-4">
               {cluster.map((shard, index) => (
                 <Tooltip key={shard.id}>
                   <TooltipTrigger

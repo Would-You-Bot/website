@@ -109,7 +109,17 @@ const Footer = () => {
             <Settings className="size-4" />
             Manage Cookies
           </Button>
-          <a href="https://startupfa.me/s/would-you?utm_source=wouldyoubot.gg" target="_blank"><Image src="https://startupfa.me/badges/featured-badge-small.webp" alt="Would You - Entertain Your Discord Server | Startup Fame" width="224" height="36" /></a>
+          <a
+            href="https://startupfa.me/s/would-you?utm_source=wouldyoubot.gg"
+            target="_blank"
+          >
+            <Image
+              src="https://startupfa.me/badges/featured-badge-small.webp"
+              alt="Would You - Entertain Your Discord Server | Startup Fame"
+              width="224"
+              height="36"
+            />
+          </a>
         </div>
         <div className="flex w-full flex-col items-center md:items-start">
           <h4 className="mb-2 text-lg font-bold text-foreground">

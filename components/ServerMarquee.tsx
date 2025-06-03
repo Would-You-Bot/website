@@ -1,10 +1,10 @@
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
+import FeaturedServer from '@/types/FeaturedServer'
 import Marquee from 'react-fast-marquee'
 import { useTheme } from 'next-themes'
 import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
-import FeaturedServer from '@/types/FeaturedServer'
 
 interface MarqueeProps {
   servers: FeaturedServer[]
