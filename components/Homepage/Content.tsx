@@ -107,7 +107,7 @@ export function HomeContent({
             <h3 className="mt-4 text-xl md:text-2xl px-12">
               keeping{' '}
               <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
-                9,000,000+
+                10,000,000+
               </span>{' '}
               users entertained
             </h3>
