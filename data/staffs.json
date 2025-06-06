@@ -4,7 +4,7 @@
     "categories": ["Developers", "Translators"],
     "description": "Founder, Lead Developer, German Translator",
     "imageUrl": "https://cdn.wouldyoubot.gg/staff/developer/Dominik.webp",
-    "websiteUrl": "https://brickver.com/@dominik"
+    "websiteUrl": "https://brickver.com/@dominik?utm_source=wouldyoubot.gg"
   },
   {
     "name": "ForGetFulSkyBro",
@@ -123,7 +123,7 @@
     "categories": ["Beta Testers"],
     "description": "Beta Tester",
     "imageUrl": "https://cdn.wouldyoubot.gg/staff/bughunter/Sdriver.webp",
-    "websiteUrl": "https://sdriver1.carrd.co/"
+    "websiteUrl": "https://sdriver1.carrd.co?utm_source=wouldyoubot.gg"
   },
   {
     "name": "Yareaj",
@@ -144,6 +144,13 @@
     "categories": ["Contributors"],
     "description": "Website Interactivity",
     "imageUrl": "https://cdn.wouldyoubot.gg/staff/special/Dan.webp",
-    "websiteUrl": "https://compiles.me/"
+    "websiteUrl": "https://compiles.me?utm_source=wouldyoubot.gg"
+  },
+  {
+  "name": "Marc Hoffmann",
+  "categories": ["Contributors"],
+  "description": "Website Design and Development",
+  "imageUrl": "https://cdn.wouldyoubot.gg/staff/special/Marc.webp",
+  "websiteUrl": "https://github.com/MarcWebDev"
   }
 ]
