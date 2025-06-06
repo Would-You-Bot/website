@@ -35,7 +35,7 @@
     "lucide-react": "^0.376.0",
     "mongoose": "^8.4.0",
     "motion": "^11.11.17",
-    "next": "14.2.15",
+    "next": "15.3.3",
     "next-mdx-remote": "^4.4.1",
     "next-sitemap": "^4.2.3",
     "next-themes": "^0.3.0",
