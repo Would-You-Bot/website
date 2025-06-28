@@ -1,12 +1,12 @@
 import { OAuthTokenJWT } from '@/helpers/oauth/types'
 import { IdTokenJWT } from '@/helpers/hooks'
 import { verifyJwt } from '@/helpers/jwt'
-import { cookies } from 'next/headers'
+import { cookies, type UnsafeUnwrappedCookies } from 'next/headers';
 import { parseJWT } from 'oslo/jwt'
 import { cache } from 'react'
 
 export function getIdToken(): IdTokenJWT | null {
-  const tokenString = cookies().get('ID_TOKEN')?.value
+  const tokenString = (cookies() as unknown as UnsafeUnwrappedCookies).get('ID_TOKEN')?.value
   return tokenString ? (parseJWT(tokenString) as IdTokenJWT) : null
 }
 
@@ -16,7 +16,7 @@ export function getIdToken(): IdTokenJWT | null {
  * Throws if the JWT is invalid or expired.
  */
 export function getAuthToken(): Promise<OAuthTokenJWT> {
-  const token = cookies().get('OAUTH_TOKEN')?.value
+  const token = (cookies() as unknown as UnsafeUnwrappedCookies).get('OAUTH_TOKEN')?.value
 
   if (!token) {
     throw new MissingTokenException()

@@ -4,7 +4,7 @@ import { redirect } from 'next/navigation'
 import { NextRequest } from 'next/server'
 import { signJwt } from '@/helpers/jwt'
 import { setServer } from '@/lib/redis'
-import { cookies } from 'next/headers'
+import { cookies, type UnsafeUnwrappedCookies } from 'next/headers';
 import { stripe } from '@/lib/stripe'
 import Stripe from 'stripe'
 import { z } from 'zod'
@@ -16,7 +16,7 @@ const _queryParamsSchema = z.object({
 })
 
 export async function GET(req: NextRequest) {
-  const cookieJar = cookies()
+  const cookieJar = await cookies()
   const {
     code,
     error,
@@ -155,11 +155,11 @@ async function exchangeAuthorizationCode(code: string) {
 }
 
 function setSecureHttpOnlyCookie(name: string, value: string) {
-  return cookies().set(name, value, {
+  return (cookies() as unknown as UnsafeUnwrappedCookies).set(name, value, {
     path: '/',
     secure: true,
     httpOnly: true,
     sameSite: 'lax',
     maxAge: 24 * 60 * 60
-  })
+  });
 }

@@ -21,8 +21,8 @@ export async function GET(req: NextRequest) {
     ])
   }
 
-  cookies().delete('OAUTH_TOKEN')
-  cookies().delete('ID_TOKEN')
+  (await cookies()).delete('OAUTH_TOKEN')
+  (await cookies()).delete('ID_TOKEN')
 
   return redirect(redirectUrl ?? '/')
 }
