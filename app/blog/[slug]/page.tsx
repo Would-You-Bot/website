@@ -5,17 +5,11 @@ import { postPaths } from '@/utils/mdx'
 import Image from 'next/image'
 import Link from 'next/link'
 
-export async function generateMetadata(
-  props: {
-    params: Promise<{ slug: string }>
-  }
-): Promise<Metadata> {
-  const params = await props.params;
-
-  const {
-    slug
-  } = params;
-
+export async function generateMetadata({
+  params: { slug }
+}: {
+  params: { slug: string }
+}): Promise<Metadata> {
   const { frontmatter } = await getPost(slug)
   const title = `${frontmatter.title}- Would You Bot`
 
@@ -53,16 +47,10 @@ export const viewport: Viewport = {
 export function generateStaticParams() {
   return postPaths
     .map((path) => path.replace(/\.mdx?$/, ''))
-    .map((slug) => ({ slug }));
+    .map((slug) => ({ slug }))
 }
 
-const BlogPost = async (props: { params: Promise<{ slug: string }> }) => {
-  const params = await props.params;
-
-  const {
-    slug
-  } = params;
-
+const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
   const result = await getPost(slug)
   const { frontmatter: frontMatter } = result
 
