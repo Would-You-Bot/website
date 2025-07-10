@@ -34,7 +34,7 @@ export async function POST(request: NextRequest) {
       // in the event of a successful checkout
       case 'customer.subscription.created':
         const subscriptionData: Stripe.Subscription = event.data.object
-        const serverId = subscriptionData.metadata?.serverId
+        const serverId = subscriptionData.items.data[0].metadata.serverId
 
         if (!serverId) {
           return NextResponse.json(
@@ -129,7 +129,7 @@ export async function POST(request: NextRequest) {
       // in the event of a subscription being updated
       case 'customer.subscription.updated':
         const subscriptionDataUpdated: Stripe.Subscription = event.data.object
-        const serverIdUpdated = subscriptionDataUpdated.metadata?.serverId
+        const serverIdUpdated = subscriptionDataUpdated.items.data[0].metadata.serverId
 
         if (!serverIdUpdated) {
           return NextResponse.json(
@@ -159,7 +159,7 @@ export async function POST(request: NextRequest) {
       // in the event of a subscription being deleted
       case 'customer.subscription.deleted':
         const subscriptionDataDeleted: Stripe.Subscription = event.data.object
-        const serverIdDeleted = subscriptionDataDeleted.metadata?.serverId
+        const serverIdDeleted = subscriptionDataDeleted.items.data[0].metadata.serverId
 
         if (!serverIdDeleted) {
           console.error('One or more variables are undefined.')
