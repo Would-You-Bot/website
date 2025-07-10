@@ -34,11 +34,11 @@ export async function POST(request: NextRequest) {
       // in the event of a successful checkout
       case 'customer.subscription.created':
         const subscriptionData: Stripe.Subscription = event.data.object
-        const serverId = subscriptionData.items.data[0].metadata.serverId
+        const serverId = subscriptionData.metadata?.serverId
 
         if (!serverId) {
           return NextResponse.json(
-            { message: 'Server ID is missing', status: 400 },
+            { message: 'One or more variables are missing', status: 400 },
             { status: 400 }
           )
         }
@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
               premiumUser: subscription?.data[0]?.metadata.userId,
               premium: 1,
               premiumExpiration: new Date(
-                subscription.data[0].items.data[0].current_period_end * 1000
+                subscription.data[0].current_period_end * 1000
               ),
               language: 'en_US'
             },
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
               premiumUser: subscription?.data[0]?.metadata.userId,
               premium: 1,
               premiumExpiration: new Date(
-                subscription.data[0].items.data[0].current_period_end * 1000
+                subscription.data[0].current_period_end * 1000
               )
             }
           })
@@ -85,17 +85,17 @@ export async function POST(request: NextRequest) {
       case 'invoice.payment_succeeded':
         const invoice: Stripe.Invoice = event.data.object
 
-        if (invoice === null)
+        if (invoice.subscription_details === null)
           return NextResponse.json(
             { message: 'No subscription details found', status: 400 },
             { status: 400 }
           )
-        const serverIdInvoice = invoice.metadata?.serverId
-        console.log(invoice)
-        console.log(invoice.metadata)
+
+        const serverIdInvoice = invoice.subscription_details.metadata?.serverId
+
         if (!serverIdInvoice) {
           return NextResponse.json(
-            { message: 'Server ID is missing', status: 400 },
+            { message: 'One or more variables are missing', status: 400 },
             { status: 400 }
           )
         }
@@ -111,7 +111,7 @@ export async function POST(request: NextRequest) {
             data: {
               pending: false,
               premiumExpiration: new Date(
-                subscriptionInvoice.data[0].items.data[0].current_period_end * 1000
+                subscriptionInvoice.data[0].current_period_end * 1000
               )
             }
           })
@@ -130,11 +130,11 @@ export async function POST(request: NextRequest) {
       // in the event of a subscription being updated
       case 'customer.subscription.updated':
         const subscriptionDataUpdated: Stripe.Subscription = event.data.object
-        const serverIdUpdated = subscriptionDataUpdated.items.data[0].metadata.serverId
+        const serverIdUpdated = subscriptionDataUpdated.metadata?.serverId
 
         if (!serverIdUpdated) {
           return NextResponse.json(
-            { message: 'Server ID is missing', status: 400 },
+            { message: 'One or more variables are missing', status: 400 },
             { status: 400 }
           )
         }
@@ -150,7 +150,7 @@ export async function POST(request: NextRequest) {
           data: {
             premium: 1,
             premiumExpiration: new Date(
-              subscriptionUpdated.data[0].items.data[0].current_period_end * 1000
+              subscriptionUpdated.data[0].current_period_end * 1000
             )
           }
         })
@@ -160,12 +160,12 @@ export async function POST(request: NextRequest) {
       // in the event of a subscription being deleted
       case 'customer.subscription.deleted':
         const subscriptionDataDeleted: Stripe.Subscription = event.data.object
-        const serverIdDeleted = subscriptionDataDeleted.items.data[0].metadata.serverId
+        const serverIdDeleted = subscriptionDataDeleted.metadata?.serverId
 
         if (!serverIdDeleted) {
           console.error('One or more variables are undefined.')
           return NextResponse.json(
-            { message: 'Server ID is missing', status: 400 },
+            { message: 'One or more variables are missing', status: 400 },
             { status: 400 }
           )
         }
