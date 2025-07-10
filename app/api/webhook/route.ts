@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
 
         if (!serverId) {
           return NextResponse.json(
-            { message: 'One or more variables are missing', status: 400 },
+            { message: 'Server ID is missing', status: 400 },
             { status: 400 }
           )
         }
@@ -91,10 +91,11 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           )
         const serverIdInvoice = invoice.metadata?.serverId
-
+        console.log(invoice)
+        console.log(invoice.metadata)
         if (!serverIdInvoice) {
           return NextResponse.json(
-            { message: 'One or more variables are missing', status: 400 },
+            { message: 'Server ID is missing', status: 400 },
             { status: 400 }
           )
         }
@@ -133,7 +134,7 @@ export async function POST(request: NextRequest) {
 
         if (!serverIdUpdated) {
           return NextResponse.json(
-            { message: 'One or more variables are missing', status: 400 },
+            { message: 'Server ID is missing', status: 400 },
             { status: 400 }
           )
         }
@@ -164,7 +165,7 @@ export async function POST(request: NextRequest) {
         if (!serverIdDeleted) {
           console.error('One or more variables are undefined.')
           return NextResponse.json(
-            { message: 'One or more variables are missing', status: 400 },
+            { message: 'Server ID is missing', status: 400 },
             { status: 400 }
           )
         }
