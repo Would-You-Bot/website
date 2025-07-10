@@ -57,7 +57,7 @@ export async function POST(request: NextRequest) {
               premiumUser: subscription?.data[0]?.metadata.userId,
               premium: 1,
               premiumExpiration: new Date(
-                subscription.data[0].current_period_end * 1000
+                subscription.data[0].items.data[0].current_period_end * 1000
               ),
               language: 'en_US'
             },
@@ -65,7 +65,7 @@ export async function POST(request: NextRequest) {
               premiumUser: subscription?.data[0]?.metadata.userId,
               premium: 1,
               premiumExpiration: new Date(
-                subscription.data[0].current_period_end * 1000
+                subscription.data[0].items.data[0].current_period_end * 1000
               )
             }
           })
@@ -85,13 +85,12 @@ export async function POST(request: NextRequest) {
       case 'invoice.payment_succeeded':
         const invoice: Stripe.Invoice = event.data.object
 
-        if (invoice.subscription_details === null)
+        if (invoice === null)
           return NextResponse.json(
             { message: 'No subscription details found', status: 400 },
             { status: 400 }
           )
-
-        const serverIdInvoice = invoice.subscription_details.metadata?.serverId
+        const serverIdInvoice = invoice.metadata?.serverId
 
         if (!serverIdInvoice) {
           return NextResponse.json(
@@ -111,7 +110,7 @@ export async function POST(request: NextRequest) {
             data: {
               pending: false,
               premiumExpiration: new Date(
-                subscriptionInvoice.data[0].current_period_end * 1000
+                subscriptionInvoice.data[0].items.data[0].current_period_end * 1000
               )
             }
           })
@@ -150,7 +149,7 @@ export async function POST(request: NextRequest) {
           data: {
             premium: 1,
             premiumExpiration: new Date(
-              subscriptionUpdated.data[0].current_period_end * 1000
+              subscriptionUpdated.data[0].items.data[0].current_period_end * 1000
             )
           }
         })
