@@ -17,7 +17,7 @@ export function AnalyticsScript() {
 					strategy="afterInteractive"
         />
         <Script
-          src="https://app.databuddy.cc/databuddy.js"
+          src="https://cdn.databuddy.cc/databuddy.js"
           data-client-id="-uK7L4DEoLiXWIsEa0oxb"
           data-api-url="https://basket.databuddy.cc"
           data-track-web-vitals="true"

@@ -54,25 +54,6 @@ export default function legalnoticede() {
       <p className="select-none">Email: dominik@wouldyoubot.com</p>
       <p className="select-none">Telefon: +49 151 23793107</p>
       <div>
-        <h3 className="text-lg font-bold text-foreground">
-          Online dispute resolution
-        </h3>
-        <p>
-          Die Europäische Kommission bietet eine Plattform für die
-          Online-Streitbeilegung Streitbeilegung, die hier zu finden ist:{' '}
-          <Link
-            href="https://ec.europa.eu/consumers/odr/"
-            className="text-foreground underline"
-          >
-            https://ec.europa.eu/consumers/odr/
-          </Link>
-          . <br />
-          Ich bin weder bereit noch verpflichtet, an einem
-          Streitbeilegungsverfahren an einem Streitbeilegungsverfahren vor einer
-          Verbraucherschlichtungsstelle teilzunehmen.
-        </p>
-      </div>
-      <div>
         <h3 className="text-lg font-bold text-foreground">Privacy Policy</h3>
         <Link
           href="https://wouldyoubot.gg/privacy/"
@@ -112,6 +93,13 @@ export default function legalnoticede() {
           className="underline"
         >
           https://twitter.com/WouldYouBot/
+        </Link>
+        <br />
+        <Link
+          href="https://discord-components.com/"
+          className="underline"
+        >
+          https://discord-components.com/
         </Link>
       </div>
       <p>

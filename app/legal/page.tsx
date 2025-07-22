@@ -74,23 +74,6 @@ export default function legalnotice() {
       <p className="select-none">Email: dominik@wouldyoubot.com</p>
       <p className="select-none">Phone: +49 151 23793107</p>
       <div>
-        <h3 className="text-lg font-bold text-foreground">
-          Online dispute resolution
-        </h3>
-        <p>
-          The European Comission provides a platform for online dispute
-          resolution, available at{' '}
-          <Link
-            href="https://ec.europa.eu/consumers/odr/"
-            className="text-foreground underline"
-          >
-            https://ec.europa.eu/consumers/odr/
-          </Link>
-          . <br />I am neither willing nor obliged to participate in dispute
-          resolution proceedings in front of a consumer arbitration board.
-        </p>
-      </div>
-      <div>
         <h3 className="text-lg font-bold text-foreground">Privacy Policy</h3>
         <Link
           href="https://wouldyoubot.gg/privacy/"
@@ -130,6 +113,13 @@ export default function legalnotice() {
           className="underline"
         >
           https://twitter.com/WouldYouBot/
+        </Link>
+        <br />
+        <Link
+          href="https://discord-components.com/"
+          className="underline"
+        >
+          https://discord-components.com/
         </Link>
       </div>
       <p>
