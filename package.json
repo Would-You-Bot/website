@@ -62,7 +62,7 @@
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^10.0.0",
-    "validator": "^13.12.0",
+    "validator": "^13.15.20",
     "vaul": "^1.1.1",
     "zod": "^3.22.4"
   },
