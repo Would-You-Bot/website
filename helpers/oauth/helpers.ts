@@ -5,8 +5,9 @@ import { cookies } from 'next/headers'
 import { parseJWT } from 'oslo/jwt'
 import { cache } from 'react'
 
-export function getIdToken(): IdTokenJWT | null {
-  const tokenString = cookies().get('ID_TOKEN')?.value
+export async function getIdToken(): Promise<IdTokenJWT | null> {
+  const cookieStore = await cookies()
+  const tokenString = cookieStore.get('ID_TOKEN')?.value
   return tokenString ? (parseJWT(tokenString) as IdTokenJWT) : null
 }
 
@@ -15,8 +16,9 @@ export function getIdToken(): IdTokenJWT | null {
  * including the signature, expiration, and not-before date.
  * Throws if the JWT is invalid or expired.
  */
-export function getAuthToken(): Promise<OAuthTokenJWT> {
-  const token = cookies().get('OAUTH_TOKEN')?.value
+export async function getAuthToken(): Promise<OAuthTokenJWT> {
+  const cookieStore = await cookies()
+  const token = cookieStore.get('OAUTH_TOKEN')?.value
 
   if (!token) {
     throw new MissingTokenException()

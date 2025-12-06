@@ -11,12 +11,12 @@ import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function RootLayout({
+export default async function RootLayout({
   children
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const idToken = getIdToken()
+  const idToken = await getIdToken()
 
   return (
     <html lang="en">

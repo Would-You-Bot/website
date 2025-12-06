@@ -1,50 +1,51 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from "next"
+
+const nextConfig: NextConfig = {
   reactStrictMode: true,
   output: 'standalone',
+  reactCompiler: true,
   typescript: {
     ignoreBuildErrors: true
   },
   compiler: {
-		removeConsole: process.env.NODE_ENV === 'production' && {
-			exclude: ['error']
-		}
-	},
+    removeConsole: process.env.NODE_ENV === 'production' && {
+      exclude: ['error']
+    }
+  },
   experimental: {
     serverActions: {
-      allowedForwardedHosts: ['wouldyoubot.gg'],
       allowedOrigins: ['wouldyoubot.gg']
     }
   },
   async headers() {
-		return [
-			{
-				source: '/(.*)',
-				headers: [
-					{
-						key: 'Strict-Transport-Security',
-						value: 'max-age=31536000; includeSubDomains; preload'
-					},
-					{
-						key: 'Content-Security-Policy',
-						value: "frame-ancestors 'self' https://top.gg https://bottom.gg https://dsc.bot https://nightly.dsc.bot;"
-					},
-					{
-						key: 'X-Frame-Options',
-						value: 'SAMEORIGIN'
-					},
-					{
-						key: 'Referrer-Policy',
-						value: 'origin-when-cross-origin'
-					},
-					{
-						key: 'X-Content-Type-Options',
-						value: 'nosniff'
-					}
-				]
-			}
-		]
-	},
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=31536000; includeSubDomains; preload'
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'self' https://top.gg https://bottom.gg https://dsc.bot https://nightly.dsc.bot;"
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN'
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin'
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff'
+          }
+        ]
+      }
+    ]
+  },
   async redirects() {
     return [
       {
@@ -73,15 +74,17 @@ const nextConfig = {
         destination: '/support',
         permanent: true
       },
+    ]
+  },
+  async rewrites() {
+    return [
       {
         source: '/imprint',
         destination: '/legal',
-        permanent: true
       },
       {
         source: '/impressum',
         destination: '/legal-de',
-        permanent: true
       }
     ]
   },

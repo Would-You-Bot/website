@@ -16,7 +16,7 @@ const _queryParamsSchema = z.object({
 })
 
 export async function GET(req: NextRequest) {
-  const cookieJar = cookies()
+  const cookieJar = await cookies()
   const {
     code,
     error,
@@ -31,7 +31,7 @@ export async function GET(req: NextRequest) {
     if (error) {
       return redirect('/')
     } else {
-      setSecureHttpOnlyCookie('OAUTH_REDIRECT', redirectUrl ?? '/')
+      await setSecureHttpOnlyCookie('OAUTH_REDIRECT', redirectUrl ?? '/')
       const oauthRedirect = await discordOAuthClient.createAuthorizationURL()
       return redirect(oauthRedirect.href)
     }
@@ -49,7 +49,7 @@ export async function GET(req: NextRequest) {
   })
   const idToken = await signJwt({ ...user } as IdTokenData)
 
-  setSecureHttpOnlyCookie('OAUTH_TOKEN', accessToken)
+  await setSecureHttpOnlyCookie('OAUTH_TOKEN', accessToken)
   cookieJar.set('ID_TOKEN', idToken, {
     path: '/',
     maxAge: 24 * 60 * 60
@@ -154,8 +154,9 @@ async function exchangeAuthorizationCode(code: string) {
   }
 }
 
-function setSecureHttpOnlyCookie(name: string, value: string) {
-  return cookies().set(name, value, {
+async function setSecureHttpOnlyCookie(name: string, value: string) {
+  const cookieStore = await cookies()
+  return cookieStore.set(name, value, {
     path: '/',
     secure: true,
     httpOnly: true,
