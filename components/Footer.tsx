@@ -109,7 +109,17 @@ const Footer = () => {
             <Settings className="size-4" />
             Manage Cookies
           </Button>
-
+          <p className="mt-4 text-center text-sm md:text-left">
+            Check out my other project{' '}
+            <a
+              href="https://usenotra.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-foreground underline transition-all hover:text-foreground/70"
+            >
+              Notra
+            </a>
+          </p>
         </div>
         <div className="flex w-full flex-col items-center md:items-start">
           <h4 className="mb-2 text-lg font-bold text-foreground">
