@@ -64,53 +64,6 @@ export default function legalnoticede() {
           https://wouldyoubot.gg/privacy/
         </Link>
       </div>
-      <div>
-        <h3 className="text-lg font-bold text-foreground">
-          Gültigkeit dieses Impressums
-        </h3>
-        <p>
-          Dieser rechtliche Hinweis gilt für die folgenden Websites, Social
-          Media Konten und andere Dienste, sofern sie hier aufgeführt sind.
-        </p>
-      </div>
-      <div className="text-foreground">
-        <br />
-        <Link
-          href="https://wouldyoubot.gg/"
-          className="underline"
-        >
-          https://wouldyoubot.gg/
-        </Link>
-        <br />
-
-        <Link
-          href="https://rivo.gg/"
-          className="underline"
-        >
-          https://rivo.gg/
-        </Link>
-        <br />
-        <Link
-          href="https://twitter.com/WouldYouBot/"
-          className="underline"
-        >
-          https://twitter.com/WouldYouBot/
-        </Link>
-        <br />
-        <Link
-          href="https://discord-components.com/"
-          className="underline"
-        >
-          https://discord-components.com/
-        </Link>
-      </div>
-      <p>
-        Der Discord Bot mit der id{' '}
-        <span className="font-mono text-foreground">981649513427111957</span>
-        <br />
-        Der Discord server mit der id{' '}
-        <span className="font-mono text-foreground">1009562516105461780</span>
-      </p>
     </main>
   )
 }
