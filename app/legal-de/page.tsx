@@ -42,11 +42,13 @@ export default function legalnoticede() {
         <h3 className="text-lg font-bold text-foreground">Kontakt</h3>
         <p className="select-none">
           Dominik Koch
-          <br />
-          Parkstraße 5
-          <br />
-          88499 Riedlingen
-          <br />
+					<br />
+					c/o IP-Management #8532
+					<br />
+					Ludwig-Erhard-Str. 18
+					<br />
+					20459 Hamburg
+					<br />
           Deutschland
         </p>
       </div>
