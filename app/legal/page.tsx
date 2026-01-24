@@ -84,53 +84,6 @@ export default function legalnotice() {
           https://wouldyoubot.gg/privacy/
         </Link>
       </div>
-      <div>
-        <h3 className="text-lg font-bold text-foreground">
-          Validity of this Legal Notice
-        </h3>
-        <p>
-          This legal notice is valid for the following websites, social media
-          accounts and other services, as long as they are listed below.
-        </p>
-      </div>
-      <div className="text-foreground">
-        <br />
-        <Link
-          href="https://wouldyoubot.gg/"
-          className="underline"
-        >
-          https://wouldyoubot.gg/
-        </Link>
-        <br />
-
-        <Link
-          href="https://rivo.gg/"
-          className="underline"
-        >
-          https://rivo.gg/
-        </Link>
-        <br />
-        <Link
-          href="https://twitter.com/WouldYouBot/"
-          className="underline"
-        >
-          https://twitter.com/WouldYouBot/
-        </Link>
-        <br />
-        <Link
-          href="https://discord-components.com/"
-          className="underline"
-        >
-          https://discord-components.com/
-        </Link>
-      </div>
-      <p>
-        The Discord bot with the id{' '}
-        <span className="font-mono text-foreground">981649513427111957</span>
-        <br />
-        The Discord server with the id{' '}
-        <span className="font-mono text-foreground">1009562516105461780</span>
-      </p>
     </main>
   )
 }
