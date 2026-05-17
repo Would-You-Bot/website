@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import staffs from '@/data/staffs.json' // Import the JSON data
 import Image from 'next/image' // Import the 'Image' component
+import { Fragment } from 'react'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://wouldyoubot.gg'),
@@ -53,16 +54,14 @@ export default function Team() {
           </p>
         </div>
         <div className="mx-auto h-full max-w-5xl justify-center text-center">
-          {roles.map((role, i) => (
-            <>
+          {roles.map((role) => (
+            <Fragment key={role}>
               <h2
-                key={role}
                 className="mt-10 select-none font-semibold text-foreground/70"
               >
                 {role}
               </h2>
               <ul
-                key={i}
                 role="list"
                 className="mx-auto mt-10 flex max-w-2xl flex-wrap justify-center gap-6 text-pretty px-6 lg:mx-0 lg:max-w-none lg:gap-8 lg:px-8"
               >
@@ -123,7 +122,7 @@ export default function Team() {
                     </li>
                   ))}{' '}
               </ul>
-            </>
+            </Fragment>
           ))}{' '}
         </div>
       </main>
