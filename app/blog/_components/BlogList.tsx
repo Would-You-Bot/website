@@ -64,6 +64,7 @@ export async function BlogList() {
                   src={post.data.thumbnail.large}
                   alt={post.data.thumbnail.alt || post.data.title}
                   className="rounded-lg sm:mt-0"
+                  sizes="(min-width: 640px) 200px, 100vw"
                   fill
                 />
               </div>
