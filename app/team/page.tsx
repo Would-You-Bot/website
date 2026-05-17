@@ -80,45 +80,20 @@ export default function Team() {
                         alt={`${staff.name}'s profile picture`}
                       />
                       <h3 className="mt-6 text-base font-semibold leading-7 tracking-tight text-foreground">
-                        {staff.name}
+                        {staff.websiteUrl !== null ?
+                          <a
+                            href={staff.websiteUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="hover:text-foreground/80"
+                          >
+                            {staff.name}
+                          </a>
+                        : staff.name}
                       </h3>
                       <p className="text-sm leading-6 text-foreground/60">
                         {staff.description}
                       </p>
-                      {staff.websiteUrl !== null ?
-                        <ul
-                          role="list"
-                          className="mt-6 flex justify-center align-bottom"
-                        >
-                          <li
-                            className="absolute bottom-5 left-1/2 -translate-x-1/2"
-                            key={staff.websiteUrl}
-                          >
-                            <a
-                              href={staff.websiteUrl} // Use the correct variable name
-                              target="_blank"
-                              className="text-foreground/60 hover:text-foreground/80"
-                            >
-                              <span className="sr-only">website link</span>
-                              <svg
-                                className="h-5 w-5"
-                                aria-hidden="true"
-                                fill="currentColor"
-                                viewBox="0 0 120 120"
-                              >
-                                <switch>
-                                  <g>
-                                    <path d="M60 120C26.9 120 0 93.1 0 60S26.9 0 60 0s60 26.9 60 60-26.9 60-60 60M60 5C29.7 5 5 29.7 5 60s24.7 55 55 55 55-24.7 55-55S90.3 5 60 5" />
-                                    <path d="M60 120c-19.3 0-34.4-26.4-34.4-60S40.7 0 60 0s34.4 26.4 34.4 60-15.1 60-34.4 60M60 5C43.8 5 30.5 29.7 30.5 60s13.2 55 29.5 55 29.5-24.7 29.5-55S76.2 5 60 5" />
-                                    <path d="M12.2 25.6h95.6v5H12.2zm0 63.9h95.6v5H12.2zm-9.7-32h115v5H2.5z" />
-                                    <path d="M57.5 2.5h5v115h-5z" />
-                                  </g>
-                                </switch>
-                              </svg>
-                            </a>
-                          </li>
-                        </ul>
-                      : null}
                     </li>
                   ))}{' '}
               </ul>
