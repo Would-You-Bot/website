@@ -6,10 +6,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export async function generateMetadata({
-  params: { slug }
+  params
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> {
+  const { slug } = await params
   const { frontmatter } = await getPost(slug)
   const title = `${frontmatter.title}- Would You Bot`
 
@@ -50,7 +51,8 @@ export function generateStaticParams() {
     .map((slug) => ({ slug }))
 }
 
-const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
+const BlogPost = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params
   const result = await getPost(slug)
   const { frontmatter: frontMatter } = result
 
