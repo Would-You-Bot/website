@@ -40,6 +40,8 @@ export const viewport: Viewport = {
   maximumScale: 5
 }
 
+const FALLBACK_SERVER_COUNT = 35877
+
 const getServerCount = async (): Promise<number> => {
   try {
     const response = await fetch(
@@ -50,11 +52,11 @@ const getServerCount = async (): Promise<number> => {
         }
       }
     )
-    if (!response.ok) return 0
+    if (!response.ok) return FALLBACK_SERVER_COUNT
     const data = await response.json()
-    return data?.data?.bot?.approximate_guild_count ?? 0
+    return data?.data?.bot?.approximate_guild_count ?? FALLBACK_SERVER_COUNT
   } catch {
-    return 0
+    return FALLBACK_SERVER_COUNT
   }
 }
 
