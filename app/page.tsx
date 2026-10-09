@@ -40,31 +40,48 @@ export const viewport: Viewport = {
   maximumScale: 5
 }
 
+const getServerCount = async (): Promise<number> => {
+  try {
+    const response = await fetch(
+      'https://japi.rest/discord/v1/application/981649513427111957/',
+      {
+        next: {
+          revalidate: 60
+        }
+      }
+    )
+    if (!response.ok) return 0
+    const data = await response.json()
+    return data?.data?.bot?.approximate_guild_count ?? 0
+  } catch {
+    return 0
+  }
+}
+
+const getFeaturedServers = async (): Promise<FeaturedServer[]> => {
+  try {
+    const serverResponse = await fetch(
+      'https://liberal-snail-47202.upstash.io/get/server_count',
+      {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + process.env.UPSTASH_API_KEY
+        }
+      }
+    )
+    if (!serverResponse.ok) return []
+    const serverData = await serverResponse.json()
+    return JSON.parse(serverData.result ?? null) ?? []
+  } catch {
+    return []
+  }
+}
+
 const Home = async () => {
-  const response = await fetch(
-    'https://japi.rest/discord/v1/application/981649513427111957/',
-    {
-      next: {
-        revalidate: 60
-      }
-    }
-  )
-
-  const data = await response.json()
-  const serverCount = data.data.bot.approximate_guild_count ?? 0
-
-  const serverResponse = await fetch(
-    'https://liberal-snail-47202.upstash.io/get/server_count',
-    {
-      method: 'POST',
-      headers: {
-        Authorization: 'Bearer ' + process.env.UPSTASH_API_KEY
-      }
-    }
-  )
-
-  const serverData = await serverResponse.json()
-  const servers = JSON.parse(serverData.result ?? null) ?? []
+  const [serverCount, servers] = await Promise.all([
+    getServerCount(),
+    getFeaturedServers()
+  ])
 
   return (
     <>
